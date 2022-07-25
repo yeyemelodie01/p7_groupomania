@@ -29,6 +29,7 @@ const Styleglobal = createGlobalStyle`
   main {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     margin-top: 70px;
   }
 `

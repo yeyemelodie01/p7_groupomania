@@ -49,8 +49,6 @@ function Header() {
                     <Imgstyle src={ Logo } alt="Logo Groupomania"/>
                 </Linkimg>
                 <Divstyle>
-                    <Linkstyle to="/">Accueil</Linkstyle>
-                    <Spanstyle>|</Spanstyle>
                     <Linkstyle to="/login">Se connecter </Linkstyle>
                     <Spanstyle>|</Spanstyle>
                     <Linkstyle to="/signup">S'inscrire</Linkstyle>
