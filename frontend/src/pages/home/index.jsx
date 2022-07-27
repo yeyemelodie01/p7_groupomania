@@ -4,6 +4,7 @@ import { faImage } from '@fortawesome/free-solid-svg-icons'
 import styled from "styled-components";
 import colors from '../../utils/styles/colors'
 import Post from '../../components/post'
+import { useState } from 'react'
 
 const ParentGrid = styled.div`
   display: grid;
@@ -53,6 +54,7 @@ const CreatePost = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  
 `
 
 const FormFlex = styled.form`
@@ -98,17 +100,22 @@ const StyleButton = styled.button`
 `
 
 function Home() {
+  const [ isHidden, setIsHidden ] = useState(true);
+  const handleClick = event => {
+    setIsHidden(current => !current);
+  }
+
   return(
       <main>
         <ParentGrid>
           <Grid1>
             <DivButton>
-              <PostButton>
+              <PostButton onClick={handleClick}>
                 <FontAwesomeIcon icon={ faCirclePlus } />
                 Créer un poste
               </PostButton>
             </DivButton>
-            <CreatePost>
+            <CreatePost style={{display: isHidden ? 'block' : 'none'}}>
               <h1>Créer un post</h1>
               <FormFlex>
                 <DivSize>
