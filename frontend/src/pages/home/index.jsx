@@ -103,7 +103,7 @@ function Home() {
         <ParentGrid>
           <Grid1>
             <DivButton>
-              <PostButton onClick={}>
+              <PostButton>
                 <FontAwesomeIcon icon={ faCirclePlus } />
                 Créer un poste
               </PostButton>
