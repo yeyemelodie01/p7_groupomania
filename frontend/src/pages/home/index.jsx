@@ -5,6 +5,9 @@ import styled from "styled-components";
 import colors from '../../utils/styles/colors'
 import Post from '../../components/post'
 import { useState } from 'react'
+import React from 'react'
+import useModal from '../../utils/hooks'
+import Modal from '../../components/modal'
 
 const ParentGrid = styled.div`
   display: grid;
@@ -48,6 +51,10 @@ const PostButton = styled.button`
     transform: scale(1.2);
     -webkit-transform: scale(1.2);
   }
+`
+
+const HiddenDiv = styled.div`
+  display: none;
 `
 
 const CreatePost = styled.div`
@@ -99,47 +106,81 @@ const StyleButton = styled.button`
   margin: 0 auto;
 `
 
+/* Fenetre Pop-up */
+const App = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const ModalToggle = styled.button`
+  background-color: turquoise;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+  border: none;
+`
+
+
 function Home() {
   const [ isHidden, setIsHidden ] = useState(true);
-  const handleClick = event => {
-    setIsHidden(current => !current);
-  }
+  const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
+
+  const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
 
   return(
       <main>
+        <App>
+          <ModalToggle onClick={toggleLoginForm}>
+            Login
+          </ModalToggle>
+          <ModalToggle onClick={toggleRegistrationForm}>
+            Register
+          </ModalToggle>
+
+          <Modal
+            isShow={isLoginFormShow}
+            hide={toggleLoginForm}
+            title="Login"
+          />
+        </App>
+
         <ParentGrid>
           <Grid1>
             <DivButton>
-              <PostButton onClick={handleClick}>
+              <PostButton onClick={() => setIsHidden((s) => !s)}>
                 <FontAwesomeIcon icon={ faCirclePlus } />
                 Créer un poste
               </PostButton>
             </DivButton>
-            <CreatePost style={{display: isHidden ? 'block' : 'none'}}>
-              <h1>Créer un post</h1>
-              <FormFlex>
-                <DivSize>
-                  <label form='title'>
-                    <InputSize
-                      id="title"
-                      name="title"
-                      type="text"
-                      placeholder="Titre"
-                      maxLength="280"
-                    />
-                  </label>
-                </DivSize>
-                <IconSize>
-                  <FontAwesomeIcon icon={ faImage } />
-                </IconSize>
-                <DivSize2>
-                  <label form='upload' placeholder="Ajouter une image">
-                    <InputSize id="upload" type="file" name="file"/>
-                  </label>
-                </DivSize2>
-                <StyleButton>Envoyer</StyleButton>
-              </FormFlex>
-            </CreatePost>
+            <HiddenDiv style={{display: isHidden ? 'block' : 'none'}}>
+              <CreatePost>
+                <h1>Créer un post</h1>
+                <FormFlex>
+                  <DivSize>
+                    <label form='title'>
+                      <InputSize
+                        id="title"
+                        name="title"
+                        type="text"
+                        placeholder="Titre"
+                        maxLength="280"
+                      />
+                    </label>
+                  </DivSize>
+                  <IconSize>
+                    <FontAwesomeIcon icon={ faImage } />
+                  </IconSize>
+                  <DivSize2>
+                    <label form='upload' placeholder="Ajouter une image">
+                      <InputSize id="upload" type="file" name="file"/>
+                    </label>
+                  </DivSize2>
+                  <StyleButton>Envoyer</StyleButton>
+                </FormFlex>
+              </CreatePost>
+            </HiddenDiv>
           </Grid1>
         </ParentGrid>
         <Post />
