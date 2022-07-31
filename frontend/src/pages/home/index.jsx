@@ -5,9 +5,6 @@ import styled from "styled-components";
 import colors from '../../utils/styles/colors'
 import Post from '../../components/post'
 import { useState } from 'react'
-import React from 'react'
-import useModal from '../../utils/hooks'
-import Modal from '../../components/modal'
 
 const ParentGrid = styled.div`
   display: grid;
@@ -106,46 +103,11 @@ const StyleButton = styled.button`
   margin: 0 auto;
 `
 
-/* Fenetre Pop-up */
-const App = styled.div`
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const ModalToggle = styled.button`
-  background-color: turquoise;
-  cursor: pointer;
-  padding: 1rem 2rem;
-  text-transform: uppercase;
-  border: none;
-`
-
-
 function Home() {
   const [ isHidden, setIsHidden ] = useState(true);
-  const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
-
-  const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
 
   return(
       <main>
-        <App>
-          <ModalToggle onClick={toggleLoginForm}>
-            Login
-          </ModalToggle>
-          <ModalToggle onClick={toggleRegistrationForm}>
-            Register
-          </ModalToggle>
-
-          <Modal
-            isShow={isLoginFormShow}
-            hide={toggleLoginForm}
-            title="Login"
-          />
-        </App>
-
         <ParentGrid>
           <Grid1>
             <DivButton>
