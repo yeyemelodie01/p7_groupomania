@@ -16,9 +16,7 @@ const ParentGrid = styled.div`
 
 const Grid1 = styled.div`
   grid-area: 1 / 1 / 2 / 6;
-  background-color: aquamarine;
   margin-bottom: 50px;
-  padding-bottom: 50px;
 `
 
 const DivButton = styled.div`
@@ -35,15 +33,15 @@ const PostButton = styled.button`
   border-radius: 19px;
   border: none;
   font-size: 22px;
-  color: ${colors.black};
+  color: ${colors.white};
   box-shadow: 8px 8px 10px #aaa;
-  background: ${colors.secondary};
+  background: ${colors.navyblue};
   transition-property: transform;
   transition-duration: 0.5s;
   transition-timing-function: ease-out;
   cursor: pointer;
   width: 250px;
-  height: 50px;
+  height: 60px;
   &:hover {
     transform: scale(1.2);
     -webkit-transform: scale(1.2);
@@ -58,16 +56,15 @@ const CreatePost = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  
 `
 
 const FormFlex = styled.form`
-  width: 600px;
+  width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 30px;
-  border: 4px ${colors.grey} solid;
+  border: 4px ${colors.navyblue} solid;
   border-radius: 10px;
 `
 
@@ -78,9 +75,42 @@ const DivSize = styled.div`
 `
 
 const DivSize2 = styled.div`
-  width: 399px;
-  height: 50px;
+  width: 900px;
+  background-color: ${colors.secondary};
+  color: ${colors.navyblue};
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 40px;
+`
+
+const DivSize3 = styled.div`
+  width: 400px;
+  margin-bottom: 20px;
+`
+
+const DivSize4 = styled.div`
+  width: 400px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  
+  .textcitation {
+    width: 417px;
+    height: 45px;
+  }
+`
+
+const DivIcon = styled.div`
+  margin-top: 20px;
+  margin-bottom: 60px;
+  
+  .texticon {
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 12px;
+    margin-bottom: 0;
+  }
 `
 
 const InputSize = styled.input`
@@ -92,19 +122,21 @@ const IconSize = styled.div`
   font-size: 50px;
 `
 
-const StyleButton = styled.button`
+const StyleButton = styled(PostButton)`
   width: 215px;
   height: 75px;
   font-size: 23px;
   font-weight: bold;
-  background-color: ${colors.navyblue};
-  border: none;
-  color: ${colors.white};
+  background-color: transparent;
+  box-shadow: none;
+  border: 4px ${colors.navyblue} solid;
+  color: ${colors.navyblue};
   margin: 0 auto;
+  margin-bottom: 40px;
 `
 
 function Home() {
-  const [ isHidden, setIsHidden ] = useState(true);
+  const [ isHidden, setIsHidden ] = useState(false);
 
   return(
       <main>
@@ -131,15 +163,26 @@ function Home() {
                       />
                     </label>
                   </DivSize>
-                  <IconSize>
-                    <FontAwesomeIcon icon={ faImage } />
-                  </IconSize>
                   <DivSize2>
-                    <label form='upload' placeholder="Ajouter une image">
-                      <InputSize id="upload" type="file" name="file"/>
-                    </label>
+                    <DivIcon>
+                      <IconSize>
+                        <FontAwesomeIcon icon={ faImage } />
+                      </IconSize>
+                      <p className="texticon">Ajouter une photo ou un texte</p>
+                    </DivIcon>
+                    <DivSize3>
+                      <label form='upload' placeholder="Ajouter une image">
+                        <InputSize id="upload" type="file" name="file"/>
+                      </label>
+                    </DivSize3>
+                    <p>ou</p>
+                    <DivSize4>
+                      <label form='citation'>
+                        <textarea id="citation" className="textcitation"> </textarea>
+                      </label>
+                    </DivSize4>
+                    <StyleButton>Envoyer</StyleButton>
                   </DivSize2>
-                  <StyleButton>Envoyer</StyleButton>
                 </FormFlex>
               </CreatePost>
             </HiddenDiv>

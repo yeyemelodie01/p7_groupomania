@@ -3,6 +3,7 @@ import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
 import ImgPost from '../../assets/marcel-eberle-n4boKCT_RLk-unsplash.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import Comment from '../comments'
 
 const ParentGrid = styled.div`
   display: grid;
@@ -14,6 +15,8 @@ const ParentGrid = styled.div`
 
 const Grid1 = styled.div`
   grid-area: 1 / 2 / 6 / 5;
+  display: flex;
+  justify-content: center;
 `
 
 const PostDiv = styled.div`
@@ -32,8 +35,18 @@ const PostProfil = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
-  height: 40px;
+  margin-left: 40px;
+  width: 160px;
+`
+
+const ListPost = styled.ul`
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 `
 
 const ImgProfil = styled.img`
@@ -52,6 +65,7 @@ const PostHour = styled.p`
 
 const PostTitle = styled.h1`
   font-weight: bold;
+  margin-left: 40px;
 `
 
 const FigurePost = styled.figure`
@@ -59,7 +73,13 @@ const FigurePost = styled.figure`
 `
 
 const LikeDislike = styled.div`
-
+  display: flex;
+  margin: 10px 0;
+  font-size: 25px;
+  
+  .margin-icon {
+    margin-right: 10px;
+  }
 `
 
 function Post() {
@@ -68,20 +88,29 @@ function Post() {
       <Grid1>
         <PostDiv>
           <PostProfil>
-            <ImgProfil className="img_profil" src={ Profil } alt="profil" />
-            <NameProfil className="name_profil">Mélodie</NameProfil>
-            <PostHour className="hour-post">
-              5h
-            </PostHour>
+            <ListPost>
+              <li>
+                <ImgProfil src={ Profil } alt="profil"/>
+              </li>
+              <li>
+                <NameProfil>Jean-Marc</NameProfil>
+              </li>
+              <li>
+                <PostHour>5h</PostHour>
+              </li>
+            </ListPost>
           </PostProfil>
           <PostTitle className="title_post">Titre du poste</PostTitle>
           <FigurePost>
             <img src={ ImgPost } alt="born" />
             <figcaption>
               <LikeDislike>
-                <FontAwesomeIcon icon={ faThumbsUp } />
+                <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon" />
                 <FontAwesomeIcon icon={ faThumbsDown } />
               </LikeDislike>
+              <div>
+                <Comment />
+              </div>
             </figcaption>
           </FigurePost>
         </PostDiv>

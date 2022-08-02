@@ -66,7 +66,7 @@ function Header() {
         <Modal
           isShow={isLoginFormShow}
           hide={toggleLoginForm}
-          title="Login">
+          title="Se connecter">
 
             <form>
                 <div className="form-group">
@@ -83,7 +83,7 @@ function Header() {
           <Modal
             isShow={isRegistrationForm}
             hide={toggleRegistrationForm}
-            title="Register">
+            title="S'inscrire">
 
               <form>
                   <div className="form-group">
