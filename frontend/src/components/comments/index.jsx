@@ -20,7 +20,6 @@ const ProfilDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 40px;
   width: 160px;
 `
 
@@ -64,7 +63,6 @@ function Comment() {
         </ProfilPost>
         <p>Cute :-)</p>
       </ProfilDiv>
-      <input />
     </CommentPost>
   )
 }
