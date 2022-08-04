@@ -24,8 +24,8 @@ const PostDiv = styled.div`
   flex-direction: column;
   align-items: flex-start;
   background-color: bisque;
-  width: 90%;
-  padding: 10px 10px;
+  width: 100%;
+  padding: 16px 40px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
@@ -35,7 +35,6 @@ const PostProfil = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 40px;
   width: 160px;
 `
 
@@ -65,11 +64,10 @@ const PostHour = styled.p`
 
 const PostTitle = styled.h1`
   font-weight: bold;
-  margin-left: 40px;
 `
 
 const FigurePost = styled.figure`
-  
+  margin: auto 0;
 `
 
 const LikeDislike = styled.div`
