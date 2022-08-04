@@ -18,8 +18,7 @@ const NumComments = styled.div`
 
 const ProfilDiv = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   width: 160px;
 `
 
@@ -28,9 +27,10 @@ const ProfilImg = styled.img`
   height: 30px;
   background-color: aqua;
   border-radius: 80px 80px 80px 80px;
+  float: left;
 `
 
-const ProfilPost = styled.ul`
+const ProfilPost = styled.div`
   list-style: none;
   display: flex;
   align-items: center;
@@ -54,12 +54,8 @@ function Comment() {
       <ProfilDiv>
         <ProfilImg src={ Profil } alt="profil"/>
         <ProfilPost>
-          <li>
             <p>Mélodie</p>
-          </li>
-          <li>
             <p>1h</p>
-          </li>
         </ProfilPost>
         <p>Cute :-)</p>
       </ProfilDiv>
