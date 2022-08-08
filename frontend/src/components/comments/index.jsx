@@ -10,6 +10,7 @@ const CommentPost = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  font-size: 20px;
 `
 
 const NumComments = styled.div`
@@ -17,9 +18,6 @@ const NumComments = styled.div`
 `
 
 const ProfilDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 160px;
 `
 
 const ProfilImg = styled.img`
@@ -48,15 +46,20 @@ function Comment() {
         <label form="comments">
           <textarea id="comments"> </textarea>
         </label>
-        <button>Annuler</button>
-        <button>Commenter</button>
+        <div>
+          <button>Annuler</button>
+          <button>Commenter</button>
+        </div>
       </div>
       <ProfilDiv>
-        <ProfilImg src={ Profil } alt="profil"/>
-        <ProfilPost>
+        <div>
+          <ProfilImg src={ Profil } alt="profil"/>
+          <ProfilPost>
             <p>Mélodie</p>
             <p>1h</p>
-        </ProfilPost>
+          </ProfilPost>
+        </div>
+
         <p>Cute :-)</p>
       </ProfilDiv>
     </CommentPost>
