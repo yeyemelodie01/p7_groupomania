@@ -49,7 +49,6 @@ app.use((req, res, next) => {
 });
 
 //CONNECTION MONGOOSE
-console.log(process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, process.env.DATABASE_NAME);
 mongoose.connect('mongodb+srv://'+process.env.DATABASE_USER+':'+process.env.DATABASE_PASSWORD+'@'+process.env.DATABASE_NAME,
   {
     useCreateIndex: true,
@@ -61,8 +60,8 @@ mongoose.connect('mongodb+srv://'+process.env.DATABASE_USER+':'+process.env.DATA
 
 //app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // gère la ressource images de manière statique à chaque fois qu'elle reçoit une requête vers la route /uploads
 
-//const userRouter = require('./routes/user.routes'); //constante userRouter qui a pour valeur le chemin vers le fichier user.routes
-//app.use('/users', userRouter);
+const userRouter = require('./routes/user.routes'); //constante userRouter qui a pour valeur le chemin vers le fichier user.routes
+app.use('/users', userRouter);
 
 //const authRouter = require('./routes/auth.routes')//constante userRouter qui a pour valeur le chemin vers le fichier auth.routes
 //app.use('/api/auth', authRouter);

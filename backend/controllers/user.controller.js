@@ -1,14 +1,20 @@
+const UserModel = require('../models/user.model');
+
 exports.createOneRequest = async (req, res) => {
   // req.body est pour les demandes POST. Pensez au "corps du facteur".
   // déstructure la valeur du nom du corps de la requête.
-  const {name} = req.body;
+  const {email, password} = req.body;
 
   // vérifier si la base de données contient déjà ce nom.
-  const foundUser = await UserModel.find({name});
+  const foundUser = await UserModel.find({email});
 
   // si aucun utilisateur n'est trouvé, nous pouvons ajouter cet utilisateur à la base de données.
-  if(!foundUser || foundUser.length == 0) {
-    const user = new UserModel({name});
+  if(!foundUser || foundUser.length === 0) {
+    const user = new UserModel({email, password});
+    const MailUser = req.body.email;
+    const ArrayUser = MailUser.split('@', 1);
+    const username = String(ArrayUser);
+    console.log(username);
     const response = await user.save();
     res.status(201).json(response);
   } else {
@@ -26,7 +32,7 @@ exports.readOneRequest = async (req, res) => {
   const foundUser = await UserModel.findOne({_id: id});
 
   // return 404 if no user found, return user otherwise.
-  if(!foundUser || foundUser.length == 0) {
+  if(!foundUser || foundUser.length === 0) {
     res.status(404).json({message: "User not found!"});
   } else {
     res.status(302).json(foundUser);
