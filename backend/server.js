@@ -63,10 +63,10 @@ mongoose.connect('mongodb+srv://'+process.env.DATABASE_USER+':'+process.env.DATA
 const userRouter = require('./routes/user.routes'); //constante userRouter qui a pour valeur le chemin vers le fichier user.routes
 app.use('/users', userRouter);
 
-//const authRouter = require('./routes/auth.routes')//constante userRouter qui a pour valeur le chemin vers le fichier auth.routes
-//app.use('/api/auth', authRouter);
+const authRouter = require('./routes/auth.routes')//constante userRouter qui a pour valeur le chemin vers le fichier auth.routes
+app.use('/api/auth', authRouter);
 
-//const sauceRouter = require('./routes/sauce.routes')//constante userRouter qui a pour valeur le chemin vers le fichier sauce.routes
-//app.use('/api/sauces', sauceRouter);
+const postRouter = require('./routes/post.routes')//constante userRouter qui a pour valeur le chemin vers le fichier post.routes
+app.use('/api/post', postRouter);
 
 module.exports = app;
