@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
   userid:{ type:String, required:true },
+  postname:{ type:String, required:true },
   media:{ type:String, required:true },
   like:{ type:Number, default:0 },
   dislike:{ type:Number, default:0 },
