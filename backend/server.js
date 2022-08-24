@@ -1,6 +1,6 @@
 require('dotenv').config();// charge les variables d'environnement du fichier .env
 const express = require("express");// importation du module express
-//const path = require('path');// importation du module path
+const path = require('path');// importation du module path
 const helmet = require("helmet"); // importation du module helmet qui aide à sécuriser l'application express en définissant divers en-têtes HTTP
 const mongoose = require('mongoose');// importation du module mongoose
 //const rateLimit = require("express-rate-limit"); //importation du module express rate limit qui permet de contrôler la vitesse à laquelle les demandes des utilisateurs sont traitées par notre serveur. Elle sécurise l'API
@@ -58,7 +58,7 @@ mongoose.connect('mongodb+srv://'+process.env.DATABASE_USER+':'+process.env.DATA
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch((error) => console.log(error));
 
-//app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // gère la ressource images de manière statique à chaque fois qu'elle reçoit une requête vers la route /uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // gère la ressource images de manière statique à chaque fois qu'elle reçoit une requête vers la route /uploads
 
 const userRouter = require('./routes/user.routes'); //constante userRouter qui a pour valeur le chemin vers le fichier user.routes
 app.use('/users', userRouter);
