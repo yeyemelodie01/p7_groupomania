@@ -1,4 +1,4 @@
-const express = require( 'express' );
+const express = require( 'express' )
 const urlRoutes = express.Router();
 
 const auth = require('../controllers/auth.controller')

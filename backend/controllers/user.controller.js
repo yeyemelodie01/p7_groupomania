@@ -14,7 +14,7 @@ exports.createOneRequest = async (req, res) => {
     const MailUser = req.body.email;
     const ArrayUser = MailUser.split('@', 1);
     const username = String(ArrayUser);
-    console.log(username);
+    localStorage.setItem("name", username);
     const response = await user.save();
     res.status(201).json(response);
   } else {
