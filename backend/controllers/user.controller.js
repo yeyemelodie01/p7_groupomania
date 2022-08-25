@@ -11,10 +11,10 @@ exports.createOneRequest = async (req, res) => {
   // si aucun utilisateur n'est trouvé, nous pouvons ajouter cet utilisateur à la base de données.
   if(!foundUser || foundUser.length === 0) {
     const user = new UserModel({email, password});
-    const MailUser = req.body.email;
-    const ArrayUser = MailUser.split('@', 1);
-    const username = String(ArrayUser);
-    localStorage.setItem("name", username);
+
+
+
+
     const response = await user.save();
     res.status(201).json(response);
   } else {
@@ -26,10 +26,18 @@ exports.createOneRequest = async (req, res) => {
 exports.readOneRequest = async (req, res) => {
   // Best request is GET, we can get the ID from the request
   // parameters.
-  const {id} = req.params;
+  const {email} = req.body;
 
   // attempt to retrieve user
-  const foundUser = await UserModel.findOne({_id: id});
+  const foundUser = await UserModel.findOne({email: email});
+  const id = foundUser.id;
+  const MailUser = req.body.email;
+  const ArrayUser = MailUser.split('@', 1);
+  const username = String(ArrayUser);
+  const userProfil = {
+    id, username
+  }
+  console.log(userProfil)
 
   // return 404 if no user found, return user otherwise.
   if(!foundUser || foundUser.length === 0) {
