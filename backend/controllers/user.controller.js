@@ -30,14 +30,9 @@ exports.readOneRequest = async (req, res) => {
 
   // attempt to retrieve user
   const foundUser = await UserModel.findOne({email: email});
-  const id = foundUser.id;
-  const MailUser = req.body.email;
-  const ArrayUser = MailUser.split('@', 1);
-  const username = String(ArrayUser);
-  const userProfil = {
-    id, username
-  }
-  console.log(userProfil)
+
+
+
 
   // return 404 if no user found, return user otherwise.
   if(!foundUser || foundUser.length === 0) {

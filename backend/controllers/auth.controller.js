@@ -43,6 +43,23 @@ exports.loginRequest = async (req, res) => { // export de la fonction loginReque
         userId: foundUser._id, // userId qui prend la valeur de foundUser._id
         token: token, //token qui prend la valeur de token.compact
       }
+
+      const id = foundUser.id;
+      const MailUser = req.body.email;
+      const ArrayUser = MailUser.split('@', 1);
+      const username = String(ArrayUser);
+      const userProfil = {
+        id, username
+      }
+      console.log(userProfil)
+      if (typeof window !== 'undefined') {
+        console.log('You are on the browser')
+        localStorage.setItem("profil", JSON.stringify(userProfil))
+        // 👉️ can use localStorage here
+      } else {
+        console.log('You are on the server')
+        // 👉️ can't use localStorage
+      }
       res.status(200).json(userLoginInformation);// réponse avec le status 302 qui encode l'objet userLoginInformation
     } else {
       res.status(409).json({message: "User not found"}); // réponse avec le status 409 qui encode le message User not found
