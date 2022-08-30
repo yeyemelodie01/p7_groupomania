@@ -5,7 +5,7 @@ import { faImage } from '@fortawesome/free-solid-svg-icons'
 import styled from "styled-components";
 import colors from '../../utils/styles/colors'
 import Post from '../../components/post'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 const ParentGrid = styled.div`
@@ -139,6 +139,20 @@ const StyleButton = styled(PostButton)`
 
 function Home() {
   const [ isHidden, setIsHidden ] = useState(false);
+  const [ postList, setPostList ] = useState([])
+
+  useEffect(() => {
+    async function fetchHome() {
+      try {
+        const response = await fetch(`http://localhost:8000/api/post`)
+        const { postList } = await response.json()
+        setPostList(postList)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    fetchHome()
+  }, [])
 
   return(
       <main>
@@ -191,36 +205,18 @@ function Home() {
           </Grid1>
         </ParentGrid>
         <div>
-          <LazyLoad height={200} offset={100}>
-            <Post />
-          </LazyLoad>
-          <LazyLoad height={200} offset={100}>
-            <Post />
-          </LazyLoad>
-          <LazyLoad height={200} offset={100}>
-            <Post />
-          </LazyLoad>
-          <LazyLoad height={200} offset={100}>
-            <Post />
-          </LazyLoad>
-          <LazyLoad height={200} offset={100}>
-            <Post />
-          </LazyLoad>
-          <LazyLoad height={200} offset={100}>
-            <Post />
-          </LazyLoad>
-          <LazyLoad height={200} offset={100}>
-          <Post />
-        </LazyLoad>
-          <LazyLoad height={200} offset={100}>
-            <Post />
-          </LazyLoad>
-          <LazyLoad height={200} offset={100}>
-            <Post />
-          </LazyLoad>
-          <LazyLoad height={200} offset={100}>
-            <Post />
-          </LazyLoad>
+          {postList.map((post, index) =>
+            <LazyLoad height={200} offset={100}>
+              <Post
+                key={`${post.name}-${index}`}
+                nameUser={post.username}
+                picture={post.picture}
+                picturePost={post.picturePost}
+                hour={post.hour}
+                title={post.title}
+              />
+            </LazyLoad>
+          )}
         </div>
       </main>
   )
