@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
 import ImgPost from '../../assets/marcel-eberle-n4boKCT_RLk-unsplash.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -80,7 +81,7 @@ const LikeDislike = styled.div`
   }
 `
 
-function Post() {
+function Post({ picture, picturePost, nameUser, hour, title }) {
   return(
     <ParentGrid>
       <Grid1>
@@ -88,19 +89,19 @@ function Post() {
           <PostProfil>
             <ListPost>
               <li>
-                <ImgProfil src={ Profil } alt="profil"/>
+                <ImgProfil src={ picture } alt="profil"/>
               </li>
               <li>
-                <NameProfil>Jean-Marc</NameProfil>
+                <NameProfil>{nameUser}</NameProfil>
               </li>
               <li>
-                <PostHour>5h</PostHour>
+                <PostHour>{hour}</PostHour>
               </li>
             </ListPost>
           </PostProfil>
-          <PostTitle className="title_post">Titre du poste</PostTitle>
+          <PostTitle className="title_post">{title}</PostTitle>
           <FigurePost>
-            <img src={ ImgPost } alt="born" />
+            <img src={ picturePost } alt="born" />
             <figcaption>
               <LikeDislike>
                 <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon" />
@@ -115,6 +116,22 @@ function Post() {
       </Grid1>
     </ParentGrid>
   )
+}
+
+Post.prototype = {
+  picture: PropTypes.string,
+  picturePost: PropTypes.string,
+  nameUser: PropTypes.string,
+  hour: PropTypes.number,
+  title: PropTypes.string,
+}
+
+Post.defaultProps = {
+  picture: Profil,
+  picturePost: ImgPost,
+  nameUser: '',
+  hour: '',
+  title: '',
 }
 
 export default Post

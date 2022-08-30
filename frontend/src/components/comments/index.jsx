@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import colors from '../../utils/styles/colors'
 import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
@@ -38,10 +40,11 @@ const ProfilPost = styled.div`
   width: 100%;
 `
 
-function Comment() {
+function Comment({ picture, nameUser, hour, text }) {
+  const numberComments = useParams();
   return(
     <CommentPost>
-      <NumComments>2 commentaires</NumComments>
+      <NumComments>{ numberComments } commentaires</NumComments>
       <div>
         <label form="comments">
           <textarea id="comments"> </textarea>
@@ -53,17 +56,31 @@ function Comment() {
       </div>
       <ProfilDiv>
         <div>
-          <ProfilImg src={ Profil } alt="profil"/>
+          <ProfilImg src={ picture } alt="profil"/>
           <ProfilPost>
-            <p>Mélodie</p>
-            <p>1h</p>
+            <p>{nameUser}</p>
+            <p>{hour}</p>
           </ProfilPost>
         </div>
 
-        <p>Cute :-)</p>
+        <p>{text}</p>
       </ProfilDiv>
     </CommentPost>
   )
+}
+
+Comment.propTypes = {
+  picture: PropTypes.string,
+  nameUser: PropTypes.string,
+  hour: PropTypes.number,
+  text: PropTypes.string,
+}
+
+Comment.defaultProps = {
+  picture: Profil,
+  nameUser: '',
+  hour: '',
+  text: '',
 }
 
 export default Comment
