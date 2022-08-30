@@ -1,3 +1,4 @@
+import LazyLoad from 'react-lazyload'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
@@ -5,6 +6,7 @@ import styled from "styled-components";
 import colors from '../../utils/styles/colors'
 import Post from '../../components/post'
 import { useState } from 'react'
+
 
 const ParentGrid = styled.div`
   display: grid;
@@ -188,7 +190,38 @@ function Home() {
             </HiddenDiv>
           </Grid1>
         </ParentGrid>
-        <Post />
+        <div>
+          <LazyLoad height={200} offset={100}>
+            <Post />
+          </LazyLoad>
+          <LazyLoad height={200} offset={100}>
+            <Post />
+          </LazyLoad>
+          <LazyLoad height={200} offset={100}>
+            <Post />
+          </LazyLoad>
+          <LazyLoad height={200} offset={100}>
+            <Post />
+          </LazyLoad>
+          <LazyLoad height={200} offset={100}>
+            <Post />
+          </LazyLoad>
+          <LazyLoad height={200} offset={100}>
+            <Post />
+          </LazyLoad>
+          <LazyLoad height={200} offset={100}>
+          <Post />
+        </LazyLoad>
+          <LazyLoad height={200} offset={100}>
+            <Post />
+          </LazyLoad>
+          <LazyLoad height={200} offset={100}>
+            <Post />
+          </LazyLoad>
+          <LazyLoad height={200} offset={100}>
+            <Post />
+          </LazyLoad>
+        </div>
       </main>
   )
 }
