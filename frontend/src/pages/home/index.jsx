@@ -1,11 +1,11 @@
-import LazyLoad from 'react-lazyload'
+//import LazyLoad from 'react-lazyload'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import styled from "styled-components";
 import colors from '../../utils/styles/colors'
-import Post from '../../components/post'
-import { useState, useEffect } from 'react'
+//import Post from '../../components/post'
+import { useState } from 'react'
 
 
 const ParentGrid = styled.div`
@@ -139,9 +139,16 @@ const StyleButton = styled(PostButton)`
 
 function Home() {
   const [ isHidden, setIsHidden ] = useState(false);
-  const [ postList, setPostList ] = useState([])
+  //const [ postList, setPostList ] = useState([])
+  const [ titleValue, setTitleValue ] = useState('');
+  const [ fileValue, setFileValue ] = useState(null);
+  const [ textValue, setTextValue ] = useState('');
 
-  useEffect(() => {
+  function handleChange(e) {
+    setFileValue(e.target.files[0])
+  }
+  const submitForm = (e) => { e.preventDefault(); };
+ /* useEffect(() => {
     async function fetchHome() {
       try {
         const response = await fetch(`http://localhost:8000/api/post`)
@@ -152,7 +159,7 @@ function Home() {
       }
     }
     fetchHome()
-  }, [])
+  }, [])*/
 
   return(
       <main>
@@ -167,7 +174,7 @@ function Home() {
             <HiddenDiv style={{display: isHidden ? 'block' : 'none'}}>
               <CreatePost>
                 <h1>Créer un post</h1>
-                <FormFlex>
+                <FormFlex onSubmit={(e) => {submitForm(e)}}>
                   <DivSize>
                     <label form='title'>
                       <InputSize
@@ -176,6 +183,8 @@ function Home() {
                         type="text"
                         placeholder="Titre"
                         maxLength="280"
+                        value={ titleValue }
+                        onChange={(e) => setTitleValue(e.target.value)}
                       />
                     </label>
                   </DivSize>
@@ -188,16 +197,26 @@ function Home() {
                     </DivIcon>
                     <DivSize3>
                       <label form='upload' placeholder="Ajouter une image">
-                        <InputSize id="upload" type="file" name="file"/>
+                        <InputSize
+                          id="upload"
+                          type="file"
+                          value={fileValue}
+                          onChange={handleChange}
+                        />
                       </label>
                     </DivSize3>
                     <p>ou</p>
                     <DivSize4>
                       <label form='citation'>
-                        <textarea id="citation" className="textcitation"> </textarea>
+                        <textarea
+                          id="citation"
+                          className="textcitation"
+                          value={ textValue }
+                          onChange={(e) => setTextValue(e.target.value)}
+                        />
                       </label>
                     </DivSize4>
-                    <StyleButton>Envoyer</StyleButton>
+                    <StyleButton type="submit" value="Submit" onClick={() => console.log(titleValue, fileValue, textValue)}>Envoyer</StyleButton>
                   </DivSize2>
                 </FormFlex>
               </CreatePost>
@@ -205,7 +224,7 @@ function Home() {
           </Grid1>
         </ParentGrid>
         <div>
-          {postList.map((post, index) =>
+          {/*{postList.map((post, index) =>
             <LazyLoad height={200} offset={100}>
               <Post
                 key={`${post.name}-${index}`}
@@ -216,7 +235,7 @@ function Home() {
                 title={post.title}
               />
             </LazyLoad>
-          )}
+          )}*/}
         </div>
       </main>
   )
