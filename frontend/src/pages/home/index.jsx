@@ -1,11 +1,13 @@
 //import LazyLoad from 'react-lazyload'
+import { useState } from 'react'
+import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import styled from "styled-components";
 import colors from '../../utils/styles/colors'
 //import Post from '../../components/post'
-import { useState } from 'react'
+
 
 
 const ParentGrid = styled.div`
@@ -147,7 +149,21 @@ function Home() {
   function handleChange(e) {
     setFileValue(e.target.files[0])
   }
-  const submitForm = (e) => { e.preventDefault(); };
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const url = 'http://localhost:4000/uploads';
+    const formData = new FormData();
+      formData.append('file', JSON.stringify(fileValue));
+      axios.post(url, formData,{
+        headers: {
+          'content-type': 'multipart/form-data',
+        }
+      }).then(res => {
+        console.log(res.data);
+      })
+        .catch(err => console.log(err))
+  }
  /* useEffect(() => {
     async function fetchHome() {
       try {
@@ -174,7 +190,7 @@ function Home() {
             <HiddenDiv style={{display: isHidden ? 'block' : 'none'}}>
               <CreatePost>
                 <h1>Créer un post</h1>
-                <FormFlex onSubmit={(e) => {submitForm(e)}}>
+                <FormFlex onSubmit={handleSubmit}>
                   <DivSize>
                     <label form='title'>
                       <InputSize
@@ -196,14 +212,12 @@ function Home() {
                       <p className="texticon">Ajouter une photo ou un texte</p>
                     </DivIcon>
                     <DivSize3>
-                      <label form='upload' placeholder="Ajouter une image">
                         <InputSize
-                          id="upload"
                           type="file"
                           value={fileValue}
                           onChange={handleChange}
+
                         />
-                      </label>
                     </DivSize3>
                     <p>ou</p>
                     <DivSize4>
@@ -216,7 +230,7 @@ function Home() {
                         />
                       </label>
                     </DivSize4>
-                    <StyleButton type="submit" value="Submit" onClick={() => console.log(titleValue, fileValue, textValue)}>Envoyer</StyleButton>
+                    <StyleButton type="submit" onClick={() => console.log(titleValue, textValue)}>Envoyer</StyleButton>
                   </DivSize2>
                 </FormFlex>
               </CreatePost>
