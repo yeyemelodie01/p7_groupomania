@@ -1,10 +1,13 @@
+import React from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Logo from '../../assets/icon-left-font.png'
 import styled from 'styled-components'
 import useModal from '../../utils/hooks'
 import Modal from '../../components/modal'
-import React from 'react'
+
+
 
 const Headerstyle = styled.header`
   display: flex;
@@ -48,32 +51,47 @@ const Spanstyle = styled.span`
 function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
-    const [ email, setEmail ] = useState("");
-    const [ password, setPassword] = useState("");
+    const { register, handleSubmit} = useForm();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            let res = await fetch("http://localhost:4000/api/auth/signup", {
-                method: "POST",
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                }),
-            });
-            let resJSON = await res.JSON();
-            console.log(resJSON);
-            if (res.status === 200) {
-                setEmail("");
-                setPassword("");
-                console.log();
-            }
-        } catch (err) {
+
+    const onSignup = async (data) => {
+        axios
+          .post("http://localhost:4000/api/auth/signup", data)
+          .then(() =>{
+              axios
+                .post("http://localhost:4000/api/auth/login", data)
+                .then((res) => {
+                    localStorage.clear();
+                    localStorage.setItem("token", res.data.token);
+                    const userEmail = data.email;
+                    const ArrayUser = userEmail.split('@', 1);
+                    const username = String(ArrayUser);
+                    console.log(username,"est","connecter")
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+          })
+          .catch((err) => {
             console.log(err)
-        }
+        })
     }
 
-
+    const onLogin = async (data) => {
+        axios
+          .post("http://localhost:4000/api/auth/login", data)
+          .then((res) => {
+              localStorage.clear();
+              localStorage.setItem("token", res.data.token);
+              const userEmail = data.email;
+               const ArrayUser = userEmail.split('@', 1);
+               const username = String(ArrayUser);
+              console.log(username,"est","connecter")
+          })
+          .catch((err) => {
+              console.log(err);
+          });
+    }
 
     return(
       <>
@@ -94,15 +112,27 @@ function Header() {
           hide={toggleLoginForm}
           title="Se connecter">
 
-            <form>
+            <form onSubmit={handleSubmit(onLogin)}>
                 <div className="form-group">
-                    <input type="text" placeholder="Username" />
+                    <input
+                      type="text"
+                      placeholder="Email"
+                      required
+                      {...register("email")}
+                    />
                 </div>
                 <div className="form-group">
-                    <input type="text" placeholder="Password" />
+                    <input
+                      type="text"
+                      placeholder="Password"
+                      required
+                      {...register("password")}
+                    />
                 </div>
                 <div className="form-group">
-                    <input type="submit" placeholder="Login" />
+                    <input type="submit" placeholder="Se connecter" onClick={() => {
+
+                    }} />
                 </div>
             </form>
         </Modal>
@@ -111,25 +141,31 @@ function Header() {
             hide={toggleRegistrationForm}
             title="S'inscrire">
 
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit(onSignup)}>
                   <div className="form-group">
                       <input
                         type="text"
                         placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        {...register("email")}
                       />
                   </div>
                   <div className="form-group">
                       <input
                         type="text"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Mot de Passe"
+                        required
+                        {...register("password")}
                       />
                   </div>
                   <div className="form-group">
-                      <input type="submit" placeholder="Register" />
+                      <input
+                        type="submit"
+                        placeholder="Envoyer"
+                        onClick={() => {
+
+                        }}
+                      />
                   </div>
               </form>
           </Modal>

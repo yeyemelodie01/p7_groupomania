@@ -1,4 +1,5 @@
 //import LazyLoad from 'react-lazyload'
+import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -145,9 +146,11 @@ function Home({ getPost }) {
   const [ titleValue, setTitleValue ] = useState('');
   //const [ fileValue, setFileValue ] = useState(null);
   const [ textValue, setTextValue ] = useState('');
+  const { register, handleSubmit } = useForm();
 
 
   const onSubmit = (data) => {
+    console.log(data)
     //const url = 'http://localhost:4000/uploads';
     const formData = new FormData();
       formData.append('file', data.img[0]);
@@ -187,7 +190,10 @@ function Home({ getPost }) {
             <HiddenDiv style={{display: isHidden ? 'block' : 'none'}}>
               <CreatePost>
                 <h1>Créer un post</h1>
-                <FormFlex onSubmit={onSubmit}>
+                <FormFlex
+                  onSubmit={handleSubmit(onSubmit)}
+                  encType="multipart/form/data"
+                >
                   <DivSize>
                     <label form='title'>
                       <InputSize
@@ -211,7 +217,6 @@ function Home({ getPost }) {
                     <DivSize3>
                         <InputSize
                           type="file"
-                          name="img"
                           {...register("img")}
                         />
                     </DivSize3>
@@ -223,6 +228,7 @@ function Home({ getPost }) {
                           className="textcitation"
                           value={ textValue }
                           onChange={(e) => setTextValue(e.target.value)}
+                          {...register("text")}
                         />
                       </label>
                     </DivSize4>
