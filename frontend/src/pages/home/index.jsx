@@ -139,31 +139,28 @@ const StyleButton = styled(PostButton)`
   margin-bottom: 40px;
 `
 
-function Home() {
+function Home({ getPost }) {
   const [ isHidden, setIsHidden ] = useState(false);
   //const [ postList, setPostList ] = useState([])
   const [ titleValue, setTitleValue ] = useState('');
-  const [ fileValue, setFileValue ] = useState(null);
+  //const [ fileValue, setFileValue ] = useState(null);
   const [ textValue, setTextValue ] = useState('');
 
-  function handleChange(e) {
-    setFileValue(e.target.files[0])
-  }
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    const url = 'http://localhost:4000/uploads';
+  const onSubmit = (data) => {
+    //const url = 'http://localhost:4000/uploads';
     const formData = new FormData();
-      formData.append('file', JSON.stringify(fileValue));
-      axios.post(url, formData,{
-        headers: {
-          'content-type': 'multipart/form-data',
-        }
-      }).then(res => {
-        console.log(res.data);
-      })
-        .catch(err => console.log(err))
-  }
+      formData.append('file', data.img[0]);
+      axios
+        .post("http://localhost:4000/api/post/", formData)
+        .then(() => {
+          getPost();
+        })
+        .catch((err) =>{
+          console.log(err);
+        });
+    };
+
  /* useEffect(() => {
     async function fetchHome() {
       try {
@@ -190,7 +187,7 @@ function Home() {
             <HiddenDiv style={{display: isHidden ? 'block' : 'none'}}>
               <CreatePost>
                 <h1>Créer un post</h1>
-                <FormFlex onSubmit={handleSubmit}>
+                <FormFlex onSubmit={onSubmit}>
                   <DivSize>
                     <label form='title'>
                       <InputSize
@@ -214,9 +211,8 @@ function Home() {
                     <DivSize3>
                         <InputSize
                           type="file"
-                          value={fileValue}
-                          onChange={handleChange}
-
+                          name="img"
+                          {...register("img")}
                         />
                     </DivSize3>
                     <p>ou</p>
