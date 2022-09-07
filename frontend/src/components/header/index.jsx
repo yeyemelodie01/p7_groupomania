@@ -86,6 +86,7 @@ function Header() {
               const userEmail = data.email;
                const ArrayUser = userEmail.split('@', 1);
                const username = String(ArrayUser);
+               localStorage.setItem("username", username);
               console.log(username,"est","connecter")
           })
           .catch((err) => {

@@ -3,16 +3,16 @@ const express = require("express");// importation du module express
 const path = require('path');// importation du module path
 const helmet = require("helmet"); // importation du module helmet qui aide à sécuriser l'application express en définissant divers en-têtes HTTP
 const mongoose = require('mongoose');// importation du module mongoose
-//const rateLimit = require("express-rate-limit"); //importation du module express rate limit qui permet de contrôler la vitesse à laquelle les demandes des utilisateurs sont traitées par notre serveur. Elle sécurise l'API
+const rateLimit = require("express-rate-limit"); //importation du module express rate limit qui permet de contrôler la vitesse à laquelle les demandes des utilisateurs sont traitées par notre serveur. Elle sécurise l'API
 
-//const limiter = rateLimit({ // constante limiter qui a pour valeur rateLimit
-  //windowMs : 15 * 60 * 10000000,// 15 minutes
-  //max : 250, // 250 essaies
-//});
+const limiter = rateLimit({ // constante limiter qui a pour valeur rateLimit
+  windowMs : 15 * 60 * 10000000,// 15 minutes
+  max : 250, // 250 essaies
+});
 
 const app = express(); // utilisation du module express
 
-//app.use(limiter); // application de la constante limiter pour l'écoute maximum des requêtes
+app.use(limiter); // application de la constante limiter pour l'écoute maximum des requêtes
 
 app.use(helmet());// application de helmet pour la protection des en-têtes HTTP
 

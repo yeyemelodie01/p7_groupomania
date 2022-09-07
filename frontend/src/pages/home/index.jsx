@@ -142,22 +142,20 @@ const StyleButton = styled(PostButton)`
 
 function Home({ getPost }) {
   const [ isHidden, setIsHidden ] = useState(false);
-  //const [ postList, setPostList ] = useState([])
-  const [ titleValue, setTitleValue ] = useState('');
-  //const [ fileValue, setFileValue ] = useState(null);
-  const [ textValue, setTextValue ] = useState('');
   const { register, handleSubmit } = useForm();
 
 
   const onSubmit = (data) => {
     console.log(data)
-    //const url = 'http://localhost:4000/uploads';
     const formData = new FormData();
+      formData.append('title', data.title);
       formData.append('file', data.img[0]);
+      formData.append('sentence', data.text);
       axios
         .post("http://localhost:4000/api/post/", formData)
         .then(() => {
           getPost();
+          console.log(formData);
         })
         .catch((err) =>{
           console.log(err);
@@ -198,12 +196,10 @@ function Home({ getPost }) {
                     <label form='title'>
                       <InputSize
                         id="title"
-                        name="title"
                         type="text"
                         placeholder="Titre"
                         maxLength="280"
-                        value={ titleValue }
-                        onChange={(e) => setTitleValue(e.target.value)}
+                        {...register("title")}
                       />
                     </label>
                   </DivSize>
@@ -215,10 +211,13 @@ function Home({ getPost }) {
                       <p className="texticon">Ajouter une photo ou un texte</p>
                     </DivIcon>
                     <DivSize3>
+                      <label form='img'>
                         <InputSize
+                          id="img"
                           type="file"
                           {...register("img")}
                         />
+                      </label>
                     </DivSize3>
                     <p>ou</p>
                     <DivSize4>
@@ -226,13 +225,11 @@ function Home({ getPost }) {
                         <textarea
                           id="citation"
                           className="textcitation"
-                          value={ textValue }
-                          onChange={(e) => setTextValue(e.target.value)}
-                          {...register("text")}
+                          {...register("sentence")}
                         />
                       </label>
                     </DivSize4>
-                    <StyleButton type="submit" onClick={() => console.log(titleValue, textValue)}>Envoyer</StyleButton>
+                    <StyleButton type="submit" onClick={() => {}}>Envoyer</StyleButton>
                   </DivSize2>
                 </FormFlex>
               </CreatePost>
