@@ -11,6 +11,7 @@ import colors from '../../utils/styles/colors'
 
 
 
+
 const ParentGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -140,9 +141,18 @@ const StyleButton = styled(PostButton)`
   margin-bottom: 40px;
 `
 
-function Home({ getPost }) {
+function Home({ getPost}) {
   const [ isHidden, setIsHidden ] = useState(false);
   const { register, handleSubmit } = useForm();
+
+  function ButtonPost(props){
+    const isLogin = props.isLogin;
+
+    if (isLogin){
+      return ButtonPost;
+    }
+  }
+
 
 
   const onSubmit = (data) => {
@@ -180,10 +190,12 @@ function Home({ getPost }) {
         <ParentGrid>
           <Grid1>
             <DivButton>
-              <PostButton onClick={() => setIsHidden((s) => !s)}>
-                <FontAwesomeIcon icon={ faCirclePlus } />
-                Créer un poste
-              </PostButton>
+              <ButtonPost isLogin={false}>
+                <PostButton onClick={() => setIsHidden((s) => !s)}>
+                  <FontAwesomeIcon icon={ faCirclePlus } />
+                  Créer un post
+                </PostButton>
+              </ButtonPost>
             </DivButton>
             <HiddenDiv style={{display: isHidden ? 'block' : 'none'}}>
               <CreatePost>

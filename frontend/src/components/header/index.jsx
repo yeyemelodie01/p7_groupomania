@@ -22,17 +22,16 @@ const Navstyle = styled.nav`
 `
 
 const Linkimg = styled(Link)`
-  width: 30%;
   display: flex;
   padding-left: 20px;
 `
 
 const Imgstyle = styled.img`
-  width: 53%;
+  width: 36%;
 `
 
 const Linkstyle = styled(Link)`
-  font-size: 30px;
+  font-size: 19px;
   font-weight: bold;
 `
 
@@ -45,7 +44,7 @@ const Divstyle = styled.div`
 `
 
 const Spanstyle = styled.span`
-  font-size: 50px;
+  font-size: 30px;
 `
 
 function Header() {
@@ -124,8 +123,8 @@ function Header() {
                 </div>
                 <div className="form-group">
                     <input
-                      type="text"
-                      placeholder="Password"
+                      type="password"
+                      placeholder="Mot de Passe"
                       required
                       {...register("password")}
                     />
@@ -153,7 +152,7 @@ function Header() {
                   </div>
                   <div className="form-group">
                       <input
-                        type="text"
+                        type="password"
                         placeholder="Mot de Passe"
                         required
                         {...register("password")}
