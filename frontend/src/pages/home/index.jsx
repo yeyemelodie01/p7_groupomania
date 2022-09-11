@@ -59,7 +59,7 @@ function Home({ getPost}) {
                   Créer un post
                 </button>
                   <p>Vous devez vous connecter pour créer un post</p>
-              
+
 
             </div>
             <div className="hiddendiv" style={{display: isHidden ? 'block' : 'none'}}>
