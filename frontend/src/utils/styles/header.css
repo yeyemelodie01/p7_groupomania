@@ -13,27 +13,49 @@ nav{
 .linkimg{
     display: flex;
     padding-left: 20px;
-    width: 100%;
+    width: 50%;
 }
 
 .linkimg div{
-    width: 19%;
-}
-
-.linkstyle {
-    font-size: 19px;
-    font-weight: bold;
-    cursor: pointer;
+    width: 25%;
 }
 
 .divstyle {
     display: flex;
     align-items: center;
+    width: 50%;
+    justify-content: flex-end;
     margin-right: 35px;
-    width: 30%;
-    justify-content: space-around;
 }
 
+.divlink{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.linkstyle {
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+
 span {
-    font-size: 30px;
+    margin: 0 20px;
+    font-size: 20px;
+}
+
+
+/* RESPONSIVE */
+
+/* MOBILE */
+@media screen and (min-width: 320px) and (max-width: 767px){
+
+}
+/* TABLET */
+@media screen and (min-width: 768px) and (max-width: 1023px){
+
 }

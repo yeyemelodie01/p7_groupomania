@@ -69,9 +69,11 @@ function Header() {
                 </div>
               </a>
               <div className="divstyle">
-                <div className="modal-toggle linkstyle" onClick={toggleLoginForm}>Se connecter </div>
-                <span>|</span>
-                <div className="modal-toggle linkstyle" onClick={toggleRegistrationForm}>S'inscrire</div>
+                <div className="divlink">
+                  <div className="modal-toggle linkstyle" onClick={toggleLoginForm}>Se connecter </div>
+                  <span>|</span>
+                  <div className="modal-toggle linkstyle" onClick={toggleRegistrationForm}>S'inscrire</div>
+                </div>
               </div>
             </nav>
           </header>
