@@ -7,6 +7,7 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import styled from "styled-components";
 import colors from '../../utils/styles/colors'
+import Header from '../../components/header'
 //import Post from '../../components/post'
 
 
@@ -144,15 +145,7 @@ const StyleButton = styled(PostButton)`
 function Home({ getPost}) {
   const [ isHidden, setIsHidden ] = useState(false);
   const { register, handleSubmit } = useForm();
-
-  function ButtonPost(props){
-    const isLogin = props.isLogin;
-
-    if (isLogin){
-      return ButtonPost;
-    }
-  }
-
+  const [ isLogin, setIsLogin ] = useState(true);
 
 
   const onSubmit = (data) => {
@@ -190,12 +183,14 @@ function Home({ getPost}) {
         <ParentGrid>
           <Grid1>
             <DivButton>
-              <ButtonPost isLogin={false}>
-                <PostButton onClick={() => setIsHidden((s) => !s)}>
+              {isLogin ?
+                ( <PostButton onClick={() => setIsHidden((s) => !s)}>
                   <FontAwesomeIcon icon={ faCirclePlus } />
                   Créer un post
-                </PostButton>
-              </ButtonPost>
+                </PostButton> ) : (
+                  <p>Vous devez vous connecter pour créer un post</p>
+                )}
+
             </DivButton>
             <HiddenDiv style={{display: isHidden ? 'block' : 'none'}}>
               <CreatePost>

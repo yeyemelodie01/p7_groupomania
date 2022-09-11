@@ -1,51 +1,11 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import Logo from '../../assets/icon-left-font.png'
-import styled from 'styled-components'
+import '../../utils/styles/header.css'
 import useModal from '../../utils/hooks'
 import Modal from '../../components/modal'
-
-
-
-const Headerstyle = styled.header`
-  display: flex;
-  margin-top: 20px;
-  margin-bottom: 20px;
-`
-
-const Navstyle = styled.nav`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`
-
-const Linkimg = styled(Link)`
-  display: flex;
-  padding-left: 20px;
-`
-
-const Imgstyle = styled.img`
-  width: 36%;
-`
-
-const Linkstyle = styled(Link)`
-  font-size: 19px;
-  font-weight: bold;
-`
-
-const Divstyle = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 35px;
-  width: 30%;
-  justify-content: space-around;
-`
-
-const Spanstyle = styled.span`
-  font-size: 30px;
-`
+//import authLog from '../../utils/auth'
 
 function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
@@ -76,6 +36,12 @@ function Header() {
         })
     }
 
+    // const onLogin = (e) => {
+    //   e.preventDefault();
+    //   authLog.login(email,password).then(
+    //     () =>
+    //   )
+    // }
     const onLogin = async (data) => {
         axios
           .post("http://localhost:4000/api/auth/login", data)
@@ -95,18 +61,20 @@ function Header() {
 
     return(
       <>
-        <Headerstyle>
-            <Navstyle>
-                <Linkimg to="/">
-                    <Imgstyle src={ Logo } alt="Logo Groupomania"/>
-                </Linkimg>
-                <Divstyle>
-                    <Linkstyle to="/" className="modal-toggle" onClick={toggleLoginForm}>Se connecter </Linkstyle>
-                    <Spanstyle>|</Spanstyle>
-                    <Linkstyle to="/" className="modal-toggle" onClick={toggleRegistrationForm}>S'inscrire</Linkstyle>
-                </Divstyle>
-            </Navstyle>
-        </Headerstyle>
+          <header>
+            <nav>
+              <a className="linkimg" href="/">
+                <div>
+                  <img className="styleimg" src={ Logo } alt="Logo Groupomania"/>
+                </div>
+              </a>
+              <div className="divstyle">
+                <div className="modal-toggle linkstyle" onClick={toggleLoginForm}>Se connecter </div>
+                <span>|</span>
+                <div className="modal-toggle linkstyle" onClick={toggleRegistrationForm}>S'inscrire</div>
+              </div>
+            </nav>
+          </header>
         <Modal
           isShow={isLoginFormShow}
           hide={toggleLoginForm}
@@ -131,7 +99,7 @@ function Header() {
                 </div>
                 <div className="form-group">
                     <input type="submit" placeholder="Se connecter" onClick={() => {
-
+                      //handleLogin();
                     }} />
                 </div>
             </form>
