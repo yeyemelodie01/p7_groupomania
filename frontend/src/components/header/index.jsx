@@ -1,17 +1,17 @@
 import React from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
+//import { useHistory } from 'react-router-dom'
 import Logo from '../../assets/icon-left-font.png'
 import '../../utils/styles/header.css'
 import useModal from '../../utils/hooks'
 import Modal from '../../components/modal'
-//import authLog from '../../utils/auth'
+
 
 function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
     const { register, handleSubmit} = useForm();
-
 
     const onSignup = async (data) => {
         axios
@@ -26,6 +26,7 @@ function Header() {
                     const ArrayUser = userEmail.split('@', 1);
                     const username = String(ArrayUser);
                     console.log(username,"est","connecter")
+                  console.log(res.status)
                 })
                 .catch((err) => {
                     console.log(err);
@@ -36,12 +37,6 @@ function Header() {
         })
     }
 
-    // const onLogin = (e) => {
-    //   e.preventDefault();
-    //   authLog.login(email,password).then(
-    //     () =>
-    //   )
-    // }
     const onLogin = async (data) => {
         axios
           .post("http://localhost:4000/api/auth/login", data)
@@ -52,7 +47,8 @@ function Header() {
                const ArrayUser = userEmail.split('@', 1);
                const username = String(ArrayUser);
                localStorage.setItem("username", username);
-              console.log(username,"est","connecter")
+               localStorage.setItem("status", res.status);
+               window.location.href='/';
           })
           .catch((err) => {
               console.log(err);
@@ -101,7 +97,7 @@ function Header() {
                 </div>
                 <div className="form-group">
                     <input type="submit" placeholder="Se connecter" onClick={() => {
-                      //handleLogin();
+                      
                     }} />
                 </div>
             </form>

@@ -8,16 +8,10 @@ import { faImage } from '@fortawesome/free-solid-svg-icons'
 import '../../utils/styles/post.css'
 //import Post from '../../components/post'
 
-
-
-
-
-
 function Home({ getPost}) {
   const [ isHidden, setIsHidden ] = useState(false);
   const { register, handleSubmit } = useForm();
-  //const [ isLogin, setIsLogin ] = useState(true);
-
+  const userstatus = localStorage.getItem("status");
 
   const onSubmit = (data) => {
     console.log(data)
@@ -36,31 +30,15 @@ function Home({ getPost}) {
         });
     };
 
- /* useEffect(() => {
-    async function fetchHome() {
-      try {
-        const response = await fetch(`http://localhost:8000/api/post`)
-        const { postList } = await response.json()
-        setPostList(postList)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    fetchHome()
-  }, [])*/
-
-  return(
-      <main>
+    if(userstatus) {
+     return <main>
         <div className="parentgrid">
           <div className="grid1">
             <div className="buttondiv">
-                 <button className="buttonpost" onClick={() => setIsHidden((s) => !s)}>
-                  <FontAwesomeIcon icon={ faCirclePlus } />
-                  Créer un post
-                </button>
-                  <p>Vous devez vous connecter pour créer un post</p>
-
-
+              <button className="buttonpost" onClick={() => setIsHidden((s) => !s)}>
+                <FontAwesomeIcon icon={ faCirclePlus } />
+                Créer un post
+              </button>
             </div>
             <div className="hiddendiv" style={{display: isHidden ? 'block' : 'none'}}>
               <div className="postcreate">
@@ -130,7 +108,11 @@ function Home({ getPost}) {
           )}*/}
         </div>
       </main>
-  )
+    } else {
+      return  <div className="buttondiv">
+                  <p>Vous devez vous connecter pour créer un post</p>
+              </div>
+    }
 }
 
 export default Home;
