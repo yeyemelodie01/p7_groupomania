@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
-//import { useHistory } from 'react-router-dom'
 import Logo from '../../assets/icon-left-font.png'
 import '../../utils/styles/header.css'
 import useModal from '../../utils/hooks'
@@ -55,8 +54,17 @@ function Header() {
           });
     }
 
-    return(
-      <>
+    function Logout(){
+      localStorage.clear();
+      window.location.href='/';
+    }
+
+    let userstatus = localStorage.getItem("status");
+    let userprofil = localStorage.getItem("username");
+
+    if (userstatus === null) {
+      return(
+        <>
           <header>
             <nav>
               <a className="linkimg" href="/">
@@ -73,70 +81,70 @@ function Header() {
               </div>
             </nav>
           </header>
-        <Modal
-          isShow={isLoginFormShow}
-          hide={toggleLoginForm}
-          title="Se connecter">
+          <Modal
+            isShow={isLoginFormShow}
+            hide={toggleLoginForm}
+            title="Se connecter">
 
             <form onSubmit={handleSubmit(onLogin)}>
-                <div className="form-group">
-                    <input
-                      type="text"
-                      placeholder="Email"
-                      required
-                      {...register("email")}
-                    />
-                </div>
-                <div className="form-group">
-                    <input
-                      type="password"
-                      placeholder="Mot de Passe"
-                      required
-                      {...register("password")}
-                    />
-                </div>
-                <div className="form-group">
-                    <input type="submit" placeholder="Se connecter" onClick={() => {
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Email"
+                  required
+                  {...register("email")}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  placeholder="Mot de Passe"
+                  required
+                  {...register("password")}
+                />
+              </div>
+              <div className="form-group">
+                <input type="submit" placeholder="Se connecter" onClick={() => {
 
-                    }} />
-                </div>
+                }} />
+              </div>
             </form>
-        </Modal>
+          </Modal>
           <Modal
             isShow={isRegistrationForm}
             hide={toggleRegistrationForm}
             title="S'inscrire">
 
-              <form onSubmit={handleSubmit(onSignup)}>
-                  <div className="form-group">
-                      <input
-                        type="text"
-                        placeholder="Email"
-                        required
-                        {...register("email")}
-                      />
-                  </div>
-                  <div className="form-group">
-                      <input
-                        type="password"
-                        placeholder="Mot de Passe"
-                        required
-                        {...register("password")}
-                      />
-                  </div>
-                  <div className="form-group">
-                      <input
-                        type="submit"
-                        placeholder="Envoyer"
-                        onClick={() => {
+            <form onSubmit={handleSubmit(onSignup)}>
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Email"
+                  required
+                  {...register("email")}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  placeholder="Mot de Passe"
+                  required
+                  {...register("password")}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="submit"
+                  placeholder="Envoyer"
+                  onClick={() => {
 
-                        }}
-                      />
-                  </div>
-              </form>
+                  }}
+                />
+              </div>
+            </form>
           </Modal>
 
-        <style jsx="true">
+          <style jsx="true">
             {`
                 button.modal-toggle,
                 input[type="submit"] {
@@ -163,9 +171,29 @@ function Header() {
                   padding: 0.5rem 0.7rem;
                 }
             `}
-        </style>
-      </>
-    )
+          </style>
+        </>
+      )
+    } else {
+      return <header>
+              <nav>
+                <a className="linkimg" href="/">
+                  <div>
+                    <img className="styleimg" src={ Logo } alt="Logo Groupomania"/>
+                  </div>
+                </a>
+                <div className="divstyle">
+                  <div className="divlink">
+                    <p>Bienvenue { userprofil }</p>
+                    <span>|</span>
+                    <button onClick={ Logout }>Déconnecter</button>
+                  </div>
+                </div>
+              </nav>
+            </header>
+
+    }
+
 }
 
 export default Header
