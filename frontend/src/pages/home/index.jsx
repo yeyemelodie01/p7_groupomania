@@ -7,8 +7,7 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import '../../utils/styles/post.css'
 //import Post from '../../components/post'
-import { Editor } from 'react-draft-wysiwyg'
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
+
 
 
 function Home({ getPost}) {
@@ -81,13 +80,7 @@ function Home({ getPost}) {
                     </div>
                     <p>ou</p>
                     <div className="divtext">
-                      <Editor
-                        editorState={editorState}
-                        toolbarClassName="toolbarClassName"
-                        wrapperClassName="wrapperClassName"
-                        editorClassName="editorClassName"
-                        onEditorStateChange={this.onEditorStateChange}
-                      />
+
                       <label form='citation'>
                         <textarea
                           id="citation"
