@@ -7,6 +7,8 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import '../../utils/styles/post.css'
 //import Post from '../../components/post'
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
 
@@ -31,6 +33,13 @@ function Home({ getPost}) {
           console.log(err);
         });
     };
+
+  function getInitialState() {
+    return {
+      selectedOption: 'image'
+    };
+  }
+
 
     if(userstatus) {
      return <main>
@@ -61,6 +70,25 @@ function Home({ getPost}) {
                       />
                     </label>
                   </div>
+                  <form>
+                    <div className="radiodiv">
+                      <label form='radio'>
+                        <input
+                          id="radio"
+                          type="radio"
+                          value="image"
+                          checked={ this.state.getInitialState === Image }
+                        /> Image
+                      </label>
+                      <label form='radio'>
+                        <input
+                          id="radio"
+                          type="radio"
+                          value="texte"
+                        /> Texte
+                      </label>
+                    </div>
+                  </form>
                   <div className="divimgtext">
                     <div className="icondiv">
                       <div className="iconsize">
@@ -80,14 +108,24 @@ function Home({ getPost}) {
                     </div>
                     <p>ou</p>
                     <div className="divtext">
-
-                      <label form='citation'>
-                        <textarea
-                          id="citation"
-                          className="textcitation"
-                          {...register("sentence")}
-                        />
-                      </label>
+                      <CKEditor
+                        editor={ ClassicEditor }
+                        data="<p>Ecrivez votre texte</p>"
+                        onReady={ editor => {
+                          // You can store the "editor" and use when it is needed.
+                          console.log( 'Editor is ready to use!', editor );
+                        } }
+                        onChange={ ( event, editor ) => {
+                          const data = editor.getData();
+                          console.log( { event, editor, data } );
+                        } }
+                        onBlur={ ( event, editor ) => {
+                          console.log( 'Blur.', editor );
+                        } }
+                        onFocus={ ( event, editor ) => {
+                          console.log( 'Focus.', editor );
+                        } }
+                      />
                     </div>
                     <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
                   </div>
