@@ -62,7 +62,7 @@ function Header() {
     let userstatus = localStorage.getItem("status");
     let userprofil = localStorage.getItem("username");
 
-    if (userstatus === null) {
+    if(userstatus === null) {
       return(
         <>
           <header>

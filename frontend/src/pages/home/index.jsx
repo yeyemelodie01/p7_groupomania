@@ -16,6 +16,7 @@ function Home({ getPost}) {
   const [ isHidden, setIsHidden ] = useState(false);
   const { register, handleSubmit } = useForm();
   const userstatus = localStorage.getItem("status");
+  const [ radioValue, setRadioValue ] = useState(false);
 
   const onSubmit = (data) => {
     console.log(data)
@@ -34,12 +35,12 @@ function Home({ getPost}) {
         });
     };
 
-  function getInitialState() {
-    return {
-      selectedOption: 'image'
-    };
+  const handleChange = (e) => {
+    setRadioValue(e.target.value);
+    localStorage.setItem("choice", e.target.value)
   }
-
+  const userchoice = localStorage.getItem("choice");
+  console.log(userchoice)
 
     if(userstatus) {
      return <main>
@@ -58,6 +59,28 @@ function Home({ getPost}) {
                   onSubmit={handleSubmit(onSubmit)}
                   encType="multipart/form/data"
                 >
+                  <h2 className="texticon">Choisissez entre une image ou un texte</h2>
+                  <div className="radiodiv">
+                    <label form='radio'>
+                      <input
+                        id="radio"
+                        type="radio"
+                        value="img"
+                        checked={ radioValue === 'img' }
+                        onChange={ handleChange }
+                      /> Image
+                    </label>
+                    <label form='radio'>
+                      <input
+                        id="radio"
+                        type="radio"
+                        name="text"
+                        value="text"
+                        checked={ radioValue === 'text' }
+                        onChange={ handleChange }
+                      /> Texte
+                    </label>
+                  </div>
                   <div className="divtitle">
                     <label form='title'>
                       <input
@@ -70,31 +93,12 @@ function Home({ getPost}) {
                       />
                     </label>
                   </div>
-                  <form>
-                    <div className="radiodiv">
-                      <label form='radio'>
-                        <input
-                          id="radio"
-                          type="radio"
-                          value="image"
-                          checked={ this.state.getInitialState === Image }
-                        /> Image
-                      </label>
-                      <label form='radio'>
-                        <input
-                          id="radio"
-                          type="radio"
-                          value="texte"
-                        /> Texte
-                      </label>
-                    </div>
-                  </form>
                   <div className="divimgtext">
                     <div className="icondiv">
                       <div className="iconsize">
                         <FontAwesomeIcon icon={ faImage } />
                       </div>
-                      <p className="texticon">Ajouter une photo ou un texte</p>
+
                     </div>
                     <div className="divupload">
                       <label form='img'>
@@ -106,7 +110,18 @@ function Home({ getPost}) {
                         />
                       </label>
                     </div>
-                    <p>ou</p>
+                    <div className="divtitle">
+                      <label form='title'>
+                        <input
+                          id="title"
+                          className="sizeinput"
+                          type="text"
+                          placeholder="Titre"
+                          maxLength="280"
+                          {...register("title")}
+                        />
+                      </label>
+                    </div>
                     <div className="divtext">
                       <CKEditor
                         editor={ ClassicEditor }
