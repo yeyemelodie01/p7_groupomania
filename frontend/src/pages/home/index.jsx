@@ -98,7 +98,6 @@ function Home({ getPost}) {
                       <div className="iconsize">
                         <FontAwesomeIcon icon={ faImage } />
                       </div>
-
                     </div>
                     <div className="divupload">
                       <label form='img'>
