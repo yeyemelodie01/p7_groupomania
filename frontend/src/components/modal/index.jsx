@@ -51,7 +51,7 @@ const Modal = ({ isShow, hide, title, ...props }) => isShow
               position: relative;
               margin: auto;
               border-radius: 5px;
-              max-width: 500px;
+              max-width: 318px;
               width: 80%;
               padding: 1rem;
             }

@@ -149,10 +149,12 @@ function Header() {
             {`
                 button.modal-toggle,
                 input[type="submit"] {
-                  background-color: turquoise;
+                  background-color: #091F43FF;
+                  color: #fff;
                   cursor: pointer;
-                  padding: 1rem 2rem;
+                  padding: 7px 10px;
                   text-transform: uppercase;
+                  border-radius: 3px;
                   border: none;
                 }
         
@@ -168,8 +170,10 @@ function Header() {
                 input[type="password"],
                 input[type="email"] {
                   box-sizing: border-box;
-                  width: 100%;
+                  width: 72%;
                   padding: 0.5rem 0.7rem;
+                  border-radius: 3px;
+                  border: 2px #091F43FF solid;
                 }
             `}
           </style>
