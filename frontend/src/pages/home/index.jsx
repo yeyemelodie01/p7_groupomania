@@ -38,33 +38,31 @@ function Home({ getPost}) {
     const userchoice = localStorage.getItem("choice");
 
     if(userchoice === 'img'){
-      console.log("j'affiche l'upload");
       document.getElementById('uploadimg').style.display='block';
-      document.getElementById('radiochoice').style.display='none';
-    }
-
-    if(userchoice === 'text') {
-      console.log("j'affiche wisywig");
-      document.getElementById('textwisywig').style.display='block';
-      document.getElementById('radiochoice').style.display='none';
-    }
-  }
-
-  function cancelChoice(){
-    const userchoice = localStorage.getItem("choice");
-
-    if(userchoice === 'img'){
-      document.getElementById('uploadimg').style.display='none';
-      document.getElementById('radiochoice').style.display='block';
-      localStorage.removeItem("choice");
-    }
-
-    if(userchoice === 'text') {
       document.getElementById('textwisywig').style.display='none';
-      document.getElementById('radiochoice').style.display='block';
-      localStorage.removeItem("choice");
+    }
+
+    if(userchoice === 'text') {
+      document.getElementById('textwisywig').style.display='block';
+      document.getElementById('uploadimg').style.display='none';
     }
   }
+
+  // function cancelChoice(){
+  //   const userchoice = localStorage.getItem("choice");
+  //
+  //   if(userchoice === 'img'){
+  //     document.getElementById('uploadimg').style.display='none';
+  //     document.getElementById('radiochoice').style.display='block';
+  //     localStorage.removeItem("choice");
+  //   }
+  //
+  //   if(userchoice === 'text') {
+  //     document.getElementById('textwisywig').style.display='none';
+  //     document.getElementById('radiochoice').style.display='block';
+  //     localStorage.removeItem("choice");
+  //   }
+  // }
 
   const handleChange = (e) => {
     setRadioValue(e.target.value);
@@ -146,10 +144,8 @@ function Home({ getPost}) {
                             />
                           </label>
                         </div>
-                        <div className="buttonpostdiv">
                           <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
-                          <button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>
-                        </div>
+                          {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                     </div>
                   </div>
                   </div>
@@ -187,10 +183,8 @@ function Home({ getPost}) {
                           } }
                         />
                       </div>
-                      <div className="buttonpostdiv">
                         <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
-                        <button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>
-                      </div>
+                        {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                     </div>
                   </div>
 
