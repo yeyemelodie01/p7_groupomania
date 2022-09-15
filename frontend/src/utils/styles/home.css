@@ -1,0 +1,140 @@
+.parentgrid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+}
+
+.grid1{
+    grid-area: 1 / 1 / 2 / 6;
+}
+
+.buttondiv{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.buttonpost {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    color: #fff;
+    box-shadow: 5px 5px 10px #aaa;
+    background: #091F43FF;
+    transition-property: transform;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+    cursor: pointer;
+    width: 140px;
+    height: 30px;
+}
+
+.buttonpost:hover {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+}
+
+.hiddendiv {
+    display: none;
+}
+
+.postcreate {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.formflex {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    border: 4px #091F43FF solid;
+    border-radius: 10px;
+}
+
+#radiodisplay{
+    display: block;
+}
+
+#uploadimg{
+    display: none;
+}
+
+#textwisywig{
+    display: none;
+}
+
+.divtitle {
+    width: 494px;
+    height: 50px;
+    margin-bottom: 40px;
+}
+
+.sizeinput{
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+}
+
+.divimgtext{
+    width: 900px;
+    background-color: #FFD7D7;
+    color: #091F43FF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.icondiv{
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+.iconsize{
+    font-size: 50px;
+}
+
+.texticon{
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+.divupload{
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+.divtext{
+    width: 400px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.textcitation{
+    width: 417px;
+    height: 45px;
+}
+
+.stylebutton{
+    width: 215px;
+    height: 75px;
+    font-size: 23px;
+    font-weight: bold;
+    background-color: transparent;
+    box-shadow: none;
+    border: 4px #091F43FF solid;
+    color: #091F43FF;
+    margin: 0 auto 40px;
+}

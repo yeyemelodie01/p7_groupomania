@@ -5,7 +5,7 @@ import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
-import '../../utils/styles/post.css'
+import '../../utils/styles/home.css'
 //import Post from '../../components/post'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -35,12 +35,28 @@ function Home({ getPost}) {
         });
     };
 
+  function showChoice(){
+    const userchoice = localStorage.getItem("choice");
+
+    if(userchoice === 'img'){
+      console.log("j'affiche l'upload");
+      document.getElementById('uploadimg').style.display='block';
+      document.getElementById('radiochoice').style.display='none';
+    }
+
+    if(userchoice === 'text') {
+      console.log("j'affiche wisywig");
+      document.getElementById('textwisywig').style.display='block';
+      document.getElementById('radiochoice').style.display='none';
+    }
+  }
+
   const handleChange = (e) => {
     setRadioValue(e.target.value);
     localStorage.setItem("choice", e.target.value)
+    showChoice();
   }
-  const userchoice = localStorage.getItem("choice");
-  console.log(userchoice)
+
 
     if(userstatus) {
      return <main>
@@ -59,56 +75,63 @@ function Home({ getPost}) {
                   onSubmit={handleSubmit(onSubmit)}
                   encType="multipart/form/data"
                 >
-                  <h2 className="texticon">Choisissez entre une image ou un texte</h2>
-                  <div className="radiodiv">
-                    <label form='radio'>
-                      <input
-                        id="radio"
-                        type="radio"
-                        value="img"
-                        checked={ radioValue === 'img' }
-                        onChange={ handleChange }
-                      /> Image
-                    </label>
-                    <label form='radio'>
-                      <input
-                        id="radio"
-                        type="radio"
-                        name="text"
-                        value="text"
-                        checked={ radioValue === 'text' }
-                        onChange={ handleChange }
-                      /> Texte
-                    </label>
-                  </div>
-                  <div className="divtitle">
-                    <label form='title'>
-                      <input
-                        id="title"
-                        className="sizeinput"
-                        type="text"
-                        placeholder="Titre"
-                        maxLength="280"
-                        {...register("title")}
-                      />
-                    </label>
-                  </div>
-                  <div className="divimgtext">
-                    <div className="icondiv">
-                      <div className="iconsize">
-                        <FontAwesomeIcon icon={ faImage } />
-                      </div>
-                    </div>
-                    <div className="divupload">
-                      <label form='img'>
+                  <div id="radiochoice">
+                    <h2 className="texticon">Choisissez entre une image ou un texte</h2>
+                    <div className="radiodiv">
+                      <label form='radio'>
                         <input
-                          id="img"
+                          id="radio"
+                          type="radio"
+                          value="img"
+                          checked={ radioValue === 'img' }
+                          onChange={ handleChange }
+                        /> Image
+                      </label>
+                      <label form='radio'>
+                        <input
+                          id="radio"
+                          type="radio"
+                          name="text"
+                          value="text"
+                          checked={ radioValue === 'text' }
+                          onChange={ handleChange }
+                        /> Texte
+                      </label>
+                    </div>
+                  </div>
+                  <div id="uploadimg">
+                    <div className="divtitle">
+                      <label form='title'>
+                        <input
+                          id="title"
                           className="sizeinput"
-                          type="file"
-                          {...register("img")}
+                          type="text"
+                          placeholder="Titre"
+                          maxLength="280"
+                          {...register("title")}
                         />
                       </label>
                     </div>
+                    <div className="divimgtext">
+                      <div className="icondiv">
+                        <div className="iconsize">
+                          <FontAwesomeIcon icon={ faImage } />
+                        </div>
+                      </div>
+                      <div className="divupload">
+                        <label form='img'>
+                          <input
+                            id="img"
+                            className="sizeinput"
+                            type="file"
+                            {...register("img")}
+                          />
+                        </label>
+                      </div>
+                      <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
+                  </div>
+                  </div>
+                  <div id="textwisywig" className="divwisywig">
                     <div className="divtitle">
                       <label form='title'>
                         <input
@@ -143,12 +166,12 @@ function Home({ getPost}) {
                     </div>
                     <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
                   </div>
+
                 </form>
               </div>
             </div>
           </div>
         </div>
-        <div>
           {/*{postList.map((post, index) =>
             <LazyLoad height={200} offset={100}>
               <Post
@@ -161,7 +184,6 @@ function Home({ getPost}) {
               />
             </LazyLoad>
           )}*/}
-        </div>
       </main>
     } else {
       return  <div className="buttondiv">

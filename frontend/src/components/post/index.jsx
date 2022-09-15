@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
@@ -6,81 +5,8 @@ import ImgPost from '../../assets/marcel-eberle-n4boKCT_RLk-unsplash.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import Comment from '../comments'
+import '../../utils/styles/post.css'
 
-const ParentGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-`
-
-const Grid1 = styled.div`
-  grid-area: 1 / 2 / 6 / 5;
-  display: flex;
-  justify-content: center;
-`
-
-const PostDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: bisque;
-  width: 100%;
-  padding: 16px 40px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-`
-
-const PostProfil = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 160px;
-`
-
-const ListPost = styled.ul`
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-`
-
-const ImgProfil = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 80px 80px 80px 80px;
-`
-
-const NameProfil = styled.p`
-  
-`
-
-const PostHour = styled.p`
-  
-`
-
-const PostTitle = styled.h1`
-  font-weight: bold;
-`
-
-const FigurePost = styled.figure`
-  margin: auto 0;
-`
-
-const LikeDislike = styled.div`
-  display: flex;
-  margin: 10px 0;
-  font-size: 25px;
-  
-  .margin-icon {
-    margin-right: 10px;
-  }
-`
 
 function Post({ picture, picturePost, nameUser, hour, title }) {
   const [ commentList, setCommentList ] = useState([])
@@ -98,30 +24,30 @@ function Post({ picture, picturePost, nameUser, hour, title }) {
     fetchPost()
   }, [])
   return(
-    <ParentGrid>
-      <Grid1>
-        <PostDiv>
-          <PostProfil>
-            <ListPost>
+    <div className="parentgrid">
+      <div className="grid">
+        <div className="postdiv">
+          <div className="profilpost">
+            <ul className="listpost">
               <li>
-                <ImgProfil src={ picture } alt="profil"/>
+                <img className="imgprofil" src={ picture } alt="profil"/>
               </li>
               <li>
-                <NameProfil>{nameUser}</NameProfil>
+                <p className="nameprofil">{nameUser}</p>
               </li>
               <li>
-                <PostHour>{hour}</PostHour>
+                <p className="hourpost">{hour}</p>
               </li>
-            </ListPost>
-          </PostProfil>
-          <PostTitle className="title_post">{title}</PostTitle>
-          <FigurePost>
+            </ul>
+          </div>
+          <h1 className="titlepost">{title}</h1>
+          <figure>
             <img src={ picturePost } alt="born" />
             <figcaption>
-              <LikeDislike>
+              <div className="likedislike">
                 <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon" />
                 <FontAwesomeIcon icon={ faThumbsDown } />
-              </LikeDislike>
+              </div>
               <div>
                 {commentList.map((comment, index) =>
                   <Comment
@@ -134,10 +60,10 @@ function Post({ picture, picturePost, nameUser, hour, title }) {
                 )}
               </div>
             </figcaption>
-          </FigurePost>
-        </PostDiv>
-      </Grid1>
-    </ParentGrid>
+          </figure>
+        </div>
+      </div>
+    </div>
   )
 }
 
