@@ -22,10 +22,6 @@ const Styleglobal = createGlobalStyle`
     color: ${colors.black};
   }
 
-  h1  {
-    font-size: 46px;
-  }
-
   main {
     display: flex;
     justify-content: center;

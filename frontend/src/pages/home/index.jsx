@@ -100,71 +100,75 @@ function Home({ getPost}) {
                     </div>
                   </div>
                   <div id="uploadimg">
-                    <div className="divtitle">
-                      <label form='title'>
-                        <input
-                          id="title"
-                          className="sizeinput"
-                          type="text"
-                          placeholder="Titre"
-                          maxLength="280"
-                          {...register("title")}
-                        />
-                      </label>
-                    </div>
-                    <div className="divimgtext">
-                      <div className="icondiv">
-                        <div className="iconsize">
-                          <FontAwesomeIcon icon={ faImage } />
-                        </div>
-                      </div>
-                      <div className="divupload">
-                        <label form='img'>
+                    <div className="divuploadimg">
+                      <div className="divtitle">
+                        <label form='title'>
                           <input
-                            id="img"
+                            id="title"
                             className="sizeinput"
-                            type="file"
-                            {...register("img")}
+                            type="text"
+                            placeholder="Titre"
+                            maxLength="280"
+                            {...register("title")}
                           />
                         </label>
                       </div>
-                      <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
+                      <div className="divimgtext">
+                        <div className="icondiv">
+                          <div className="iconsize">
+                            <FontAwesomeIcon icon={ faImage } />
+                          </div>
+                        </div>
+                        <div className="divupload">
+                          <label form='img'>
+                            <input
+                              id="img"
+                              className="sizeinput"
+                              type="file"
+                              {...register("img")}
+                            />
+                          </label>
+                        </div>
+                        <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
+                    </div>
                   </div>
                   </div>
-                  <div id="textwisywig" className="divwisywig">
-                    <div className="divtitle">
-                      <label form='title'>
-                        <input
-                          id="title"
-                          className="sizeinput"
-                          type="text"
-                          placeholder="Titre"
-                          maxLength="280"
-                          {...register("title")}
+                  <div id="textwisywig">
+                    <div className="divwisywig">
+                      <div className="divtitle">
+                        <label form='title'>
+                          <input
+                            id="title"
+                            className="sizeinput"
+                            type="text"
+                            placeholder="Titre"
+                            maxLength="280"
+                            {...register("title")}
+                          />
+                        </label>
+                      </div>
+                      <div className="divtext">
+                        <CKEditor
+                          editor={ ClassicEditor }
+                          data="<p>Ecrivez votre texte</p>"
+                          onReady={ editor => {
+                            // You can store the "editor" and use when it is needed.
+                            console.log( 'Editor is ready to use!', editor );
+                          } }
+                          onChange={ ( event, editor ) => {
+                            const data = editor.getData();
+                            console.log( { event, editor, data } );
+                          } }
+                          onBlur={ ( event, editor ) => {
+                            console.log( 'Blur.', editor );
+                          } }
+                          onFocus={ ( event, editor ) => {
+                            console.log( 'Focus.', editor );
+                          } }
                         />
-                      </label>
+                      </div>
+                      <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
                     </div>
-                    <div className="divtext">
-                      <CKEditor
-                        editor={ ClassicEditor }
-                        data="<p>Ecrivez votre texte</p>"
-                        onReady={ editor => {
-                          // You can store the "editor" and use when it is needed.
-                          console.log( 'Editor is ready to use!', editor );
-                        } }
-                        onChange={ ( event, editor ) => {
-                          const data = editor.getData();
-                          console.log( { event, editor, data } );
-                        } }
-                        onBlur={ ( event, editor ) => {
-                          console.log( 'Blur.', editor );
-                        } }
-                        onFocus={ ( event, editor ) => {
-                          console.log( 'Focus.', editor );
-                        } }
-                      />
-                    </div>
-                    <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
                   </div>
 
                 </form>
