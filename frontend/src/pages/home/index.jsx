@@ -187,7 +187,6 @@ function Home({ getPost}) {
                         {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                     </div>
                   </div>
-
                 </form>
               </div>
             </div>
