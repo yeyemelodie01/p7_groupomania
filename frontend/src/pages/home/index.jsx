@@ -11,7 +11,6 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
-
 function Home({ getPost}) {
   const [ isHidden, setIsHidden ] = useState(false);
   const { register, handleSubmit } = useForm();
@@ -51,6 +50,22 @@ function Home({ getPost}) {
     }
   }
 
+  function cancelChoice(){
+    const userchoice = localStorage.getItem("choice");
+
+    if(userchoice === 'img'){
+      document.getElementById('uploadimg').style.display='none';
+      document.getElementById('radiochoice').style.display='block';
+      localStorage.removeItem("choice");
+    }
+
+    if(userchoice === 'text') {
+      document.getElementById('textwisywig').style.display='none';
+      document.getElementById('radiochoice').style.display='block';
+      localStorage.removeItem("choice");
+    }
+  }
+
   const handleChange = (e) => {
     setRadioValue(e.target.value);
     localStorage.setItem("choice", e.target.value)
@@ -76,27 +91,29 @@ function Home({ getPost}) {
                   encType="multipart/form/data"
                 >
                   <div id="radiochoice">
-                    <h2 className="texticon">Choisissez entre une image ou un texte</h2>
-                    <div className="radiodiv">
-                      <label form='radio'>
-                        <input
-                          id="radio"
-                          type="radio"
-                          value="img"
-                          checked={ radioValue === 'img' }
-                          onChange={ handleChange }
-                        /> Image
-                      </label>
-                      <label form='radio'>
-                        <input
-                          id="radio"
-                          type="radio"
-                          name="text"
-                          value="text"
-                          checked={ radioValue === 'text' }
-                          onChange={ handleChange }
-                        /> Texte
-                      </label>
+                    <div className="radiodisplay">
+                      <h2 className="texticon">Choisissez entre une image ou un texte</h2>
+                      <div className="radiodiv">
+                        <label form='radio'>
+                          <input
+                            id="radio"
+                            type="radio"
+                            value="img"
+                            checked={ radioValue === 'img' }
+                            onChange={ handleChange }
+                          /> Image
+                        </label>
+                        <label form='radio'>
+                          <input
+                            id="radio"
+                            type="radio"
+                            name="text"
+                            value="text"
+                            checked={ radioValue === 'text' }
+                            onChange={ handleChange }
+                          /> Texte
+                        </label>
+                      </div>
                     </div>
                   </div>
                   <div id="uploadimg">
@@ -129,7 +146,10 @@ function Home({ getPost}) {
                             />
                           </label>
                         </div>
-                        <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
+                        <div className="buttonpostdiv">
+                          <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
+                          <button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>
+                        </div>
                     </div>
                   </div>
                   </div>
@@ -167,7 +187,10 @@ function Home({ getPost}) {
                           } }
                         />
                       </div>
-                      <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
+                      <div className="buttonpostdiv">
+                        <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
+                        <button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>
+                      </div>
                     </div>
                   </div>
 
