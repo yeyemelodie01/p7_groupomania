@@ -18,11 +18,19 @@ function Home({ getPost}) {
   const [ radioValue, setRadioValue ] = useState(false);
 
   const onSubmit = (data) => {
-    console.log(data)
+    const choice = localStorage.getItem("choice");
     const formData = new FormData();
+
+    if(choice === 'img'){
       formData.append('title', data.title);
       formData.append('file', data.img[0]);
-      formData.append('sentence', data.text);
+    }
+
+    if (choice === 'text'){
+      formData.append('title', data.title);
+      formData.append('text', data.text);
+    }
+
       axios
         .post("http://localhost:4000/api/post/", formData)
         .then(() => {
