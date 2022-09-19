@@ -20,22 +20,21 @@ function Home({ getPost}) {
   const onSubmit = (data) => {
     const choice = localStorage.getItem("choice");
     const formData = new FormData();
-    console.log(data);
 
-    if(choice === 'img'){
-      formData.append('title', data.title);
-      formData.append('file', data.img[0]);
-
-      axios
-        .post("http://localhost:4000/api/post", formData)
-        .then(() => {
-              getPost();
-              console.log(formData);
-        })
-        .catch((err) =>{
-          console.log(err);
-        });
-    }
+    // if(choice === 'img'){
+    //   formData.append('title', data.title);
+    //   formData.append('file', data.img[0]);
+    //
+    //   axios
+    //     .post("http://localhost:4000/api/post", formData)
+    //     .then(() => {
+    //           getPost();
+    //           console.log(formData);
+    //     })
+    //     .catch((err) =>{
+    //       console.log(err);
+    //     });
+    // }
 
     if (choice === 'text'){
       formData.append('title', data.title);
@@ -187,7 +186,7 @@ function Home({ getPost}) {
                           onFocus={ ( event, editor ) => {
                             console.log( 'Focus.', editor );
                           } }
-                          {...register("data")}
+                          {...register("text")}
                         />
                       </div>
                         <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>

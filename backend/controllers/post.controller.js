@@ -14,7 +14,7 @@ exports.postIdRequest = async(req, res) => {
 }
 
 exports.postAddRequest = async(req, res) => {
-   const data = JSON.parse(req.body.post);
+   const data = req.body.post;
    const dataPost = await postModel.find({postname: data.postname});
    console.log(data);
    if(dataPost.length > 0) {
