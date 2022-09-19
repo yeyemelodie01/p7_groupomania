@@ -1,6 +1,6 @@
 //import LazyLoad from 'react-lazyload'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
@@ -16,6 +16,7 @@ function Home({ getPost}) {
   const { register, handleSubmit } = useForm();
   const userstatus = localStorage.getItem("status");
   const [ radioValue, setRadioValue ] = useState(false);
+  //const [ textEdit, setTextEdit ] = useState(false);
 
   const onSubmit = (data) => {
     const choice = localStorage.getItem("choice");
@@ -172,20 +173,7 @@ function Home({ getPost}) {
                         <CKEditor
                           editor={ ClassicEditor }
                           data="<p>Ecrivez votre texte</p>"
-                          onReady={ editor => {
-                            // You can store the "editor" and use when it is needed.
-                            console.log( 'Editor is ready to use!', editor );
-                          } }
-                          onChange={ ( event, editor ) => {
-                            const data = editor.getData();
-                            console.log( { event, editor, data } );
-                          } }
-                          onBlur={ ( event, editor ) => {
-                            console.log( 'Blur.', editor );
-                          } }
-                          onFocus={ ( event, editor ) => {
-                            console.log( 'Focus.', editor );
-                          } }
+                          onChange={() => }
                           {...register("text")}
                         />
                       </div>

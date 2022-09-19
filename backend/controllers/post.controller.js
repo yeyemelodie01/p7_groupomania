@@ -14,29 +14,28 @@ exports.postIdRequest = async(req, res) => {
 }
 
 exports.postAddRequest = async(req, res) => {
-   const data = req.body.post;
-   const dataPost = await postModel.find({postname: data.postname});
-   console.log(data);
-   if(dataPost.length > 0) {
-       res.status(200).json({message: "post déja ajouter"});
-   }
-   try {
-       const post = new postModel({
-           userId: data.userId,
-           postname: data.postname,
-           //media: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
-           text: data.text,
-           like: 0,
-           dislike: 0,
-           usersLiked: [],
-           usersDisLiked: [],
-       });
-       post.save()
-         .then(() => res.status(201).json({message: "post ajouter"}))
-         .catch(error =>  res.status(400).json({error}));
-   } catch (error) {
-       res.status(400).json({error})
-   }
+  const {userId, post} = req.body;
+  const dataPost = await postModel.find({title: post.title});
+  if(dataPost.length > 0) {
+    res.status(200).json({message: "post déja ajouter"});
+    return;
+  }
+  try {
+    const newPost = new postModel({
+      "userId": userId,
+      "title": post.title,
+      "text": post.text,
+      "like": 0,
+      "dislike": 0,
+      "usersLiked": [],
+      "usersDisLiked": [],
+    });
+    newPost.save()
+      .then(() => res.status(201).json({message: "post ajouter"}))
+      .catch(error =>  res.status(400).json({error}));
+  } catch (error) {
+    res.status(400).json({error})
+  }
 }
 
 //exports.postUpdateRequest = async(req) => {

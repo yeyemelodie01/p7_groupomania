@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
-  userid:{ type:String, required:true },
-  postname:{ type:String, required:true },
+  userId:{ type:String, required:true },
+  title:{ type:String, required:true },
   //media:{ type:String },
   text:{ type:String },
-  like:{ type:Number, default:0 },
-  dislike:{ type:Number, default:0 },
+  likes:{ type:Number, default:0 },
+  dislikes:{ type:Number, default:0 },
   usersLiked: { type: [String] },
   usersDisLiked: { type: [String] }
 })
