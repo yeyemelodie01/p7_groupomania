@@ -1,6 +1,6 @@
 //import LazyLoad from 'react-lazyload'
 import { useForm } from 'react-hook-form'
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
@@ -16,7 +16,7 @@ function Home({ getPost}) {
   const { register, handleSubmit } = useForm();
   const userstatus = localStorage.getItem("status");
   const [ radioValue, setRadioValue ] = useState(false);
-  //const [ textEdit, setTextEdit ] = useState(false);
+  const [ textEdit, setTextEdit ] = useState("");
 
   const onSubmit = (data) => {
     const choice = localStorage.getItem("choice");
@@ -173,9 +173,12 @@ function Home({ getPost}) {
                         <CKEditor
                           editor={ ClassicEditor }
                           data="<p>Ecrivez votre texte</p>"
-                          onChange={() => }
+                          onChange={(textEdit) => {
+                            setTextEdit(textEdit);
+                          }}
                           {...register("text")}
                         />
+                        {JSON.stringify(textEdit)}
                       </div>
                         <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
                         {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
