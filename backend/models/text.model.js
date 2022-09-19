@@ -1,9 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require ('mongoose');
 
-const postSchema = mongoose.Schema({
+const textSchema = mongoose.Schema({
   userid:{ type:String, required:true },
   postname:{ type:String, required:true },
-  //media:{ type:String },
   text:{ type:String },
   like:{ type:Number, default:0 },
   dislike:{ type:Number, default:0 },
@@ -11,4 +10,4 @@ const postSchema = mongoose.Schema({
   usersDisLiked: { type: [String] }
 })
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model('Text', textSchema)

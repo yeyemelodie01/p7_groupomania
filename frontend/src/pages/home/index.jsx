@@ -20,26 +20,41 @@ function Home({ getPost}) {
   const onSubmit = (data) => {
     const choice = localStorage.getItem("choice");
     const formData = new FormData();
+    console.log(data);
 
     if(choice === 'img'){
       formData.append('title', data.title);
       formData.append('file', data.img[0]);
-    }
-
-    if (choice === 'text'){
-      formData.append('title', data.title);
-      formData.append('text', data.text);
-    }
 
       axios
-        .post("http://localhost:4000/api/post/", formData)
+        .post("http://localhost:4000/api/post", formData)
         .then(() => {
-          getPost();
-          console.log(formData);
+              getPost();
+              console.log(formData);
         })
         .catch((err) =>{
           console.log(err);
         });
+    }
+
+    if (choice === 'text'){
+      formData.append('title', data.title);
+      formData.append('data', data.data);
+      console.log(formData);
+      axios
+        .post("http://localhost:4000/api/post/", formData)
+        .then(() => {
+          axios
+            .post("http://localhost:4000/api/post/", formData)
+            .then(() => {
+              getPost();
+              console.log(formData);
+            })
+        })
+        .catch((err) =>{
+          console.log(err);
+        });
+    }
     };
 
   function showChoice(){
@@ -55,22 +70,6 @@ function Home({ getPost}) {
       document.getElementById('uploadimg').style.display='none';
     }
   }
-
-  // function cancelChoice(){
-  //   const userchoice = localStorage.getItem("choice");
-  //
-  //   if(userchoice === 'img'){
-  //     document.getElementById('uploadimg').style.display='none';
-  //     document.getElementById('radiochoice').style.display='block';
-  //     localStorage.removeItem("choice");
-  //   }
-  //
-  //   if(userchoice === 'text') {
-  //     document.getElementById('textwisywig').style.display='none';
-  //     document.getElementById('radiochoice').style.display='block';
-  //     localStorage.removeItem("choice");
-  //   }
-  // }
 
   const handleChange = (e) => {
     setRadioValue(e.target.value);
@@ -91,7 +90,6 @@ function Home({ getPost}) {
             </div>
             <div className="hiddendiv" style={{display: isHidden ? 'block' : 'none'}}>
               <div className="postcreate">
-                <h1>Créer un post</h1>
                 <form className="formflex"
                   onSubmit={handleSubmit(onSubmit)}
                   encType="multipart/form/data"
@@ -146,7 +144,7 @@ function Home({ getPost}) {
                           <label form='img'>
                             <input
                               id="img"
-                              className="sizeinput"
+                              className="sizeinputimg"
                               type="file"
                               {...register("img")}
                             />
@@ -189,6 +187,7 @@ function Home({ getPost}) {
                           onFocus={ ( event, editor ) => {
                             console.log( 'Focus.', editor );
                           } }
+                          {...register("data")}
                         />
                       </div>
                         <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>

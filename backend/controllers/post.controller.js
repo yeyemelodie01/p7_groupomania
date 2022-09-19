@@ -16,6 +16,7 @@ exports.postIdRequest = async(req, res) => {
 exports.postAddRequest = async(req, res) => {
    const data = JSON.parse(req.body.post);
    const dataPost = await postModel.find({postname: data.postname});
+   console.log(data);
    if(dataPost.length > 0) {
        res.status(200).json({message: "post déja ajouter"});
    }
@@ -23,7 +24,7 @@ exports.postAddRequest = async(req, res) => {
        const post = new postModel({
            userId: data.userId,
            postname: data.postname,
-           media: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
+           //media: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
            text: data.text,
            like: 0,
            dislike: 0,
@@ -39,7 +40,13 @@ exports.postAddRequest = async(req, res) => {
 }
 
 //exports.postUpdateRequest = async(req) => {
-//    req.status(200).json({message:"Update post"})
+//    const dataUpdate = req.file ? {
+//                 ...req.body,//
+//                 imageUrl: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}` // url pour l'image req.protocol(http), req.get('host) pour l'hôte de serveur ici localhost:3000, uploads(dossier qui contiendra l'image), req.file.filename pour le nom du fichier
+//             } : { ...req.body };//
+//         postModel.updateOne({ _id: req.params.id }, { ...dataUpdate, _id: req.params.id })
+//             .then(() => res.status(200).json({ message: 'Mise a jour des informations'}))
+//             .catch(error => res.status(400).json({ error }));
 //}
 
 //exports.postDeleteRequest = async(req) => {

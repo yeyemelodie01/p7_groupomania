@@ -108,7 +108,15 @@
 
 .sizeinput{
     width: 72%;
-    padding: 7px 5px;
+    padding: 0.5rem 0.7rem;
+    border-radius: 3px;
+    border: 2px #091F43FF solid;
+    font-size: 13.4px;
+}
+
+.sizeinputimg{
+    width: 72%;
+    padding: 0.5rem 0.7rem;
     font-size: 16px;
 }
 
@@ -154,11 +162,10 @@
     width: 96px;
     height: 35px;
     font-size: 17px;
-    font-weight: bold;
-    background-color: transparent;
+    background-color: #091F43FF;
     box-shadow: none;
-    border: 3px #091F43FF solid;
-    color: #091F43FF;
+    border-radius: 3px;
+    color: #fff;
     padding: 0;
     cursor: pointer;
 }

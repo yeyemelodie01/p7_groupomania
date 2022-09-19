@@ -10,7 +10,7 @@ import Modal from '../../components/modal'
 function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
-    const { register, handleSubmit} = useForm();
+    const { register, handleSubmit, formState: { errors }} = useForm();
 
     const onSignup = async (data) => {
         axios
@@ -90,9 +90,8 @@ function Header() {
             <form onSubmit={handleSubmit(onLogin)}>
               <div className="form-group">
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Email"
-                  required
                   {...register("email")}
                 />
               </div>
@@ -119,19 +118,33 @@ function Header() {
             <form onSubmit={handleSubmit(onSignup)}>
               <div className="form-group">
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Email"
-                  required
-                  {...register("email")}
+                  {...register("email",  {
+                    required: {
+                      value: true,
+                    },
+                    pattern: {
+                      value: /\S+@\S+.\S+/,
+                    }
+                  })}
                 />
+                {errors.email && <span role="alert">{errors.email.message}</span>}
               </div>
               <div className="form-group">
                 <input
                   type="password"
                   placeholder="Mot de Passe"
-                  required
-                  {...register("password")}
+                  {...register("password", {
+                    required: {
+                      value:true,
+                    },
+                    pattern: {
+                      value: 6,
+                    }
+                  })}
                 />
+                {errors.password && <span role="alert">{errors.password.message}</span>}
               </div>
               <div className="form-group">
                 <input
@@ -174,6 +187,7 @@ function Header() {
                   padding: 0.5rem 0.7rem;
                   border-radius: 3px;
                   border: 2px #091F43FF solid;
+                  font-size: 13.4px;
                 }
             `}
           </style>

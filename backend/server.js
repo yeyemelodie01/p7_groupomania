@@ -67,6 +67,6 @@ const authRouter = require('./routes/auth.routes')//constante userRouter qui a p
 app.use('/api/auth', authRouter);
 
 const postRouter = require('./routes/post.routes')//constante userRouter qui a pour valeur le chemin vers le fichier post.routes
-app.use('/api/post', postRouter);
+app.use('/api/posts', postRouter);
 
 module.exports = app;
