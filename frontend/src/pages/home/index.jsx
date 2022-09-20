@@ -38,7 +38,7 @@ function Home(getPost) {
     //     });
     // }
 
-    if('text' === choice) {
+    if ('text' === choice) {
       const dataToSend = {
         "userId": userDetails._id,
         "postType": 'text',
@@ -48,18 +48,19 @@ function Home(getPost) {
         }
       }
       axios
-        .post("http://localhost:4000/api/posts/create", dataToSend, {headers: { Authorization: Bearer ${userDetails.jwt} }})
+        .post("http://localhost:4000/api/posts/create", dataToSend, { headers: { Authorization: Bearer ${userDetails.jwt} } })
         .then(() => {
           axios
-            .post("http://localhost:4000/api/posts/create", dataToSend, {headers: { Authorization: Bearer ${userDetails.jwt} }})
+            .post("http://localhost:4000/api/posts/create", dataToSend, { headers: { Authorization: Bearer ${userDetails.jwt} } })
             .then(() => {
               getPost();
               console.log(formData);
             })
         })
-        .catch((err) =>{
+        .catch((err) => {
           console.log(err);
         });
+    }
   }
 
   function showChoice(){
