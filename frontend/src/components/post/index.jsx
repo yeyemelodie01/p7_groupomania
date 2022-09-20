@@ -44,6 +44,7 @@ function Post() {
 
   const usePosts = posts.map((posts) =>{
     if(posts.text){
+      const text = posts.text.split(/[",<,>]/);
       return (
         <div className="parentgrid">
           <div className="grid">
@@ -65,7 +66,7 @@ function Post() {
                 <div>
                   <h1 className="titlepost">{posts.title}</h1>
                   <figure>
-                    <div>{posts.text}</div>
+                      {text}
                     <figcaption>
                       <div className="likedislike">
                         <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon" />
