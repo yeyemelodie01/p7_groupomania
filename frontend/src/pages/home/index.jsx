@@ -11,7 +11,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
-function Home({ getPost}) {
+function Home() {
   const [ isHidden, setIsHidden ] = useState(false);
   const { register, handleSubmit } = useForm();
   const userstatus = localStorage.getItem("status");
@@ -37,25 +37,20 @@ function Home({ getPost}) {
     //     });
     // }
 
-    if (choice === 'text'){
-      formData.append('title', data.title);
-      formData.append('data', data.data);
-      console.log(formData);
-      axios
-        .post("http://localhost:4000/api/post/", formData)
-        .then(() => {
-          axios
-            .post("http://localhost:4000/api/post/", formData)
-            .then(() => {
-              getPost();
-              console.log(formData);
-            })
-        })
-        .catch((err) =>{
-          console.log(err);
-        });
-    }
-    };
+    if (choice === 'text') {
+        formData.append('title', data.title);
+        formData.append('data', data.text);
+        console.log(formData);
+        axios
+          .post("http://localhost:4000/api/posts", formData)
+          .then(() => {
+
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+  }
 
   function showChoice(){
     const userchoice = localStorage.getItem("choice");
@@ -172,15 +167,31 @@ function Home({ getPost}) {
                       <div className="divtext">
                         <CKEditor
                           editor={ ClassicEditor }
-                          data="<p>Ecrivez votre texte</p>"
+                          onReady={ editor => {
+                            // You can store the "editor" and use when it is needed.
+                            console.log( 'Editor is ready to use!', editor );
+                          } }
+                          config={{
+                            placeholder: "Ecrivez votre texte",
+                            removePlugins: [
+                              'imageUpload', 'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
+                              'ImageUpload', 'ImageToolbar', 'ImageStyle',
+                              'ImageCaption'
+                            ],
+                          }}
                           onChange={(textEdit) => {
                             setTextEdit(textEdit);
                           }}
                           {...register("text")}
+                          onBlur={ ( event, editor ) => {
+                            console.log( 'Blur.', editor );
+                          } }
+                          onFocus={ ( event, editor ) => {
+                            console.log( 'Focus.', editor );
+                          } }
                         />
-                        {JSON.stringify(textEdit)}
                       </div>
-                        <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
+                        <button className="stylebutton" type="submit" onClick={() => {}} >Envoyer</button>
                         {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                     </div>
                   </div>
