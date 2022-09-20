@@ -16,6 +16,7 @@ function Home() {
   const { register, handleSubmit } = useForm();
   const [ radioValue, setRadioValue ] = useState(false);
   const [ textEdit, setTextEdit ] = useState("");
+  //const [ postList, setPostList ] = useState([])
   let userDetails = JSON.parse(localStorage.getItem('user'));
 
 
@@ -199,18 +200,19 @@ function Home() {
             </div>
           </div>
         </div>
-          {/*{postList.map((post, index) =>
-            <LazyLoad height={200} offset={100}>
-              <Post
-                key={`${post.name}-${index}`}
-                nameUser={post.username}
-                picture={post.picture}
-                picturePost={post.picturePost}
-                hour={post.hour}
-                title={post.title}
-              />
-            </LazyLoad>
-          )}*/}
+       {/*//<Post />*/}
+          {/*{postList.map((post, index) =>*/}
+          {/*  <LazyLoad height={200} offset={100}>*/}
+          {/*    <Post*/}
+          {/*      key={`${post.name}-${index}`}*/}
+          {/*      nameUser={post.username}*/}
+          {/*      picture={post.picture}*/}
+          {/*      picturePost={post.picturePost}*/}
+          {/*      hour={post.hour}*/}
+          {/*      title={post.title}*/}
+          {/*    />*/}
+          {/*  </LazyLoad>*/}
+          {/*)}*/}
       </main>
     } else {
       return  <div className="buttondiv">

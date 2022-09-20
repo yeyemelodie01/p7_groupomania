@@ -9,7 +9,7 @@ exports.postRequest = async(req, res) => {
 
 exports.postIdRequest = async(req, res) => {
     postModel.findOne({ _id: req.params.id })
-      .then((post) => req.status(200).json(post))
+      .then((posts) => req.status(200).json(posts))
       .catch(error => res.status(400).json({error}));
 }
 
