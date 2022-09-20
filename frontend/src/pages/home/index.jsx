@@ -14,12 +14,14 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 function Home() {
   const [ isHidden, setIsHidden ] = useState(false);
   const { register, handleSubmit } = useForm();
-  const userstatus = localStorage.getItem("status");
+  const userJwt = localStorage.getItem("jwt");
   const [ radioValue, setRadioValue ] = useState(false);
   const [ textEdit, setTextEdit ] = useState("");
 
+
   const onSubmit = (data) => {
     const choice = localStorage.getItem("choice");
+
     const formData = new FormData();
 
     // if(choice === 'img'){
@@ -36,8 +38,6 @@ function Home() {
     //       console.log(err);
     //     });
     // }
-
-    if (choice === 'text') {
         formData.append('title', data.title);
         formData.append('data', data.text);
         console.log(formData);
@@ -74,7 +74,7 @@ function Home() {
 
 
 
-    if(userstatus) {
+    if(userjwt) {
      return <main>
         <div className="parentgrid">
           <div className="grid1">
@@ -168,7 +168,7 @@ function Home() {
                       <div className="divtext">
                        <CKEditor
                           editor={ ClassicEditor }
-                          data={textEdit}
+                          data=""
                           onReady={ editor => {
                             // You can store the "editor" and use when it is needed.
                             console.log( 'Editor is ready to use!', editor );
@@ -181,7 +181,9 @@ function Home() {
                               'ImageCaption'
                             ],
                           }}
-                          onChange={(textEdit) => {
+                          onChange={(textEdit, editor) => {
+                            const data = editor.getData();
+                            console.log(data);
                             setTextEdit(textEdit);
                           }}
                           {...register("text")}
@@ -191,6 +193,7 @@ function Home() {
                           onFocus={ ( event, editor ) => {
                             console.log( 'Focus.', editor );
                           } }
+
                         />
                         { JSON.stringify(textEdit) }
                       </div>

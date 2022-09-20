@@ -12,6 +12,18 @@ function Header() {
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
     const { register, handleSubmit, formState: { errors }} = useForm();
 
+  function setUserDetails (data, res) {
+    const userEmail = data.email;
+    const ArrayUser = userEmail.split('@', 1);
+    const username = String(ArrayUser);
+    localStorage.setItem('user', JSON.stringify({
+      '_id': res.data.userId,
+      'email': data.email,
+      'userName': username,
+      'jwt': res.data.token
+    }));
+  }
+
     const onSignup = async (data) => {
         axios
           .post("http://localhost:4000/api/auth/signup", data)
@@ -19,16 +31,8 @@ function Header() {
               axios
                 .post("http://localhost:4000/api/auth/login", data)
                 .then((res) => {
-                    localStorage.clear();
-                    localStorage.setItem("token", res.data.token);
-                    localStorage.setItem("userId", res.data.userId);
-                  const userEmail = data.email;
-                    const ArrayUser = userEmail.split('@', 1);
-                    const username = String(ArrayUser);
-                  localStorage.setItem("username", username);
-                  localStorage.setItem("status", res.status);
-                  localStorage.setItem("userId", res.id);
-
+                  localStorage.clear();
+                  setUserDetails(data, res);
                   window.location.href='/';
                 })
                 .catch((err) => {
@@ -44,15 +48,9 @@ function Header() {
         axios
           .post("http://localhost:4000/api/auth/login", data)
           .then((res) => {
-              localStorage.clear();
-              localStorage.setItem("token", res.data.token);
-              localStorage.setItem("userId", res.data.userId);
-              const userEmail = data.email;
-               const ArrayUser = userEmail.split('@', 1);
-               const username = String(ArrayUser);
-               localStorage.setItem("username", username);
-               localStorage.setItem("status", res.status);
-               window.location.href='/';
+            localStorage.clear();
+            setUserDetails(data, res);
+            window.location.href='/';
           })
           .catch((err) => {
               console.log(err);
@@ -64,10 +62,9 @@ function Header() {
       window.location.href='/';
     }
 
-    let userstatus = localStorage.getItem("status");
-    let userprofil = localStorage.getItem("username");
+  let userDetails = JSON.parse(localStorage.getItem('user'));
 
-    if(userstatus === null) {
+    if(userDetails === null) {
       return(
         <>
           <header>
@@ -207,7 +204,7 @@ function Header() {
                 </a>
                 <div className="divstyle">
                   <div className="divlink">
-                    <p>Bienvenue { userprofil }</p>
+                    <p>Bienvenue { userDetails.userName }</p>
                     <span>|</span>
                     <button onClick={ Logout }>Déconnecter</button>
                   </div>
