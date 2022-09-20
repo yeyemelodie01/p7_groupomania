@@ -21,11 +21,14 @@ function Header() {
                 .then((res) => {
                     localStorage.clear();
                     localStorage.setItem("token", res.data.token);
-                    const userEmail = data.email;
+                    localStorage.setItem("userId", res.data.userId);
+                  const userEmail = data.email;
                     const ArrayUser = userEmail.split('@', 1);
                     const username = String(ArrayUser);
                   localStorage.setItem("username", username);
                   localStorage.setItem("status", res.status);
+                  localStorage.setItem("userId", res.id);
+
                   window.location.href='/';
                 })
                 .catch((err) => {
@@ -43,6 +46,7 @@ function Header() {
           .then((res) => {
               localStorage.clear();
               localStorage.setItem("token", res.data.token);
+              localStorage.setItem("userId", res.data.userId);
               const userEmail = data.email;
                const ArrayUser = userEmail.split('@', 1);
                const username = String(ArrayUser);

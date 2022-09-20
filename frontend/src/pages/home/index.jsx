@@ -168,6 +168,7 @@ function Home() {
                       <div className="divtext">
                        <CKEditor
                           editor={ ClassicEditor }
+                          data={textEdit}
                           onReady={ editor => {
                             // You can store the "editor" and use when it is needed.
                             console.log( 'Editor is ready to use!', editor );
