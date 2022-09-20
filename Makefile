@@ -2,6 +2,7 @@
 
 # Executables
 NPM           = npm
+YARN           = yarn
 NODE          = node
 NODEMON       = nodemon
 
@@ -18,7 +19,7 @@ help: ## Outputs this help screen
 install: install-back install-front ## Installation du projet en local
 
 install-front: ## Execution de npm install dans sur le dossier backend
-	cd frontend; $(NPM) install
+	cd frontend; $(YARN) install
 
 launch-front: ## Watch files and build assets when needed for the dev env
 	cd frontend; $(NPM) start
@@ -26,7 +27,7 @@ launch-front: ## Watch files and build assets when needed for the dev env
 front: install-front launch-front
 
 install-back: ## Execution de npm install dans sur le dossier backend
-	cd backend; $(NPM) install
+	cd backend; $(YARN) install
 
 launch-back: ## Watch files and build assets when needed for the dev env
 	cd backend; $(NODEMON) server
