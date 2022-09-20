@@ -12,8 +12,8 @@ const storage = multer.diskStorage({
     fs.mkdirsSync('uploads');
     callback(null, 'uploads')
   },
-  filename: (req, files, callback) => {
-    const name = files.originalname.split(' ').join('_');
+  filename: (files, callback) => {
+    const name = files.originalname.split('.').join('_');
     const extension = MIME_TYPES[files.mimetype];
     callback(null, name + Date.now() + '.' + extension);
   }

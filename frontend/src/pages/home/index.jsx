@@ -1,4 +1,4 @@
-//import LazyLoad from 'react-lazyload'
+import LazyLoad from 'react-lazyload'
 import { useForm } from 'react-hook-form'
 import { useState} from 'react'
 import axios from 'axios'
@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import '../../utils/styles/home.css'
-//import Post from '../../components/post'
+import Post from '../../components/post'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -17,6 +17,7 @@ function Home() {
   const [ textEdit, setTextEdit ] = useState("");
   const [file, setFile] = useState();
   let userDetails = JSON.parse(localStorage.getItem('user'));
+
 
   function handleFileChange(event) {
     setFile(event.target.files)
@@ -203,22 +204,22 @@ function Home() {
             </div>
           </div>
         </div>
-          {/*{postList.map((post, index) =>
-            <LazyLoad height={200} offset={100}>
-              <Post
-                key={`${post.name}-${index}`}
-                nameUser={post.username}
-                picture={post.picture}
-                picturePost={post.picturePost}
-                hour={post.hour}
-                title={post.title}
-              />
-            </LazyLoad>
-          )}*/}
       </main>
     } else {
-      return  <div className="buttondiv">
+      return  <div>
+                <div className="buttondiv">
                   <p>Vous devez vous connecter pour créer un post</p>
+                </div>
+                <LazyLoad height={200} offset={100}>
+                  <Post />
+                  {/*{postsList.map((post, index) =>
+                      <Post
+                        key={`${index}`}
+                        title={post.title}
+                        text={post.text}
+                      />
+                  )}*/}
+                </LazyLoad>
               </div>
     }
 }

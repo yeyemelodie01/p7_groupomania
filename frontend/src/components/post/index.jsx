@@ -1,88 +1,151 @@
-import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import axios from 'axios'
 import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
-import ImgPost from '../../assets/marcel-eberle-n4boKCT_RLk-unsplash.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 //import Comment from '../comments'
 import '../../utils/styles/post.css'
 
 
-function EditPost({ picture, picturePost, nameUser, hour, title }) {
+function Post() {
   //const [ commentList, setCommentList ] = useState([])
-  const [ posts, setPosts ] = useState(null);
-  let userDetails = JSON.parse(localStorage.getItem('user'));
+  const [ posts, setPosts ] = useState([]);
+  //const [ postsList, setPostsList ] = useState([])
 
+  // function EditPost(){
+  //   const promise = axios.get("http://localhost:4000/api/posts")
+  //   const donnees = promise.then((res) => res.data)
+  //     return donnees
+  // }
+
+  useEffect(() => {
     axios
-      .get("http://localhost:4000/api/posts", { headers: { Authorization: `Bearer ${userDetails.jwt}` } })
-      .then(function(res) {
+      .get('http://localhost:4000/api/posts')
+      .then((res) => {
         setPosts(res.data);
-          console.log(res.data)
-        return res.data;
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(error => console.error(error));
+  }, []);
 
 
-  return(
-    <div className="parentgrid">
-      <div className="grid">
-        <div className="postdiv">
-          <div className="profilpost">
-            <ul className="listpost">
-              <li>
-                <img className="imgprofil" src={picture} alt="profil"/>
-              </li>
-              <li>
-                <p className="nameprofil">{posts.userName}</p>
-              </li>
-              <li>
-                <p className="hourpost">{hour}</p>
-              </li>
-            </ul>
-          </div>
-          <h1 className="titlepost">{title}</h1>
-          <figure>
-            <img src={ picturePost } alt="born" />
-            <figcaption>
-              <div className="likedislike">
-                <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon" />
-                <FontAwesomeIcon icon={ faThumbsDown } />
+  // useEffect(() => {
+  //   async function fetchPost() {
+  //     try {
+  //       const response = await fetch(`http://localhost:4000/api/posts`)
+  //       const { postsList } = await response.json()
+  //       setPostsList(postsList)
+  //     } catch (err) {
+  //       console.log(err)
+  //     } finally {
+  //     }
+  //   }
+  //   fetchPost()
+  // }, [])
+
+  const usePosts = posts.map((posts, index) =>{
+    if(posts.text){
+      return (
+        <div className="parentgrid">
+          <div className="grid">
+            <div className="postdiv" key={index}>
+              <div className="profilpost">
+                <ul className="listpost">
+                  <li>
+                    <img className="imgprofil" src={ Profil } alt="profil"/>
+                  </li>
+                  <li>
+                    <p className="nameprofil">{}</p>
+                  </li>
+                  <li>
+                    <p className="hourpost">2h</p>
+                  </li>
+                </ul>
               </div>
-              {/*<div>*/}
-              {/*  {commentList.map((comment, index) =>*/}
-              {/*    <Comment*/}
-              {/*      key={`${comment.name}-${index}`}*/}
-              {/*      picture={comment.picture}*/}
-              {/*      nameUser={comment.username}*/}
-              {/*      hour={comment.hour}*/}
-              {/*      text={comment.text}*/}
-              {/*    />*/}
-              {/*  )}*/}
-              {/*</div>*/}
-            </figcaption>
-          </figure>
+              <div>
+                <div>
+                  <h1 className="titlepost">{posts.title}</h1>
+                  <figure>
+                    <div>{posts.text}</div>
+                    <figcaption>
+                      <div className="likedislike">
+                        <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon" />
+                        <FontAwesomeIcon icon={ faThumbsDown } />
+                      </div>
+                      {/*<div>*/}
+                      {/*  {commentList.map((comment, index) =>*/}
+                      {/*    <Comment*/}
+                      {/*      key={`${comment.name}-${index}`}*/}
+                      {/*      picture={comment.picture}*/}
+                      {/*      nameUser={comment.username}*/}
+                      {/*      hour={comment.hour}*/}
+                      {/*      text={comment.text}*/}
+                      {/*    />*/}
+                      {/*  )}*/}
+                      {/*</div>*/}
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      )
+    }
+    if (posts.media){
+      return (
+        <div className="parentgrid">
+          <div className="grid">
+            <div className="postdiv" key={index}>
+              <div className="profilpost">
+                <ul className="listpost">
+                  <li>
+                    <img className="imgprofil" src={ Profil } alt="profil"/>
+                  </li>
+                  <li>
+                    <p className="nameprofil">{}</p>
+                  </li>
+                  <li>
+                    <p className="hourpost">2h</p>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <div>
+                  <h1 className="titlepost">{posts.title}</h1>
+                  <figure>
+                    <img src={posts.media} alt=""/>
+                    <figcaption>
+                      <div className="likedislike">
+                        <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon" />
+                        <FontAwesomeIcon icon={ faThumbsDown } />
+                      </div>
+                      {/*<div>*/}
+                      {/*  {commentList.map((comment, index) =>*/}
+                      {/*    <Comment*/}
+                      {/*      key={`${comment.name}-${index}`}*/}
+                      {/*      picture={comment.picture}*/}
+                      {/*      nameUser={comment.username}*/}
+                      {/*      hour={comment.hour}*/}
+                      {/*      text={comment.text}*/}
+                      {/*    />*/}
+                      {/*  )}*/}
+                      {/*</div>*/}
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  });
+
+    return (
+      <div>
+        { usePosts }
       </div>
-    </div>
-  )
+      )
 }
 
-EditPost.prototype = {
-  picture: PropTypes.string,
-  picturePost: PropTypes.string,
-  nameUser: PropTypes.string,
-  hour: PropTypes.number,
-  title: PropTypes.string,
-}
-
-EditPost.defaultProps = {
-  picture: Profil,
-  picturePost: ImgPost,
-  hour: '',
-  title: '',
-}
-
-export default EditPost
+export default Post

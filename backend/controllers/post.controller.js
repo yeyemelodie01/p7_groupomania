@@ -2,13 +2,13 @@ const postModel = require('../models/post.model');
 
 exports.postRequest = async(req, res) => {
     postModel.find()
-      .then((post) => req.status(200).json(post))
+      .then((post) => res.status(200).json(post))
       .catch(error => res.status(400).json({error}));
 }
 
 exports.postIdRequest = async(req, res) => {
     postModel.findOne({ _id: req.params.id })
-      .then((post) => req.status(200).json(post))
+      .then((post) => res.status(200).json(post))
       .catch(error => res.status(400).json({error}));
 }
 
