@@ -73,6 +73,7 @@ function Home() {
   }
 
 
+
     if(userstatus) {
      return <main>
         <div className="parentgrid">
@@ -165,7 +166,7 @@ function Home() {
                         </label>
                       </div>
                       <div className="divtext">
-                        <CKEditor
+                       <CKEditor
                           editor={ ClassicEditor }
                           onReady={ editor => {
                             // You can store the "editor" and use when it is needed.
@@ -190,6 +191,7 @@ function Home() {
                             console.log( 'Focus.', editor );
                           } }
                         />
+                        { JSON.stringify(textEdit) }
                       </div>
                         <button className="stylebutton" type="submit" onClick={() => {}} >Envoyer</button>
                         {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
