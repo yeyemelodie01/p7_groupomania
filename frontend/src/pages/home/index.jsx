@@ -11,17 +11,16 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
-function Home() {
+function Home(getPost) {
   const [ isHidden, setIsHidden ] = useState(false);
   const { register, handleSubmit } = useForm();
-  const userJwt = localStorage.getItem("jwt");
   const [ radioValue, setRadioValue ] = useState(false);
   const [ textEdit, setTextEdit ] = useState("");
+  let userDetails = JSON.parse(localStorage.getItem('user'));
 
 
   const onSubmit = (data) => {
     const choice = localStorage.getItem("choice");
-
     const formData = new FormData();
 
     // if(choice === 'img'){
@@ -38,18 +37,29 @@ function Home() {
     //       console.log(err);
     //     });
     // }
-        formData.append('title', data.title);
-        formData.append('data', data.text);
-        console.log(formData);
-        axios
-          .post("http://localhost:4000/api/posts", formData)
-          .then(() => {
 
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+    if('text' === choice) {
+      const dataToSend = {
+        "userId": userDetails._id,
+        "postType": 'text',
+        "post": {
+          "title": data.title,
+          "text": textEdit
+        }
       }
+      axios
+        .post("http://localhost:4000/api/posts/create", dataToSend, {headers: { Authorization: Bearer ${userDetails.jwt} }})
+        .then(() => {
+          axios
+            .post("http://localhost:4000/api/posts/create", dataToSend, {headers: { Authorization: Bearer ${userDetails.jwt} }})
+            .then(() => {
+              getPost();
+              console.log(formData);
+            })
+        })
+        .catch((err) =>{
+          console.log(err);
+        });
   }
 
   function showChoice(){
@@ -72,9 +82,7 @@ function Home() {
     showChoice();
   }
 
-
-
-    if(userjwt) {
+    if(userDetails) {
      return <main>
         <div className="parentgrid">
           <div className="grid1">
@@ -166,36 +174,22 @@ function Home() {
                         </label>
                       </div>
                       <div className="divtext">
-                       <CKEditor
+                        <CKEditor
                           editor={ ClassicEditor }
-                          data=""
-                          onReady={ editor => {
-                            // You can store the "editor" and use when it is needed.
-                            console.log( 'Editor is ready to use!', editor );
-                          } }
+                          id={'editor'}
                           config={{
                             placeholder: "Ecrivez votre texte",
                             removePlugins: [
-                              'imageUpload', 'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
+                              'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
                               'ImageUpload', 'ImageToolbar', 'ImageStyle',
                               'ImageCaption'
                             ],
                           }}
-                          onChange={(textEdit, editor) => {
-                            const data = editor.getData();
-                            console.log(data);
-                            setTextEdit(textEdit);
+                          onChange={(event, editor) => {
+                            const data = editor.getData()
+                            setTextEdit(data)
                           }}
-                          {...register("text")}
-                          onBlur={ ( event, editor ) => {
-                            console.log( 'Blur.', editor );
-                          } }
-                          onFocus={ ( event, editor ) => {
-                            console.log( 'Focus.', editor );
-                          } }
-
                         />
-                        { JSON.stringify(textEdit) }
                       </div>
                         <button className="stylebutton" type="submit" onClick={() => {}} >Envoyer</button>
                         {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
