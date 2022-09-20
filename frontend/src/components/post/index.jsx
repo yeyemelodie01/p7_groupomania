@@ -42,12 +42,12 @@ function Post() {
   //   fetchPost()
   // }, [])
 
-  const usePosts = posts.map((posts, index) =>{
+  const usePosts = posts.map((posts) =>{
     if(posts.text){
       return (
         <div className="parentgrid">
           <div className="grid">
-            <div className="postdiv" key={index}>
+            <div className="postdiv" key={posts._id}>
               <div className="profilpost">
                 <ul className="listpost">
                   <li>
@@ -95,7 +95,7 @@ function Post() {
       return (
         <div className="parentgrid">
           <div className="grid">
-            <div className="postdiv" key={index}>
+            <div className="postdiv" key={posts._id}>
               <div className="profilpost">
                 <ul className="listpost">
                   <li>
@@ -139,6 +139,7 @@ function Post() {
         </div>
       )
     }
+    return null;
   });
 
     return (
