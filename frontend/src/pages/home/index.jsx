@@ -10,52 +10,53 @@ import '../../utils/styles/home.css'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-
 function Home() {
   const [ isHidden, setIsHidden ] = useState(false);
   const { register, handleSubmit } = useForm();
   const [ radioValue, setRadioValue ] = useState(false);
   const [ textEdit, setTextEdit ] = useState("");
-  //const [ postList, setPostList ] = useState([])
+  const [file, setFile] = useState();
   let userDetails = JSON.parse(localStorage.getItem('user'));
 
+  function handleFileChange(event) {
+    setFile(event.target.files)
+  }
 
   const onSubmit = (data) => {
     const choice = localStorage.getItem("choice");
-
-    // if(choice === 'img'){
-    //   formData.append('title', data.title);
-    //   formData.append('file', data.img[0]);
-    //
-    //   axios
-    //     .post("http://localhost:4000/api/post", formData)
-    //     .then(() => {
-    //           getPost();
-    //           console.log(formData);
-    //     })
-    //     .catch((err) =>{
-    //       console.log(err);
-    //     });
-    // }
+    if('img' === choice) {
+      const formData = new FormData();
+      formData.append("userId", userDetails._id);
+      formData.append("postType", "media");
+      formData.append("title", data.title);
+      formData.append("files", data.img[0]);
+      axios
+          .post("http://localhost:4000/api/posts/create", formData, {
+            headers: {
+              Authorization: `Bearer ${userDetails.jwt}`,
+              "Content-Type": "multipart/form-data"
+            }
+          })
+          .then(() => {
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    }
 
     if ('text' === choice) {
       const dataToSend = {
         "userId": userDetails._id,
         "postType": 'text',
         "post": {
-          "title": data.title,
+          "title": data.textTitle,
           "text": textEdit
         }
       }
-      axios
-        .post("http://localhost:4000/api/posts/create", dataToSend, { headers: { Authorization: `Bearer ${userDetails.jwt}` } })
-        .then(() => {
-          axios
-            .post("http://localhost:4000/api/posts/create", dataToSend, { headers: { Authorization: `Bearer ${userDetails.jwt}` } })
-            .then(() => {
 
-            })
-        })
+      axios
+        .post("http://localhost:4000/api/posts/create", dataToSend, {headers: {Authorization: `Bearer ${userDetails.jwt}`}})
+        .then(() => {})
         .catch((err) => {
           console.log(err);
         });
@@ -150,6 +151,8 @@ function Home() {
                               id="img"
                               className="sizeinputimg"
                               type="file"
+                              value={ file }
+                              onChange={ handleFileChange }
                               {...register("img")}
                             />
                           </label>
@@ -164,12 +167,12 @@ function Home() {
                       <div className="divtitle">
                         <label form='title'>
                           <input
-                            id="title"
+                            id="textTitle"
                             className="sizeinput"
                             type="text"
                             placeholder="Titre"
                             maxLength="280"
-                            {...register("title")}
+                            {...register("textTitle")}
                           />
                         </label>
                       </div>
@@ -200,19 +203,18 @@ function Home() {
             </div>
           </div>
         </div>
-       {/*//<Post />*/}
-          {/*{postList.map((post, index) =>*/}
-          {/*  <LazyLoad height={200} offset={100}>*/}
-          {/*    <Post*/}
-          {/*      key={`${post.name}-${index}`}*/}
-          {/*      nameUser={post.username}*/}
-          {/*      picture={post.picture}*/}
-          {/*      picturePost={post.picturePost}*/}
-          {/*      hour={post.hour}*/}
-          {/*      title={post.title}*/}
-          {/*    />*/}
-          {/*  </LazyLoad>*/}
-          {/*)}*/}
+          {/*{postList.map((post, index) =>
+            <LazyLoad height={200} offset={100}>
+              <Post
+                key={`${post.name}-${index}`}
+                nameUser={post.username}
+                picture={post.picture}
+                picturePost={post.picturePost}
+                hour={post.hour}
+                title={post.title}
+              />
+            </LazyLoad>
+          )}*/}
       </main>
     } else {
       return  <div className="buttondiv">
