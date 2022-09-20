@@ -5,7 +5,7 @@ const userAuth = require('../middleware/auth');
 const upload = require('../middleware/upload')
 
 
-urlRoutes.get('/', userAuth, controller.postRequest);
+urlRoutes.get('/', controller.postRequest);
 urlRoutes.get('/:id', userAuth, controller.postIdRequest);
 urlRoutes.post('/create', userAuth, upload, controller.postAddRequest);
 // urlRoutes.put('/:id', userAuth, upload, controller.postUpdateRequest);

@@ -9,7 +9,7 @@ import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import '../../utils/styles/post.css'
 
 
-function Post({ picture, picturePost, nameUser, hour, title }) {
+function EditPost({ picture, picturePost, nameUser, hour, title }) {
   //const [ commentList, setCommentList ] = useState([])
   const [ posts, setPosts ] = useState(null);
   let userDetails = JSON.parse(localStorage.getItem('user'));
@@ -70,7 +70,7 @@ function Post({ picture, picturePost, nameUser, hour, title }) {
   )
 }
 
-Post.prototype = {
+EditPost.prototype = {
   picture: PropTypes.string,
   picturePost: PropTypes.string,
   nameUser: PropTypes.string,
@@ -78,11 +78,11 @@ Post.prototype = {
   title: PropTypes.string,
 }
 
-Post.defaultProps = {
+EditPost.defaultProps = {
   picture: Profil,
   picturePost: ImgPost,
   hour: '',
   title: '',
 }
 
-export default Post
+export default EditPost
