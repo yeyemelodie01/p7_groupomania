@@ -204,21 +204,19 @@ function Home() {
             </div>
           </div>
         </div>
+       <div>
+         <LazyLoad height={200} offset={100}>
+           <Post />
+         </LazyLoad>
+       </div>
       </main>
     } else {
-      return  <div>
+      return <div>
                 <div className="buttondiv">
                   <p>Vous devez vous connecter pour créer un post</p>
                 </div>
                 <LazyLoad height={200} offset={100}>
                   <Post />
-                  {/*{postsList.map((post, index) =>
-                      <Post
-                        key={`${index}`}
-                        title={post.title}
-                        text={post.text}
-                      />
-                  )}*/}
                 </LazyLoad>
               </div>
     }
