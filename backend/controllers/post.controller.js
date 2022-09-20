@@ -14,9 +14,16 @@ exports.postIdRequest = async(req, res) => {
 }
 
 exports.postAddRequest = async(req, res) => {
-  const {userId, post} = req.body;
+  const {userId, postType, post} = req.body;
   const dataPost = await postModel.find({title: post.title});
   if(dataPost.length > 0) {
+    if ('media' === postType) {
+      const dataUpdate = req.file ? {
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}` // url pour l'image req.protocol(http), req.get('host) pour l'hôte de serveur ici localhost:3000, uploads(dossier qui contiendra l'image), req.file.filename pour le nom du fichier
+    } : { ...req.body };
+      console.log(dataUpdate);
+    }
     res.status(200).json({message: "post déja ajouter"});
     return;
   }
