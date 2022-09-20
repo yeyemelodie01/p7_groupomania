@@ -11,7 +11,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
-function Home(getPost) {
+function Home() {
   const [ isHidden, setIsHidden ] = useState(false);
   const { register, handleSubmit } = useForm();
   const [ radioValue, setRadioValue ] = useState(false);
@@ -21,7 +21,6 @@ function Home(getPost) {
 
   const onSubmit = (data) => {
     const choice = localStorage.getItem("choice");
-    const formData = new FormData();
 
     // if(choice === 'img'){
     //   formData.append('title', data.title);
@@ -48,13 +47,12 @@ function Home(getPost) {
         }
       }
       axios
-        .post("http://localhost:4000/api/posts/create", dataToSend, { headers: { Authorization: 'Bearer ${userDetails.jwt}' } })
+        .post("http://localhost:4000/api/posts/create", dataToSend, { headers: { Authorization: `Bearer ${userDetails.jwt}` } })
         .then(() => {
           axios
-            .post("http://localhost:4000/api/posts/create", dataToSend, { headers: { Authorization: 'Bearer ${userDetails.jwt}' } })
+            .post("http://localhost:4000/api/posts/create", dataToSend, { headers: { Authorization: `Bearer ${userDetails.jwt}` } })
             .then(() => {
-              getPost();
-              console.log(formData);
+
             })
         })
         .catch((err) => {
