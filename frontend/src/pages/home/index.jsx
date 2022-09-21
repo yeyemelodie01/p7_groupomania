@@ -17,7 +17,7 @@ function Home() {
   const [ textEdit, setTextEdit ] = useState("");
   const [file, setFile] = useState();
   let userDetails = JSON.parse(localStorage.getItem('user'));
-  
+
   function handleFileChange(event) {
     setFile(event.target.files)
   }
