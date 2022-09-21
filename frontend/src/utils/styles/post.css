@@ -4,6 +4,7 @@
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0;
     grid-row-gap: 0;
+    margin-bottom: 20px;
 }
 
 .grid{
@@ -16,7 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: bisque;
+    background-color: #aaaaaa;
     width: 100%;
     padding: 16px 40px;
     -webkit-border-radius: 20px;
@@ -71,4 +72,9 @@ figure{
 
 .margin-icon {
     margin-right: 10px;
+}
+
+.iconcolor{
+    color: #FFD7D7;
+    font-size: 16px;
 }

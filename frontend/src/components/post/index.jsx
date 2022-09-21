@@ -83,8 +83,8 @@ function Post() {
                       {text}
                     <figcaption>
                       <div className="likedislike">
-                        <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon" />
-                        <FontAwesomeIcon icon={ faThumbsDown } />
+                        <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon iconcolor" />
+                        <FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>
                       </div>
                       {/*<div>*/}
                       {/*  {commentList.map((comment, index) =>*/}
@@ -131,8 +131,8 @@ function Post() {
                     <img src={posts.media} alt=""/>
                     <figcaption>
                       <div className="likedislike">
-                        <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon" />
-                        <FontAwesomeIcon icon={ faThumbsDown } />
+                        <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon iconcolor" />
+                        <FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>
                       </div>
                       {/*<div>*/}
                       {/*  {commentList.map((comment, index) =>*/}
