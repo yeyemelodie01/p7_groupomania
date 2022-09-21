@@ -60,7 +60,7 @@ function Post() {
       const text = postText.substring(0, postText.length - 4)
 
       return (
-        <div className="parentgrid">
+        <div className="postgrid">
           <div className="grid">
             <div className="postdiv" key={posts._id}>
               <div className="profilpost">
@@ -108,7 +108,7 @@ function Post() {
     }
     if (posts.media){
       return (
-        <div className="parentgrid">
+        <div className="postgrid">
           <div className="grid">
             <div className="postdiv" key={posts._id}>
               <div className="profilpost">
