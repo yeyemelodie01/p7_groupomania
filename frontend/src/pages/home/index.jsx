@@ -17,8 +17,7 @@ function Home() {
   const [ textEdit, setTextEdit ] = useState("");
   const [file, setFile] = useState();
   let userDetails = JSON.parse(localStorage.getItem('user'));
-
-
+  
   function handleFileChange(event) {
     setFile(event.target.files)
   }
@@ -28,6 +27,7 @@ function Home() {
     if('img' === choice) {
       const formData = new FormData();
       formData.append("userId", userDetails._id);
+      formData.append("userName", userDetails.userName);
       formData.append("postType", "media");
       formData.append("title", data.title);
       formData.append("files", data.img[0]);
@@ -39,6 +39,7 @@ function Home() {
             }
           })
           .then(() => {
+            window.location.href='/';
           })
           .catch((err) => {
             console.log(err);
@@ -48,6 +49,7 @@ function Home() {
     if ('text' === choice) {
       const dataToSend = {
         "userId": userDetails._id,
+        "userName": userDetails.userName,
         "postType": 'text',
         "post": {
           "title": data.textTitle,
@@ -57,7 +59,9 @@ function Home() {
 
       axios
         .post("http://localhost:4000/api/posts/create", dataToSend, {headers: {Authorization: `Bearer ${userDetails.jwt}`}})
-        .then(() => {})
+        .then(() => {
+          window.location.href='/';
+        })
         .catch((err) => {
           console.log(err);
         });

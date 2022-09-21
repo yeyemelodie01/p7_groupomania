@@ -7,9 +7,11 @@ import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import '../../utils/styles/post.css'
 
 
+
 function Post() {
   //const [ commentList, setCommentList ] = useState([])
   const [ posts, setPosts ] = useState([]);
+  //const userDetails = JSON.parse(localStorage.getItem('user'));
   //const [ postsList, setPostsList ] = useState([])
 
   // function EditPost(){
@@ -27,6 +29,14 @@ function Post() {
       .catch(error => console.error(error));
   }, []);
 
+  // function Users(){
+  //   axios
+  //     .get('http://localhost:4000/users', userDetails.userId)
+  //     .then((res) => {
+  //       console.log(res.data)
+  //     })
+  // }
+  // console.log(Users)
 
   // useEffect(() => {
   //   async function fetchPost() {
@@ -41,10 +51,14 @@ function Post() {
   //   }
   //   fetchPost()
   // }, [])
-
+///[</p>, &nbs;]/
   const usePosts = posts.map((posts) =>{
+    console.log(posts.userName)
     if(posts.text){
-      const text = posts.text.split(/[",<,>]/);
+      const usetext = posts.text.split('&nbsp;').join(" ");
+      const postText = usetext.substring(3)
+      const text = postText.substring(0, postText.length - 4)
+
       return (
         <div className="parentgrid">
           <div className="grid">
@@ -55,7 +69,7 @@ function Post() {
                     <img className="imgprofil" src={ Profil } alt="profil"/>
                   </li>
                   <li>
-                    <p className="nameprofil">{}</p>
+                    <p className="nameprofil">{posts.userName}</p>
                   </li>
                   <li>
                     <p className="hourpost">2h</p>
@@ -103,7 +117,7 @@ function Post() {
                     <img className="imgprofil" src={ Profil } alt="profil"/>
                   </li>
                   <li>
-                    <p className="nameprofil">{}</p>
+                    <p className="nameprofil">{posts.userName}</p>
                   </li>
                   <li>
                     <p className="hourpost">2h</p>

@@ -4,6 +4,6 @@ const urlRoutes = express.Router();
 const controller = require('../controllers/user.controller')
 
 urlRoutes.post('/', controller.createOneRequest);
-urlRoutes.get('/:email', controller.readOneRequest);
+urlRoutes.get('/', controller.readOneRequest);
 
 module.exports = urlRoutes;

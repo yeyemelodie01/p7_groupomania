@@ -26,10 +26,10 @@ exports.createOneRequest = async (req, res) => {
 exports.readOneRequest = async (req, res) => {
   // Best request is GET, we can get the ID from the request
   // parameters.
-  const {email} = req.body;
+  const {userId} = req.body;
 
   // attempt to retrieve user
-  const foundUser = await UserModel.findOne({email: email});
+  const foundUser = await UserModel.findOne({_id: userId});
 
 
 

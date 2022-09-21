@@ -13,7 +13,7 @@ exports.postIdRequest = async(req, res) => {
 }
 
 exports.postAddRequest = async(req, res) => {
-  const {userId, postType, post} = req.body;
+  const {userId, postType, post, userName} = req.body;
   let title = "";
   if ('media' === postType) {
       title = req.body.title;
@@ -33,6 +33,7 @@ exports.postAddRequest = async(req, res) => {
     if ('media' === postType) {
       const newPost = new postModel({
         "userId": userId,
+        "userName": userName,
         "title": title,
         "media": `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
         "like": 0,
@@ -46,6 +47,7 @@ exports.postAddRequest = async(req, res) => {
     if ('text' === postType) {
       const newPost = new postModel({
         "userId": userId,
+        "userName": userName,
         "title": title,
         "text": post.text,
         "like": 0,
