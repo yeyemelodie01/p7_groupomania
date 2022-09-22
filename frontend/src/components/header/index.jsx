@@ -62,6 +62,7 @@ function Header() {
       window.location.href='/';
     }
 
+
   let userDetails = JSON.parse(localStorage.getItem('user'));
 
     if(userDetails === null) {
