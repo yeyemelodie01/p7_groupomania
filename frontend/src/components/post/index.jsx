@@ -46,13 +46,13 @@ function Post() {
                 <div className="divfigure">
                   <h1 className="titlepost">{posts.title}</h1>
                   <figure>
-                      {text}
+                    <p>{text}</p>
                     <figcaption>
                       <div className="likedislike">
                         <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon iconcolor" />
                         <FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>
                       </div>
-                      <div>
+                      <div className="stylecomments">
                         <Comment />
                       </div>
                     </figcaption>
@@ -91,7 +91,7 @@ function Post() {
                         <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon iconcolor" />
                         <FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>
                       </div>
-                      <div>
+                      <div className="stylecomments">
                         <Comment />
                       </div>
                     </figcaption>

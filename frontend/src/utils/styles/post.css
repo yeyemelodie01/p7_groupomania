@@ -17,12 +17,9 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border: 4px #4E5166 solid;
+    border-bottom: 2px #4E5166 solid;
     width: 100%;
     padding: 16px 40px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
 }
 
 .profilpost{
@@ -72,6 +69,11 @@ figure{
     display: flex;
     margin: 10px 0;
     font-size: 25px;
+}
+
+.stylecomments{
+    background-color: #091F43FF;
+    padding: 0 10px;
 }
 
 .margin-icon {
