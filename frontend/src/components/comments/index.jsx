@@ -5,7 +5,6 @@ import '../../utils/styles/comments.css'
 function Comment() {
   //const numberComments = useParams();
   let userDetails = localStorage.getItem('user');
-  console.log(userDetails)
   if (!userDetails){
     return (
       <div className="divcomments">

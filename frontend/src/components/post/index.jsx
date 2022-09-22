@@ -43,8 +43,7 @@ function Post() {
                   </li>
                 </ul>
               </div>
-              <div>
-                <div>
+                <div className="divfigure">
                   <h1 className="titlepost">{posts.title}</h1>
                   <figure>
                       {text}
@@ -59,7 +58,6 @@ function Post() {
                     </figcaption>
                   </figure>
                 </div>
-              </div>
             </div>
           </div>
         </div>

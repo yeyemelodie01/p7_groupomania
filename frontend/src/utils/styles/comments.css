@@ -1,11 +1,11 @@
 .divcomments{
     width: 100%;
-    height: 300px;
     background-color: #FFF;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     font-size: 20px;
+    padding: 0 10px;
 }
 
 .divnumber{
@@ -19,7 +19,6 @@
 .profilcommentsimg{
     width: 30px;
     height: 30px;
-    background-color: aqua;
     border-radius: 80px 80px 80px 80px;
     float: left;
 }
