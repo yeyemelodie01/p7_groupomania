@@ -69,11 +69,12 @@ figure{
     display: flex;
     margin: 10px 0;
     font-size: 25px;
+    padding-left: 10px;
 }
 
 .stylecomments{
     background-color: #091F43FF;
-    padding: 0 10px;
+    padding: 10px 10px;
 }
 
 .margin-icon {

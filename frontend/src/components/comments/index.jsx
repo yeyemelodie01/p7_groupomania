@@ -9,15 +9,29 @@ function Comment() {
     return (
       <div className="divcomments">
         <p className="divnumber">2 commentaires</p>
-        <div className="profilcomments">
-          <div>
+        <div className="divprofilcomments">
+          <div className="divpaddingcomments">
             <img className="profilcommentsimg" src={ Profil } alt="profil"/>
             <div className="profilpostcomments">
               <p>{}</p>
+            </div>
+          </div>
+        </div>
+        <div className="divprofilcomments">
+          <div className="divpaddingcomments">
+            <img className="profilcommentsimg" src={ Profil } alt="profil"/>
+            <div className="profilpostcomments">
               <p>{}</p>
             </div>
           </div>
-          <p>{}</p>
+        </div>
+        <div className="divprofilcomments">
+          <div className="divpaddingcomments">
+            <img className="profilcommentsimg" src={ Profil } alt="profil"/>
+            <div className="profilpostcomments">
+              <p>{}</p>
+            </div>
+          </div>
         </div>
       </div>
     )
