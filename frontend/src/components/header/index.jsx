@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Logo from '../../assets/icon-left-font.png'
 import '../../utils/styles/header.css'
 import useModal from '../../utils/hooks'
@@ -10,7 +12,8 @@ import Modal from '../../components/modal'
 function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
-    const { register, handleSubmit, formState: { errors }} = useForm();
+    const { register, handleSubmit} = useForm();
+    const notify = () => toast("Wow trop facile");
 
   function setUserDetails (data, res) {
     const userEmail = data.email;
@@ -106,9 +109,8 @@ function Header() {
                 />
               </div>
               <div className="form-group">
-                <input type="submit" placeholder="Se connecter" onClick={() => {
-
-                }} />
+                <input type="submit" placeholder="Se connecter" onClick={notify}/>
+                <ToastContainer />
               </div>
             </form>
           </Modal>
@@ -122,31 +124,15 @@ function Header() {
                 <input
                   type="email"
                   placeholder="Email"
-                  {...register("email",  {
-                    required: {
-                      value: true,
-                    },
-                    pattern: {
-                      value: /\S+@\S+.\S+/,
-                    }
-                  })}
+                  {...register("email")}
                 />
-                {errors.email && <span role="alert">{errors.email.message}</span>}
               </div>
               <div className="form-group">
                 <input
                   type="password"
                   placeholder="Mot de Passe"
-                  {...register("password", {
-                    required: {
-                      value:true,
-                    },
-                    pattern: {
-                      value: 6,
-                    }
-                  })}
+                  {...register("password")}
                 />
-                {errors.password && <span role="alert">{errors.password.message}</span>}
               </div>
               <div className="form-group">
                 <input
