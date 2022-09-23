@@ -209,7 +209,7 @@ function Home() {
           </div>
         </div>
        <div>
-         <LazyLoad height={200} offset={100}>
+         <LazyLoad height={100} offset={100}>
            <Post />
          </LazyLoad>
        </div>
