@@ -27,9 +27,6 @@ function ShowDetails(e) {
   
   const usePosts = posts.map((posts) =>{
     if(posts.text){
-      // const usetext = posts.text.split('&nbsp;').join(" ");
-      // const postText = usetext.substring(3)
-      // const text = postText.substring(0, postText.length - 4)
 
       return (
         <div className="postgrid">

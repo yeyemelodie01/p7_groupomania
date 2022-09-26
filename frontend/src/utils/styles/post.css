@@ -65,10 +65,13 @@ figure{
     margin: auto 0;
 }
 
+figcaption{
+    margin-top: 15px;
+}
+
 .stylecomments{
     background-color: #091F43FF;
-    padding: 5px 10px;
-    margin-top: 15px;
+    padding: 15px 10px;
 }
 
 .divcomments{
@@ -112,8 +115,4 @@ figure{
     border: none;
     background: transparent;
     cursor: pointer;
-}
-
-#commentable{
-    display: none;
 }
