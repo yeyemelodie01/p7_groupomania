@@ -70,3 +70,50 @@ figure{
     padding: 5px 10px;
     margin-top: 15px;
 }
+
+.divcomments{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 20px;
+}
+
+.diviconnumber{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.buttonicon{
+    color: #ffffff;
+    font-size: 12px;
+    margin: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.likedislike{
+    width: 80px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.iconcolor{
+    color: #FFD7D7;
+    margin-right: 5px;
+}
+
+.number{
+    font-size: 12px;
+    color: white;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+#commentable{
+    display: none;
+}

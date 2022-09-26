@@ -1,13 +1,19 @@
 import { useState, useEffect} from 'react'
 import axios from 'axios'
 import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
-import DetailPosts from '../detailposts'
 import '../../utils/styles/post.css'
 import parse from 'html-react-parser'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
 function Post() {
   //const [ commentList, setCommentList ] = useState([])
   const [ posts, setPosts ] = useState([]);
+
+function ShowDetails(e) {
+  e.preventDefault();
+  window.location = '../detailposts';
+}
 
   useEffect(() => {
       axios
@@ -47,9 +53,16 @@ function Post() {
                   <figure>
                     <p>{parse(posts.text)}</p>
                     <figcaption>
-
                       <div className="stylecomments">
-                        <DetailPosts />
+                        <div className="divcomments">
+                          <div className="diviconnumber">
+                            <div className="likedislike">
+                              <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
+                              <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
+                            </div>
+                            <button className="number" onClick={ ShowDetails }>2 commentaires</button>
+                          </div>
+                        </div>
                       </div>
                     </figcaption>
                   </figure>
@@ -84,7 +97,15 @@ function Post() {
                     <img src={posts.media} alt=""/>
                     <figcaption>
                       <div className="stylecomments">
-                        <DetailPosts />
+                        <div className="divcomments">
+                          <div className="diviconnumber">
+                            <div className="likedislike">
+                              <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
+                              <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
+                            </div>
+                            <button className="number" onClick={ ShowDetails }>2 commentaires</button>
+                          </div>
+                        </div>
                       </div>
                     </figcaption>
                   </figure>
