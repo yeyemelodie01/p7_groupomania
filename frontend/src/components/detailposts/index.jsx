@@ -12,26 +12,10 @@ function DetailPosts() {
       <div className="divcomments">
         <div className="diviconnumber">
           <div className="likedislike">
-            <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon iconcolor" />
-            <FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>
+            <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
+            <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
           </div>
           <p className="number">2 commentaires</p>
-        </div>
-        <div className="divprofilcomments">
-          <div className="divpaddingcomments">
-            <img className="profilcommentsimg" src={ Profil } alt="profil"/>
-            <div className="profilpostcomments">
-              <p>{}</p>
-            </div>
-          </div>
-        </div>
-        <div className="divprofilcomments">
-          <div className="divpaddingcomments">
-            <img className="profilcommentsimg" src={ Profil } alt="profil"/>
-            <div className="profilpostcomments">
-              <p>{}</p>
-            </div>
-          </div>
         </div>
       </div>
     )
@@ -54,15 +38,21 @@ function DetailPosts() {
             <button>Commenter</button>
           </div>
         </div>
-        <div className="profilcomments">
-          <div>
+        <div className="divprofilcomments">
+          <div className="divpaddingcomments">
             <img className="profilcommentsimg" src={ Profil } alt="profil"/>
             <div className="profilpostcomments">
               <p>{}</p>
+            </div>
+          </div>
+        </div>
+        <div className="divprofilcomments">
+          <div className="divpaddingcomments">
+            <img className="profilcommentsimg" src={ Profil } alt="profil"/>
+            <div className="profilpostcomments">
               <p>{}</p>
             </div>
           </div>
-          <p>{}</p>
         </div>
       </div>
     )

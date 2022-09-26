@@ -193,7 +193,7 @@ function Header() {
                   <div className="divlink">
                     <p>Bienvenue { userDetails.userName }</p>
                     <span>|</span>
-                    <button onClick={ Logout }>Déconnecter</button>
+                    <button className="buttonheader" onClick={ Logout }>Déconnecter</button>
                   </div>
                 </div>
               </nav>

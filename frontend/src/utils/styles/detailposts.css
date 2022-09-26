@@ -8,10 +8,32 @@
 
 .diviconnumber{
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.buttonicon{
+    color: #ffffff;
+    font-size: 12px;
+    margin: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.likedislike{
+    width: 80px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.iconcolor{
+    color: #FFD7D7;
+    margin-right: 5px;
 }
 
 .number{
-    margin: 0 0 10px 0;
     font-size: 12px;
     color: white;
 }
