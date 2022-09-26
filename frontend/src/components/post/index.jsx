@@ -3,7 +3,7 @@ import axios from 'axios'
 import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
 import DetailPosts from '../detailposts'
 import '../../utils/styles/post.css'
-
+import parse from 'html-react-parser'
 
 function Post() {
   //const [ commentList, setCommentList ] = useState([])
@@ -45,7 +45,7 @@ function Post() {
                 <div className="divfigure">
                   <h1 className="titlepost">{posts.title}</h1>
                   <figure>
-                    <p>{posts.text}</p>
+                    <p>{parse(posts.text)}</p>
                     <figcaption>
 
                       <div className="stylecomments">
