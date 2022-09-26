@@ -4,6 +4,7 @@ import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
 import DetailPosts from '../detailposts'
 import '../../utils/styles/post.css'
 
+
 function Post() {
   //const [ commentList, setCommentList ] = useState([])
   const [ posts, setPosts ] = useState([]);
@@ -20,9 +21,9 @@ function Post() {
   
   const usePosts = posts.map((posts) =>{
     if(posts.text){
-      const usetext = posts.text.split('&nbsp;').join(" ");
-      const postText = usetext.substring(3)
-      const text = postText.substring(0, postText.length - 4)
+      // const usetext = posts.text.split('&nbsp;').join(" ");
+      // const postText = usetext.substring(3)
+      // const text = postText.substring(0, postText.length - 4)
 
       return (
         <div className="postgrid">
@@ -44,7 +45,7 @@ function Post() {
                 <div className="divfigure">
                   <h1 className="titlepost">{posts.title}</h1>
                   <figure>
-                    <p>{text}</p>
+                    <p>{posts.text}</p>
                     <figcaption>
 
                       <div className="stylecomments">
