@@ -16,7 +16,7 @@ function DetailPosts() {
     <div>
       <div id="commentable">
         <label form="textcomments">
-          <textarea id="textcomments"></textarea>
+          <textarea id='textcomments'/>
         </label>
         <div>
           <button>Annuler</button>

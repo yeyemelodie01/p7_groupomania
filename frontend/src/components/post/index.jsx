@@ -10,10 +10,6 @@ function Post() {
   //const [ commentList, setCommentList ] = useState([])
   const [ posts, setPosts ] = useState([]);
 
-function ShowDetails(e) {
-  e.preventDefault();
-  window.location = '../detailposts';
-}
 
   useEffect(() => {
       axios
@@ -57,7 +53,7 @@ function ShowDetails(e) {
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
                             </div>
-                            <button className="number" onClick={ ShowDetails }>2 commentaires</button>
+                            <button className="number">2 commentaires</button>
                           </div>
                         </div>
                       </div>
@@ -100,7 +96,7 @@ function ShowDetails(e) {
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
                             </div>
-                            <button className="number" onClick={ ShowDetails }>2 commentaires</button>
+                            <button className="number">2 commentaires</button>
                           </div>
                         </div>
                       </div>
