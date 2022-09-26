@@ -1,9 +1,7 @@
 import { useState, useEffect} from 'react'
 import axios from 'axios'
 import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
-import Comment from '../comments'
+import DetailPosts from '../detailposts'
 import '../../utils/styles/post.css'
 
 function Post() {
@@ -48,12 +46,9 @@ function Post() {
                   <figure>
                     <p>{text}</p>
                     <figcaption>
-                      <div className="likedislike">
-                        <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon iconcolor" />
-                        <FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>
-                      </div>
+
                       <div className="stylecomments">
-                        <Comment />
+                        <DetailPosts />
                       </div>
                     </figcaption>
                   </figure>
@@ -87,12 +82,8 @@ function Post() {
                   <figure>
                     <img src={posts.media} alt=""/>
                     <figcaption>
-                      <div className="likedislike">
-                        <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon iconcolor" />
-                        <FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>
-                      </div>
                       <div className="stylecomments">
-                        <Comment />
+                        <DetailPosts />
                       </div>
                     </figcaption>
                   </figure>

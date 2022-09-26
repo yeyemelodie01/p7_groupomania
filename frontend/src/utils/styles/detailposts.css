@@ -6,7 +6,11 @@
     font-size: 20px;
 }
 
-.divnumber{
+.diviconnumber{
+    display: flex;
+}
+
+.number{
     margin: 0 0 10px 0;
     font-size: 12px;
     color: white;

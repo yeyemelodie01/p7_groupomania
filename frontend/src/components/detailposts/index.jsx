@@ -1,21 +1,21 @@
 //import { useParams } from 'react-router-dom'
 import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
-import '../../utils/styles/comments.css'
+import '../../utils/styles/detailposts.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
-function Comment() {
+function DetailPosts() {
   //const numberComments = useParams();
   let userDetails = localStorage.getItem('user');
   if (!userDetails){
     return (
       <div className="divcomments">
-        <p className="divnumber">2 commentaires</p>
-        <div className="divprofilcomments">
-          <div className="divpaddingcomments">
-            <img className="profilcommentsimg" src={ Profil } alt="profil"/>
-            <div className="profilpostcomments">
-              <p>{}</p>
-            </div>
+        <div className="diviconnumber">
+          <div className="likedislike">
+            <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon iconcolor" />
+            <FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>
           </div>
+          <p className="number">2 commentaires</p>
         </div>
         <div className="divprofilcomments">
           <div className="divpaddingcomments">
@@ -38,8 +38,13 @@ function Comment() {
   } else {
     return(
       <div className="divcomments">
-        <p className="divnumber">{  } commentaires</p>
-
+        <div>
+          <div className="likedislike">
+            <FontAwesomeIcon icon={ faThumbsUp } className="margin-icon iconcolor" />
+            <FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>
+          </div>
+          <p className="divnumber">{  } commentaires</p>
+        </div>
         <div id="commentable">
           <label form="textcomments">
             <textarea id="textcomments"> </textarea>
@@ -64,4 +69,4 @@ function Comment() {
   }
 }
 
-export default Comment
+export default DetailPosts
