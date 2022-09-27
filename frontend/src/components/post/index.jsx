@@ -22,14 +22,14 @@ function Post() {
   
   const usePosts = posts.map((posts) =>{
     if(posts.text){
-      function ShowDiv(){
-        const divshow = document.getElementById("divShow");
-        if (divshow.style.display === "none") {
-          divshow.style.display = "block";
-        } else {
-          divshow.style.display = "none";
-        }
-      }
+      // function ShowDiv(){
+      //   const divshow = document.getElementById("divShow");
+      //   if (divshow.style.display === "none") {
+      //     divshow.style.display = "block";
+      //   } else {
+      //     divshow.style.display = "none";
+      //   }
+      // }
       return (
         <div className="postgrid">
           <div className="grid">
@@ -59,10 +59,10 @@ function Post() {
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
                             </div>
-                            <button className="number" onClick={ ShowDiv }>2 commentaires</button>
+                            <button className="number">2 commentaires</button>
                           </div>
                         </div>
-                        <div id="divShow"></div>
+                        {/*<div id="divShow"></div>*/}
                       </div>
                     </figcaption>
                   </figure>
