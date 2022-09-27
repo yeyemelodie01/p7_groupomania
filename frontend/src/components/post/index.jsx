@@ -5,7 +5,6 @@ import '../../utils/styles/post.css'
 import parse from 'html-react-parser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
-import DetailPosts from '../detailposts'
 
 function Post() {
   const [ posts, setPosts ] = useState([]);
@@ -25,7 +24,7 @@ function Post() {
     function SendPostId(){
       const detail = posts._id;
       localStorage.setItem("postId", detail);
-      window.location.href= { DetailPosts };
+      window.location.href= '../detailposts/index.jsx';
     }
 
     if(posts.text){
