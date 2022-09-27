@@ -10,7 +10,6 @@ function Post() {
   //const [ commentList, setCommentList ] = useState([])
   const [ posts, setPosts ] = useState([]);
 
-
   useEffect(() => {
       axios
         .get('http://localhost:4000/api/posts')
@@ -23,11 +22,18 @@ function Post() {
   
   const usePosts = posts.map((posts) =>{
     if(posts.text){
-
+      function ShowDiv(){
+        const divshow = document.getElementById("divShow");
+        if (divshow.style.display === "none") {
+          divshow.style.display = "block";
+        } else {
+          divshow.style.display = "none";
+        }
+      }
       return (
         <div className="postgrid">
           <div className="grid">
-            <div className="postdiv" key={posts._id}>
+            <div className="postdiv" key={posts.id}>
               <div className="profilpost">
                 <ul className="listpost">
                   <li>
@@ -44,7 +50,7 @@ function Post() {
                 <div className="divfigure">
                   <h1 className="titlepost">{posts.title}</h1>
                   <figure>
-                    <p>{parse(posts.text)}</p>
+                    <div>{parse(posts.text)}</div>
                     <figcaption>
                       <div className="stylecomments">
                         <div className="divcomments">
@@ -53,9 +59,10 @@ function Post() {
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
                             </div>
-                            <button className="number">2 commentaires</button>
+                            <button className="number" onClick={ ShowDiv }>2 commentaires</button>
                           </div>
                         </div>
+                        <div id="divShow"></div>
                       </div>
                     </figcaption>
                   </figure>

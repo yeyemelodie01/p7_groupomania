@@ -67,6 +67,10 @@ function savePosts(post, res) {
         .then(() => res.status(201).json({message: "post ajouter"}))
         .catch(error =>  res.status(400).json({error}));
 }
+
+// exports.postAddDetailPostsRequest = async (req, res) => {
+//   const { userId, detailPosts } = req.body;
+// }
 //exports.postUpdateRequest = async(req) => {
 //    const dataUpdate = req.file ? {
 //                 ...req.body,//

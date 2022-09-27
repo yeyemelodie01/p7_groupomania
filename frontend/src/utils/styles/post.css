@@ -117,3 +117,10 @@ figcaption{
     background: transparent;
     cursor: pointer;
 }
+
+#divShow{
+    display: none;
+    width: 200px;
+    height: 20px;
+    background: chocolate;
+}
