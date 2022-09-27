@@ -6,7 +6,7 @@ const upload = require('../middleware/upload')
 
 
 urlRoutes.get('/', controller.postRequest);
-urlRoutes.get('/:id', userAuth, controller.postIdRequest);
+urlRoutes.get('/:id', controller.postIdRequest);
 urlRoutes.post('/create', userAuth, upload, controller.postAddRequest);
 // urlRoutes.put('/:id', userAuth, upload, controller.postUpdateRequest);
 // urlRoutes.delete('/:id', userAuth, controller.postDeleteRequest);
