@@ -5,9 +5,9 @@ import '../../utils/styles/post.css'
 import parse from 'html-react-parser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import DetailPosts from '../detailposts'
 
 function Post() {
-  //const [ commentList, setCommentList ] = useState([])
   const [ posts, setPosts ] = useState([]);
 
   useEffect(() => {
@@ -21,19 +21,18 @@ function Post() {
     []);
   
   const usePosts = posts.map((posts) =>{
+
+    function SendPostId(){
+      const detail = posts._id;
+      localStorage.setItem("postId", detail);
+      window.location.href= { DetailPosts };
+    }
+
     if(posts.text){
-      // function ShowDiv(){
-      //   const divshow = document.getElementById("divShow");
-      //   if (divshow.style.display === "none") {
-      //     divshow.style.display = "block";
-      //   } else {
-      //     divshow.style.display = "none";
-      //   }
-      // }
       return (
         <div className="postgrid">
           <div className="grid">
-            <div className="postdiv" key={posts.id}>
+            <div className="postdiv" id="postId" key={posts.id}>
               <div className="profilpost">
                 <ul className="listpost">
                   <li>
@@ -59,10 +58,9 @@ function Post() {
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
                             </div>
-                            <button className="number">2 commentaires</button>
+                            <button className="number" onClick={ SendPostId }>2 commentaires</button>
                           </div>
                         </div>
-                        {/*<div id="divShow"></div>*/}
                       </div>
                     </figcaption>
                   </figure>
@@ -102,7 +100,7 @@ function Post() {
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
                             </div>
-                            <button className="number">2 commentaires</button>
+                            <button className="number" onClick={ SendPostId }>2 commentaires</button>
                           </div>
                         </div>
                       </div>
