@@ -90,8 +90,7 @@ function Post() {
                   </li>
                 </ul>
               </div>
-              <div>
-                <div>
+                <div className="divfigure">
                   <h1 className="titlepost">{posts.title}</h1>
                   <figure>
                     <img src={posts.media} alt=""/>
@@ -110,7 +109,6 @@ function Post() {
                     </figcaption>
                   </figure>
                 </div>
-              </div>
             </div>
           </div>
         </div>
