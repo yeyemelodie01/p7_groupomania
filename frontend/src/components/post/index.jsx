@@ -24,7 +24,7 @@ function Post() {
     function SendPostId(){
       const detail = posts._id;
       localStorage.setItem("postId", detail);
-      window.location.href= '../detailposts/index.jsx';
+      window.location.href='/detail';
     }
 
     if(posts.text){
