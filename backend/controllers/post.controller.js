@@ -13,7 +13,7 @@ exports.postIdRequest = async(req, res) => {
 }
 
 exports.postAddRequest = async(req, res) => {
-  const {userId, postType, post, userName} = req.body;
+  const {userId, postType, post, userName, createAt} = req.body;
   let title = "";
   if ('media' === postType) {
       title = req.body.title;
@@ -40,6 +40,7 @@ exports.postAddRequest = async(req, res) => {
         "dislike": 0,
         "usersLiked": [],
         "usersDisLiked": [],
+        "createAt": createAt,
       });
       return savePosts(newPost, res);
     }
@@ -54,6 +55,7 @@ exports.postAddRequest = async(req, res) => {
         "dislike": 0,
         "usersLiked": [],
         "usersDisLiked": [],
+        "createAt":createAt,
       });
       return savePosts(newPost, res);
     }

@@ -26,7 +26,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 160px;
+    width: 30%;
 }
 
 .listpost{
@@ -46,7 +46,7 @@
 }
 
 .nameprofil{
-
+    font-weight: bold;
 }
 
 .hourpost{

@@ -27,6 +27,12 @@ function Post() {
       window.location.href='/detail';
     }
 
+    const useHour = new Date(posts.createAt)
+    const hourPost = useHour.getHours();
+    const minutePost = useHour.getMinutes()
+    const hour = hourPost + ':' + minutePost;
+    console.log(hour);
+
     if(posts.text){
       return (
         <div className="postgrid">
@@ -41,7 +47,7 @@ function Post() {
                     <p className="nameprofil">{posts.userName}</p>
                   </li>
                   <li>
-                    <p className="hourpost">2h</p>
+                    <p className="hourpost">{ hour }</p>
                   </li>
                 </ul>
               </div>
@@ -83,7 +89,7 @@ function Post() {
                     <p className="nameprofil">{posts.userName}</p>
                   </li>
                   <li>
-                    <p className="hourpost">2h</p>
+                    <p className="hourpost">{ hour }</p>
                   </li>
                 </ul>
               </div>
