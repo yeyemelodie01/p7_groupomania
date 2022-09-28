@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types'
-import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
 import parse from 'html-react-parser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
-function Card({ title, media, text, username, hour }){
+function Card({ title, media, text, username, hour, avatar }){
 
   if (media){
     document.getElementById('media').style.display='block';
@@ -21,21 +20,21 @@ function Card({ title, media, text, username, hour }){
       <div className="profilpost">
         <ul className="listpost">
           <li>
-            <img className="imgprofil" src={ Profil } alt="profil"/>
+            <img className="imgprofil" src={ avatar } alt="profil"/>
           </li>
           <li>
-            <p className="nameprofil">{username}</p>
+            <p className="nameprofil">{ username }</p>
           </li>
           <li>
-            <p className="hourpost">{hour}</p>
+            <p className="hourpost">{ hour }</p>
           </li>
         </ul>
       </div>
       <div className="divfigure">
-        <h1 className="titlepost">{title}</h1>
+        <h1 className="titlepost">{ title }</h1>
         <figure>
           <div id="media">
-            <img src={media} alt=""/>
+            <img src={ media } alt=""/>
           </div>
           <div id="text">
             <div>{ parse( text ) }</div>
@@ -65,6 +64,7 @@ Card.propTypes = {
   text: PropTypes.string,
   username: PropTypes.string,
   hour: PropTypes.string,
+  avatar: PropTypes.string,
 }
 
 Card.defaultProps = {
@@ -73,6 +73,7 @@ Card.defaultProps = {
   text: '',
   username: '',
   hour: '',
+  avatar:'',
 }
 
 export default Card

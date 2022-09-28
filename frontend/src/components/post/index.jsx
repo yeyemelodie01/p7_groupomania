@@ -1,6 +1,5 @@
 import { useState, useEffect} from 'react'
 import axios from 'axios'
-import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
 import '../../utils/styles/post.css'
 import parse from 'html-react-parser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -31,7 +30,6 @@ function Post() {
     const hourPost = useHour.getHours();
     const minutePost = useHour.getMinutes()
     const hour = hourPost + ':' + minutePost;
-    console.log(hour);
 
     if(posts.text){
       return (
@@ -41,7 +39,7 @@ function Post() {
               <div className="profilpost">
                 <ul className="listpost">
                   <li>
-                    <img className="imgprofil" src={ Profil } alt="profil"/>
+                    <img className="imgprofil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
                   </li>
                   <li>
                     <p className="nameprofil">{posts.userName}</p>
@@ -83,7 +81,7 @@ function Post() {
               <div className="profilpost">
                 <ul className="listpost">
                   <li>
-                    <img className="imgprofil" src={ Profil } alt="profil"/>
+                    <img className="imgprofil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
                   </li>
                   <li>
                     <p className="nameprofil">{posts.userName}</p>

@@ -35,6 +35,7 @@ function DetailPosts() {
                 text={detail.text}
                 username={detail.userName}
                 hour={hour}
+                avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
               />
               <div id="commentable">
                 <label form="textcomments">
@@ -46,7 +47,6 @@ function DetailPosts() {
                 </div>
                 <div className="divprofilcomments">
                   <div className="divpaddingcomments">
-                    <img className="profilcommentsimg" src={ Profil } alt="profil"/>
                     <div className="profilpostcomments">
                       <p>{}</p>
                     </div>
@@ -78,6 +78,8 @@ function DetailPosts() {
                 media={detail.media}
                 text={detail.text}
                 username={detail.userName}
+                hour={hour}
+                avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
               />
               <div id="commentable">
 

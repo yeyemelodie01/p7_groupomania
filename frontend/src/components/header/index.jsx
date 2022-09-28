@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Logo from '../../assets/icon-left-font.png'
 import '../../utils/styles/header.css'
-import useModal from '../../utils/hooks'
+import useModal from '../../utils/hooks/usemodal'
 import Modal from '../../components/modal'
 
 
