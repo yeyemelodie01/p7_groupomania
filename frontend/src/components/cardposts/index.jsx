@@ -4,7 +4,7 @@ import parse from 'html-react-parser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
-function Card({ title, media, text, username }){
+function Card({ title, media, text, username, hour }){
 
   if (media){
     document.getElementById('media').style.display='block';
@@ -27,7 +27,7 @@ function Card({ title, media, text, username }){
             <p className="nameprofil">{username}</p>
           </li>
           <li>
-            <p className="hourpost">2h</p>
+            <p className="hourpost">{hour}</p>
           </li>
         </ul>
       </div>
@@ -64,6 +64,7 @@ Card.propTypes = {
   media: PropTypes.string,
   text: PropTypes.string,
   username: PropTypes.string,
+  hour: PropTypes.string,
 }
 
 Card.defaultProps = {
@@ -71,6 +72,7 @@ Card.defaultProps = {
   media: '',
   text: '',
   username: '',
+  hour: '',
 }
 
 export default Card

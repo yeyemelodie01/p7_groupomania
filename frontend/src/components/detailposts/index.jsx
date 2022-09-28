@@ -17,6 +17,11 @@ function DetailPosts() {
       })
   }, [])
 
+  const useHour = new Date(detail.createAt)
+  const hourPost = useHour.getHours();
+  const minutePost = useHour.getMinutes()
+  const hour = hourPost + ':' + minutePost;
+
   if(userDetails){
     return(
       <main>
@@ -29,6 +34,7 @@ function DetailPosts() {
                 media={detail.media}
                 text={detail.text}
                 username={detail.userName}
+                hour={hour}
               />
               <div id="commentable">
                 <label form="textcomments">
