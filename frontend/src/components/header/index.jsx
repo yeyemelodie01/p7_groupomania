@@ -34,9 +34,8 @@ function Header() {
               axios
                 .post("http://localhost:4000/api/auth/login", data)
                 .then((res) => {
-                  localStorage.clear();
                   setUserDetails(data, res);
-                  window.location.href='/';
+                  window.location.reload();
                 })
                 .catch((err) => {
                     console.log(err);
@@ -51,9 +50,8 @@ function Header() {
         axios
           .post("http://localhost:4000/api/auth/login", data)
           .then((res) => {
-            localStorage.clear();
             setUserDetails(data, res);
-            window.location.href='/';
+            window.location.reload();
           })
           .catch((err) => {
               console.log(err);

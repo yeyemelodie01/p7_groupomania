@@ -17,7 +17,7 @@ function Card({ title, media, text, username }){
   }
 
   return(
-    <div>
+    <>
       <div className="profilpost">
         <ul className="listpost">
           <li>
@@ -55,7 +55,7 @@ function Card({ title, media, text, username }){
           </figcaption>
         </figure>
       </div>
-    </div>
+    </>
   )
 }
 
