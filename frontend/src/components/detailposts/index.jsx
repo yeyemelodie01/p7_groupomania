@@ -15,16 +15,17 @@ function DetailPosts() {
       .then((detail) => {
         setDetail(detail)
       })
-  }, [])
+  }, []);
+  console.log(detail.createdAt)
 
   const useHour = new Date(detail.createdAt)
-  const nowDate = new Date(Date.now());
-  const hourNewDate = nowDate.getHours();
+  //const nowDate = new Date(Date.now());
+  //const hourNewDate = nowDate.getHours();
   const hourPost = useHour.getHours();
-  console.log(nowDate.getHours())
-  console.log(useHour.getHours())
+  //console.log(nowDate.getHours());
+  console.log(useHour.getHours());
   //const minutePost = useHour.getMinutes();
-  const hour = hourNewDate - hourPost ;
+  const hour = JSON.stringify(hourPost) ;
   console.log(hour);
   if(userDetails){
     return(

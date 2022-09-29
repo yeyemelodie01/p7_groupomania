@@ -40,7 +40,7 @@ exports.postAddRequest = async(req, res) => {
         "dislike": 0,
         "usersLiked": [],
         "usersDisLiked": [],
-        "createAt": createAt,
+        "createdAt": createdAt,
       });
       return savePosts(newPost, res);
     }
@@ -55,7 +55,7 @@ exports.postAddRequest = async(req, res) => {
         "dislike": 0,
         "usersLiked": [],
         "usersDisLiked": [],
-        "createAt":createAt,
+        "createdAt": createdAt,
       });
       return savePosts(newPost, res);
     }
