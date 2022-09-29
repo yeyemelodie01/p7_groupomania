@@ -20,16 +20,21 @@ function DetailPosts() {
 
   const date1 = moment(detail.createdAt);
   const date2 = moment(Date.now());
-  let hours = date2.diff(date1, 'hours');
+  let hours = date2.diff(date1, 'minutes');
+  let hour;
 
   if (0 <= hours) {
-    hours = date2.diff(date1, 'minutes') + " min";
+    hour = hours + "min";
   }
 
-  if (23 < hours) {
-    hours = date2.diff(date1, 'days') + " j";
+  if( 60 <= hours) {
+    hour = date2.diff(date1, 'hours') + "h";
   }
-  console.log(hours);
+
+  if (1440 <= hours) {
+    hour = date2.diff(date1, 'days') + "j";
+  }
+  console.log(hour);
   if(userDetails){
     return(
       <main>
@@ -42,7 +47,7 @@ function DetailPosts() {
                 media={detail.media}
                 text={detail.text}
                 username={detail.userName}
-                hour={hours}
+                hour={hour}
                 avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
               />
               <div id="commentable">
@@ -86,7 +91,7 @@ function DetailPosts() {
                 media={detail.media}
                 text={detail.text}
                 username={detail.userName}
-                hour={hours}
+                hour={hour}
                 avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
               />
               <div id="commentable">

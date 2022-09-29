@@ -29,16 +29,21 @@ function Post() {
 
     const date1 = moment(posts.createdAt);
     const date2 = moment(Date.now());
-    let hours = date2.diff(date1, 'hours');
+    let hours = date2.diff(date1, 'minutes');
+    let hour;
 
     if (0 <= hours) {
-      hours = date2.diff(date1, 'minutes') + "min";
+      hour = hours + "min";
     }
 
-    if (23 <= hours) {
-      hours = date2.diff(date1, 'days') + "j";
+    if( 60 <= hours) {
+      hour = date2.diff(date1, 'hours') + "h";
     }
-    console.log(hours);
+
+    if (1440 <= hours) {
+      hour = date2.diff(date1, 'days') + "j";
+    }
+    console.log(hour);
 
     if(posts.text){
       return (
@@ -54,7 +59,7 @@ function Post() {
                     <p className="nameprofil">{posts.userName}</p>
                   </li>
                   <li>
-                    <p className="hourpost">{ hours }</p>
+                    <p className="hourpost">{ hour }</p>
                   </li>
                 </ul>
               </div>
@@ -96,7 +101,7 @@ function Post() {
                     <p className="nameprofil">{posts.userName}</p>
                   </li>
                   <li>
-                    <p className="hourpost">{ hours }</p>
+                    <p className="hourpost">{ hour }</p>
                   </li>
                 </ul>
               </div>
