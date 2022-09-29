@@ -17,11 +17,15 @@ function DetailPosts() {
       })
   }, [])
 
-  const useHour = new Date(detail.createAt)
+  const useHour = new Date(detail.createdAt)
+  const nowDate = new Date(Date.now());
+  const hourNewDate = nowDate.getHours();
   const hourPost = useHour.getHours();
-  const minutePost = useHour.getMinutes()
-  const hour = hourPost + ':' + minutePost;
-
+  console.log(nowDate.getHours())
+  console.log(useHour.getHours())
+  //const minutePost = useHour.getMinutes();
+  const hour = hourNewDate - hourPost ;
+  console.log(hour);
   if(userDetails){
     return(
       <main>
