@@ -59,6 +59,7 @@
 
 .titlepost{
     font-weight: bold;
+    cursor: pointer;
 }
 
 figure{

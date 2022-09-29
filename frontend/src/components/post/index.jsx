@@ -50,7 +50,7 @@ function Post() {
                 </ul>
               </div>
                 <div className="divfigure">
-                  <h1 className="titlepost">{posts.title}</h1>
+                  <h1 className="titlepost" onClick={ SendPostId }>{posts.title}</h1>
                   <figure>
                     <div>{parse(posts.text)}</div>
                     <figcaption>
@@ -92,7 +92,7 @@ function Post() {
                 </ul>
               </div>
                 <div className="divfigure">
-                  <h1 className="titlepost">{posts.title}</h1>
+                  <h1 className="titlepost" onClick={ SendPostId }>{posts.title}</h1>
                   <figure>
                     <img src={posts.media} alt=""/>
                     <figcaption>
