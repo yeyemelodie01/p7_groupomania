@@ -12,8 +12,8 @@ exports.postIdRequest = async(req, res) => {
       .catch(error => res.status(400).json({error}));
 }
 
-exports.postAddRequest = async(req, res) => {
-  const {userId, postType, post, userName, createAt} = req.body;
+exports.postAddRequest = async(req, res) => { // export de la fonction postAddRequest qui pour valeur une fonction asynchrone avec la valeur req et res
+  const { userId, postType, post, userName } = req.body //constante userId... qui récupère les données envoyer par le front avec req.body
   let title = "";
   if ('media' === postType) {
       title = req.body.title;
@@ -36,11 +36,6 @@ exports.postAddRequest = async(req, res) => {
         "userName": userName,
         "title": title,
         "media": `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
-        "like": 0,
-        "dislike": 0,
-        "usersLiked": [],
-        "usersDisLiked": [],
-        "createdAt": createdAt,
       });
       return savePosts(newPost, res);
     }
@@ -51,11 +46,6 @@ exports.postAddRequest = async(req, res) => {
         "userName": userName,
         "title": title,
         "text": post.text,
-        "like": 0,
-        "dislike": 0,
-        "usersLiked": [],
-        "usersDisLiked": [],
-        "createdAt": createdAt,
       });
       return savePosts(newPost, res);
     }
