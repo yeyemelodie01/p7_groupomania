@@ -3,6 +3,7 @@ import '../../utils/styles/detailposts.css'
 import '../../utils/styles/post.css'
 import { useEffect, useState } from 'react'
 import Card from '../cardposts'
+import moment from 'moment';
 
 function DetailPosts() {
   const [detail, setDetail] = useState('');
@@ -16,17 +17,19 @@ function DetailPosts() {
         setDetail(detail)
       })
   }, []);
-  console.log(detail.createdAt)
 
-  const useHour = new Date(detail.createdAt)
-  //const nowDate = new Date(Date.now());
-  //const hourNewDate = nowDate.getHours();
-  const hourPost = useHour.getHours();
-  //console.log(nowDate.getHours());
-  console.log(useHour.getHours());
-  //const minutePost = useHour.getMinutes();
-  const hour = JSON.stringify(hourPost) ;
-  console.log(hour);
+  const date1 = moment(detail.createdAt);
+  const date2 = moment(Date.now());
+  let hours = date2.diff(date1, 'hours');
+
+  if (0 <= hours) {
+    hours = date2.diff(date1, 'minutes') + " min";
+  }
+
+  if (23 < hours) {
+    hours = date2.diff(date1, 'days') + " j";
+  }
+  console.log(hours);
   if(userDetails){
     return(
       <main>
@@ -39,7 +42,7 @@ function DetailPosts() {
                 media={detail.media}
                 text={detail.text}
                 username={detail.userName}
-                hour={hour}
+                hour={hours}
                 avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
               />
               <div id="commentable">
@@ -83,7 +86,7 @@ function DetailPosts() {
                 media={detail.media}
                 text={detail.text}
                 username={detail.userName}
-                hour={hour}
+                hour={hours}
                 avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
               />
               <div id="commentable">

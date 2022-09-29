@@ -4,6 +4,7 @@ import '../../utils/styles/post.css'
 import parse from 'html-react-parser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import moment from 'moment'
 
 function Post() {
   const [ posts, setPosts ] = useState([]);
@@ -26,10 +27,18 @@ function Post() {
       window.location.href='/detail';
     }
 
-    const useHour = new Date(posts.createAt)
-    const hourPost = useHour.getHours();
-    const minutePost = useHour.getMinutes()
-    const hour = hourPost + ':' + minutePost;
+    const date1 = moment(posts.createdAt);
+    const date2 = moment(Date.now());
+    let hours = date2.diff(date1, 'hours');
+
+    if (0 <= hours) {
+      hours = date2.diff(date1, 'minutes') + "min";
+    }
+
+    if (23 <= hours) {
+      hours = date2.diff(date1, 'days') + "j";
+    }
+    console.log(hours);
 
     if(posts.text){
       return (
@@ -45,7 +54,7 @@ function Post() {
                     <p className="nameprofil">{posts.userName}</p>
                   </li>
                   <li>
-                    <p className="hourpost">{ hour }</p>
+                    <p className="hourpost">{ hours }</p>
                   </li>
                 </ul>
               </div>
@@ -87,7 +96,7 @@ function Post() {
                     <p className="nameprofil">{posts.userName}</p>
                   </li>
                   <li>
-                    <p className="hourpost">{ hour }</p>
+                    <p className="hourpost">{ hours }</p>
                   </li>
                 </ul>
               </div>
