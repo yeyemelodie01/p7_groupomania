@@ -1,5 +1,11 @@
 const multer = require('multer');
+const cloudinary = require ('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
 //let fs = require('fs-extra');
+
+cloudinary.config({
+  
+})
 
 const MIME_TYPES = {
   'image/jpg': 'jpg',
