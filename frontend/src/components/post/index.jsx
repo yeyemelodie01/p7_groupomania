@@ -108,7 +108,9 @@ function Post() {
                 <div className="divfigure">
                   <h1 className="titlepost" onClick={ SendPostId }>{posts.title}</h1>
                   <figure>
-                    <img src={posts.media} alt=""/>
+                    <div className="imgfigure">
+                      <img src={posts.media} alt=""/>
+                    </div>
                     <figcaption>
                       <div className="stylecomments">
                         <div className="divcomments">

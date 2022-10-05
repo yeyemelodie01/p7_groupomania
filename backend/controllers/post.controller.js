@@ -1,4 +1,5 @@
 const postModel = require('../models/post.model');
+const cloudinary = require('../middleware/cloud')
 
 exports.postRequest = async(req, res) => {
     postModel.find()
@@ -23,6 +24,7 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
       title = post.title;
   }
 
+  const result = await cloudinary.uploader.upload(req.file.path);
   const dataPost = await postModel.find({title: title});
   if(dataPost.length > 0) {
     res.status(200).json({message: "post déja ajouter"});
@@ -35,7 +37,7 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
         "userId": userId,
         "userName": userName,
         "title": title,
-        "media": `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
+        "media": result.secure_url,
       });
       return savePosts(newPost, res);
     }

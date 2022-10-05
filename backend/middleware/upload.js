@@ -1,18 +1,11 @@
 const multer = require('multer');
-const cloudinary = require ('cloudinary');
-const cloudinaryStorage = require('multer-storage-cloudinary');
-//let fs = require('fs-extra');
-
-cloudinary.config({
-  
-})
 
 const MIME_TYPES = {
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
   'image/png': 'png',
 };
-//fs.mkdirsSync('uploads');
+
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, "uploads")
