@@ -1,4 +1,4 @@
-import LazyLoad from 'react-lazyload'
+import LazyLoad from 'react-lazy-load'
 import { useForm } from 'react-hook-form'
 import { useState} from 'react'
 import axios from 'axios'
@@ -209,7 +209,7 @@ function Home() {
           </div>
         </div>
        <div>
-         <LazyLoad height={50} offset={100}>
+         <LazyLoad height={100}>
            <Post />
          </LazyLoad>
        </div>
@@ -219,7 +219,7 @@ function Home() {
                 <div className="buttondiv">
                   <p>Vous devez vous connecter pour créer un post</p>
                 </div>
-                <LazyLoad height={50} offset={100}>
+                <LazyLoad height={100}>
                   <Post />
                 </LazyLoad>
               </div>

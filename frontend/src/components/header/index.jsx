@@ -12,8 +12,19 @@ import Modal from '../../components/modal'
 function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
-    const { register, handleSubmit} = useForm();
-    const notify = () => toast("Wow trop facile");
+    const { register, handleSubmit, formState: { errors }} = useForm();
+    const success = () => toast.success("Success");
+    const error = () => toast.error("Non valide", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  console.log("errors", errors)
 
   function setUserDetails (data, res) {
     const userEmail = data.email;
@@ -55,6 +66,7 @@ function Header() {
           })
           .catch((err) => {
               console.log(err);
+
           });
     }
 
@@ -62,6 +74,15 @@ function Header() {
       localStorage.clear();
       window.location.href='/';
     }
+
+    // function ShowError(){
+    //   if(errors.email?.message){
+    //     error
+    //   }
+    //   if (errors.password?.message){
+    //     error
+    //   }
+    // }
 
 
   let userDetails = JSON.parse(localStorage.getItem('user'));
@@ -107,7 +128,7 @@ function Header() {
                 />
               </div>
               <div className="form-group">
-                <input type="submit" placeholder="Se connecter" onClick={notify}/>
+                <input type="submit" placeholder="Se connecter" onClick={success }/>
                 <ToastContainer />
               </div>
             </form>
@@ -122,24 +143,35 @@ function Header() {
                 <input
                   type="email"
                   placeholder="Email"
-                  {...register("email")}
+                  {...register("email", {
+                    required:"Email requis",
+                    pattern:{
+                      value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      message:"Email non valide"
+                    }
+                  })}
                 />
               </div>
               <div className="form-group">
                 <input
                   type="password"
                   placeholder="Mot de Passe"
-                  {...register("password")}
+                  {...register("password",{
+                    required: "Mot de passe requis",
+                    pattern:{
+                      value: /^(?=.*[0-9])(?=.*[!@#$%^&*.,])[a-zA-Z0-9!@#$%^&*.,]{6,16}$/,
+                      message:"Mot de passe non valide",
+                    }
+                  })}
                 />
               </div>
               <div className="form-group">
                 <input
                   type="submit"
                   placeholder="Envoyer"
-                  onClick={() => {
-
-                  }}
+                  onClick={error}
                 />
+                <ToastContainer />
               </div>
             </form>
           </Modal>
