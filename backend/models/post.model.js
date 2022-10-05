@@ -5,13 +5,12 @@ const postSchema = mongoose.Schema({
   userName:{ type:String, required:true },
   title:{ type:String, required:true },
   media:{ type:String },
-  cloudinary_id:{ type:String },
   text:{ type:String },
   likes:{ type:Number, default:0 },
   dislikes:{ type:Number, default:0 },
   usersLiked: { type: [String] },
   usersDisLiked: { type: [String] },
-  createdAt: { type: Date, default: Date.now() }
+  createdAt: { type: Date, default: Date.now }
 })
 
 module.exports = mongoose.model('Post', postSchema);
