@@ -12,9 +12,9 @@ import Modal from '../../components/modal'
 function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
-    const { register, handleSubmit, formState: { errors }} = useForm();
+    const { register, handleSubmit, formState: { errors }, setError} = useForm();
     const success = () => toast.success("Success");
-    const error = () => toast.error("Non valide", {
+    const mailerror = () => toast.error("Email non valide", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -23,6 +23,15 @@ function Header() {
       draggable: true,
       progress: undefined,
     });
+  const passworderror = () => toast.error("Mot de passe non valide", {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
 
   console.log("errors", errors)
 
@@ -151,6 +160,7 @@ function Header() {
                     }
                   })}
                 />
+                {errors.email && <p>{mailerror()}</p>}
               </div>
               <div className="form-group">
                 <input
@@ -164,12 +174,29 @@ function Header() {
                     }
                   })}
                 />
+                {errors.password && <p>{passworderror()}</p>}
               </div>
               <div className="form-group">
                 <input
                   type="submit"
                   placeholder="Envoyer"
-                  onClick={error}
+                  onClick={() => {
+                    [
+                      {
+                        type: "manual",
+                        name: "email",
+                        message: "Double Check This"
+                      },
+                      {
+                        type: "manual",
+                        name: "password",
+                        message: "Triple Check This"
+                      }
+                    ].forEach(({ name, type, message }) =>
+                      setError(name, { type, message })
+                    );
+                  }}
+                  Trigle Name Errors
                 />
                 <ToastContainer />
               </div>

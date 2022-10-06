@@ -7,6 +7,7 @@ import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment'
 import LazyLoad from 'react-lazy-load'
 
+
 function Post() {
   const [ posts, setPosts ] = useState([]);
 
@@ -51,7 +52,7 @@ function Post() {
       return (
         <div className="postgrid">
           <div className="grid">
-            <LazyLoad width={767}>
+            <LazyLoad>
               <div className="postdiv" id="postId" key={posts.id}>
                 <div className="profilpost">
                   <ul className="listpost">
@@ -95,7 +96,7 @@ function Post() {
       return (
         <div className="postgrid">
           <div className="grid">
-            <LazyLoad width={767}>
+            <LazyLoad>
               <div className="postdiv" key={posts._id}>
                 <div className="profilpost">
                   <ul className="listpost">
@@ -141,9 +142,9 @@ function Post() {
   });
 
     return (
-      <div>
+      <>
         { usePosts }
-      </div>
+      </>
       )
 }
 
