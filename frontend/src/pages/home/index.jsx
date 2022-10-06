@@ -10,6 +10,8 @@ import Post from '../../components/post'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+
+
 function Home() {
   const [ isHidden, setIsHidden ] = useState(false);
   const { register, handleSubmit } = useForm();
@@ -219,9 +221,9 @@ function Home() {
                 <div className="buttondiv">
                   <p>Vous devez vous connecter pour créer un post</p>
                 </div>
-                <LazyLoad height={100}>
-                  <Post />
-                </LazyLoad>
+                <div className="scrollable-container">
+                    <Post />
+                </div>
               </div>
     }
 }

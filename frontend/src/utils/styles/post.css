@@ -1,14 +1,15 @@
+
 .postgrid{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: 1fr;
     grid-column-gap: 0;
     grid-row-gap: 0;
     margin-bottom: 20px;
 }
 
 .grid{
-    grid-area: 1 / 2 / 6 / 5;
+    grid-area: 1 / 1 / 2 / 6;
     display: flex;
     justify-content: center;
 }
@@ -16,9 +17,9 @@
 .postdiv{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    /*align-items: flex-start;*/
     border-bottom: 2px #4E5166 solid;
-    width: 100%;
+    /*width: 100%;*/
     padding: 16px 40px;
 }
 
@@ -125,6 +126,23 @@ figcaption{
     width: 200px;
     height: 20px;
     background: chocolate;
+}
+
+/* LAZYLOAD */
+.LazyLoad {
+    opacity: 0;
+    transition: all 1.5s ease-in-out;
+    margin: 0;
+    height: 100%;
+}
+
+.scrollable-container {
+    height: 469px;
+    overflow: scroll;
+}
+
+.is-visible {
+    opacity: 1;
 }
 
 /* RESPONSIVE */
