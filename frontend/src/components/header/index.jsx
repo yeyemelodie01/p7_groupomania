@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
-import { ToastContainer, toast } from 'react-toastify'
+//import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Logo from '../../assets/icon-left-font.png'
 import '../../utils/styles/header.css'
@@ -12,26 +12,7 @@ import Modal from '../../components/modal'
 function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
-    const { register, handleSubmit, formState: { errors }, setError} = useForm();
-    const success = () => toast.success("Success");
-    const mailerror = () => toast.error("Email non valide", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  const passworderror = () => toast.error("Mot de passe non valide", {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
+    const { register, handleSubmit, formState: { errors }} = useForm();
 
   console.log("errors", errors)
 
@@ -137,8 +118,8 @@ function Header() {
                 />
               </div>
               <div className="form-group">
-                <input type="submit" placeholder="Se connecter" onClick={success }/>
-                <ToastContainer />
+                <input type="submit" placeholder="Se connecter" />
+
               </div>
             </form>
           </Modal>
@@ -159,8 +140,9 @@ function Header() {
                       message:"Email non valide"
                     }
                   })}
+                  aria-invalid={errors.email ? "true" : "false"}
                 />
-                {errors.email && <p>{mailerror()}</p>}
+                {errors.email && <p>{errors.email.message}</p>}
               </div>
               <div className="form-group">
                 <input
@@ -170,35 +152,19 @@ function Header() {
                     required: "Mot de passe requis",
                     pattern:{
                       value: /^(?=.*[0-9])(?=.*[!@#$%^&*.,])[a-zA-Z0-9!@#$%^&*.,]{6,16}$/,
-                      message:"Mot de passe non valide",
+                      message:"Mot de passe non valide, 6 characters, Une majuscule, une minuscule, un nombre et un caractère spécial",
                     }
                   })}
+                  aria-invalid={errors.password ? "true" : "false"}
                 />
-                {errors.password && <p>{passworderror()}</p>}
+                {errors.password && <p>{errors.password.message}</p>}
               </div>
               <div className="form-group">
                 <input
                   type="submit"
                   placeholder="Envoyer"
-                  onClick={() => {
-                    [
-                      {
-                        type: "manual",
-                        name: "email",
-                        message: "Double Check This"
-                      },
-                      {
-                        type: "manual",
-                        name: "password",
-                        message: "Triple Check This"
-                      }
-                    ].forEach(({ name, type, message }) =>
-                      setError(name, { type, message })
-                    );
-                  }}
-                  Trigle Name Errors
                 />
-                <ToastContainer />
+
               </div>
             </form>
           </Modal>

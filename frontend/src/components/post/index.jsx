@@ -52,7 +52,7 @@ function Post() {
       return (
         <div className="postgrid">
           <div className="grid">
-            <LazyLoad>
+            <LazyLoad width={767}>
               <div className="postdiv" id="postId" key={posts.id}>
                 <div className="profilpost">
                   <ul className="listpost">
@@ -96,7 +96,7 @@ function Post() {
       return (
         <div className="postgrid">
           <div className="grid">
-            <LazyLoad>
+            <LazyLoad width={767}>
               <div className="postdiv" key={posts._id}>
                 <div className="profilpost">
                   <ul className="listpost">

@@ -59,6 +59,10 @@ span {
     background: #091F43FF;
 }
 
+.none{
+    display: block;
+}
+
 /* RESPONSIVE */
 
 /* MOBILE */
