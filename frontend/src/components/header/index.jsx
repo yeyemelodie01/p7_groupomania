@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
-//import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Logo from '../../assets/icon-left-font.png'
 import '../../utils/styles/header.css'
@@ -13,8 +12,6 @@ function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
     const { register, handleSubmit, formState: { errors }} = useForm();
-
-  console.log("errors", errors)
 
   function setUserDetails (data, res) {
     const userEmail = data.email;
@@ -65,14 +62,14 @@ function Header() {
       window.location.href='/';
     }
 
-    // function ShowError(){
-    //   if(errors.email?.message){
-    //     error
-    //   }
-    //   if (errors.password?.message){
-    //     error
-    //   }
-    // }
+    function ShowError(){
+      if(errors.email){
+        document.getElementsByClassName('emailError').border='2px #FD2D01 solid';
+      }
+      if (errors.password?.message){
+        document.getElementsByClassName('passwordError').borderColor='2px #FD2D01 solid'
+      }
+    }
 
 
   let userDetails = JSON.parse(localStorage.getItem('user'));
@@ -133,6 +130,7 @@ function Header() {
                 <input
                   type="email"
                   placeholder="Email"
+                  className="emailError"
                   {...register("email", {
                     required:"Email requis",
                     pattern:{
@@ -142,66 +140,33 @@ function Header() {
                   })}
                   aria-invalid={errors.email ? "true" : "false"}
                 />
-                {errors.email && <p>{errors.email.message}</p>}
+                {errors.email && <div className="error">{errors.email.message}</div>}
               </div>
               <div className="form-group">
                 <input
                   type="password"
                   placeholder="Mot de Passe"
+                  className="passwordError"
                   {...register("password",{
                     required: "Mot de passe requis",
                     pattern:{
                       value: /^(?=.*[0-9])(?=.*[!@#$%^&*.,])[a-zA-Z0-9!@#$%^&*.,]{6,16}$/,
-                      message:"Mot de passe non valide, 6 characters, Une majuscule, une minuscule, un nombre et un caractère spécial",
+                      message:"Mot de passe non valide, 6 caractères, une majuscule, une minuscule, un nombre et un caractère spécial",
                     }
                   })}
                   aria-invalid={errors.password ? "true" : "false"}
                 />
-                {errors.password && <p>{errors.password.message}</p>}
+                {errors.password && <div className="error">{ errors.password.message }</div>}
               </div>
               <div className="form-group">
                 <input
                   type="submit"
                   placeholder="Envoyer"
+                  onClick={ ShowError }
                 />
-
               </div>
             </form>
           </Modal>
-
-          <style jsx="true">
-            {`
-                button.modal-toggle,
-                input[type="submit"] {
-                  background-color: #091F43FF;
-                  color: #fff;
-                  cursor: pointer;
-                  padding: 7px 10px;
-                  text-transform: uppercase;
-                  border-radius: 3px;
-                  border: none;
-                }
-        
-                button.modal-toggle:not(:first-child) {
-                  margin-left: 10px;
-                }
-        
-                .form-group {
-                  margin-top: 10px;
-                }
-        
-                input[type="text"],
-                input[type="password"],
-                input[type="email"] {
-                  box-sizing: border-box;
-                  width: 72%;
-                  padding: 0.5rem 0.7rem;
-                  border-radius: 3px;
-                  border: 2px #091F43FF solid;
-                  font-size: 13.4px;
-                }
-            `}
-          </style>
         </>
       )
     } else {

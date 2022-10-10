@@ -59,9 +59,50 @@ span {
     background: #091F43FF;
 }
 
-.none{
-    display: block;
+.mailtoast{
+
 }
+
+.error {
+    color: #FD2D01;
+    margin-top: 7px;
+    font-size: 12px;
+}
+
+input:focus{
+    border: 2px #091F43FF solid;
+}
+
+button.modal-toggle,
+input[type="submit"] {
+    background-color: #091F43FF;
+    color: #fff;
+    cursor: pointer;
+    padding: 7px 10px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    border: none;
+}
+
+button.modal-toggle:not(:first-child) {
+    margin-left: 10px;
+}
+
+.form-group {
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    box-sizing: border-box;
+    width: 72%;
+    padding: 0.5rem 0.7rem;
+    border-radius: 3px;
+    border: 2px #091F43FF solid;
+    font-size: 13.4px;
+}
+
 
 /* RESPONSIVE */
 
