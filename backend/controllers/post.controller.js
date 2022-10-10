@@ -82,3 +82,47 @@ function savePosts(post, res) {
 //exports.postLikeRequest = async(req) => {
 //    req.status(200).json({message:"like post"})
 //}
+exports.postLikeRequest = async (req, res) => {
+  const {userId, like} = req.body;
+  const postId = req.params.id;
+  let post = await postModel.findOne({_id: postId});
+
+  if (like === 1 && post.usersLiked.includes(userId) === false) {
+    postModel.updateOne({_id: postId},{$addToSet: { usersLiked : [userId]}})
+      .catch(err => res.status(404).json(err))
+
+    let likes = post.likes + 1;
+    postModel.updateOne({_id: postId}, {$set: { likes : likes }})
+      .catch(err=> res.status(404).json(err))
+  }
+
+  if(like === 0) {
+    if (post.usersLiked.includes(userId)) {
+      postModel.updateOne({_id: postId}, {$set: {usersLiked: post.usersLiked.filter(item => item !== userId)}})
+        .catch(err => res.status(404).json(err))
+
+      let likes = post.likes - 1;
+      postModel.updateOne({_id: postId}, {$set: { likes : likes }})
+        .catch(err=> res.status(404).json(err))
+    }
+
+    if (post.usersDisliked.includes(userId)) {
+      postModel.updateOne({_id: postId}, {$set: {usersDisliked: post.usersDisliked.filter(item => item !== userId)}})
+        .catch(err => res.status(404).json(err))
+      let dislikes = post.dislikes - 1;
+      postModel.updateOne({_id: postId}, {$set: { dislikes : dislikes }})
+        .catch(err=> res.status(404).json(err))
+    }
+  }
+
+  if(like === -1 && post.usersDisliked.includes(userId) === false){
+    postModel.updateOne({_id: postId}, {$addToSet: { usersDisliked : [userId]}})
+      .catch(err=> res.status(404).json(err))
+    let dislikes = post.dislikes + 1;
+    postModel.updateOne({_id: postId}, {$set: { dislikes : dislikes }})
+      .catch(err=> res.status(404).json(err))
+  }
+
+  post = await postModel.findOne({_id: postId});
+  res.status(200).json(post);
+}
