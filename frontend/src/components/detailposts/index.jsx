@@ -95,7 +95,6 @@ function DetailPosts() {
                 avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
               />
               <div id="commentable">
-
                 <div className="divprofilcomments">
                   <div className="divpaddingcomments">
                     <img className="profilcommentsimg" src={ Profil } alt="profil"/>
