@@ -84,8 +84,11 @@ function savePosts(post, res) {
 //}
 exports.postLikeRequest = async (req, res) => {
   const {userId, like} = req.body;
+  console.log(userId);
+  console.log(like)
   const postId = req.params.id;
   let post = await postModel.findOne({_id: postId});
+  console.log(post)
 
   if (like === 1 && post.usersLiked.includes(userId) === false) {
     postModel.updateOne({_id: postId},{$addToSet: { usersLiked : [userId]}})

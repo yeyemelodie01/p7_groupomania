@@ -115,7 +115,8 @@ function Header() {
                 />
               </div>
               <div className="form-group">
-                <input type="submit" placeholder="Se connecter" />
+                <input type="submit"
+                       placeholder="Envoyer" />
 
               </div>
             </form>

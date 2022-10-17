@@ -10,7 +10,6 @@ import LazyLoad from 'react-lazy-load'
 
 function Post() {
   const [ posts, setPosts ] = useState([]);
-  let userDetails = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
       axios
@@ -22,17 +21,6 @@ function Post() {
     },
     []);
 
-
-  const submitLike = (data) => {
-    let postsId = localStorage.getItem("postId");
-    axios
-      .post(`http://localhost:4000/api/posts/${postsId}/like`, {
-        headers: {
-          Authorization: `Bearer ${userDetails.jwt}`
-        }
-      })
-  }
-  
   const usePosts = posts.map((posts) =>{
 
     function SendPostId(){
@@ -57,8 +45,6 @@ function Post() {
     if (1440 <= hours) {
       hour = date2.diff(date1, 'days') + "j";
     }
-    console.log(hour);
-
 
     if(posts.text){
       return (
@@ -88,7 +74,7 @@ function Post() {
                           <div className="divcomments">
                             <div className="diviconnumber">
                               <div className="likedislike">
-                                <button className="buttonicon" onClick={ submitLike }><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
+                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
                                 <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
                               </div>
                               <button className="number" onClick={ SendPostId }>2 commentaires</button>

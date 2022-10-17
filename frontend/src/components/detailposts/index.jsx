@@ -18,6 +18,7 @@ function DetailPosts() {
       })
   }, []);
 
+
   const date1 = moment(detail.createdAt);
   const date2 = moment(Date.now());
   let hours = date2.diff(date1, 'minutes');
@@ -34,7 +35,7 @@ function DetailPosts() {
   if (1440 <= hours) {
     hour = date2.diff(date1, 'days') + "j";
   }
-  console.log(hour);
+
   if(userDetails){
     return(
       <main>
