@@ -79,10 +79,6 @@ function savePosts(post, res) {
 //    req.status(200).json({message:"delete post"})
 //}
 
-//exports.postLikeRequest = async(req) => {
-//    req.status(200).json({message:"like post"})
-//}
-
 exports.postLikeRequest = async (req, res) => {
   const {userId, like} = req.body;
   const postId = req.params.id;

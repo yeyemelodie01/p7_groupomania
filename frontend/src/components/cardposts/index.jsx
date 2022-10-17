@@ -4,7 +4,7 @@ import parse from 'html-react-parser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
-function Card({ title, media, text, username, hour, avatar }){
+function Card({ title, media, text, username, hour, avatar, like, dislike}){
 
 
   if (media){
@@ -20,16 +20,43 @@ function Card({ title, media, text, username, hour, avatar }){
   let userDetails = JSON.parse(localStorage.getItem('user'));
   if(userDetails) {
 
-    const submitLike = (userId) => {
+    function submitLike() {
       let postsId = localStorage.getItem("postId");
-
-      //const userId = userDetails._id ;
+      const like = {
+        "userId": userDetails._id,
+        "like": 1
+      }
+      console.log(like);
       axios
-        .post(`http://localhost:4000/api/posts/${postsId}/like`, { userId: userId } ,{
+        .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
           headers: {
             Authorization: `Bearer ${userDetails.jwt}`,
-            "Content-Type": "multipart/form-data"
           }
+        })
+        .then(() => {
+          window.location.reload()
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+
+    function submitDislike() {
+      let postsId = localStorage.getItem("postId");
+      const like = {
+        "userId": userDetails._id,
+        "like": -1
+      }
+
+      axios
+        .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
+          headers: {
+            Authorization: `Bearer ${userDetails.jwt}`,
+          }
+        })
+        .then(() => {
+          window.location.reload()
         })
         .catch((err) => {
           console.log(err);
@@ -65,8 +92,8 @@ function Card({ title, media, text, username, hour, avatar }){
                 <div className="divcomments">
                   <div className="diviconnumber">
                     <div className="likedislike">
-                      <button className="buttonicon" onClick={ submitLike }><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
-                      <button className="buttonicon" ><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
+                      <button className="buttonicon" onClick={ submitLike }><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
+                      <button className="buttonicon" onClick={ submitDislike }><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
                     </div>
                     <button className="number">2 commentaires</button>
                   </div>
@@ -107,8 +134,8 @@ function Card({ title, media, text, username, hour, avatar }){
                 <div className="divcomments">
                   <div className="diviconnumber">
                     <div className="likedislike">
-                      <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
-                      <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
+                      <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
+                      <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
                     </div>
                     <button className="number">2 commentaires</button>
                   </div>
@@ -129,6 +156,8 @@ Card.propTypes = {
   username: PropTypes.string,
   hour: PropTypes.string,
   avatar: PropTypes.string,
+  like: PropTypes.string,
+  dislike: PropTypes.string
 }
 
 Card.defaultProps = {
@@ -138,6 +167,8 @@ Card.defaultProps = {
   username: '',
   hour: '',
   avatar:'',
+  like: '',
+  dislike: '',
 }
 
 export default Card

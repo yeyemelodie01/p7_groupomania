@@ -74,8 +74,8 @@ function Post() {
                           <div className="divcomments">
                             <div className="diviconnumber">
                               <div className="likedislike">
-                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />2</button>
-                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
+                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ posts.likes }</button>
+                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ posts.dislikes }</button>
                               </div>
                               <button className="number" onClick={ SendPostId }>2 commentaires</button>
                             </div>
@@ -120,8 +120,8 @@ function Post() {
                           <div className="divcomments">
                             <div className="diviconnumber">
                               <div className="likedislike">
-                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor"/>2</button>
-                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>1</button>
+                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor"/>{ posts.likes }</button>
+                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ posts.dislikes }</button>
                               </div>
                               <button className="number" onClick={ SendPostId }>2 commentaires</button>
                             </div>

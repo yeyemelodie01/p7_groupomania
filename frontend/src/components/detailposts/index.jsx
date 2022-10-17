@@ -50,6 +50,8 @@ function DetailPosts() {
                 username={detail.userName}
                 hour={hour}
                 avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
+                like={ JSON.stringify(detail.likes) }
+                dislike={ JSON.stringify(detail.dislikes) }
               />
               <div id="commentable">
                 <label form="textcomments">
@@ -94,6 +96,8 @@ function DetailPosts() {
                 username={detail.userName}
                 hour={hour}
                 avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
+                like={ JSON.stringify(detail.likes) }
+                dislike={ JSON.stringify(detail.dislikes) }
               />
               <div id="commentable">
                 <div className="divprofilcomments">
