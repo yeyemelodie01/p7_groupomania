@@ -103,7 +103,9 @@ function Header() {
                 <input
                   type="email"
                   placeholder="Email"
-                  {...register("email")}
+                  {...register("email", {
+                    required: true,
+                  })}
                 />
               </div>
               <div className="form-group">
@@ -149,9 +151,9 @@ function Header() {
                   className="passwordError"
                   {...register("password",{
                     required: "Mot de passe requis",
-                    pattern:{
-                      value: /^(?=.*[0-9])(?=.*[!@#$%^&*.,])[a-zA-Z0-9!@#$%^&*.,]{6,16}$/,
-                      message:"Mot de passe non valide, 6 caractères, une majuscule, une minuscule, un nombre et un caractère spécial",
+                    minLength:{
+                      value: 6,
+                      message:"Mot de passe non valide, minimum 6 caractères",
                     }
                   })}
                   aria-invalid={errors.password ? "true" : "false"}
