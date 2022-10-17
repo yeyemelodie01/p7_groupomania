@@ -62,9 +62,9 @@ function savePosts(post, res) {
         .catch(error =>  res.status(400).json({error}));
 }
 
-// exports.postAddDetailPostsRequest = async (req, res) => {
+//exports.postAddDetailPostsRequest = async (req, res) => {
 //   const { userId, detailPosts } = req.body;
-// }
+//}
 //exports.postUpdateRequest = async(req) => {
 //    const dataUpdate = req.file ? {
 //                 ...req.body,//
@@ -82,15 +82,22 @@ function savePosts(post, res) {
 //exports.postLikeRequest = async(req) => {
 //    req.status(200).json({message:"like post"})
 //}
+
 exports.postLikeRequest = async (req, res) => {
   const {userId, like} = req.body;
-  console.log(userId);
-  console.log(like)
   const postId = req.params.id;
   let post = await postModel.findOne({_id: postId});
-  console.log(post)
 
   if (like === 1 && post.usersLiked.includes(userId) === false) {
+    if (post.usersDisliked.includes(userId)) {
+      postModel.updateOne({_id: postId}, {$set: {usersDisliked: post.usersDisliked.filter(item => item !== userId)}})
+        .catch(err => res.status(404).json(err))
+
+      let dislikes = post.dislikes - 1;
+      postModel.updateOne({_id: postId}, {$set: { dislikes : dislikes }})
+        .catch(err=> res.status(404).json(err))
+    }
+
     postModel.updateOne({_id: postId},{$addToSet: { usersLiked : [userId]}})
       .catch(err => res.status(404).json(err))
 
@@ -99,7 +106,7 @@ exports.postLikeRequest = async (req, res) => {
       .catch(err=> res.status(404).json(err))
   }
 
-  if(like === 0) {
+  if(like === -1 && post.usersDisliked.includes(userId) === false) {
     if (post.usersLiked.includes(userId)) {
       postModel.updateOne({_id: postId}, {$set: {usersLiked: post.usersLiked.filter(item => item !== userId)}})
         .catch(err => res.status(404).json(err))
@@ -109,16 +116,6 @@ exports.postLikeRequest = async (req, res) => {
         .catch(err=> res.status(404).json(err))
     }
 
-    if (post.usersDisliked.includes(userId)) {
-      postModel.updateOne({_id: postId}, {$set: {usersDisliked: post.usersDisliked.filter(item => item !== userId)}})
-        .catch(err => res.status(404).json(err))
-      let dislikes = post.dislikes - 1;
-      postModel.updateOne({_id: postId}, {$set: { dislikes : dislikes }})
-        .catch(err=> res.status(404).json(err))
-    }
-  }
-
-  if(like === -1 && post.usersDisliked.includes(userId) === false){
     postModel.updateOne({_id: postId}, {$addToSet: { usersDisliked : [userId]}})
       .catch(err=> res.status(404).json(err))
     let dislikes = post.dislikes + 1;

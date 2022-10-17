@@ -103,7 +103,7 @@ function Header() {
                 <input
                   type="email"
                   placeholder="Email"
-                  {...register("email")}
+                  {...register("emaillog")}
                 />
               </div>
               <div className="form-group">
@@ -111,13 +111,12 @@ function Header() {
                   type="password"
                   placeholder="Mot de Passe"
                   required
-                  {...register("password")}
+                  {...register("passwordlog")}
                 />
               </div>
               <div className="form-group">
                 <input type="submit"
                        placeholder="Envoyer" />
-
               </div>
             </form>
           </Modal>
