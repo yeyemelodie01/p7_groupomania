@@ -72,9 +72,95 @@ function Header() {
     }
 
 
+
   let userDetails = JSON.parse(localStorage.getItem('user'));
 
     if(userDetails === null) {
+      if(isLoginFormShow){
+        return (
+          <>
+            <Modal
+              isShow={isLoginFormShow}
+              hide={toggleLoginForm}
+              title="Se connecter">
+              <form onSubmit={handleSubmit(onLogin)}>
+                <div className="form-group">
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    {...register("email", {
+                      required: true,
+                    })}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="password"
+                    placeholder="Mot de Passe"
+                    required
+                    {...register("password")}
+                  />
+                </div>
+                <div className="form-group">
+                  <input type="submit" placeholder="Envoyer" />
+                </div>
+              </form>
+            </Modal>
+          </>
+        )}
+      if (isRegistrationForm) {
+        return (
+          <>
+            <Modal
+              isShow={isRegistrationForm}
+              hide={toggleRegistrationForm}
+              title="S'inscrire">
+              <form onSubmit={handleSubmit(onSignup)}>
+                <div className="form-group">
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    className="emailError"
+                    {...register("email", {
+                      required:"Email requis",
+                      pattern:{
+                        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        message:"Email non valide"
+                      }
+                    })}
+                    aria-invalid={errors.email ? "true" : "false"}
+                  />
+                  {errors.email && <div className="error">{errors.email.message}</div>}
+                </div>
+                <div className="form-group">
+                  <input
+                    type="password"
+                    placeholder="Mot de Passe"
+                    className="passwordError"
+                    {...register("password",{
+                      required: "Mot de passe requis",
+                      pattern:{
+                        value: /^(?=.*[0-9])(?=.*[!@#$%^&*.,])[a-zA-Z0-9!@#$%^&*.,]{6,16}$/,
+                        message:"Mot de passe non valide, 6 characters, Une majuscule, une minuscule, un nombre et un caractère spécial",
+                      }
+                    })}
+                    aria-invalid={errors.password ? "true" : "false"}
+                  />
+                  {errors.password && <div className="error">{ errors.password.message }</div>}
+                </div>
+                <div className="form-group">
+                  <input
+                    type="submit"
+                    placeholder="Envoyer"
+                    onClick={ ShowError }
+                  />
+                </div>
+              </form>
+            </Modal>
+          </>
+        )
+      }
+
       return(
         <>
           <header>
@@ -93,82 +179,6 @@ function Header() {
               </div>
             </nav>
           </header>
-          <Modal
-            isShow={isLoginFormShow}
-            hide={toggleLoginForm}
-            title="Se connecter">
-
-            <form onSubmit={handleSubmit(onLogin)}>
-              <div className="form-group">
-                <input
-                  type="email"
-                  placeholder="Email"
-                  {...register("email", {
-                    required: true,
-                  })}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="password"
-                  placeholder="Mot de Passe"
-                  required
-                  {...register("password")}
-                />
-              </div>
-              <div className="form-group">
-                <input type="submit"
-                       placeholder="Envoyer" />
-              </div>
-            </form>
-          </Modal>
-          <Modal
-            isShow={isRegistrationForm}
-            hide={toggleRegistrationForm}
-            title="S'inscrire">
-
-            <form onSubmit={handleSubmit(onSignup)}>
-              <div className="form-group">
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="emailError"
-                  {...register("email", {
-                    required:"Email requis",
-                    pattern:{
-                      value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                      message:"Email non valide"
-                    }
-                  })}
-                  aria-invalid={errors.email ? "true" : "false"}
-                />
-                {errors.email && <div className="error">{errors.email.message}</div>}
-              </div>
-              <div className="form-group">
-                <input
-                  type="password"
-                  placeholder="Mot de Passe"
-                  className="passwordError"
-                  {...register("password",{
-                    required: "Mot de passe requis",
-                    minLength:{
-                      value: 6,
-                      message:"Mot de passe non valide, minimum 6 caractères",
-                    }
-                  })}
-                  aria-invalid={errors.password ? "true" : "false"}
-                />
-                {errors.password && <div className="error">{ errors.password.message }</div>}
-              </div>
-              <div className="form-group">
-                <input
-                  type="submit"
-                  placeholder="Envoyer"
-                  onClick={ ShowError }
-                />
-              </div>
-            </form>
-          </Modal>
         </>
       )
     } else {
