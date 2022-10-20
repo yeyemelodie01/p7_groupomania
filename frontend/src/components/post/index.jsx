@@ -21,9 +21,7 @@ function Post() {
     },
     []);
 
-  const recentPost = posts.sort();
-  console.log(recentPost)
-  const usePosts = recentPost.map((posts) =>{
+  const usePosts = posts.map((posts) =>{
 
     function SendPostId(){
       const detail = posts._id;

@@ -53,13 +53,24 @@ function Header() {
           })
           .catch((err) => {
               console.log(err);
-
           });
     }
 
     function Logout(){
       localStorage.clear();
       window.location.href='/';
+    }
+
+    function userRead(){
+        const userEmail = {
+          "email": userDetails.email
+        };
+        console.log(userEmail)
+      axios
+        .get("http://localhost:4000/users", userEmail)
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
     function ShowError(){
@@ -88,21 +99,35 @@ function Header() {
                   <input
                     type="email"
                     placeholder="Email"
+                    className="emailError"
                     {...register("email", {
-                      required: true,
+                      required:"Email requis",
+                      pattern:{
+                        value: userRead,
+                        message: "Email non reconnue"
+                      }
                     })}
+                    aria-invalid={errors.email ? "true" : "false"}
                   />
+                  {errors.email && <div className="error">{errors.email.message}</div>}
                 </div>
                 <div className="form-group">
                   <input
                     type="password"
                     placeholder="Mot de Passe"
-                    required
-                    {...register("password")}
+                    className="passwordError"
+                    {...register("password", {
+                      required:"Mot de Passe requis",
+                      pattern:{
+                        message:" Mot de passe érronée "
+                      }
+                    })}
+                    aria-invalid={errors.password ? "true" : "false"}
                   />
+                  {errors.password && <div className="error">{errors.password.message}</div>}
                 </div>
                 <div className="form-group">
-                  <input type="submit" placeholder="Envoyer" />
+                  <input type="submit" placeholder="Envoyer" onClick={ ShowError }/>
                 </div>
               </form>
             </Modal>
