@@ -19,8 +19,7 @@
     flex-direction: column;
     align-items: flex-start;
     border-bottom: 2px #4E5166 solid;
-    width: 100%;
-    padding: 16px 40px;
+    padding: 16px 0;
 }
 
 .profilpost{
@@ -56,6 +55,12 @@
 
 .divfigure{
     width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.divfigurecenter{
+    width: 90%;
 }
 
 .titlepost{

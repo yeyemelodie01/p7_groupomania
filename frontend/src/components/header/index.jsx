@@ -61,11 +61,11 @@ function Header() {
       window.location.href='/';
     }
 
-    function userRead(){
+    const userRead = async (data) => {
         const userEmail = {
-          "email": userDetails.email
+          "email": data.email
         };
-        console.log(userEmail)
+        console.log(data.email)
       axios
         .get("http://localhost:4000/users", userEmail)
         .catch((err) => {
@@ -103,7 +103,7 @@ function Header() {
                     {...register("email", {
                       required:"Email requis",
                       pattern:{
-                        value: userRead,
+                        value: userRead(),
                         message: "Email non reconnue"
                       }
                     })}

@@ -65,7 +65,8 @@ function Post() {
                     </li>
                   </ul>
                 </div>
-                  <div className="divfigure">
+                <div className="divfigure">
+                  <div className="divfigurecenter">
                     <h1 className="titlepost" onClick={ SendPostId }>{posts.title}</h1>
                     <figure>
                       <div>{parse(posts.text)}</div>
@@ -84,6 +85,7 @@ function Post() {
                       </figcaption>
                     </figure>
                   </div>
+                </div>
               </div>
             </LazyLoad>
           </div>
@@ -109,7 +111,8 @@ function Post() {
                     </li>
                   </ul>
                 </div>
-                  <div className="divfigure">
+                <div className="divfigure">
+                  <div className="divfigurecenter">
                     <h1 className="titlepost" onClick={ SendPostId }>{posts.title}</h1>
                     <figure>
                       <div className="imgfigure">
@@ -130,6 +133,7 @@ function Post() {
                       </figcaption>
                     </figure>
                   </div>
+                </div>
               </div>
             </LazyLoad>
           </div>
