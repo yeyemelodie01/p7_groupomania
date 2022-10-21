@@ -2,7 +2,7 @@ import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
 import '../../utils/styles/detailposts.css'
 import '../../utils/styles/post.css'
 import { useEffect, useState } from 'react'
-import Card from '../cardposts'
+import Card from '../../components/cardposts'
 import moment from 'moment';
 
 function DetailPosts() {
@@ -41,7 +41,7 @@ function DetailPosts() {
       <main>
         <div className="postgrid">
           <div className="grid">
-            <div className="postdiv">
+            <div className="postdivdetail">
               <Card
                 key={detail.id}
                 title={detail.title}
@@ -87,7 +87,7 @@ function DetailPosts() {
       <main>
         <div className="postgrid">
           <div className="grid">
-            <div className="postdiv">
+            <div className="postdivdetail">
               <Card
                 key={detail.id}
                 title={detail.title}

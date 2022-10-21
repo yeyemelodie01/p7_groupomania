@@ -78,29 +78,31 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
             </li>
           </ul>
         </div>
-        <div className="divfigure">
-          <h1 className="titlepost">{ title }</h1>
-          <figure>
-            <div id="media">
-              <img src={ media } alt=""/>
-            </div>
-            <div id="text">
-              <div>{ parse( text ) }</div>
-            </div>
-            <figcaption>
-              <div className="stylecomments">
-                <div className="divcomments">
-                  <div className="diviconnumber">
-                    <div className="likedislike">
-                      <button className="buttonicon" onClick={ submitLike }><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
-                      <button className="buttonicon" onClick={ submitDislike }><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
+        <div className="divfigurecenter">
+          <div className="divfigure">
+            <h1 className="titlepost">{ title }</h1>
+            <figure>
+              <div id="media">
+                <img src={ media } alt=""/>
+              </div>
+              <div id="text">
+                <div>{ parse( text ) }</div>
+              </div>
+              <figcaption>
+                <div className="stylecomments">
+                  <div className="divcomments">
+                    <div className="diviconnumber">
+                      <div className="likedislike">
+                        <button className="buttonicon" onClick={ submitLike }><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
+                        <button className="buttonicon" onClick={ submitDislike }><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
+                      </div>
+                      <button className="number">2 commentaires</button>
                     </div>
-                    <button className="number">2 commentaires</button>
                   </div>
                 </div>
-              </div>
-            </figcaption>
-          </figure>
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </>
     )
@@ -120,29 +122,31 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
             </li>
           </ul>
         </div>
-        <div className="divfigure">
-          <h1 className="titlepost">{ title }</h1>
-          <figure>
-            <div id="media">
-              <img src={ media } alt=""/>
-            </div>
-            <div id="text">
-              <div>{ parse( text ) }</div>
-            </div>
-            <figcaption>
-              <div className="stylecomments">
-                <div className="divcomments">
-                  <div className="diviconnumber">
-                    <div className="likedislike">
-                      <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
-                      <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
+        <div className="divfigurecenter">
+          <div className="divfigure">
+            <h1 className="titlepost">{ title }</h1>
+            <figure>
+              <div id="media">
+                <img src={ media } alt=""/>
+              </div>
+              <div id="text">
+                <div>{ parse( text ) }</div>
+              </div>
+              <figcaption>
+                <div className="stylecomments">
+                  <div className="divcomments">
+                    <div className="diviconnumber">
+                      <div className="likedislike">
+                        <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
+                        <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
+                      </div>
+                      <button className="number">2 commentaires</button>
                     </div>
-                    <button className="number">2 commentaires</button>
                   </div>
                 </div>
-              </div>
-            </figcaption>
-          </figure>
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </>
     )

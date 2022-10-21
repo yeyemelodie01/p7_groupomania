@@ -73,6 +73,8 @@ function Header() {
         });
     }
 
+    console.log(userRead())
+
     function ShowError(){
       if(errors.email){
         document.getElementsByClassName('emailError').border='2px #FD2D01 solid';
@@ -103,8 +105,8 @@ function Header() {
                     {...register("email", {
                       required:"Email requis",
                       pattern:{
-                        value: userRead(),
-                        message: "Email non reconnue"
+
+                        message: "Cet utilisateur n'existe pas"
                       }
                     })}
                     aria-invalid={errors.email ? "true" : "false"}

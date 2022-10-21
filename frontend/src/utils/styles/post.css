@@ -53,13 +53,13 @@
 
 }
 
-.divfigure{
+.divfigurecenter{
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.divfigurecenter{
+.divfigure{
     width: 90%;
 }
 

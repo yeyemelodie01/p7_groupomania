@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from './pages/home';
 import Header from "./components/header";
 import GlobalStyle from './utils/styles/GlobalStyle'
-import Detailposts from './components/detailposts'
+import Detailposts from './pages/detailposts'
 
 
 ReactDOM.render(

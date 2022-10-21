@@ -111,8 +111,8 @@ function Post() {
                     </li>
                   </ul>
                 </div>
-                <div className="divfigure">
-                  <div className="divfigurecenter">
+                <div className="divfigurecenter">
+                  <div className="divfigure">
                     <h1 className="titlepost" onClick={ SendPostId }>{posts.title}</h1>
                     <figure>
                       <div className="imgfigure">
