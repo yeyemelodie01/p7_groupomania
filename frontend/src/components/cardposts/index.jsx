@@ -79,7 +79,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
           </ul>
         </div>
         <div className="divfigurecenter">
-          <div className="divfigure">
+          <div className="divfigurewidth">
             <h1 className="titlepost">{ title }</h1>
             <figure>
               <div id="media">
@@ -123,7 +123,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
           </ul>
         </div>
         <div className="divfigurecenter">
-          <div className="divfigure">
+          <div className="divfigurewidth">
             <h1 className="titlepost">{ title }</h1>
             <figure>
               <div id="media">

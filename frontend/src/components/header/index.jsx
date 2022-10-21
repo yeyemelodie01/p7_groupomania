@@ -61,20 +61,6 @@ function Header() {
       window.location.href='/';
     }
 
-    const userRead = async (data) => {
-        const userEmail = {
-          "email": data.email
-        };
-        console.log(data.email)
-      axios
-        .get("http://localhost:4000/users", userEmail)
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-
-    console.log(userRead())
-
     function ShowError(){
       if(errors.email){
         document.getElementsByClassName('emailError').border='2px #FD2D01 solid';
@@ -104,10 +90,6 @@ function Header() {
                     className="emailError"
                     {...register("email", {
                       required:"Email requis",
-                      pattern:{
-
-                        message: "Cet utilisateur n'existe pas"
-                      }
                     })}
                     aria-invalid={errors.email ? "true" : "false"}
                   />
@@ -120,9 +102,6 @@ function Header() {
                     className="passwordError"
                     {...register("password", {
                       required:"Mot de Passe requis",
-                      pattern:{
-                        message:" Mot de passe érronée "
-                      }
                     })}
                     aria-invalid={errors.password ? "true" : "false"}
                   />
