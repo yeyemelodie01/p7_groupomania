@@ -21,7 +21,11 @@ function Post() {
     },
     []);
 
-  const usePosts = posts.map((posts) =>{
+  const postsSort = posts.sort(function (a, b) {
+    return b.createdAt > a.createdAt
+  })
+
+  const usePosts = postsSort.map((posts) =>{
 
     function SendPostId(){
       const detail = posts._id;

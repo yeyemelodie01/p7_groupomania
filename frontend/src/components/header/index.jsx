@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import 'react-toastify/dist/ReactToastify.css'
@@ -12,6 +12,7 @@ function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
     const { register, handleSubmit, formState: { errors }} = useForm();
+    const { errorMessage, setErrorMessage } = useState('')
 
   function setUserDetails (data, res) {
     const userEmail = data.email;
@@ -53,6 +54,7 @@ function Header() {
           })
           .catch((err) => {
               console.log(err);
+              setErrorMessage(err);
           });
     }
 
@@ -69,8 +71,6 @@ function Header() {
         document.getElementsByClassName('passwordError').borderColor='2px #FD2D01 solid'
       }
     }
-
-
 
   let userDetails = JSON.parse(localStorage.getItem('user'));
 
@@ -91,9 +91,9 @@ function Header() {
                     {...register("email", {
                       required:"Email requis",
                     })}
-                    aria-invalid={errors.email ? "true" : "false"}
+                    aria-invalid={ errorMessage ? "true" : "false"}
                   />
-                  {errors.email && <div className="error">{errors.email.message}</div>}
+                  {errorMessage && <div className="error">{errorMessage}</div>}
                 </div>
                 <div className="form-group">
                   <input
