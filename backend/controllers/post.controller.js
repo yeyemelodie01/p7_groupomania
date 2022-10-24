@@ -78,6 +78,15 @@ function savePosts(post, res) {
 //exports.postDeleteRequest = async(req) => {
 //    req.status(200).json({message:"delete post"})
 //}
+exports.postAddFeedBackRequest = async (req, res) => {
+  const { userId, feedBack } = req.body;
+  console.log(userId, feedBack)
+  const postId = req.params.id;
+  console.log(postId);
+  //let post = await postModel.findOne({_id: postId});
+    res.status(200).json({ message: 'infos bien reçu'});
+    res.status(400).json({ message: 'infos non reçu' })
+}
 
 exports.postLikeRequest = async (req, res) => {
   const {userId, like} = req.body;
