@@ -1,5 +1,6 @@
 const postModel = require('../models/post.model');
 const cloudinary = require('../middleware/cloud')
+const fs = require('fs')
 
 exports.postRequest = async(req, res) => {
     postModel.find()
@@ -37,7 +38,9 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
         "userId": userId,
         "userName": userName,
         "title": title,
-        "media": result.secure_url,
+        "media": {
+          public_id: result.public_id,
+          url: result.secure_url },
       });
       return savePosts(newPost, res);
     }
@@ -74,10 +77,30 @@ function savePosts(post, res) {
 //             .then(() => res.status(200).json({ message: 'Mise a jour des informations'}))
 //             .catch(error => res.status(400).json({ error }));
 //}
+// exports.sauceDeleteRequest = async (req, res) => {
+//   sauceModel.findOne({ _id: req.params.id })
+//     .then(data => {
+//       const filename = data.imageUrl.split('/uploads/')[1];
+//       fs.unlink(`uploads/${filename}`, () => {
+//         sauceModel.deleteOne({ _id: req.params.id })
+//           .then(() => res.status(200).json({ message: 'Image supprimée'}))
+//           .catch(error => res.status(400).json({ error }));
+//       });
+//     })
+//     .catch(error => res.status(500).json({ error }));
+// }
 
-//exports.postDeleteRequest = async(req) => {
-//    req.status(200).json({message:"delete post"})
-//}
+exports.postDeleteRequest = async(req, res) => {
+  postModel.findOne({_id: req.params.id})
+    .then(() => {
+      cloudinary.uploader.destroy(user.cloudinary_id);
+      postModel.deleteOne({_id:req.params.id})
+        .then(() => res.status(200).json({ message: 'Post supprimé'}))
+        .catch(error => res.status(400).json({ error }));
+      })
+    .catch(error => res.status(500).json({ error }));
+}
+
 exports.postAddFeedBackRequest = async (req, res) => {
   const { userId, feedBack } = req.body;
   console.log(userId, feedBack)

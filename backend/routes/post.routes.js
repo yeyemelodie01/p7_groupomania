@@ -10,7 +10,7 @@ urlRoutes.get('/:id', controller.postIdRequest);
 urlRoutes.post('/create', userAuth, upload, controller.postAddRequest);
 urlRoutes.post('/:id/feedback', userAuth, controller.postAddFeedBackRequest);
 // urlRoutes.put('/:id', userAuth, upload, controller.postUpdateRequest);
-// urlRoutes.delete('/:id', userAuth, controller.postDeleteRequest);
+urlRoutes.delete('/:id', userAuth, controller.postDeleteRequest);
 urlRoutes.post('/:id/like', userAuth, controller.postLikeRequest);
 
 module.exports = urlRoutes;

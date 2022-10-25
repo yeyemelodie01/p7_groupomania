@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import 'react-toastify/dist/ReactToastify.css'
@@ -12,7 +12,6 @@ function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
     const { register, handleSubmit, formState: { errors }} = useForm();
-    const { errorMessage, setErrorMessage } = useState('')
 
   function setUserDetails (data, res) {
     const userEmail = data.email;
@@ -50,13 +49,26 @@ function Header() {
           .post("http://localhost:4000/api/auth/login", data)
           .then((res) => {
             setUserDetails(data, res);
-            window.location.reload();
+            //window.location.reload();
           })
           .catch((err) => {
-              console.log(err);
-              setErrorMessage(err);
+            const status = err.response.data.message;
+            localStorage.setItem('error', status)
+            console.log(err)
           });
     }
+
+    // function error(){
+    //   let status = localStorage.getItem('error')
+    //   if(status){
+    //     const errorMessage = "Utilisateur non enregistré";
+    //     console.log(errorMessage)
+    //   }
+    //   if(status === null){
+    //     const success = "Utilisateur enregistré"
+    //     console.log(success)
+    //   }
+    // }
 
     function Logout(){
       localStorage.clear();
@@ -64,7 +76,8 @@ function Header() {
     }
 
     function ShowError(){
-      if(errors.email){
+      let status = localStorage.getItem('error')
+      if(status){
         document.getElementsByClassName('emailError').border='2px #FD2D01 solid';
       }
       if (errors.password?.message){
@@ -73,6 +86,7 @@ function Header() {
     }
 
   let userDetails = JSON.parse(localStorage.getItem('user'));
+  let status = localStorage.getItem('error')
 
     if(userDetails === null) {
       if(isLoginFormShow){
@@ -90,10 +104,14 @@ function Header() {
                     className="emailError"
                     {...register("email", {
                       required:"Email requis",
+                      pattern:{
+                      value: status,
+                      messages:'Utilisateur non enregistré'
+                    }
                     })}
-                    aria-invalid={ errorMessage ? "true" : "false"}
+                    aria-invalid={errors.email ? "true" : "false"}
                   />
-                  {errorMessage && <div className="error">{errorMessage}</div>}
+                  {errors.email && <div className="error">{errors.email.message}</div>}
                 </div>
                 <div className="form-group">
                   <input
