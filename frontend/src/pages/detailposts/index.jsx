@@ -45,7 +45,7 @@ function DetailPosts() {
               <Card
                 key={detail.id}
                 title={detail.title}
-                media={detail.media}
+                media={detail.media.url}
                 text={detail.text}
                 username={detail.userName}
                 hour={hour}

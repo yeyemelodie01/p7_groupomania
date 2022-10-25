@@ -1,6 +1,6 @@
 const postModel = require('../models/post.model');
 const cloudinary = require('../middleware/cloud')
-const fs = require('fs')
+//const fs = require('fs')
 
 exports.postRequest = async(req, res) => {
     postModel.find()
@@ -77,23 +77,15 @@ function savePosts(post, res) {
 //             .then(() => res.status(200).json({ message: 'Mise a jour des informations'}))
 //             .catch(error => res.status(400).json({ error }));
 //}
-// exports.sauceDeleteRequest = async (req, res) => {
-//   sauceModel.findOne({ _id: req.params.id })
-//     .then(data => {
-//       const filename = data.imageUrl.split('/uploads/')[1];
-//       fs.unlink(`uploads/${filename}`, () => {
-//         sauceModel.deleteOne({ _id: req.params.id })
-//           .then(() => res.status(200).json({ message: 'Image supprimée'}))
-//           .catch(error => res.status(400).json({ error }));
-//       });
-//     })
-//     .catch(error => res.status(500).json({ error }));
-// }
 
 exports.postDeleteRequest = async(req, res) => {
   postModel.findOne({_id: req.params.id})
-    .then(() => {
-      cloudinary.uploader.destroy(user.cloudinary_id);
+    .then((data) => {
+      const media = data.media.public_id;
+      if(media){
+        cloudinary.uploader.destroy(media);
+      }
+
       postModel.deleteOne({_id:req.params.id})
         .then(() => res.status(200).json({ message: 'Post supprimé'}))
         .catch(error => res.status(400).json({ error }));

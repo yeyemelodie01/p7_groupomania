@@ -49,7 +49,7 @@ function Header() {
           .post("http://localhost:4000/api/auth/login", data)
           .then((res) => {
             setUserDetails(data, res);
-            //window.location.reload();
+            window.location.reload();
           })
           .catch((err) => {
             const status = err.response.data.message;

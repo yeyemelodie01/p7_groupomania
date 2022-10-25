@@ -4,7 +4,16 @@ const postSchema = mongoose.Schema({
   userId:{ type:String, required:true },
   userName:{ type:String, required:true },
   title:{ type:String, required:true },
-  media:{ type:String },
+  media:{
+    public_id: {
+      type: String,
+      required: true
+    },
+    url: {
+      type: String,
+    required: true
+    }
+  },
   text:{ type:String },
   likes:{ type:Number, default:0 },
   dislikes:{ type:Number, default:0 },
