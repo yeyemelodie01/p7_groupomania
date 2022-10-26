@@ -16,15 +16,17 @@ function DetailPosts() {
       .get(`http://localhost:4000/api/posts/${postsId}`)
       .then((res) => {
         setDetail(res.data)
-        localStorage.setItem('media', res.data.media.url);
+        if(res.data.media){
+          localStorage.setItem('media', res.data.media.url);
+        }
+
       })
       .catch((err) => {
         console.log(err)
       })
   }, []);
 
-  const media = localStorage.getItem('media');
-  console.log(media);
+  const cloudMedia = localStorage.getItem('media');
 
   const date1 = moment(detail.createdAt);
   const date2 = moment(Date.now());
@@ -43,52 +45,94 @@ function DetailPosts() {
     hour = date2.diff(date1, 'days') + "j";
   }
 
-  if(userDetails.username === detail.userName){
-    return(
-      <main>
-        <div className="postgrid">
-          <div className="grid">
-            <div className="postdivdetail">
-              <Card
-                key={detail.id}
-                title={detail.title}
-                media={media}
-                text={detail.text}
-                username={detail.userName}
-                hour={hour}
-                avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
-                like={ JSON.stringify(detail.likes) }
-                dislike={ JSON.stringify(detail.dislikes) }
-              />
-              <div id="commentable">
-                <label form="textcomments">
-                  <textarea id='textcomments'/>
-                </label>
-                <div>
-                  <button>Annuler</button>
-                  <button>Commenter</button>
-                </div>
-                <div className="divprofilcomments">
-                  <div className="divpaddingcomments">
-                    <div className="profilpostcomments">
-                      <p>{}</p>
+  if(userDetails){
+    if(userDetails.username === detail.userName){
+      return(
+        <main>
+          <div className="postgrid">
+            <div className="grid">
+              <div className="postdivdetail">
+                <Card
+                  key={detail.id}
+                  title={detail.title}
+                  media={cloudMedia}
+                  text={detail.text}
+                  username={detail.userName}
+                  hour={hour}
+                  avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
+                  like={ JSON.stringify(detail.likes) }
+                  dislike={ JSON.stringify(detail.dislikes) }
+                />
+                <div id="commentable">
+                  <label form="textcomments">
+                    <textarea id='textcomments'/>
+                  </label>
+                  <div>
+                    <button>Annuler</button>
+                    <button>Commenter</button>
+                  </div>
+                  <div className="divprofilcomments">
+                    <div className="divpaddingcomments">
+                      <div className="profilpostcomments">
+                        <p>{}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="divprofilcomments">
-                  <div className="divpaddingcomments">
-                    <img className="profilcommentsimg" src={ Profil } alt="profil"/>
-                    <div className="profilpostcomments">
-                      <p>{}</p>
+                  <div className="divprofilcomments">
+                    <div className="divpaddingcomments">
+                      <img className="profilcommentsimg" src={ Profil } alt="profil"/>
+                      <div className="profilpostcomments">
+                        <p>{}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
-    )
+        </main>
+      )
+    } else {
+      return (
+        <main>
+          <div className="postgrid">
+            <div className="grid">
+              <div className="postdivdetail">
+                <Card
+                  key={detail.id}
+                  title={detail.title}
+                  media={cloudMedia}
+                  text={detail.text}
+                  username={detail.userName}
+                  hour={hour}
+                  avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
+                  like={ JSON.stringify(detail.likes) }
+                  dislike={ JSON.stringify(detail.dislikes) }
+                />
+                <div id="commentable">
+                  <div className="divprofilcomments">
+                    <div className="divpaddingcomments">
+                      <img className="profilcommentsimg" src={ Profil } alt="profil"/>
+                      <div className="profilpostcomments">
+                        <p>{}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="divprofilcomments">
+                    <div className="divpaddingcomments">
+                      <img className="profilcommentsimg" src={ Profil } alt="profil"/>
+                      <div className="profilpostcomments">
+                        <p>{}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      )
+    }
   } else {
     return (
       <main>
@@ -98,7 +142,7 @@ function DetailPosts() {
               <Card
                 key={detail.id}
                 title={detail.title}
-                media={media}
+                media={cloudMedia}
                 text={detail.text}
                 username={detail.userName}
                 hour={hour}

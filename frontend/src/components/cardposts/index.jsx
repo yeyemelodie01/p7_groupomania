@@ -66,9 +66,8 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
   }
 
   let userDetails = JSON.parse(localStorage.getItem('user'));
-  if(userDetails.username === username ) {
-
-    if(media){
+  if(userDetails) {
+    if(userDetails.userName === username && userDetails.media.url === media){
       return (
         <>
           <div className="profilpost">
@@ -112,7 +111,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
           </div>
         </>
       )}
-      if(text){
+      if(userDetails.userName === username && userDetails.text === text){
         return (
           <>
             <div className="profilpost">
@@ -155,53 +154,95 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
               </div>
             </div>
           </>
-        )
-      }
-  } else{
-    return(
-      <>
-        <div className="profilpost">
-          <ul className="listpost">
-            <li>
-              <img className="imgprofil" src={ avatar } alt="profil"/>
-            </li>
-            <li>
-              <p className="nameprofil">{ username }</p>
-            </li>
-            <li>
-              <p className="hourpost">{ hour }</p>
-            </li>
-          </ul>
-        </div>
-        <div className="divfigurecenter">
-          <div className="divfigurewidth">
-            <h1 className="titlepost">{ title }</h1>
-            <figure>
-              <div id="media">
-                <img src={ media } alt=""/>
+        )} else {
+          return (
+            <>
+              <div className="profilpost">
+                <ul className="listpost">
+                  <li>
+                    <img className="imgprofil" src={ avatar } alt="profil"/>
+                  </li>
+                  <li>
+                    <p className="nameprofil">{ username }</p>
+                  </li>
+                  <li>
+                    <p className="hourpost">{ hour }</p>
+                  </li>
+                </ul>
               </div>
-              <div id="text">
-                <div>{ parse( text ) }</div>
-              </div>
-              <figcaption>
-                <div className="stylecomments">
-                  <div className="divcomments">
-                    <div className="diviconnumber">
-                      <div className="likedislike">
-                        <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
-                        <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
+              <div className="divfigurecenter">
+                <div className="divfigurewidth">
+                  <h1 className="titlepost">{ title }</h1>
+                  <figure>
+                    <div id="media">
+                      <img src={ media } alt=""/>
+                    </div>
+                    <div id="text">
+                      <div>{ parse( text ) }</div>
+                    </div>
+                    <figcaption>
+                      <div className="stylecomments">
+                        <div className="divcomments">
+                          <div className="diviconnumber">
+                            <div className="likedislike">
+                              <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
+                              <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
+                            </div>
+                            <button className="number">2 commentaires</button>
+                          </div>
+                        </div>
                       </div>
-                      <button className="number">2 commentaires</button>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </>
+          )
+      }} else {
+      return (
+        <>
+          <div className="profilpost">
+            <ul className="listpost">
+              <li>
+                <img className="imgprofil" src={ avatar } alt="profil"/>
+              </li>
+              <li>
+                <p className="nameprofil">{ username }</p>
+              </li>
+              <li>
+                <p className="hourpost">{ hour }</p>
+              </li>
+            </ul>
+          </div>
+          <div className="divfigurecenter">
+            <div className="divfigurewidth">
+              <h1 className="titlepost">{ title }</h1>
+              <figure>
+                <div id="media">
+                  <img src={ media } alt=""/>
+                </div>
+                <div id="text">
+                  <div>{ parse( text ) }</div>
+                </div>
+                <figcaption>
+                  <div className="stylecomments">
+                    <div className="divcomments">
+                      <div className="diviconnumber">
+                        <div className="likedislike">
+                          <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
+                          <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
+                        </div>
+                        <button className="number">2 commentaires</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </figcaption>
-            </figure>
+                </figcaption>
+              </figure>
+            </div>
           </div>
-        </div>
-      </>
-    )
-  }
+        </>
+        )
+    }
 }
 
 Card.propTypes = {
