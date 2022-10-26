@@ -43,7 +43,7 @@ function DetailPosts() {
     hour = date2.diff(date1, 'days') + "j";
   }
 
-  if(userDetails !== null){
+  if(userDetails.username === detail.userName){
     return(
       <main>
         <div className="postgrid">

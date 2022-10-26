@@ -6,51 +6,67 @@ import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
 function Card({ title, media, text, username, hour, avatar, like, dislike}){
 
+  function submitLike() {
+    let postsId = localStorage.getItem("postId");
+    const like = {
+      "userId": userDetails._id,
+      "like": 1
+    }
+    console.log(like);
+    axios
+      .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
+        headers: {
+          Authorization: `Bearer ${userDetails.jwt}`,
+        }
+      })
+      .then(() => {
+        window.location.reload()
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function submitDislike() {
+    let postsId = localStorage.getItem("postId");
+    const like = {
+      "userId": userDetails._id,
+      "like": -1
+    }
+
+    axios
+      .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
+        headers: {
+          Authorization: `Bearer ${userDetails.jwt}`,
+        }
+      })
+      .then(() => {
+        window.location.reload()
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function postDelete() {
+    let postsId = localStorage.getItem("postId");
+    axios
+      .delete(`http://localhost:4000/api/posts/${postsId}`, {
+        headers: {
+          Authorization: `Bearer ${userDetails.jwt}`
+        }
+      })
+      .then(() => {
+        alert("Votre post a bien été supprimer")
+        window.location.href='/';
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
   let userDetails = JSON.parse(localStorage.getItem('user'));
-  if(userDetails) {
-
-    function submitLike() {
-      let postsId = localStorage.getItem("postId");
-      const like = {
-        "userId": userDetails._id,
-        "like": 1
-      }
-      console.log(like);
-      axios
-        .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
-          headers: {
-            Authorization: `Bearer ${userDetails.jwt}`,
-          }
-        })
-        .then(() => {
-          window.location.reload()
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-
-
-    function submitDislike() {
-      let postsId = localStorage.getItem("postId");
-      const like = {
-        "userId": userDetails._id,
-        "like": -1
-      }
-
-      axios
-        .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
-          headers: {
-            Authorization: `Bearer ${userDetails.jwt}`,
-          }
-        })
-        .then(() => {
-          window.location.reload()
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+  if(userDetails.username === username ) {
 
     if(media){
       return (
@@ -74,6 +90,9 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
               <figure>
                 <div id="media">
                   <img src={ media } alt=""/>
+                </div>
+                <div>
+                  <button onClick={postDelete}>Supprimer</button>
                 </div>
                 <figcaption>
                   <div className="stylecomments">
@@ -115,6 +134,9 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                 <figure>
                   <div id="text">
                     <div>{ parse( text ) }</div>
+                  </div>
+                  <div>
+                    <button onClick={postDelete}>Supprimer</button>
                   </div>
                   <figcaption>
                     <div className="stylecomments">
