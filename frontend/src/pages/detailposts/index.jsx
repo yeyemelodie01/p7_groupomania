@@ -16,15 +16,15 @@ function DetailPosts() {
       .get(`http://localhost:4000/api/posts/${postsId}`)
       .then((res) => {
         setDetail(res.data)
-        console.log(res.data.userId);
+        localStorage.setItem('media', res.data.media.url);
       })
       .catch((err) => {
         console.log(err)
       })
   }, []);
 
-  console.log(detail.media.url)
-
+  const media = localStorage.getItem('media');
+  console.log(media);
 
   const date1 = moment(detail.createdAt);
   const date2 = moment(Date.now());
@@ -52,7 +52,7 @@ function DetailPosts() {
               <Card
                 key={detail.id}
                 title={detail.title}
-                media={detail.media}
+                media={media}
                 text={detail.text}
                 username={detail.userName}
                 hour={hour}
@@ -98,7 +98,7 @@ function DetailPosts() {
               <Card
                 key={detail.id}
                 title={detail.title}
-                media={detail.media.url}
+                media={media}
                 text={detail.text}
                 username={detail.userName}
                 hour={hour}
