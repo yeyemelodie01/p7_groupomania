@@ -6,17 +6,6 @@ import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
 function Card({ title, media, text, username, hour, avatar, like, dislike}){
 
-
-  if (media){
-    document.getElementById('media').style.display='block';
-    document.getElementById('text').style.display='none';
-  }
-
-  if (text){
-    document.getElementById('text').style.display='block';
-    document.getElementById('media').style.display='none';
-  }
-
   let userDetails = JSON.parse(localStorage.getItem('user'));
   if(userDetails) {
 
@@ -63,49 +52,89 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
         });
     }
 
-    return(
-      <>
-        <div className="profilpost">
-          <ul className="listpost">
-            <li>
-              <img className="imgprofil" src={ avatar } alt="profil"/>
-            </li>
-            <li>
-              <p className="nameprofil">{ username }</p>
-            </li>
-            <li>
-              <p className="hourpost">{ hour }</p>
-            </li>
-          </ul>
-        </div>
-        <div className="divfigurecenter">
-          <div className="divfigurewidth">
-            <h1 className="titlepost">{ title }</h1>
-            <figure>
-              <div id="media">
-                <img src={ media } alt=""/>
-              </div>
-              <div id="text">
-                <div>{ parse( text ) }</div>
-              </div>
-              <figcaption>
-                <div className="stylecomments">
-                  <div className="divcomments">
-                    <div className="diviconnumber">
-                      <div className="likedislike">
-                        <button className="buttonicon" onClick={ submitLike }><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
-                        <button className="buttonicon" onClick={ submitDislike }><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
+    if(media){
+      return (
+        <>
+          <div className="profilpost">
+            <ul className="listpost">
+              <li>
+                <img className="imgprofil" src={ avatar } alt="profil"/>
+              </li>
+              <li>
+                <p className="nameprofil">{ username }</p>
+              </li>
+              <li>
+                <p className="hourpost">{ hour }</p>
+              </li>
+            </ul>
+          </div>
+          <div className="divfigurecenter">
+            <div className="divfigurewidth">
+              <h1 className="titlepost">{ title }</h1>
+              <figure>
+                <div id="media">
+                  <img src={ media } alt=""/>
+                </div>
+                <figcaption>
+                  <div className="stylecomments">
+                    <div className="divcomments">
+                      <div className="diviconnumber">
+                        <div className="likedislike">
+                          <button className="buttonicon" onClick={ submitLike }><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
+                          <button className="buttonicon" onClick={ submitDislike }><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
+                        </div>
+                        <button className="number">2 commentaires</button>
                       </div>
-                      <button className="number">2 commentaires</button>
                     </div>
                   </div>
-                </div>
-              </figcaption>
-            </figure>
+                </figcaption>
+              </figure>
+            </div>
           </div>
-        </div>
-      </>
-    )
+        </>
+      )}
+      if(text){
+        return (
+          <>
+            <div className="profilpost">
+              <ul className="listpost">
+                <li>
+                  <img className="imgprofil" src={ avatar } alt="profil"/>
+                </li>
+                <li>
+                  <p className="nameprofil">{ username }</p>
+                </li>
+                <li>
+                  <p className="hourpost">{ hour }</p>
+                </li>
+              </ul>
+            </div>
+            <div className="divfigurecenter">
+              <div className="divfigurewidth">
+                <h1 className="titlepost">{ title }</h1>
+                <figure>
+                  <div id="text">
+                    <div>{ parse( text ) }</div>
+                  </div>
+                  <figcaption>
+                    <div className="stylecomments">
+                      <div className="divcomments">
+                        <div className="diviconnumber">
+                          <div className="likedislike">
+                            <button className="buttonicon" onClick={ submitLike }><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
+                            <button className="buttonicon" onClick={ submitDislike }><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
+                          </div>
+                          <button className="number">2 commentaires</button>
+                        </div>
+                      </div>
+                    </div>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </>
+        )
+      }
   } else{
     return(
       <>

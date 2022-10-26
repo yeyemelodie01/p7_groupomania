@@ -4,6 +4,7 @@ import '../../utils/styles/post.css'
 import { useEffect, useState } from 'react'
 import Card from '../../components/cardposts'
 import moment from 'moment';
+import axios from 'axios'
 
 function DetailPosts() {
   const [detail, setDetail] = useState('');
@@ -11,12 +12,18 @@ function DetailPosts() {
 
   useEffect(() => {
     let postsId = localStorage.getItem("postId");
-    fetch(`http://localhost:4000/api/posts/${postsId}`)
-      .then((res) => res.json())
-      .then((detail) => {
-        setDetail(detail)
+    axios
+      .get(`http://localhost:4000/api/posts/${postsId}`)
+      .then((res) => {
+        setDetail(res.data)
+        console.log(res.data.userId);
+      })
+      .catch((err) => {
+        console.log(err)
       })
   }, []);
+
+  console.log(detail.media.url)
 
 
   const date1 = moment(detail.createdAt);
@@ -36,7 +43,7 @@ function DetailPosts() {
     hour = date2.diff(date1, 'days') + "j";
   }
 
-  if(userDetails){
+  if(userDetails !== null){
     return(
       <main>
         <div className="postgrid">
@@ -45,7 +52,7 @@ function DetailPosts() {
               <Card
                 key={detail.id}
                 title={detail.title}
-                media={detail.media.url}
+                media={detail.media}
                 text={detail.text}
                 username={detail.userName}
                 hour={hour}
@@ -91,7 +98,7 @@ function DetailPosts() {
               <Card
                 key={detail.id}
                 title={detail.title}
-                media={detail.media}
+                media={detail.media.url}
                 text={detail.text}
                 username={detail.userName}
                 hour={hour}
