@@ -40,3 +40,11 @@
     width: 100%;
 }
 
+.delete{
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    color: #fff;
+    background: #091F43FF;
+}

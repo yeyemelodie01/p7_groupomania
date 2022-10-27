@@ -69,11 +69,26 @@ function savePosts(post, res) {
 //}
 
 exports.postUpdateRequest = async(req, res) => {
+  // if(req.body.media){
+  //   const media = req.body.public_id;
+  //   if(media){
+  //     cloudinary.uploader.destroy(media);
+  //   }
+  //
+  //   const newImage = await cloudinary.uploader.upload(req.body.media)
+  //   postModel.media = newImage.media;
+  //   postModel.public_id = newImage.public_id;
+  // }
+  const media = req.body.public_id;
+  if(media){
+        cloudinary.uploader.destroy(media);
+      }
 
    const dataUpdate = req.file ? {
                 ...req.body,//
-                imageUrl: req.body.media.public_id// url pour l'image req.protocol(http), req.get('host) pour l'hôte de serveur ici localhost:3000, uploads(dossier qui contiendra l'image), req.file.filename pour le nom du fichier
-            } : { ...req.body };//
+                public_id:req.body.public_id,
+                media: req.body.media,// url pour l'image req.protocol(http), req.get('host) pour l'hôte de serveur ici localhost:3000, uploads(dossier qui contiendra l'image), req.file.filename pour le nom du fichier
+  } : { ...req.body };//
         postModel.updateOne({ _id: req.params.id }, { ...dataUpdate, _id: req.params.id })
             .then(() => res.status(200).json({ message: 'Mise a jour des informations'}))
             .catch(error => res.status(400).json({ error }));

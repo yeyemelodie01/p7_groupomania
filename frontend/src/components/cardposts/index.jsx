@@ -117,7 +117,7 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
               <figure>
                 { mediaText() }
                 <div>
-                  <button onClick={postDelete}>Supprimer</button>
+                  <button className="delete" onClick={postDelete}>Supprimer</button>
                 </div>
                 <figcaption>
                   <div className="stylecomments">
