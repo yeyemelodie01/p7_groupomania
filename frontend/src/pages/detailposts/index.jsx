@@ -65,8 +65,6 @@ function DetailPosts() {
     hour = date2.diff(date1, 'days') + "j";
   }
 
-  //const cloudMedia = detail.media.url;
-
   if(userDetails){
       return(
         <main>
@@ -74,6 +72,7 @@ function DetailPosts() {
             <div className="griddetail">
                 <Card
                   key={detail.id}
+                  userid={detail.userId}
                   title={detail.title}
                   media={detail.media}
                   text={detail.text}
