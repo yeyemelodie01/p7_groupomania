@@ -38,9 +38,8 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
         "userId": userId,
         "userName": userName,
         "title": title,
-        "media": {
-          public_id: result.public_id,
-          url: result.secure_url },
+        "public_id": result.public_id,
+        "media": result.secure_url ,
       });
       return savePosts(newPost, res);
     }
@@ -83,11 +82,10 @@ exports.postUpdateRequest = async(req, res) => {
 exports.postDeleteRequest = async(req, res) => {
   postModel.findOne({_id: req.params.id})
     .then((data) => {
-      const media = data.media.public_id;
+      const media = data.public_id;
       if(media){
         cloudinary.uploader.destroy(media);
       }
-
       postModel.deleteOne({_id:req.params.id})
         .then(() => res.status(200).json({ message: 'Post supprimé'}))
         .catch(error => res.status(400).json({ error }));

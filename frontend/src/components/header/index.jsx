@@ -70,11 +70,6 @@ function Header() {
     //   }
     // }
 
-    function Home(){
-    localStorage.clear();
-    window.location.href='/';
-    }
-
     function Logout(){
       localStorage.clear();
       window.location.href='/';
@@ -189,16 +184,15 @@ function Header() {
           </>
         )
       }
-
       return(
         <>
           <header>
             <nav>
-              <div className="linkimg" onClick={Home}>
+              <a className="linkimg" href="/">
                 <div>
                   <img className="styleimg" src={ Logo } alt="Logo Groupomania"/>
                 </div>
-              </div>
+              </a>
               <div className="divstyle">
                 <div className="divlink">
                   <div className="modal-toggle linkstyle" onClick={toggleLoginForm}>Se connecter </div>
@@ -213,11 +207,11 @@ function Header() {
     } else {
       return <header>
               <nav>
-                <div className="linkimg" onClick={Home}>
+                <a className="linkimg" href="/">
                   <div>
                     <img className="styleimg" src={ Logo } alt="Logo Groupomania"/>
                   </div>
-                </div>
+                </a>
                 <div className="divstyle">
                   <div className="divlink">
                     <p>Bienvenue { userDetails.userName }</p>
