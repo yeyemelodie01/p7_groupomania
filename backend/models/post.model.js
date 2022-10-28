@@ -12,7 +12,6 @@ const postSchema = mongoose.Schema({
   usersLiked: { type: [String] },
   usersDisliked: { type: [String] },
   feedBack: { type:String },
-  usersFeedBack:{ type: [String] },
   createdAt: { type: Date, default: Date.now }
 })
 

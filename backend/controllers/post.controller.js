@@ -56,42 +56,58 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
   } catch (error) {
     res.status(400).json({error})
   }
-}
 
-function savePosts(post, res) {
+  function savePosts(post, res) {
     return post.save()
-        .then(() => res.status(201).json({message: "post ajouter"}))
-        .catch(error =>  res.status(400).json({error}));
+      .then(() => res.status(201).json({message: "post ajouter"}))
+      .catch(error =>  res.status(400).json({error}));
+  }
 }
 
-//exports.postAddDetailPostsRequest = async (req, res) => {
-//   const { userId, detailPosts } = req.body;
-//}
+exports.postAddFeedBackRequest = async (req, res) => {
+  const { userId, feedBack } = req.body;
+  console.log(userId, feedBack)
+  const postId = req.params.id;
+  console.log(postId);
+  //let post = await postModel.findOne({_id: postId});
+
+
+  //let post = await postModel.findOne({_id: postId});
+  res.status(200).json({ message: 'infos bien reçu'});
+  res.status(400).json({ message: 'infos non reçu' })
+}
 
 exports.postUpdateRequest = async(req, res) => {
-  // if(req.body.media){
-  //   const media = req.body.public_id;
-  //   if(media){
-  //     cloudinary.uploader.destroy(media);
-  //   }
-  //
-  //   const newImage = await cloudinary.uploader.upload(req.body.media)
-  //   postModel.media = newImage.media;
-  //   postModel.public_id = newImage.public_id;
-  // }
   const media = req.body.public_id;
+  const text = req.body.text;
   if(media){
         cloudinary.uploader.destroy(media);
-      }
+        const newImg = await cloudinary.uploader.upload(req.file.path)
 
-   const dataUpdate = req.file ? {
-                ...req.body,//
-                public_id:req.body.public_id,
-                media: req.body.media,// url pour l'image req.protocol(http), req.get('host) pour l'hôte de serveur ici localhost:3000, uploads(dossier qui contiendra l'image), req.file.filename pour le nom du fichier
-  } : { ...req.body };//
-        postModel.updateOne({ _id: req.params.id }, { ...dataUpdate, _id: req.params.id })
-            .then(() => res.status(200).json({ message: 'Mise a jour des informations'}))
-            .catch(error => res.status(400).json({ error }));
+    const dataUpdate = req.file ? {
+          ...req.body,
+          public_id: newImg.public_id,
+          media: newImg.secure_url,
+    } : { ...req.body };
+      postModel.updateOne({ _id: req.params.id }, { ...dataUpdate, _id: req.params.id })
+        .then(() => res.status(200).json({ message: 'Mise a jour des informations'}))
+        .catch(error => res.status(400).json({ error }));
+  }
+  if(text){
+
+
+
+    const dataUpdate = req.file ? {
+      ...req.body,//
+      public_id:req.body.public_id,
+      media: req.body.media,// url pour l'image req.protocol(http), req.get('host) pour l'hôte de serveur ici localhost:3000, uploads(dossier qui contiendra l'image), req.file.filename pour le nom du fichier
+    } : { ...req.body };//
+    postModel.updateOne({ _id: req.params.id }, { ...dataUpdate, _id: req.params.id })
+      .then(() => res.status(200).json({ message: 'Mise a jour des informations'}))
+      .catch(error => res.status(400).json({ error }));
+  }
+
+
 }
 
 exports.postDeleteRequest = async(req, res) => {
@@ -106,16 +122,6 @@ exports.postDeleteRequest = async(req, res) => {
         .catch(error => res.status(400).json({ error }));
       })
     .catch(error => res.status(500).json({ error }));
-}
-
-exports.postAddFeedBackRequest = async (req, res) => {
-  const { userId, feedBack } = req.body;
-  console.log(userId, feedBack)
-  const postId = req.params.id;
-  console.log(postId);
-  //let post = await postModel.findOne({_id: postId});
-    res.status(200).json({ message: 'infos bien reçu'});
-    res.status(400).json({ message: 'infos non reçu' })
 }
 
 exports.postLikeRequest = async (req, res) => {
