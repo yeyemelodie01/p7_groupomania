@@ -58,18 +58,6 @@ function Header() {
           });
     }
 
-    // function error(){
-    //   let status = localStorage.getItem('error')
-    //   if(status){
-    //     const errorMessage = "Utilisateur non enregistré";
-    //     console.log(errorMessage)
-    //   }
-    //   if(status === null){
-    //     const success = "Utilisateur enregistré"
-    //     console.log(success)
-    //   }
-    // }
-
     function Logout(){
       localStorage.clear();
       window.location.href='/';

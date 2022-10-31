@@ -4,15 +4,18 @@ const userModel = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 
 exports.signUpRequest = async (req, res) => { // export de la fonction signUpRequest avec pour valeur async parametre request et response
-  const {email, password} = req.body; //constantes variables email et password extraites de request.body
+  let {email, password, role} = req.body; //constantes variables email et password extraites de request.body
   const foundUser = await userModel.find({email}); //constante foundUser avec pour valeur le résultat de userModel.find pour l'email
-
+  if (role === 'undefined') {
+    role = 'user';
+  }
   if(!foundUser || foundUser.length === 0) { // si foundUser est faux ou si foundUser.length est strictement égale à 0
     const salt = bcrypt.genSaltSync(saltRounds); //constant salt qui contient le salt généré par bcrypt.genSaltSync
     const hash = bcrypt.hashSync(password, salt); // permet de masquer le mot de passe
     const user = new userModel({ // constante user avec pour valeur un nouvel objet de type userModel
       email: email, // email qui prend la valeur de l'email
-      password : hash // le mot de passe qui sera hasher
+      password: hash, // le mot de passe qui sera hasher
+      role: role
     });
     const response = await user.save(); // constante response qui aura pour valeur le resultat de user.save
     res.status(201).json(response); // reponse avec le statut 201 qui encode en json response
