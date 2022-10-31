@@ -7,6 +7,9 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import postDelete from '../../utils/hooks/delete'
+import submitLike from '../../utils/hooks/like'
+import submitDislike from '../../utils/hooks/dislike'
 
 function Card({ userid, title, media, text, username, hour, avatar, like, dislike}){
   const [file, setFile] = useState();
@@ -22,7 +25,7 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
             <div id="media">
               <img src={ media } alt=""/>
             </div>
-            <div className="updatedelete">
+            <div className="updatedeletemedia">
               <form onSubmit={handleSubmit(postUpdate)}>
                 <label form='img'>
                   <input
@@ -57,32 +60,37 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
             <div id="text">
               <div>{ parse( text ) }</div>
             </div>
-            <form onSubmit={handleSubmit(postUpdate)}>
-              <div id="textupdate">
-                <div className="divwisywig">
-                  <div className="divtext">
-                    <CKEditor
-                      editor={ ClassicEditor }
-                      id={'editor'}
-                      config={{
-                        placeholder: "Ecrivez votre texte",
-                        removePlugins: [
-                          'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
-                          'ImageUpload', 'ImageToolbar', 'ImageStyle',
-                          'ImageCaption'
-                        ],
-                      }}
-                      onChange={(event, editor) => {
-                        const data = editor.getData()
-                        setTextEdit(data)
-                      }}
-                    />
+            <div className="updatedeletetext">
+              <form onSubmit={handleSubmit(postUpdate)}>
+                <div id="textupdate">
+                  <div className="divwisywig">
+                    <div className="divtext">
+                      <CKEditor
+                        editor={ ClassicEditor }
+                        id={'editor'}
+                        config={{
+                          placeholder: "Ecrivez votre texte",
+                          removePlugins: [
+                            'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
+                            'ImageUpload', 'ImageToolbar', 'ImageStyle',
+                            'ImageCaption'
+                          ],
+                        }}
+                        onChange={(event, editor) => {
+                          const data = editor.getData()
+                          setTextEdit(data)
+                        }}
+                      />
+                    </div>
+                    <button className="stylebutton" type="submit" onClick={() => {}} >Envoyer</button>
+                    {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                   </div>
-                  <button className="stylebutton" type="submit" onClick={() => {}} >Envoyer</button>
-                  {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                 </div>
+              </form>
+              <div>
+                <button className="delete" onClick={postDelete}>Supprimer</button>
               </div>
-            </form>
+            </div>
           </>
         )
       }
@@ -92,47 +100,6 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
         </div>
       )
     }
-  }
-
-  function submitLike() {
-    let postsId = localStorage.getItem("postId");
-    const like = {
-      "userId": userDetails._id,
-      "like": 1
-    }
-    console.log(like);
-    axios
-      .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
-        headers: {
-          Authorization: `Bearer ${userDetails.jwt}`,
-        }
-      })
-      .then(() => {
-        window.location.reload()
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  function submitDislike() {
-    let postsId = localStorage.getItem("postId");
-    const like = {
-      "userId": userDetails._id,
-      "like": -1
-    }
-    axios
-      .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
-        headers: {
-          Authorization: `Bearer ${userDetails.jwt}`,
-        }
-      })
-      .then(() => {
-        window.location.reload()
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   function handleFileChange(event) {
@@ -154,7 +121,7 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
           }
         })
         .then(() => {
-          //window.location.href='/';
+          window.location.href='/';
         })
         .catch((err) => {
           console.log(err);
@@ -172,31 +139,13 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
           }
         })
         .then(() => {
-          //window.location.href='/';
+          window.location.href='/';
         })
         .catch((err) => {
           console.log(err);
         });
     }
   }
-
-  function postDelete() {
-    let postsId = localStorage.getItem("postId");
-    axios
-      .delete(`http://localhost:4000/api/posts/${postsId}`, {
-        headers: {
-          Authorization: `Bearer ${userDetails.jwt}`
-        }
-      })
-      .then(() => {
-        alert("Votre post a bien été supprimer")
-        window.location.href='/';
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
 
   if(userDetails) {
     return (
@@ -238,48 +187,7 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
           </div>
         </div>
       </>
-    )
-    // } else {
-    //   return (
-    //     <>
-    //       <div className="profilpost">
-    //         <ul className="listpost">
-    //           <li>
-    //             <img className="imgprofil" src={ avatar } alt="profil"/>
-    //           </li>
-    //           <li>
-    //             <p className="nameprofil">{ username }</p>
-    //           </li>
-    //           <li>
-    //             <p className="hourpost">{ hour }</p>
-    //           </li>
-    //         </ul>
-    //       </div>
-    //       <div className="divfigurecenter">
-    //         <div className="divfigurewidth">
-    //           <h1 className="titlepost">{ title }</h1>
-    //           <figure>
-    //             { mediaText() }
-    //             <figcaption>
-    //               <div className="stylecomments">
-    //                 <div className="divcomments">
-    //                   <div className="diviconnumber">
-    //                     <div className="likedislike">
-    //                       <button className="buttonicon" onClick={ submitLike }><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
-    //                       <button className="buttonicon" onClick={ submitDislike }><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
-    //                     </div>
-    //                     <button className="number">2 commentaires</button>
-    //                   </div>
-    //                 </div>
-    //               </div>
-    //             </figcaption>
-    //           </figure>
-    //         </div>
-    //       </div>
-    //     </>
-    //   )
-    // }} else {
-  } else{
+    )} else{
           return (
             <>
               <div className="profilpost">
