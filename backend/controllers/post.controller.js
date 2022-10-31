@@ -78,36 +78,31 @@ exports.postAddFeedBackRequest = async (req, res) => {
 }
 
 exports.postUpdateRequest = async(req, res) => {
-  const media = req.body.public_id;
-  const text = req.body.text;
-  if(media){
-        cloudinary.uploader.destroy(media);
-        const newImg = await cloudinary.uploader.upload(req.file.path)
-
-    const dataUpdate = req.file ? {
-          ...req.body,
-          public_id: newImg.public_id,
-          media: newImg.secure_url,
-    } : { ...req.body };
-      postModel.updateOne({ _id: req.params.id }, { ...dataUpdate, _id: req.params.id })
-        .then(() => res.status(200).json({ message: 'Mise a jour des informations'}))
-        .catch(error => res.status(400).json({ error }));
-  }
-  if(text){
-
-
-
-    const dataUpdate = req.file ? {
-      ...req.body,//
-      public_id:req.body.public_id,
-      media: req.body.media,// url pour l'image req.protocol(http), req.get('host) pour l'hôte de serveur ici localhost:3000, uploads(dossier qui contiendra l'image), req.file.filename pour le nom du fichier
-    } : { ...req.body };//
+  const postId = await postModel.findOne({_id: req.params.id})
+  const { postType, text } = req.body
+  if("media" === postType){
+    const media = postId.public_id;
+    if(media){
+      cloudinary.uploader.destroy(media);
+    }
+    const newImg = await cloudinary.uploader.upload(req.file.path);
+    const dataUpdate = {
+      public_id: newImg.public_id,
+      media: newImg.secure_url
+    }
     postModel.updateOne({ _id: req.params.id }, { ...dataUpdate, _id: req.params.id })
       .then(() => res.status(200).json({ message: 'Mise a jour des informations'}))
       .catch(error => res.status(400).json({ error }));
   }
 
-
+  if ("text" === postType){
+    const updateText = {
+      text: text
+    };
+    postModel.updateOne({_id:req.params.id},{...updateText, _id: req.params.id})
+      .then(() => res.status(200).json({ message: 'Mise a jour des informations'}))
+      .catch(error => res.status(400).json({ error }));
+  }
 }
 
 exports.postDeleteRequest = async(req, res) => {

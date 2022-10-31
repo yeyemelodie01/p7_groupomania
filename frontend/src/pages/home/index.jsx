@@ -33,6 +33,7 @@ function Home() {
       formData.append("postType", "media");
       formData.append("title", data.title);
       formData.append("files", data.img[0]);
+      console.log(formData);
       axios
           .post("http://localhost:4000/api/posts/create", formData, {
             headers: {
@@ -41,7 +42,7 @@ function Home() {
             }
           })
           .then(() => {
-            window.location.href='/';
+            //window.location.href='/';
           })
           .catch((err) => {
             console.log(err);

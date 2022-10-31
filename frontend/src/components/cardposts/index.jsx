@@ -3,28 +3,89 @@ import axios from 'axios'
 import parse from 'html-react-parser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 function Card({ userid, title, media, text, username, hour, avatar, like, dislike}){
-
-  // if (media){
-  //   document.getElementById('media').style.display='block';
-  //   document.getElementById('text').style.display='none';
-  // }
-  //
-  // if (text){
-  //   document.getElementById('text').style.display='block';
-  //   document.getElementById('media').style.display='none';
-  // }
+  const [file, setFile] = useState();
+  const [ textEdit, setTextEdit ] = useState("");
+  const { register, handleSubmit} = useForm();
+  const userDetails = JSON.parse(localStorage.getItem('user'));
 
   function mediaText(){
     if(media){
-      return(
+      if (userDetails._id === userid){
+        return(
+          <>
+            <div id="media">
+              <img src={ media } alt=""/>
+            </div>
+            <div className="updatedelete">
+              <form onSubmit={handleSubmit(postUpdate)}>
+                <label form='img'>
+                  <input
+                    id="img"
+                    className="sizeinputimg"
+                    type="file"
+                    value={ file }
+                    onChange={handleFileChange}
+                    {...register("img")}
+                  />
+                </label>
+                <button className="update" type="submit" onClick={() => {}}>Modifier</button>
+              </form>
+              <div>
+                <button className="delete" onClick={postDelete}>Supprimer</button>
+              </div>
+            </div>
+          </>
+        )
+      } else {
+        return (
           <div id="media">
             <img src={ media } alt=""/>
           </div>
         )
+      }
     }
     if(text){
+      if (userDetails._id === userid){
+        return (
+          <>
+            <div id="text">
+              <div>{ parse( text ) }</div>
+            </div>
+            <form onSubmit={handleSubmit(postUpdate)}>
+              <div id="textupdate">
+                <div className="divwisywig">
+                  <div className="divtext">
+                    <CKEditor
+                      editor={ ClassicEditor }
+                      id={'editor'}
+                      config={{
+                        placeholder: "Ecrivez votre texte",
+                        removePlugins: [
+                          'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
+                          'ImageUpload', 'ImageToolbar', 'ImageStyle',
+                          'ImageCaption'
+                        ],
+                      }}
+                      onChange={(event, editor) => {
+                        const data = editor.getData()
+                        setTextEdit(data)
+                      }}
+                    />
+                  </div>
+                  <button className="stylebutton" type="submit" onClick={() => {}} >Envoyer</button>
+                  {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
+                </div>
+              </div>
+            </form>
+          </>
+        )
+      }
       return (
         <div id="text">
           <div>{ parse( text ) }</div>
@@ -60,7 +121,6 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
       "userId": userDetails._id,
       "like": -1
     }
-
     axios
       .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
         headers: {
@@ -73,6 +133,51 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  function handleFileChange(event) {
+    setFile(event.target.files)
+  }
+
+  const postUpdate = (data) =>{
+    let postsId = localStorage.getItem("postId");
+    if(media){
+      const formData = new FormData();
+      formData.append("files", data.img[0]);
+      formData.append("postType", "media");
+      console.log(formData);
+      axios
+        .put(`http://localhost:4000/api/posts/${postsId}`, formData, {
+          headers: {
+            Authorization: `Bearer ${userDetails.jwt}`,
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(() => {
+          //window.location.href='/';
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    if (text){
+      const updateText = {
+        "postType": 'text',
+          "text": textEdit
+      }
+      axios
+        .put(`http://localhost:4000/api/posts/${postsId}`, updateText, {
+          headers: {
+            Authorization: `Bearer ${userDetails.jwt}`,
+          }
+        })
+        .then(() => {
+          //window.location.href='/';
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   function postDelete() {
@@ -93,88 +198,88 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
   }
 
 
-  let userDetails = JSON.parse(localStorage.getItem('user'));
   if(userDetails) {
-    if(userDetails.userId === userid){
-      return (
-        <>
-          <div className="profilpost">
-            <ul className="listpost">
-              <li>
-                <img className="imgprofil" src={ avatar } alt="profil"/>
-              </li>
-              <li>
-                <p className="nameprofil">{ username }</p>
-              </li>
-              <li>
-                <p className="hourpost">{ hour }</p>
-              </li>
-            </ul>
-          </div>
-          <div className="divfigurecenter">
-            <div className="divfigurewidth">
-              <h1 className="titlepost">{ title }</h1>
-              <figure>
-                { mediaText() }
-                <div>
-                  <button className="delete" onClick={postDelete}>Supprimer</button>
+    return (
+      <>
+        <div className="profilpost">
+          <ul className="listpost">
+            <li>
+              <img className="imgprofil" src={avatar} alt="profil" />
+            </li>
+            <li>
+              <p className="nameprofil">{username}</p>
+            </li>
+            <li>
+              <p className="hourpost">{hour}</p>
+            </li>
+          </ul>
+        </div>
+        <div className="divfigurecenter">
+          <div className="divfigurewidth">
+            <h1 className="titlepost">{title}</h1>
+            <figure>
+              {mediaText()}
+              <figcaption>
+                <div className="stylecomments">
+                  <div className="divcomments">
+                    <div className="diviconnumber">
+                      <div className="likedislike">
+                        <button className="buttonicon" onClick={submitLike}><FontAwesomeIcon icon={faThumbsUp} className="iconcolor" />{like}
+                        </button>
+                        <button className="buttonicon" onClick={submitDislike}><FontAwesomeIcon icon={faThumbsDown} className="iconcolor" />{dislike}
+                        </button>
+                      </div>
+                      <button className="number">2 commentaires</button>
+                    </div>
+                  </div>
                 </div>
-                <figcaption>
-                  <div className="stylecomments">
-                    <div className="divcomments">
-                      <div className="diviconnumber">
-                        <div className="likedislike">
-                          <button className="buttonicon" onClick={ submitLike }><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
-                          <button className="buttonicon" onClick={ submitDislike }><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
-                        </div>
-                        <button className="number">2 commentaires</button>
-                      </div>
-                    </div>
-                  </div>
-                </figcaption>
-              </figure>
-            </div>
+              </figcaption>
+            </figure>
           </div>
-        </>
-      )} else {
-      return (
-        <>
-          <div className="profilpost">
-            <ul className="listpost">
-              <li>
-                <img className="imgprofil" src={ avatar } alt="profil"/>
-              </li>
-              <li>
-                <p className="nameprofil">{ username }</p>
-              </li>
-              <li>
-                <p className="hourpost">{ hour }</p>
-              </li>
-            </ul>
-          </div>
-          <div className="divfigurecenter">
-            <div className="divfigurewidth">
-              <h1 className="titlepost">{ title }</h1>
-              <figure>
-                { mediaText() }
-                <figcaption>
-                  <div className="stylecomments">
-                    <div className="divcomments">
-                      <div className="diviconnumber">
-                        <div className="likedislike">
-                          <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
-                          <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
-                        </div>
-                        <button className="number">2 commentaires</button>
-                      </div>
-                    </div>
-                  </div>
-                </figcaption>
-              </figure>
-            </div>
-          </div>
-        </>
-      )}} else {
+        </div>
+      </>
+    )
+    // } else {
+    //   return (
+    //     <>
+    //       <div className="profilpost">
+    //         <ul className="listpost">
+    //           <li>
+    //             <img className="imgprofil" src={ avatar } alt="profil"/>
+    //           </li>
+    //           <li>
+    //             <p className="nameprofil">{ username }</p>
+    //           </li>
+    //           <li>
+    //             <p className="hourpost">{ hour }</p>
+    //           </li>
+    //         </ul>
+    //       </div>
+    //       <div className="divfigurecenter">
+    //         <div className="divfigurewidth">
+    //           <h1 className="titlepost">{ title }</h1>
+    //           <figure>
+    //             { mediaText() }
+    //             <figcaption>
+    //               <div className="stylecomments">
+    //                 <div className="divcomments">
+    //                   <div className="diviconnumber">
+    //                     <div className="likedislike">
+    //                       <button className="buttonicon" onClick={ submitLike }><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
+    //                       <button className="buttonicon" onClick={ submitDislike }><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
+    //                     </div>
+    //                     <button className="number">2 commentaires</button>
+    //                   </div>
+    //                 </div>
+    //               </div>
+    //             </figcaption>
+    //           </figure>
+    //         </div>
+    //       </div>
+    //     </>
+    //   )
+    // }} else {
+  } else{
           return (
             <>
               <div className="profilpost">
@@ -213,48 +318,6 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
               </div>
             </>
           )
-        // } else {
-        //   return (
-        //     <>
-        //       <div className="profilpost">
-        //         <ul className="listpost">
-        //           <li>
-        //             <img className="imgprofil" src={ avatar } alt="profil"/>
-        //           </li>
-        //           <li>
-        //             <p className="nameprofil">{ username }</p>
-        //           </li>
-        //           <li>
-        //             <p className="hourpost">{ hour }</p>
-        //           </li>
-        //         </ul>
-        //       </div>
-        //       <div className="divfigurecenter">
-        //         <div className="divfigurewidth">
-        //           <h1 className="titlepost">{ title }</h1>
-        //           <figure>
-        //             <div id="text">
-        //               <div>{ parse( text ) }</div>
-        //             </div>
-        //             <figcaption>
-        //               <div className="stylecomments">
-        //                 <div className="divcomments">
-        //                   <div className="diviconnumber">
-        //                     <div className="likedislike">
-        //                       <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
-        //                       <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
-        //                     </div>
-        //                     <button className="number">2 commentaires</button>
-        //                   </div>
-        //                 </div>
-        //               </div>
-        //             </figcaption>
-        //           </figure>
-        //         </div>
-        //       </div>
-        //     </>
-        //   )
-        // }
       }
 }
 
