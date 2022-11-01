@@ -1,52 +1,52 @@
-import Profil from '../../assets/jeet-tandel-ObP_fwHNCSw-unsplash.jpg'
 import '../../utils/styles/detailposts.css'
 import '../../utils/styles/post.css'
 import { useEffect, useState } from 'react'
 import Card from '../../components/cardposts'
 import moment from 'moment';
 import axios from 'axios'
+import { useForm } from 'react-hook-form'
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import Cardcomments from '../../components/cardcomments'
+import parse from 'html-react-parser'
 
 function DetailPosts() {
   const [detail, setDetail] = useState([]);
-  let userDetails = localStorage.getItem('user')
+  const userDetails = JSON.parse(localStorage.getItem('user'));
+  const { handleSubmit} = useForm();
+  const [ textComment, setTextComment ] = useState("");
 
-  // const postDetail = async() =>{
-  //   let postsId = localStorage.getItem("postId");
-  //   const res = await fetch(`http://localhost:4000/api/posts/${postsId}`);
-  //   const data = await res.json();
-  //   setDetail(data);
-  // };
-  //
-  // useEffect(() =>{
-  //   postDetail();
-  // }, []);
-
-  // useEffect(() => {
-  //   let postsId = localStorage.getItem("postId");
-  //   fetch(`http://localhost:4000/api/posts/${postsId}`)
-  //     .then((res) => res.json())
-  //     .then((detail) => {
-  //       setDetail(detail.detail)
-  //       console.log(detail);
-  //     })
-  // }, []);
   useEffect(() => {
-    let postsId = localStorage.getItem("postId");
+    const postsId = localStorage.getItem("postId");
     axios
     .get(`http://localhost:4000/api/posts/${postsId}`)
     .then((res) => {
       setDetail(res.data)
-      // if(res.data.media){
-      //   localStorage.setItem('media', res.data.media.url);
-      // } else {
-      //   localStorage.setItem('text', res.data.text);
-      // }
     })
     .catch((err) => {
       console.log(err)
     })
-  }, []);
+  },[]);
 
+  const postComment = () => {
+    const postsId = localStorage.getItem("postId");
+    const userComment = {
+      "userId" : userDetails._id,
+      "comment" : textComment
+    }
+    axios
+      .post(`http://localhost:4000/api/posts/${postsId}/comment`, userComment, {
+        headers: {
+          Authorization: `Bearer ${userDetails.jwt}`,
+        }
+      })
+      .then(() => {
+        //window.location.href='/';
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   const date1 = moment(detail.createdAt);
   const date2 = moment(Date.now());
@@ -65,6 +65,12 @@ function DetailPosts() {
     hour = date2.diff(date1, 'days') + "j";
   }
 
+  const useComment = detail.comments;
+  const finalObj= {};
+  for(let i = 0; i < useComment.length; i++ ) {
+    Object.assign(finalObj, useComment[i]);
+  }
+
   if(userDetails){
       return(
         <main>
@@ -81,30 +87,41 @@ function DetailPosts() {
                   avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
                   like={ JSON.stringify(detail.likes) }
                   dislike={ JSON.stringify(detail.dislikes) }
+                  commentNum={JSON.stringify(useComment.length)}
                 />
-                <div id="commentable">
-                  <label form="textcomments">
-                    <textarea id='textcomments'/>
-                  </label>
-                  <div>
-                    <button>Annuler</button>
-                    <button>Commenter</button>
-                  </div>
-                  <div className="divprofilcomments">
-                    <div className="divpaddingcomments">
-                      <div className="profilpostcomments">
-                        <p>{}</p>
+                <div>
+                  <form onSubmit={handleSubmit(postComment)}>
+                    <div id="textupdate">
+                      <div className="divwisywig">
+                        <div className="divtext">
+                          <CKEditor
+                            editor={ ClassicEditor }
+                            id={'editor'}
+                            config={{
+                              placeholder: "Ecrivez votre texte",
+                              removePlugins: [
+                                'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
+                                'ImageUpload', 'ImageToolbar', 'ImageStyle',
+                                'ImageCaption'
+                              ],
+                            }}
+                            onChange={(event, editor) => {
+                              const data = editor.getData()
+                              setTextComment(data)
+                            }}
+                          />
+                        </div>
+                        <button className="stylebutton" type="submit" onClick={() => {}} >Envoyer</button>
+                        {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                       </div>
                     </div>
-                  </div>
+                  </form>
                   <div className="divprofilcomments">
-                    <div className="divpaddingcomments">
-                      <img className="profilcommentsimg" src={ Profil } alt="profil"/>
-                      <div className="profilpostcomments">
-                        <p>{}</p>
-                      </div>
-                    </div>
-                  </div>
+                    <Cardcomments
+                      key={finalObj.id}
+                      comment={parse(finalObj.comment)}
+                    />
+                </div>
                 </div>
             </div>
           </div>
@@ -113,8 +130,8 @@ function DetailPosts() {
     } else {
     return (
       <main>
-        <div className="postgrid">
-          <div className="griddetail">
+        <div className="postGrid">
+          <div className="gridDetail">
             <Card
               key={detail.id}
               title={detail.title}
@@ -125,23 +142,14 @@ function DetailPosts() {
               avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
               like={ JSON.stringify(detail.likes) }
               dislike={ JSON.stringify(detail.dislikes) }
+              commentNum={ JSON.stringify(useComment.length) }
             />
               <div id="commentable">
-                <div className="divprofilcomments">
-                  <div className="divpaddingcomments">
-                    <img className="profilcommentsimg" src={ Profil } alt="profil"/>
-                    <div className="profilpostcomments">
-                      <p>{}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="divprofilcomments">
-                  <div className="divpaddingcomments">
-                    <img className="profilcommentsimg" src={ Profil } alt="profil"/>
-                    <div className="profilpostcomments">
-                      <p>{}</p>
-                    </div>
-                  </div>
+                <div className="divProfilComments">
+                  <Cardcomments
+                    key={finalObj.id}
+                    comment={parse(finalObj.comment)}
+                  />
                 </div>
               </div>
           </div>

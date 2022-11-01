@@ -11,7 +11,7 @@ import postDelete from '../../utils/hooks/delete'
 import submitLike from '../../utils/hooks/like'
 import submitDislike from '../../utils/hooks/dislike'
 
-function Card({ userid, title, media, text, username, hour, avatar, like, dislike}){
+function Card({ userid, title, media, text, username, hour, avatar, like, dislike, commentNum}){
   const [file, setFile] = useState();
   const [ textEdit, setTextEdit ] = useState("");
   const { register, handleSubmit} = useForm();
@@ -178,7 +178,7 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
                         <button className="buttonicon" onClick={submitDislike}><FontAwesomeIcon icon={faThumbsDown} className="iconcolor" />{dislike}
                         </button>
                       </div>
-                      <button className="number">2 commentaires</button>
+                      <button className="number">{ commentNum } commentaires</button>
                     </div>
                   </div>
                 </div>
@@ -216,7 +216,7 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
                             </div>
-                            <button className="number">2 commentaires</button>
+                            <button className="number">{ commentNum } commentaires</button>
                           </div>
                         </div>
                       </div>
@@ -238,7 +238,8 @@ Card.propTypes = {
   hour: PropTypes.string,
   avatar: PropTypes.string,
   like: PropTypes.string,
-  dislike: PropTypes.string
+  dislike: PropTypes.string,
+  commentNum: PropTypes.string,
 }
 
 Card.defaultProps = {
@@ -251,6 +252,7 @@ Card.defaultProps = {
   avatar:'',
   like: '',
   dislike: '',
+  commentNum: '',
 }
 
 export default Card

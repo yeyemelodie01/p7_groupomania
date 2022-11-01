@@ -11,10 +11,6 @@ exports.createOneRequest = async (req, res) => {
   // si aucun utilisateur n'est trouvé, nous pouvons ajouter cet utilisateur à la base de données.
   if(!foundUser || foundUser.length === 0) {
     const user = new UserModel({email, password});
-
-
-
-
     const response = await user.save();
     res.status(201).json(response);
   } else {
@@ -26,10 +22,10 @@ exports.createOneRequest = async (req, res) => {
 exports.readOneRequest = async (req, res) => {
   // Best request is GET, we can get the ID from the request
   // parameters.
-  const {email} = req.body;
+  const {userId} = req.body;
 
   // attempt to retrieve user
-  const foundUser = await UserModel.findOne({email: email});
+  const foundUser = await UserModel.findOne({userId: userId});
 
 
 

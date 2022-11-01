@@ -50,6 +50,8 @@ function Post() {
       hour = date2.diff(date1, 'days') + "j";
     }
 
+    const useComment = posts.comments;
+
     if(posts.text){
       return (
         <div className="postgrid">
@@ -82,7 +84,7 @@ function Post() {
                                 <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ posts.likes }</button>
                                 <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ posts.dislikes }</button>
                               </div>
-                              <button className="number" onClick={ SendPostId }>2 commentaires</button>
+                              <button className="number" onClick={ SendPostId }>{ JSON.stringify(useComment.length) } commentaires</button>
                             </div>
                           </div>
                         </div>
@@ -130,7 +132,7 @@ function Post() {
                                 <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor"/>{ posts.likes }</button>
                                 <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ posts.dislikes }</button>
                               </div>
-                              <button className="number" onClick={ SendPostId }>2 commentaires</button>
+                              <button className="number" onClick={ SendPostId }>{ JSON.stringify(useComment.length) } commentaires</button>
                             </div>
                           </div>
                         </div>

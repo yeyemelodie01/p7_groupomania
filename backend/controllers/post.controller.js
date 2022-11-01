@@ -1,6 +1,5 @@
 const postModel = require('../models/post.model');
 const cloudinary = require('../middleware/cloud')
-//const fs = require('fs')
 
 exports.postRequest = async(req, res) => {
     postModel.find()
@@ -64,17 +63,16 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
   }
 }
 
-exports.postAddFeedBackRequest = async (req, res) => {
-  const { userId, feedBack } = req.body;
-  console.log(userId, feedBack)
+exports.postAddCommentRequest = async (req, res) => {
+  const { userId, comment } = req.body;
   const postId = req.params.id;
-  console.log(postId);
-  //let post = await postModel.findOne({_id: postId});
-
-
-  //let post = await postModel.findOne({_id: postId});
-  res.status(200).json({ message: 'infos bien reçu'});
-  res.status(400).json({ message: 'infos non reçu' })
+  const postComment = {
+    userId: userId,
+    comment: comment
+  }
+  postModel.updateOne({_id: postId}, {$addToSet: { comments : [postComment]}})
+    .then(() => res.status(200).json({ message: 'infos bien reçu'}))
+    .catch(err => res.status(404).json(err))
 }
 
 exports.postUpdateRequest = async(req, res) => {
