@@ -25,7 +25,7 @@ function DetailPosts() {
   // for (let i = 0; i < usePostComment.length; i++) {
   //   Object.assign(finalObj, usePostComment[i])
   // }
-
+console.log(detail)
 
   const date1 = moment(detail.createdAt);
   const date2 = moment(Date.now());
@@ -50,6 +50,7 @@ function DetailPosts() {
           <div className="gridDetail">
             <Card
               key={detail.id}
+              userid={detail.userId}
               title={detail.title}
               media={detail.media}
               text={detail.text}

@@ -17,7 +17,7 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
   const { register, handleSubmit} = useForm();
   const userDetails = JSON.parse(localStorage.getItem('user'));
   const idAdmin = userDetails._id;
-    console.log(userDetails._id)
+    console.log(userDetails._id , userid)
     axios
       .get(`http://localhost:4000/users/${idAdmin}`)
       .then((res) => {
@@ -26,7 +26,76 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
         localStorage.setItem('role', role);
       })
 const roleAdmin = localStorage.getItem('role');
+    console.log(roleAdmin)
   function mediaText(){
+    if(roleAdmin === "admin"){
+      if(media){
+        return(
+          <>
+            <div id="media">
+              <img src={ media } alt=""/>
+            </div>
+            <div className="updatedeletemedia">
+              <form onSubmit={handleSubmit(postUpdate)}>
+                <label form='img'>
+                  <input
+                    id="img"
+                    className="sizeinputimg"
+                    type="file"
+                    value={ file }
+                    onChange={handleFileChange}
+                    {...register("img")}
+                  />
+                </label>
+                <button className="update" type="submit" onClick={() => {}}>Modifier</button>
+              </form>
+              <div>
+                <button className="delete" onClick={postDelete}>Supprimer</button>
+              </div>
+            </div>
+          </>
+        )
+      }
+      if(text){
+        return (
+          <>
+            <div id="text">
+              <div>{ parse( text ) }</div>
+            </div>
+            <div className="updatedeletetext">
+              <form onSubmit={handleSubmit(postUpdate)}>
+                <div id="textupdate">
+                  <div className="divwisywig">
+                    <div className="divtext">
+                      <CKEditor
+                        editor={ ClassicEditor }
+                        id={'editor'}
+                        config={{
+                          placeholder: "Ecrivez votre texte",
+                          removePlugins: [
+                            'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
+                            'ImageUpload', 'ImageToolbar', 'ImageStyle',
+                            'ImageCaption'
+                          ],
+                        }}
+                        onChange={(event, editor) => {
+                          const data = editor.getData()
+                          setTextEdit(data)
+                        }}
+                      />
+                    </div>
+                    <button className="stylebutton" type="submit" onClick={() => {}} >Envoyer</button>
+                    {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
+                  </div>
+                </div>
+              </form>
+              <div>
+                <button className="delete" onClick={postDelete}>Supprimer</button>
+              </div>
+            </div>
+          </>
+        )}
+    }
     if(media){
       if (userDetails._id === userid) {
         return (
@@ -114,79 +183,6 @@ const roleAdmin = localStorage.getItem('role');
     }
   }
 
-  function updateDeleteAdmin(){
-    if(roleAdmin === "admin"){
-      if(media){
-        return(
-          <>
-            <div id="media">
-              <img src={ media } alt=""/>
-            </div>
-            <div className="updatedeletemedia">
-              <form onSubmit={handleSubmit(postUpdate)}>
-                <label form='img'>
-                  <input
-                    id="img"
-                    className="sizeinputimg"
-                    type="file"
-                    value={ file }
-                    onChange={handleFileChange}
-                    {...register("img")}
-                  />
-                </label>
-                <button className="update" type="submit" onClick={() => {}}>Modifier</button>
-              </form>
-              <div>
-                <button className="delete" onClick={postDelete}>Supprimer</button>
-              </div>
-            </div>
-          </>
-        )
-      }
-    }
-    if(text){
-      if(roleAdmin === "admin"){
-        return (
-          <>
-            <div id="text">
-              <div>{ parse( text ) }</div>
-            </div>
-            <div className="updatedeletetext">
-              <form onSubmit={handleSubmit(postUpdate)}>
-                <div id="textupdate">
-                  <div className="divwisywig">
-                    <div className="divtext">
-                      <CKEditor
-                        editor={ ClassicEditor }
-                        id={'editor'}
-                        config={{
-                          placeholder: "Ecrivez votre texte",
-                          removePlugins: [
-                            'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
-                            'ImageUpload', 'ImageToolbar', 'ImageStyle',
-                            'ImageCaption'
-                          ],
-                        }}
-                        onChange={(event, editor) => {
-                          const data = editor.getData()
-                          setTextEdit(data)
-                        }}
-                      />
-                    </div>
-                    <button className="stylebutton" type="submit" onClick={() => {}} >Envoyer</button>
-                    {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
-                  </div>
-                </div>
-              </form>
-              <div>
-                <button className="delete" onClick={postDelete}>Supprimer</button>
-              </div>
-            </div>
-          </>
-        )}
-    }
-  }
-
   function handleFileChange(event) {
     setFile(event.target.files)
   }
@@ -253,7 +249,6 @@ const roleAdmin = localStorage.getItem('role');
             <h1 className="titlepost">{title}</h1>
             <figure>
               {mediaText()}
-              {updateDeleteAdmin()}
               <figcaption>
                 <div className="stylecomments">
                   <div className="divcomments">
@@ -293,7 +288,6 @@ const roleAdmin = localStorage.getItem('role');
                   <h1 className="titlepost">{ title }</h1>
                   <figure>
                     { mediaText() }
-                    {updateDeleteAdmin()}
                     <figcaption>
                       <div className="stylecomments">
                         <div className="divcomments">
