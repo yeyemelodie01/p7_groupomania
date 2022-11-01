@@ -22,18 +22,15 @@ exports.createOneRequest = async (req, res) => {
 exports.readOneRequest = async (req, res) => {
   // Best request is GET, we can get the ID from the request
   // parameters.
-  const {userId} = req.body;
+  const userId = req.params.id;
 
   // attempt to retrieve user
-  const foundUser = await UserModel.findOne({userId: userId});
-
-
-
+  const foundUser = await UserModel.findOne({_id: userId});
 
   // return 404 if no user found, return user otherwise.
   if(!foundUser || foundUser.length === 0) {
     res.status(404).json({message: "User not found!"});
   } else {
-    res.status(302).json(foundUser);
+    res.status(200).json(foundUser);
   }
 }

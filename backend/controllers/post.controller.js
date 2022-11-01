@@ -63,18 +63,6 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
   }
 }
 
-exports.postAddCommentRequest = async (req, res) => {
-  const { userId, comment } = req.body;
-  const postId = req.params.id;
-  const postComment = {
-    userId: userId,
-    comment: comment
-  }
-  postModel.updateOne({_id: postId}, {$addToSet: { comments : [postComment]}})
-    .then(() => res.status(200).json({ message: 'infos bien reçu'}))
-    .catch(err => res.status(404).json(err))
-}
-
 exports.postUpdateRequest = async(req, res) => {
   const postId = await postModel.findOne({_id: req.params.id})
   const { postType, text } = req.body

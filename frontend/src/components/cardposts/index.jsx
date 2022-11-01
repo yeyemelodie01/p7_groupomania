@@ -11,19 +11,29 @@ import postDelete from '../../utils/hooks/delete'
 import submitLike from '../../utils/hooks/like'
 import submitDislike from '../../utils/hooks/dislike'
 
-function Card({ userid, title, media, text, username, hour, avatar, like, dislike, commentNum}){
+function Card({ userid, title, media, text, username, hour, avatar, like, dislike}){
   const [file, setFile] = useState();
   const [ textEdit, setTextEdit ] = useState("");
   const { register, handleSubmit} = useForm();
   const userDetails = JSON.parse(localStorage.getItem('user'));
-
+  const idAdmin = userDetails._id;
+    console.log(userDetails._id)
+    axios
+      .get(`http://localhost:4000/users/${idAdmin}`)
+      .then((res) => {
+        console.log(res.data)
+        const role = res.data.role;
+        localStorage.setItem('role', role);
+      })
+const roleAdmin = localStorage.getItem('role');
+    console.log(roleAdmin)
   function mediaText(){
     if(media){
-      if (userDetails._id === userid){
-        return(
+      if (userDetails._id === userid) {
+        return (
           <>
             <div id="media">
-              <img src={ media } alt=""/>
+              <img src={media} alt="" />
             </div>
             <div className="updatedeletemedia">
               <form onSubmit={handleSubmit(postUpdate)}>
@@ -32,12 +42,14 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
                     id="img"
                     className="sizeinputimg"
                     type="file"
-                    value={ file }
+                    value={file}
                     onChange={handleFileChange}
                     {...register("img")}
                   />
                 </label>
-                <button className="update" type="submit" onClick={() => {}}>Modifier</button>
+                <button className="update" type="submit" onClick={() => {
+                }}>Modifier
+                </button>
               </form>
               <div>
                 <button className="delete" onClick={postDelete}>Supprimer</button>
@@ -45,7 +57,33 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
             </div>
           </>
         )
-      } else {
+        } if(roleAdmin === "admin"){
+          return(
+            <>
+              <div id="media">
+                <img src={ media } alt=""/>
+              </div>
+              <div className="updatedeletemedia">
+                <form onSubmit={handleSubmit(postUpdate)}>
+                  <label form='img'>
+                    <input
+                      id="img"
+                      className="sizeinputimg"
+                      type="file"
+                      value={ file }
+                      onChange={handleFileChange}
+                      {...register("img")}
+                    />
+                  </label>
+                  <button className="update" type="submit" onClick={() => {}}>Modifier</button>
+                </form>
+                <div>
+                  <button className="delete" onClick={postDelete}>Supprimer</button>
+                </div>
+              </div>
+            </>
+          )
+        } else {
         return (
           <div id="media">
             <img src={ media } alt=""/>
@@ -93,12 +131,52 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
             </div>
           </>
         )
+      } if(roleAdmin){
+        return (
+          <>
+            <div id="text">
+              <div>{ parse( text ) }</div>
+            </div>
+            <div className="updatedeletetext">
+              <form onSubmit={handleSubmit(postUpdate)}>
+                <div id="textupdate">
+                  <div className="divwisywig">
+                    <div className="divtext">
+                      <CKEditor
+                        editor={ ClassicEditor }
+                        id={'editor'}
+                        config={{
+                          placeholder: "Ecrivez votre texte",
+                          removePlugins: [
+                            'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
+                            'ImageUpload', 'ImageToolbar', 'ImageStyle',
+                            'ImageCaption'
+                          ],
+                        }}
+                        onChange={(event, editor) => {
+                          const data = editor.getData()
+                          setTextEdit(data)
+                        }}
+                      />
+                    </div>
+                    <button className="stylebutton" type="submit" onClick={() => {}} >Envoyer</button>
+                    {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
+                  </div>
+                </div>
+              </form>
+              <div>
+                <button className="delete" onClick={postDelete}>Supprimer</button>
+              </div>
+            </div>
+          </>
+        )
+      } else {
+        return (
+          <div id="text">
+            <div>{ parse( text ) }</div>
+          </div>
+        )
       }
-      return (
-        <div id="text">
-          <div>{ parse( text ) }</div>
-        </div>
-      )
     }
   }
 
@@ -178,7 +256,6 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
                         <button className="buttonicon" onClick={submitDislike}><FontAwesomeIcon icon={faThumbsDown} className="iconcolor" />{dislike}
                         </button>
                       </div>
-                      <button className="number">{ commentNum } commentaires</button>
                     </div>
                   </div>
                 </div>
@@ -216,7 +293,6 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ like }</button>
                               <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ dislike }</button>
                             </div>
-                            <button className="number">{ commentNum } commentaires</button>
                           </div>
                         </div>
                       </div>
@@ -239,7 +315,6 @@ Card.propTypes = {
   avatar: PropTypes.string,
   like: PropTypes.string,
   dislike: PropTypes.string,
-  commentNum: PropTypes.string,
 }
 
 Card.defaultProps = {
@@ -252,7 +327,6 @@ Card.defaultProps = {
   avatar:'',
   like: '',
   dislike: '',
-  commentNum: '',
 }
 
 export default Card
