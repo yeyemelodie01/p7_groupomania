@@ -26,7 +26,6 @@ function Card({ userid, title, media, text, username, hour, avatar, like, dislik
         localStorage.setItem('role', role);
       })
 const roleAdmin = localStorage.getItem('role');
-    console.log(roleAdmin)
   function mediaText(){
     if(media){
       if (userDetails._id === userid) {
@@ -57,32 +56,6 @@ const roleAdmin = localStorage.getItem('role');
             </div>
           </>
         )
-        } if(roleAdmin === "admin"){
-          return(
-            <>
-              <div id="media">
-                <img src={ media } alt=""/>
-              </div>
-              <div className="updatedeletemedia">
-                <form onSubmit={handleSubmit(postUpdate)}>
-                  <label form='img'>
-                    <input
-                      id="img"
-                      className="sizeinputimg"
-                      type="file"
-                      value={ file }
-                      onChange={handleFileChange}
-                      {...register("img")}
-                    />
-                  </label>
-                  <button className="update" type="submit" onClick={() => {}}>Modifier</button>
-                </form>
-                <div>
-                  <button className="delete" onClick={postDelete}>Supprimer</button>
-                </div>
-              </div>
-            </>
-          )
         } else {
         return (
           <div id="media">
@@ -131,7 +104,48 @@ const roleAdmin = localStorage.getItem('role');
             </div>
           </>
         )
-      } if(roleAdmin){
+      } else {
+        return (
+          <div id="text">
+            <div>{ parse( text ) }</div>
+          </div>
+        )
+      }
+    }
+  }
+
+  function updateDeleteAdmin(){
+    if(roleAdmin === "admin"){
+      if(media){
+        return(
+          <>
+            <div id="media">
+              <img src={ media } alt=""/>
+            </div>
+            <div className="updatedeletemedia">
+              <form onSubmit={handleSubmit(postUpdate)}>
+                <label form='img'>
+                  <input
+                    id="img"
+                    className="sizeinputimg"
+                    type="file"
+                    value={ file }
+                    onChange={handleFileChange}
+                    {...register("img")}
+                  />
+                </label>
+                <button className="update" type="submit" onClick={() => {}}>Modifier</button>
+              </form>
+              <div>
+                <button className="delete" onClick={postDelete}>Supprimer</button>
+              </div>
+            </div>
+          </>
+        )
+      }
+    }
+    if(text){
+      if(roleAdmin === "admin"){
         return (
           <>
             <div id="text">
@@ -169,14 +183,7 @@ const roleAdmin = localStorage.getItem('role');
               </div>
             </div>
           </>
-        )
-      } else {
-        return (
-          <div id="text">
-            <div>{ parse( text ) }</div>
-          </div>
-        )
-      }
+        )}
     }
   }
 
@@ -246,6 +253,7 @@ const roleAdmin = localStorage.getItem('role');
             <h1 className="titlepost">{title}</h1>
             <figure>
               {mediaText()}
+              {updateDeleteAdmin()}
               <figcaption>
                 <div className="stylecomments">
                   <div className="divcomments">
@@ -285,6 +293,7 @@ const roleAdmin = localStorage.getItem('role');
                   <h1 className="titlepost">{ title }</h1>
                   <figure>
                     { mediaText() }
+                    {updateDeleteAdmin()}
                     <figcaption>
                       <div className="stylecomments">
                         <div className="divcomments">
