@@ -1,4 +1,4 @@
-.parentgrid{
+.parentGrid{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 1fr;
@@ -11,13 +11,13 @@
     grid-area: 1 / 1 / 2 / 6;
 }
 
-.buttondiv{
+.buttonDiv{
     display: flex;
     justify-content: center;
     padding: 20px 0;
 }
 
-.buttonpost {
+.buttonPost {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -36,22 +36,22 @@
     height: 30px;
 }
 
-.buttonpost:hover {
+.buttonPost:hover {
     transform: scale(1.2);
     -webkit-transform: scale(1.2);
 }
 
-.hiddendiv {
+.hiddenDiv {
     display: none;
 }
 
-.postcreate {
+.postCreate {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-.formflex {
+.formFlex {
     width: 730px;
     display: flex;
     flex-direction: column;
@@ -61,29 +61,29 @@
     border-radius: 10px;
 }
 
-.radiodisplay{
+.radioDisplay{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.radiodiv{
+.radioDiv{
     display: flex;
     justify-content: space-between;
     width: 300px;
 }
 
-#uploadimg{
+#uploadImg{
     display: none;
 }
 
-.divuploadimg{
+.divUploadImg{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.divimgtext{
+.divImgText{
     width: 540px;
     color: #091F43FF;
     display: flex;
@@ -91,23 +91,23 @@
     align-items: center;
 }
 
-#textwisywig{
+#textWisywig{
     display: none;
 }
 
-.divwisywig{
+.divWisywig{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.divtitle {
+.divTitle {
     width: 300px;
     height: 36px;
     margin: 25px 0;
 }
 
-.sizeinput{
+.sizeInput{
     width: 72%;
     padding: 0.5rem 0.7rem;
     border-radius: 3px;
@@ -115,31 +115,31 @@
     font-size: 13.4px;
 }
 
-.sizeinputimg{
+.sizeInputImg{
     width: 72%;
     padding: 0.5rem 0.7rem;
     font-size: 16px;
 }
 
-.icondiv{
+.iconDiv{
     margin-bottom: 10px;
 }
 
-.iconsize{
+.iconSize{
     font-size: 35px;
 }
 
-.texticon{
+.textIcon{
     font-weight: bold;
     margin: 0 0 20px;
 }
 
-.divupload{
+.divUpload{
     width: 400px;
     margin-bottom: 20px;
 }
 
-.divtext{
+.divText{
     height: 200px;
     margin-bottom: 30px;
 }
@@ -148,18 +148,18 @@
     height: 160px;
 }
 
-.textcitation{
+.textCitation{
     width: 417px;
     height: 45px;
 }
 
-.buttonpostdiv{
+.buttonPostDiv{
     width: 290px;
     display: flex;
     justify-content: space-between;
 }
 
-.stylebutton{
+.styleButton{
     width: 96px;
     height: 35px;
     font-size: 17px;

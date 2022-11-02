@@ -41,7 +41,7 @@ function Home() {
             }
           })
           .then(() => {
-            //window.location.href='/';
+            window.location.href='/';
           })
           .catch((err) => {
             console.log(err);
@@ -58,7 +58,6 @@ function Home() {
           "text": textEdit
         }
       }
-
       axios
         .post("http://localhost:4000/api/posts/create", dataToSend, {headers: {Authorization: `Bearer ${userDetails.jwt}`}})
         .then(() => {
@@ -74,13 +73,13 @@ function Home() {
     const userchoice = localStorage.getItem("choice");
 
     if(userchoice === 'img'){
-      document.getElementById('uploadimg').style.display='block';
-      document.getElementById('textwisywig').style.display='none';
+      document.getElementById('uploadImg').style.display='block';
+      document.getElementById('textWisywig').style.display='none';
     }
 
     if(userchoice === 'text') {
-      document.getElementById('textwisywig').style.display='block';
-      document.getElementById('uploadimg').style.display='none';
+      document.getElementById('textWisywig').style.display='block';
+      document.getElementById('uploadImg').style.display='none';
     }
   }
 
@@ -92,24 +91,24 @@ function Home() {
 
     if(userDetails) {
      return <main>
-        <div className="parentgrid">
+        <div className="parentGrid">
           <div className="grid1">
-            <div className="buttondiv">
-              <button className="buttonpost" onClick={() => setIsHidden((s) => !s)}>
+            <div className="buttonDiv">
+              <button className="buttonPost" onClick={() => setIsHidden((s) => !s)}>
                 <FontAwesomeIcon icon={ faCirclePlus } />
                 Créer un post
               </button>
             </div>
-            <div className="hiddendiv" style={{display: isHidden ? 'block' : 'none'}}>
-              <div className="postcreate">
-                <form className="formflex"
+            <div className="hiddenDiv" style={{display: isHidden ? 'block' : 'none'}}>
+              <div className="postCreate">
+                <form className="formFlex"
                   onSubmit={handleSubmit(onSubmit)}
                   encType="multipart/form/data"
                 >
-                  <div id="radiochoice">
-                    <div className="radiodisplay">
-                      <h2 className="texticon">Choisissez entre une image ou un texte</h2>
-                      <div className="radiodiv">
+                  <div id="radioChoice">
+                    <div className="radioDisplay">
+                      <h2 className="textIcon">Choisissez entre une image ou un texte</h2>
+                      <div className="radioDiv">
                         <label form='radio'>
                           <input
                             id="radio"
@@ -132,13 +131,13 @@ function Home() {
                       </div>
                     </div>
                   </div>
-                  <div id="uploadimg">
-                    <div className="divuploadimg">
-                      <div className="divtitle">
+                  <div id="uploadImg">
+                    <div className="divUploadImg">
+                      <div className="divTitle">
                         <label form='title'>
                           <input
                             id="title"
-                            className="sizeinput"
+                            className="sizeInput"
                             type="text"
                             placeholder="Titre"
                             maxLength="280"
@@ -146,17 +145,17 @@ function Home() {
                           />
                         </label>
                       </div>
-                      <div className="divimgtext">
-                        <div className="icondiv">
-                          <div className="iconsize">
+                      <div className="divImgText">
+                        <div className="iconDiv">
+                          <div className="iconSize">
                             <FontAwesomeIcon icon={ faImage } />
                           </div>
                         </div>
-                        <div className="divupload">
+                        <div className="divUpload">
                           <label form='img'>
                             <input
                               id="img"
-                              className="sizeinputimg"
+                              className="sizeInputImg"
                               type="file"
                               value={ file }
                               onChange={ handleFileChange }
@@ -164,18 +163,18 @@ function Home() {
                             />
                           </label>
                         </div>
-                          <button className="stylebutton" type="submit" onClick={() => {}}>Envoyer</button>
+                          <button className="styleButton" type="submit" onClick={() => {}}>Envoyer</button>
                           {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                     </div>
                   </div>
                   </div>
-                  <div id="textwisywig">
-                    <div className="divwisywig">
-                      <div className="divtitle">
+                  <div id="textWisywig">
+                    <div className="divWisywig">
+                      <div className="divTitle">
                         <label form='title'>
                           <input
                             id="textTitle"
-                            className="sizeinput"
+                            className="sizeInput"
                             type="text"
                             placeholder="Titre"
                             maxLength="280"
@@ -183,7 +182,7 @@ function Home() {
                           />
                         </label>
                       </div>
-                      <div className="divtext">
+                      <div className="divText">
                         <CKEditor
                           editor={ ClassicEditor }
                           id={'editor'}
@@ -201,7 +200,7 @@ function Home() {
                           }}
                         />
                       </div>
-                        <button className="stylebutton" type="submit" onClick={() => {}} >Envoyer</button>
+                        <button className="styleButton" type="submit" onClick={() => {}} >Envoyer</button>
                         {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                     </div>
                   </div>
@@ -218,10 +217,10 @@ function Home() {
       </main>
     } else {
       return <div>
-                <div className="buttondiv">
+                <div className="buttonDiv">
                   <p>Vous devez vous connecter pour créer un post</p>
                 </div>
-                <div className="scrollable-container">
+                <div className="scrollContainer">
                     <Post />
                 </div>
               </div>

@@ -10,17 +10,17 @@ nav{
     justify-content: space-between;
 }
 
-.linkimg{
+.linkImg{
     display: flex;
     padding-left: 20px;
     width: 50%;
 }
 
-.linkimg div{
+.linkImg div{
     width: 25%;
 }
 
-.divstyle {
+.divStyle {
     display: flex;
     align-items: center;
     width: 50%;
@@ -28,18 +28,18 @@ nav{
     margin-right: 35px;
 }
 
-.divlink{
+.divLink{
     display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 100%;
 }
 
-.divlink p{
+.divLink p{
     margin: 0;
 }
 
-.linkstyle {
+.linkStyle {
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
@@ -50,7 +50,7 @@ span {
     font-size: 20px;
 }
 
-.buttonheader{
+.buttonHeader{
     padding: 5px 10px;
     border-radius: 6px;
     border: none;
@@ -63,7 +63,7 @@ span {
 
 }
 
-.error {
+.Error {
     color: #FD2D01;
     margin-top: 7px;
     font-size: 12px;
@@ -88,7 +88,7 @@ button.modal-toggle:not(:first-child) {
     margin-left: 10px;
 }
 
-.form-group {
+.formGroup {
     margin-top: 10px;
 }
 

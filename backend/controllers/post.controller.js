@@ -24,7 +24,7 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
       title = post.title;
   }
 
-  const result = await cloudinary.uploader.upload(req.file.path);
+
   const dataPost = await postModel.find({title: title});
   if(dataPost.length > 0) {
     res.status(200).json({message: "post déja ajouter"});
@@ -33,6 +33,7 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
 
   try {
     if ('media' === postType) {
+      const result = await cloudinary.uploader.upload(req.file.path);
       const newPost = new postModel({
         "userId": userId,
         "userName": userName,

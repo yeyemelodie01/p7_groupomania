@@ -101,7 +101,7 @@ function Header() {
                   />
                   {errors.email && <div className="error">{errors.email.message}</div>}
                 </div>
-                <div className="form-group">
+                <div className="formGroup">
                   <input
                     type="password"
                     placeholder="Mot de Passe"
@@ -113,7 +113,7 @@ function Header() {
                   />
                   {errors.password && <div className="error">{errors.password.message}</div>}
                 </div>
-                <div className="form-group">
+                <div className="formGroup">
                   <input type="submit" placeholder="Envoyer" onClick={ ShowError }/>
                 </div>
               </form>
@@ -128,7 +128,7 @@ function Header() {
               hide={toggleRegistrationForm}
               title="S'inscrire">
               <form onSubmit={handleSubmit(onSignup)}>
-                <div className="form-group">
+                <div className="formGroup">
                   <input
                     type="email"
                     placeholder="Email"
@@ -144,7 +144,7 @@ function Header() {
                   />
                   {errors.email && <div className="error">{errors.email.message}</div>}
                 </div>
-                <div className="form-group">
+                <div className="formGroup">
                   <input
                     type="password"
                     placeholder="Mot de Passe"
@@ -160,7 +160,7 @@ function Header() {
                   />
                   {errors.password && <div className="error">{ errors.password.message }</div>}
                 </div>
-                <div className="form-group">
+                <div className="form-Group">
                   <input
                     type="submit"
                     placeholder="Envoyer"
@@ -176,16 +176,16 @@ function Header() {
         <>
           <header>
             <nav>
-              <a className="linkimg" href="/">
+              <a className="linkImg" href="/">
                 <div>
-                  <img className="styleimg" src={ Logo } alt="Logo Groupomania"/>
+                  <img className="styleImg" src={ Logo } alt="Logo Groupomania"/>
                 </div>
               </a>
-              <div className="divstyle">
-                <div className="divlink">
-                  <div className="modal-toggle linkstyle" onClick={toggleLoginForm}>Se connecter </div>
+              <div className="divStyle">
+                <div className="divLink">
+                  <div className="modal-toggle linkStyle" onClick={toggleLoginForm}>Se connecter </div>
                   <span>|</span>
-                  <div className="modal-toggle linkstyle" onClick={toggleRegistrationForm}>S'inscrire</div>
+                  <div className="modal-toggle linkStyle" onClick={toggleRegistrationForm}>S'inscrire</div>
                 </div>
               </div>
             </nav>
@@ -195,16 +195,16 @@ function Header() {
     } else {
       return <header>
               <nav>
-                <a className="linkimg" href="/">
+                <a className="linkImg" href="/">
                   <div>
-                    <img className="styleimg" src={ Logo } alt="Logo Groupomania"/>
+                    <img className="styleImg" src={ Logo } alt="Logo Groupomania"/>
                   </div>
                 </a>
-                <div className="divstyle">
-                  <div className="divlink">
+                <div className="divStyle">
+                  <div className="divLink">
                     <p>Bienvenue { userDetails.userName }</p>
                     <span>|</span>
-                    <button className="buttonheader" onClick={ Logout }>Déconnecter</button>
+                    <button className="buttonHeader" onClick={ Logout }>Déconnecter</button>
                   </div>
                 </div>
               </nav>

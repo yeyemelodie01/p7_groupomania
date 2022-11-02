@@ -20,13 +20,6 @@ function DetailPosts() {
       })
   },[]);
 
-
-  // const finalObj = {}
-  // for (let i = 0; i < usePostComment.length; i++) {
-  //   Object.assign(finalObj, usePostComment[i])
-  // }
-console.log(detail)
-
   const date1 = moment(detail.createdAt);
   const date2 = moment(Date.now());
   let hours = date2.diff(date1, 'minutes');
