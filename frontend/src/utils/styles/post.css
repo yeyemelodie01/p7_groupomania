@@ -1,5 +1,5 @@
 
-.postgrid{
+.postGrid{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 1fr;
@@ -14,7 +14,7 @@
     justify-content: center;
 }
 
-.postdiv{
+.postDiv{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -22,14 +22,14 @@
     padding: 16px 0;
 }
 
-.profilpost{
+.profilPost{
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 30%;
 }
 
-.listpost{
+.listPost{
     list-style: none;
     display: flex;
     align-items: center;
@@ -39,32 +39,32 @@
     width: 70%;
 }
 
-.imgprofil{
+.imgProfil{
     width: 30px;
     height: 30px;
     border-radius: 80px 80px 80px 80px;
 }
 
-.nameprofil{
+.nameProfil{
     font-weight: bold;
 }
 
-.hourpost{
+.hourPost{
 
 }
 
-.divfigurecenter{
+.divFigureCenter{
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.divfigurewidth{
+.divFigureWidth{
     width: 90%;
 
 }
 
-.titlepost{
+.titlePost{
     font-weight: bold;
     cursor: pointer;
 }
@@ -73,19 +73,19 @@ figure{
     margin: auto 0;
 }
 
-.imgfigure{
+.imgFigure{
 }
 
 figcaption{
     margin-top: 15px;
 }
 
-.stylecomments{
+.styleIconLike{
     background-color: #091F43FF;
     padding: 15px 10px;
 }
 
-.divcomments{
+.divIconLike{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -93,14 +93,14 @@ figcaption{
     font-size: 20px;
 }
 
-.diviconnumber{
+.divIconNumber{
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
 }
 
-.buttonicon{
+.buttonIcon{
     color: #ffffff;
     font-size: 12px;
     margin: 0;
@@ -108,13 +108,13 @@ figcaption{
     background: transparent;
 }
 
-.likedislike{
+.likeDislike{
     width: 80px;
     display: flex;
     justify-content: space-around;
 }
 
-.iconcolor{
+.iconColor{
     color: #FFD7D7;
     margin-right: 5px;
 }
@@ -141,8 +141,8 @@ figcaption{
     height: 100%;
 }
 
-.scrollable-container {
-    height: 469px;
+.scrollContainer {
+    height: 805px;
     overflow: scroll;
 }
 

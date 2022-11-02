@@ -22,7 +22,7 @@ function Post() {
     []);
 
   const postsSort = posts.sort(function (a, b) {
-    return b.createdAt > a.createdAt
+    return b.createdAt.localeCompare(a.createdAt);
   })
 
   const usePosts = postsSort.map((posts) =>{
@@ -52,35 +52,35 @@ function Post() {
 
     if(posts.text){
       return (
-        <div className="postgrid">
+        <div className="postGrid">
           <div className="grid">
             <LazyLoad width={767}>
-              <div className="postdiv" id="postId" key={posts.id}>
-                <div className="profilpost">
-                  <ul className="listpost">
+              <div className="postDiv" id="postId" key={posts.id}>
+                <div className="profilPost">
+                  <ul className="listPost">
                     <li>
-                      <img className="imgprofil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
+                      <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
                     </li>
                     <li>
-                      <p className="nameprofil">{posts.userName}</p>
+                      <p className="nameProfil">{posts.userName}</p>
                     </li>
                     <li>
                       <p className="hourpost">{ hour }</p>
                     </li>
                   </ul>
                 </div>
-                <div className="divfigurecenter">
-                  <div className="divfigurewidth">
-                    <h1 className="titlepost" onClick={ SendPostId }>{posts.title}</h1>
+                <div className="divFigureCenter">
+                  <div className="divFigureWidth">
+                    <h1 className="titleTost" onClick={ SendPostId }>{posts.title}</h1>
                     <figure>
                       <div>{parse(posts.text)}</div>
                       <figcaption>
-                        <div className="stylecomments">
-                          <div className="divcomments">
-                            <div className="diviconnumber">
-                              <div className="likedislike">
-                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor" />{ posts.likes }</button>
-                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ posts.dislikes }</button>
+                        <div className="styleIconLike">
+                          <div className="divIconLike">
+                            <div className="divIconNumber">
+                              <div className="likeDislike">
+                                <button className="buttonIcon"><FontAwesomeIcon icon={ faThumbsUp } className="iconColor" />{ posts.likes }</button>
+                                <button className="buttonIcon"><FontAwesomeIcon icon={ faThumbsDown } className="iconColor"/>{ posts.dislikes }</button>
                               </div>
                             </div>
                           </div>
@@ -97,37 +97,37 @@ function Post() {
     }
     if (posts.media){
       return (
-        <div className="postgrid">
+        <div className="postGrid">
           <div className="grid">
             <LazyLoad width={767}>
-              <div className="postdiv" key={posts._id}>
-                <div className="profilpost">
-                  <ul className="listpost">
+              <div className="postDiv" key={posts._id}>
+                <div className="profilPost">
+                  <ul className="listPost">
                     <li>
-                      <img className="imgprofil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
+                      <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
                     </li>
                     <li>
-                      <p className="nameprofil">{posts.userName}</p>
+                      <p className="nameProfil">{posts.userName}</p>
                     </li>
                     <li>
-                      <p className="hourpost">{ hour }</p>
+                      <p className="hourPost">{ hour }</p>
                     </li>
                   </ul>
                 </div>
-                <div className="divfigurecenter">
-                  <div className="divfigurewidth">
-                    <h1 className="titlepost" onClick={ SendPostId }>{posts.title}</h1>
+                <div className="divFigureCenter">
+                  <div className="divFigureWidth">
+                    <h1 className="titlePost" onClick={ SendPostId }>{posts.title}</h1>
                     <figure>
-                      <div className="imgfigure">
+                      <div className="imgFigure">
                         <img src={posts.media} alt=""/>
                       </div>
                       <figcaption>
-                        <div className="stylecomments">
-                          <div className="divcomments">
-                            <div className="diviconnumber">
-                              <div className="likedislike">
-                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsUp } className="iconcolor"/>{ posts.likes }</button>
-                                <button className="buttonicon"><FontAwesomeIcon icon={ faThumbsDown } className="iconcolor"/>{ posts.dislikes }</button>
+                        <div className="styleIconLike">
+                          <div className="divIconLike">
+                            <div className="divIconNumber">
+                              <div className="likeDislike">
+                                <button className="buttonIcon"><FontAwesomeIcon icon={ faThumbsUp } className="iconColor"/>{ posts.likes }</button>
+                                <button className="buttonIcon"><FontAwesomeIcon icon={ faThumbsDown } className="iconColor"/>{ posts.dislikes }</button>
                               </div>
                             </div>
                           </div>
