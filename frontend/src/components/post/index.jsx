@@ -73,7 +73,7 @@ function Post() {
                   <div className="divFigureWidth">
                     <h1 className="titleTost" onClick={ SendPostId }>{posts.title}</h1>
                     <figure>
-                      <div>{parse(posts.text)}</div>
+                      <div className="textFigure">{parse(posts.text)}</div>
                       <figcaption>
                         <div className="styleIconLike">
                           <div className="divIconLike">
@@ -119,7 +119,7 @@ function Post() {
                     <h1 className="titlePost" onClick={ SendPostId }>{posts.title}</h1>
                     <figure>
                       <div className="imgFigure">
-                        <img src={posts.media} alt=""/>
+                          <img src={posts.media} alt=""/>
                       </div>
                       <figcaption>
                         <div className="styleIconLike">
