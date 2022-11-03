@@ -1,8 +1,9 @@
 .gridDetail{
-    grid-area: 1 / 2 / 6 / 5;
+    grid-area: 1 / 2 / 2 / 3;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 }
 
 .postDivDetail{
@@ -21,4 +22,17 @@
     font-size: 14px;
     color: #fff;
     background: #091F43FF;
+}
+
+/* RESPONSIVE */
+
+/* MOBILE */
+@media screen and (min-width: 320px) and (max-width: 767px){
+    .divCard{
+        width: 320px;
+    }
+
+    figcaption{
+        width: 100%;
+    }
 }

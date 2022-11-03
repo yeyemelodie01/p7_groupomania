@@ -54,7 +54,7 @@ function Post() {
       return (
         <div className="postGrid">
           <div className="grid">
-            <LazyLoad width={767}>
+            <LazyLoad className="widthLazy">
               <div className="postDiv" id="postId" key={posts.id}>
                 <div className="profilPost">
                   <ul className="listPost">
@@ -71,7 +71,7 @@ function Post() {
                 </div>
                 <div className="divFigureCenter">
                   <div className="divFigureWidth">
-                    <h1 className="titleTost" onClick={ SendPostId }>{posts.title}</h1>
+                    <h1 className="titlePost" onClick={ SendPostId }>{posts.title}</h1>
                     <figure>
                       <div className="textFigure">{parse(posts.text)}</div>
                       <figcaption>
@@ -99,7 +99,7 @@ function Post() {
       return (
         <div className="postGrid">
           <div className="grid">
-            <LazyLoad width={767}>
+            <LazyLoad className="widthLazy">
               <div className="postDiv" key={posts._id}>
                 <div className="profilPost">
                   <ul className="listPost">

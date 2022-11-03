@@ -19,6 +19,8 @@ function DetailPosts() {
         console.log(err)
       })
   },[]);
+localStorage.setItem('userId', detail.userId);
+  console.log(detail.userId);
 
   const date1 = moment(detail.createdAt);
   const date2 = moment(Date.now());
@@ -41,18 +43,19 @@ function DetailPosts() {
       <main>
         <div className="postGrid">
           <div className="gridDetail">
-            <Card
-              key={detail.id}
-              userid={detail.userId}
-              title={detail.title}
-              media={detail.media}
-              text={detail.text}
-              username={detail.userName}
-              hour={hour}
-              avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
-              like={ JSON.stringify(detail.likes) }
-              dislike={ JSON.stringify(detail.dislikes) }
-            />
+            <div className="divCard">
+              <Card
+                key={detail.id}
+                title={detail.title}
+                media={detail.media}
+                text={detail.text}
+                username={detail.userName}
+                hour={hour}
+                avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
+                like={ JSON.stringify(detail.likes) }
+                dislike={ JSON.stringify(detail.dislikes) }
+              />
+            </div>
           </div>
         </div>
       </main>
