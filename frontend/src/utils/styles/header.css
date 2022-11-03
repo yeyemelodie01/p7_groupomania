@@ -200,6 +200,18 @@ input[type="email"] {
     .burgerBar::after{
         transform: translateY(12px);
     }
+
+    .showNav .burgerBar{
+        background: transparent;
+    }
+
+    .showNav .burgerBar::before{
+        transform: rotate(45deg);
+    }
+
+    .showNav .burgerBar::after{
+        transform: rotate(-45deg);
+    }
 }
 /* TABLET */
 @media screen and (min-width: 768px) and (max-width: 1023px){
