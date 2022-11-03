@@ -1,9 +1,16 @@
+.postGridDetail{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
 .gridDetail{
-    grid-area: 1 / 2 / 2 / 3;
+    grid-area: 1 / 1 / 2 / 2;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 100%;
+    align-items: center;
 }
 
 .postDivDetail{
@@ -13,6 +20,14 @@
     align-items: flex-start;
     border-bottom: 2px #4E5166 solid;
     padding: 16px 0;
+}
+
+.divCard{
+    width: 750px;
+}
+
+figcaption{
+    width: 100%;
 }
 
 .styleButton{
@@ -62,7 +77,31 @@
         margin-bottom: 10px;
     }
 
+    .updateDeleteMedia{
+        margin-top: 10px;
+    }
+
+    .updateDeleteMedia form{
+        margin-bottom: 10px;
+    }
+
     .styleButton{
 
     }
+}
+
+/* TABLET */
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .divCard{
+        width: 650px;
+    }
+
+    figcaption{
+        width: 100%;
+    }
+}
+
+/* ECRAN */
+@media screen and (min-width: 1025px) and (max-width: 1440px){
+
 }

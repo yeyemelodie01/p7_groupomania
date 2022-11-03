@@ -41,7 +41,7 @@ localStorage.setItem('userId', detail.userId);
 
   return (
       <main>
-        <div className="postGrid">
+        <div className="postGridDetail">
           <div className="gridDetail">
             <div className="divCard">
               <Card
