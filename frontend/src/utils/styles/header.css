@@ -184,6 +184,7 @@ input[type="email"] {
         position: relative;
         border-radius: 3px;
         background: #FFF;
+        transition: all .5s ease-in-out;
     }
 
     .burgerBar::before,
@@ -202,6 +203,7 @@ input[type="email"] {
     }
 
     .showNav .burgerBar{
+        width: 0;
         background: transparent;
     }
 
