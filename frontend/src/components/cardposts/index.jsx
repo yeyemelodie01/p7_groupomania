@@ -26,7 +26,6 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
       axios
         .get(`http://localhost:4000/users/${idAdmin}`)
         .then((res) => {
-          console.log(res.data)
           const role = res.data.role;
           localStorage.setItem('role', role);
         })
@@ -50,10 +49,10 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                       {...register("img")}
                     />
                   </label>
-                  <button className="update" type="submit" onClick={() => {}}>Modifier</button>
+                  <button className="styleButton" type="submit" onClick={() => {}}>Modifier</button>
                 </form>
                 <div>
-                  <button className="delete" onClick={postDelete}>Supprimer</button>
+                  <button className="styleButton" onClick={postDelete}>Supprimer</button>
                 </div>
               </div>
             </>
@@ -88,12 +87,11 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                         />
                       </div>
                       <button className="styleButton" type="submit" onClick={() => {}} >Envoyer</button>
-                      {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                     </div>
                   </div>
                 </form>
                 <div>
-                  <button className="delete" onClick={postDelete}>Supprimer</button>
+                  <button className="styleButton" onClick={postDelete}>Supprimer</button>
                 </div>
               </div>
             </>
@@ -117,10 +115,10 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                       {...register("img")}
                     />
                   </label>
-                  <button className="update" type="submit" onClick={() => {}}>Modifier</button>
+                  <button className="styleButton" type="submit" onClick={() => {}}>Modifier</button>
                   </form>
                   <div>
-                    <button className="delete" onClick={postDelete}>Supprimer</button>
+                    <button className="styleButton" onClick={postDelete}>Supprimer</button>
                   </div>
                 </div>
               </>
@@ -159,7 +157,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                   </div>
                 </form>
                 <div>
-                  <button className="delete" onClick={postDelete}>Supprimer</button>
+                  <button className="styleButton" onClick={postDelete}>Supprimer</button>
                 </div>
               </div>
             </>

@@ -15,13 +15,17 @@
     padding: 16px 0;
 }
 
-.delete{
-    padding: 5px 10px;
-    border-radius: 6px;
+.styleButton{
+    width: 96px;
+    height: 35px;
+    font-size: 17px;
+    background-color: #091F43FF;
+    box-shadow: none;
     border: none;
-    font-size: 14px;
+    border-radius: 3px;
     color: #fff;
-    background: #091F43FF;
+    padding: 0;
+    cursor: pointer;
 }
 
 /* RESPONSIVE */
@@ -34,5 +38,31 @@
 
     figcaption{
         width: 100%;
+    }
+
+    .likedislike{
+        width: 27%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .ck.ck-editor {
+        width: 300px;
+    }
+
+    .divText{
+        margin: 20px 0 10px 0;
+    }
+
+    .updateDeleteText{
+        margin-top: 10px;
+    }
+
+    .updateDeleteText form{
+        margin-bottom: 10px;
+    }
+
+    .styleButton{
+
     }
 }
