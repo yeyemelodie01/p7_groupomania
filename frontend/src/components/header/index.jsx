@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import 'react-toastify/dist/ReactToastify.css'
@@ -12,6 +12,11 @@ function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
     const { register, handleSubmit, formState: { errors }} = useForm();
+    const [ showBurger, setShowBurger ] = useState(false)
+
+  const handleShowLink = () => {
+      setShowBurger(!showBurger)
+  }
 
   function setUserDetails (data, res) {
     const userEmail = data.email;
@@ -175,7 +180,7 @@ function Header() {
       return(
         <>
           <header>
-            <nav>
+            <nav className={`navBar ${showBurger ? "showNav" : "hidNav"}`}>
               <a className="linkImg" href="/">
                 <div>
                   <img className="styleImg" src={ Logo } alt="Logo Groupomania"/>
@@ -188,6 +193,9 @@ function Header() {
                   <div className="modal-toggle linkStyle" onClick={toggleRegistrationForm}>S'inscrire</div>
                 </div>
               </div>
+              <button className="navBurger" onClick={handleShowLink}>
+                <span className="burgerBar"></span>
+              </button>
             </nav>
           </header>
         </>

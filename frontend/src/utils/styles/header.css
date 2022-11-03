@@ -50,6 +50,15 @@ span {
     font-size: 20px;
 }
 
+.navBurger{
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    display: none;
+}
+
 .buttonHeader{
     padding: 5px 10px;
     border-radius: 6px;
@@ -108,7 +117,89 @@ input[type="email"] {
 
 /* MOBILE */
 @media screen and (min-width: 320px) and (max-width: 767px){
+    header{
+        margin-top: 0;
+        background-color: #091F43FF;
+    }
 
+    .navBar{
+        padding: 15px 0;
+    }
+
+    .linkImg{
+        padding-left: 12px;
+    }
+
+    .linkImg div{
+        width: 80%;
+    }
+
+    .divLink{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        right: -100vh;
+        bottom: 0;
+        height: 100vh;
+        padding: 2rem;
+        visibility: hidden;
+        background-color: black;
+    }
+
+    .divLink span{
+        display: none;
+    }
+
+    .showNav .divLink{
+        width: 100vw;
+        right: 0;
+        visibility: visible;
+    }
+
+    .linkStyle{
+        display: block;
+        padding: 1.5rem;
+        font-size: 5vw;
+    }
+
+    .navBurger{
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 2rem;
+        padding-top: 10px;
+    }
+
+    .navBurger:checked{
+        cursor: pointer;
+    }
+
+    .burgerBar,
+    .burgerBar::before,
+    .burgerBar::after{
+        display: block;
+        width: 40px;
+        height: 3px;
+        position: relative;
+        border-radius: 3px;
+        background: #FFF;
+    }
+
+    .burgerBar::before,
+    .burgerBar::after{
+        content: "";
+        position: absolute;
+        left: 0;
+    }
+
+    .burgerBar::before{
+        transform: translateY(-12px);
+    }
+
+    .burgerBar::after{
+        transform: translateY(12px);
+    }
 }
 /* TABLET */
 @media screen and (min-width: 768px) and (max-width: 1023px){
