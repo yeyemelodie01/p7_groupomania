@@ -30,6 +30,15 @@
     width: 100%;
 }
 
+#text p{
+    text-align: justify;
+}
+
+.divText{
+    height: 200px;
+    margin-bottom: 30px;
+}
+
 .styleButton{
     width: 96px;
     height: 35px;
@@ -61,12 +70,9 @@
         justify-content: space-around;
     }
 
-    .ck.ck-editor {
-        width: 300px;
-    }
-
     .divText{
         margin: 20px 0 10px 0;
+        width: 300px;
     }
 
     .updateDeleteText{

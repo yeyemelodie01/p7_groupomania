@@ -181,7 +181,7 @@ function Home() {
                           />
                         </label>
                       </div>
-                      <div className="divText">
+                      <div className="divTextWis">
                         <CKEditor
                           editor={ ClassicEditor }
                           id={'editor'}

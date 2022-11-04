@@ -26,7 +26,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 30%;
+    width: 34%;
 }
 
 .listPost{
@@ -49,10 +49,6 @@
     font-weight: bold;
 }
 
-.hourPost{
-
-}
-
 .divFigureCenter{
     width: 100%;
     display: flex;
@@ -69,6 +65,12 @@
 .titlePost{
     font-weight: bold;
     cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.textFigure p{
+    text-align: justify;
+    margin-bottom: 8px;
 }
 
 figure{
@@ -170,15 +172,36 @@ figcaption{
 
 /* MOBILE */
 @media screen and (min-width: 320px) and (max-width: 767px){
+    .formFlex{
+        width: 300px;
+    }
+
+    .textIcon{
+        width: 270px;
+    }
+
+    .radioDiv{
+        width: 220px;
+    }
+
     .profilPost{
-        width: 50%;
+        width: 55%;
         margin-left: 10px;
+    }
+
+    .listPost{
+        width: 100%;
     }
 
     .titlePost{
         font-size: 23px;
         margin: 8px 0;
     }
+
+    .ck.ck-reset {
+        width: 268px;
+    }
+
     /* LAZYLOAD */
     .widthLazy{
         width: 320px;
