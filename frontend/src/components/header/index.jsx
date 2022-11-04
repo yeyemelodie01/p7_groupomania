@@ -6,6 +6,8 @@ import Logo from '../../assets/icon-left-font.png'
 import '../../utils/styles/header.css'
 import useModal from '../../utils/hooks/usemodal'
 import Modal from '../../components/modal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars} from '@fortawesome/free-solid-svg-icons'
 
 
 function Header() {
@@ -13,10 +15,6 @@ function Header() {
     const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
     const { register, handleSubmit, formState: { errors }} = useForm();
     const [ showBurger, setShowBurger ] = useState(false)
-
-  const handleShowLink = () => {
-      setShowBurger(!showBurger)
-  }
 
   function setUserDetails (data, res) {
     const userEmail = data.email;
@@ -31,8 +29,13 @@ function Header() {
   }
 
     const onSignup = async (data) => {
+      const dataUser = {
+        "email": data.email,
+        "password": data.password,
+        "role":"",
+      }
         axios
-          .post("http://localhost:4000/api/auth/signup", data)
+          .post("http://localhost:4000/api/auth/signup", dataUser)
           .then(() =>{
               axios
                 .post("http://localhost:4000/api/auth/login", data)
@@ -157,7 +160,7 @@ function Header() {
                     {...register("password",{
                       required: "Mot de passe requis",
                       pattern:{
-                        value: /^(?=.*[0-9])(?=.*[!@#$%^&*.,])[a-zA-Z0-9!@#$%^&*.,]{6,16}$/,
+                        value: /^(?=.*[0-9])(?=.*[!@#$%^&*.,])[a-zA-Z0-9!@#$%^&*.,]{6,10}$/,
                         message:"Mot de passe non valide, 6 characters, Une majuscule, une minuscule, un nombre et un caractère spécial",
                       }
                     })}
@@ -165,7 +168,7 @@ function Header() {
                   />
                   {errors.password && <div className="error">{ errors.password.message }</div>}
                 </div>
-                <div className="form-Group">
+                <div className="formGroup">
                   <input
                     type="submit"
                     placeholder="Envoyer"
@@ -180,40 +183,51 @@ function Header() {
       return(
         <>
           <header>
-            <nav className={`navBar ${showBurger ? "showNav" : "hidNav"}`}>
+            <nav className="navBar">
               <a className="linkImg" href="/">
                 <div>
                   <img className="styleImg" src={ Logo } alt="Logo Groupomania"/>
                 </div>
               </a>
-              <div className="divStyle">
-                <div className="divLink">
-                  <div className="modal-toggle linkStyle" onClick={toggleLoginForm}>Se connecter </div>
+              <div className={ showBurger ? "divStyle expand" : "divStyle"}>
+                <ul className="divLink">
+                  <li className="modal-toggle linkStyle" onClick={toggleLoginForm}>Se connecter </li>
                   <span>|</span>
-                  <div className="modal-toggle linkStyle" onClick={toggleRegistrationForm}>S'inscrire</div>
-                </div>
+                  <li className="modal-toggle linkStyle" onClick={toggleRegistrationForm}>S'inscrire</li>
+                </ul>
               </div>
-              <button className="navBurger" onClick={handleShowLink}>
-                <span className="burgerBar"></span>
-              </button>
+              <div className="buttonBurger" onClick={() => {
+                setShowBurger(!showBurger);
+              }}>
+                <FontAwesomeIcon icon={ faBars } />
+              </div>
             </nav>
           </header>
         </>
       )
     } else {
       return <header>
-              <nav>
-                <a className="linkImg" href="/">
+              <nav className="navBar">
+                <a className="linkImg linkUser" href="/">
                   <div>
                     <img className="styleImg" src={ Logo } alt="Logo Groupomania"/>
                   </div>
                 </a>
-                <div className="divStyle">
-                  <div className="divLink">
-                    <p>Bienvenue { userDetails.userName }</p>
+                <div className={ showBurger ? "divStyleUser expandUser" : "divStyleUser"}>
+                  <ul className="divLink">
+                    <li className="textUser">
+                      <p>Bienvenue { userDetails.userName }</p>
+                    </li>
                     <span>|</span>
-                    <button className="buttonHeader" onClick={ Logout }>Déconnecter</button>
-                  </div>
+                    <li>
+                      <button className="buttonHeader" onClick={ Logout }>Déconnecter</button>
+                    </li>
+                  </ul>
+                </div>
+                <div className="buttonUser" onClick={() => {
+                  setShowBurger(!showBurger);
+                }}>
+                  <p>Bienvenue { userDetails.userName }</p>
                 </div>
               </nav>
             </header>

@@ -28,6 +28,14 @@ nav{
     margin-right: 35px;
 }
 
+.divStyleUser{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: flex-end;
+    margin-right: 35px;
+}
+
 .divLink{
     display: flex;
     align-items: center;
@@ -50,12 +58,11 @@ span {
     font-size: 20px;
 }
 
-.navBurger{
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: none;
-    color: inherit;
+.buttonBurger{
+    display: none;
+}
+
+.buttonUser{
     display: none;
 }
 
@@ -68,11 +75,7 @@ span {
     background: #091F43FF;
 }
 
-.mailtoast{
-
-}
-
-.Error {
+.error {
     color: #FD2D01;
     margin-top: 7px;
     font-size: 12px;
@@ -122,39 +125,91 @@ input[type="email"] {
         background-color: #091F43FF;
     }
 
+    ul span{
+        display: none;
+    }
+
+    .divLink .textUser{
+        display: none;
+    }
+
     .navBar{
-        padding: 15px 0;
+        padding: 8px 0;
+        align-items: center;
+    }
+
+    .buttonBurger{
+        display: block;
+        font-size: 38px;
+        color: #fff;
+        margin-right: 14px;
+    }
+
+    .buttonUser{
+        display: block;
+        color: #fff;
+        margin-right: 14px;
+        width: 100%;
+    }
+
+    .buttonUser p{
+        font-size: 10px;
+    }
+
+    .buttonHeader{
+        margin-top: 6px;
     }
 
     .linkImg{
         padding-left: 12px;
     }
 
+    .linkUser{
+        width: 95%;
+    }
+
     .linkImg div{
         width: 80%;
     }
 
-    .divLink{
+    .divStyle ul{
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        right: -100vh;
-        bottom: 0;
-        height: 100vh;
-        padding: 2rem;
-        visibility: hidden;
-        background-color: black;
-    }
-
-    .divLink span{
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background-color: #fff;
         display: none;
     }
 
-    .showNav .divLink{
-        width: 100vw;
+    .divStyle li {
+        text-align: center;
+        margin: 0;
+    }
+
+    .divStyle.expand ul {
+        display: block;
+    }
+
+    .divStyleUser ul{
+        flex-direction: column;
+        position: absolute;
+        top: 34px;
         right: 0;
-        visibility: visible;
+        width: 42%;
+        height: 41px;
+        background-color: #4E5166;
+        display: none;
+    }
+
+    .divStyleUser li {
+        text-align: center;
+        margin: 0;
+    }
+
+    .divStyleUser.expandUser ul {
+        display: block;
     }
 
     .linkStyle{
@@ -163,58 +218,14 @@ input[type="email"] {
         font-size: 5vw;
     }
 
-    .navBurger{
-        display: block;
-        position: fixed;
-        top: 0;
-        right: 2rem;
-        padding-top: 10px;
-    }
+}
 
-    .navBurger:checked{
-        cursor: pointer;
-    }
-
-    .burgerBar,
-    .burgerBar::before,
-    .burgerBar::after{
-        display: block;
-        width: 40px;
-        height: 3px;
-        position: relative;
-        border-radius: 3px;
-        background: #FFF;
-        transition: all .5s ease-in-out;
-    }
-
-    .burgerBar::before,
-    .burgerBar::after{
-        content: "";
-        position: absolute;
-        left: 0;
-    }
-
-    .burgerBar::before{
-        transform: translateY(-12px);
-    }
-
-    .burgerBar::after{
-        transform: translateY(12px);
-    }
-
-    .showNav .burgerBar{
-        width: 0;
-        background: transparent;
-    }
-
-    .showNav .burgerBar::before{
-        transform: rotate(45deg);
-    }
-
-    .showNav .burgerBar::after{
-        transform: rotate(-45deg);
+@media screen and (max-width: 375px){
+    .divStyleUser ul{
+        top: 37px;
     }
 }
+
 /* TABLET */
 @media screen and (min-width: 768px) and (max-width: 1023px){
 

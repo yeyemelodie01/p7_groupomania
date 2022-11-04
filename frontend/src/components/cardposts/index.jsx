@@ -263,7 +263,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
             <h1 className="titlePost">{title}</h1>
             <figure>
               {mediaText()}
-              <figcaption>
+              <figcaption className="detailFig">
                 <div className="styleIconLike">
                   <div className="divIconLike">
                     <div className="divIconNumber">

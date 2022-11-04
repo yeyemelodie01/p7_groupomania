@@ -31,6 +31,10 @@ const Styleglobal = createGlobalStyle`
     justify-content: center;
     flex-direction: column;
   }
+  
+  li {
+    list-style: none;
+  }
 `
 
 function GlobalStyle() {
