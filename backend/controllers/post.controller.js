@@ -33,7 +33,9 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
 
   try {
     if ('media' === postType) {
-      const result = await cloudinary.uploader.upload(req.file.path);
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: 'postImg',
+      });
       const newPost = new postModel({
         "userId": userId,
         "userName": userName,
