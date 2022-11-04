@@ -129,10 +129,6 @@ input[type="email"] {
         display: none;
     }
 
-    .divLink .textUser{
-        display: none;
-    }
-
     .navBar{
         padding: 8px 0;
         align-items: center;
@@ -145,28 +141,13 @@ input[type="email"] {
         margin-right: 14px;
     }
 
-    .buttonUser{
-        display: block;
-        color: #fff;
-        margin-right: 14px;
-        width: 160px;
-    }
-
-    .buttonUser p{
-        font-size: 13px;
-        width: 159px;
-    }
-
     .buttonHeader{
         margin-top: 6px;
     }
 
     .linkImg{
         padding-left: 12px;
-    }
-
-    .linkUser{
-        width: 343px;
+        width: 36%;
     }
 
     .linkImg div{
@@ -184,32 +165,24 @@ input[type="email"] {
         display: none;
     }
 
-    .divStyle li {
+    .divStyle.textUser {
         text-align: center;
         margin: 0;
     }
 
+    .textUser{
+        margin-top: 12px;
+        border-bottom: 2px #091F43FF solid;
+        padding-bottom: 15px;
+    }
+
+    .liUser{
+        margin-top: 12px;
+        border-bottom: 2px #091F43FF solid;
+        padding-bottom: 15px;
+    }
+
     .divStyle.expand ul {
-        display: block;
-    }
-
-    .divStyleUser ul{
-        flex-direction: column;
-        position: absolute;
-        top: 34px;
-        right: 0;
-        width: 100%;
-        height: 80px;
-        background-color: #4E5166;
-        display: none;
-    }
-
-    .divStyleUser li {
-        text-align: center;
-        margin: 15px;
-    }
-
-    .divStyleUser.expandUser ul {
         display: block;
     }
 

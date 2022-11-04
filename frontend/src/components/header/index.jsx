@@ -208,27 +208,29 @@ function Header() {
     } else {
       return <header>
               <nav className="navBar">
-                <a className="linkImg linkUser" href="/">
+                <a className="linkImg" href="/">
                   <div>
                     <img className="styleImg" src={ Logo } alt="Logo Groupomania"/>
                   </div>
                 </a>
-                <div className={ showBurger ? "divStyleUser expandUser" : "divStyleUser"}>
+                <div className={ showBurger ? "divStyle expand" : "divStyle"}>
                   <ul className="divLink">
                     <li className="textUser">
                       <p>Bienvenue { userDetails.userName }</p>
                     </li>
                     <span>|</span>
-                    <li>
+                    <li className="liUser">
                       <button className="buttonHeader" onClick={ Logout }>Déconnecter</button>
                     </li>
                   </ul>
                 </div>
-                <div className="buttonUser" onClick={() => {
-                  setShowBurger(!showBurger);
-                }}>
-                  <p>Bienvenue { userDetails.userName }</p>
-                </div>
+                  <div className="buttonBurger" onClick={() => {
+                    setShowBurger(!showBurger);
+                  }}>
+                    <div>
+                      <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${userDetails.userName}` } alt="profil"/>
+                    </div>
+                  </div>
               </nav>
             </header>
 
