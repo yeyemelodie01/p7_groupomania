@@ -7,7 +7,6 @@ function submitLike() {
     "userId": userDetails._id,
     "like": 1
   }
-  console.log(like);
   axios
     .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
       headers: {

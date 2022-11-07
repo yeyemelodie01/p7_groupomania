@@ -218,7 +218,7 @@ function Home() {
     } else {
       return <div>
                 <div className="buttonDiv">
-                  <p>Vous devez vous connecter pour créer un post</p>
+                  <p>Vous devez vous connecter pour créer et aimer un post</p>
                 </div>
                 <div className="scrollContainer">
                     <Post />
