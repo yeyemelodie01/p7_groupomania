@@ -149,6 +149,7 @@ function Home() {
                         <div className="iconDiv">
                           <div className="iconSize">
                             <FontAwesomeIcon icon={ faImage } />
+                            <p></p>
                           </div>
                         </div>
                         <div className="divUpload">

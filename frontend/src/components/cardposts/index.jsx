@@ -8,8 +8,6 @@ import { useState } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import postDelete from '../../utils/hooks/delete'
-import submitLike from '../../utils/hooks/like'
-import submitDislike from '../../utils/hooks/dislike'
 
 function Card({ title, media, text, username, hour, avatar, like, dislike}){
   const [file, setFile] = useState();
@@ -167,7 +165,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
           if(media){
             return (
               <div id="media">
-                <img src={ media } alt=""/>
+                <img src={ media } alt="userImage"/>
               </div>
             )
           }
@@ -207,7 +205,6 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
       const formData = new FormData();
       formData.append("files", data.img[0]);
       formData.append("postType", "media");
-      console.log(formData);
       axios
         .put(`http://localhost:4000/api/posts/${postsId}`, formData, {
           headers: {
@@ -216,7 +213,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
           }
         })
         .then(() => {
-          window.location.href='/';
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
@@ -234,12 +231,54 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
           }
         })
         .then(() => {
-          window.location.href='/';
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
         });
     }
+  }
+
+  function submitLike() {
+    const userDetails = JSON.parse(localStorage.getItem('user'));
+    let postsId = localStorage.getItem("postId");
+    const like = {
+      "userId": userDetails._id,
+      "like": 1
+    }
+    axios
+      .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
+        headers: {
+          Authorization: `Bearer ${userDetails.jwt}`,
+        }
+      })
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function submitDislike() {
+    const userDetails = JSON.parse(localStorage.getItem('user'));
+    let postsId = localStorage.getItem("postId");
+    const like = {
+      "userId": userDetails._id,
+      "like": -1
+    }
+    axios
+      .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
+        headers: {
+          Authorization: `Bearer ${userDetails.jwt}`,
+        }
+      })
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   if(userDetails) {
@@ -267,10 +306,10 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                 <div className="styleIconLike">
                   <div className="divIconLike">
                     <div className="divIconNumber">
-                      <div className="likedislike">
-                        <button className="buttonIcon" onClick={submitLike}><FontAwesomeIcon icon={faThumbsUp} className="iconColor" />{like}
+                      <div className="likeDislike">
+                        <button className="buttonLikeDislike" onClick={submitLike}><FontAwesomeIcon icon={faThumbsUp} className="iconColor" />{like}
                         </button>
-                        <button className="buttonIcon" onClick={submitDislike}><FontAwesomeIcon icon={faThumbsDown} className="iconColor" />{dislike}
+                        <button className="buttonLikeDislike" onClick={submitDislike}><FontAwesomeIcon icon={faThumbsDown} className="iconColor" />{dislike}
                         </button>
                       </div>
                     </div>

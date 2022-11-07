@@ -30,6 +30,12 @@
     width: 100%;
 }
 
+#media img{
+    width: 564px;
+    height: 470px;
+    object-fit: contain;
+}
+
 #text p{
     text-align: justify;
 }
@@ -37,6 +43,25 @@
 .divText{
     height: 200px;
     margin-bottom: 30px;
+}
+
+.divIconNumber .likeDislike{
+    width: 12%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonLikeDislike{
+    color: #ffffff;
+    font-size: 15px;
+    margin: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.buttonLikeDislike .iconColor{
+
 }
 
 .styleButton{
@@ -60,6 +85,11 @@
         width: 320px;
     }
 
+    #media img{
+        width: 300px;
+        height: 260px;
+    }
+
     figcaption{
         width: 100%;
     }
@@ -73,6 +103,10 @@
     .divText{
         margin: 20px 0 10px 0;
         width: 300px;
+    }
+
+    .divIconNumber .likeDislike{
+        width: 27%;
     }
 
     .updateDeleteText{

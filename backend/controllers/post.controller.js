@@ -35,8 +35,8 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
     if ('media' === postType) {
       const result = await cloudinary.uploader.upload(req.file.path, {
         folder: 'postImg',
+        format:'WebP'
       });
-      console.log(req.file.path);
       const newPost = new postModel({
         "userId": userId,
         "userName": userName,
@@ -75,7 +75,10 @@ exports.postUpdateRequest = async(req, res) => {
     if(media){
       cloudinary.uploader.destroy(media);
     }
-    const newImg = await cloudinary.uploader.upload(req.file.path);
+    const newImg = await cloudinary.uploader.upload(req.file.path, {
+      folder: 'postImg',
+      format:'WebP'
+    });
     const dataUpdate = {
       public_id: newImg.public_id,
       media: newImg.secure_url
