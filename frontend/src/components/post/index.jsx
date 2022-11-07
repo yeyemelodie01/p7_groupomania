@@ -28,10 +28,15 @@ function Post() {
 
   const usePosts = postsSort.map((posts) =>{
 
-    function SendPostId(){
+    function sendPostId(){
       const detail = posts._id;
       localStorage.setItem("postId", detail);
       window.location.href='/detail';
+    }
+
+    function localPostId(){
+      const detail = posts._id;
+      localStorage.setItem("postId", detail);
     }
 
     const date1 = moment(posts.createdAt);
@@ -72,7 +77,7 @@ function Post() {
                 </div>
                 <div className="divFigureCenter">
                   <div className="divFigureWidth">
-                    <h1 className="titlePost" onClick={ SendPostId }>{posts.title}</h1>
+                    <h1 className="titlePost" onClick={ sendPostId }>{posts.title}</h1>
                     <figure>
                       <div className="textFigure">{parse(posts.text)}</div>
                       <figcaption>
@@ -80,8 +85,14 @@ function Post() {
                           <div className="divIconLike">
                             <div className="divIconNumber">
                               <div className="likeDislike">
-                                <button className="buttonIcon"><FontAwesomeIcon icon={ faThumbsUp } className="iconColor" />{ posts.likes }</button>
-                                <button className="buttonIcon"><FontAwesomeIcon icon={ faThumbsDown } className="iconColor"/>{ posts.dislikes }</button>
+                                <button className="buttonIcon" onClick={() => {
+                                  submitLike();
+                                  localPostId();
+                                }}><FontAwesomeIcon icon={ faThumbsUp } className="iconColor" />{ posts.likes }</button>
+                                <button className="buttonIcon" onClick={() => {
+                                  submitDislike();
+                                  localPostId();
+                                } }><FontAwesomeIcon icon={ faThumbsDown } className="iconColor"/>{ posts.dislikes }</button>
                               </div>
                             </div>
                           </div>
@@ -117,18 +128,26 @@ function Post() {
                 </div>
                 <div className="divFigureCenter">
                   <div className="divFigureWidth">
-                    <h1 className="titlePost" onClick={ SendPostId }>{posts.title}</h1>
+                    <h1 className="titlePost" onClick={ sendPostId }>{posts.title}</h1>
                     <figure>
                       <div className="imgFigure">
+                        <div className="imgWidth">
                           <img src={posts.media} alt=""/>
+                        </div>
                       </div>
                       <figcaption>
                         <div className="styleIconLike">
                           <div className="divIconLike">
                             <div className="divIconNumber">
                               <div className="likeDislike">
-                                <button className="buttonIcon"><FontAwesomeIcon icon={ faThumbsUp } className="iconColor"/>{ posts.likes }</button>
-                                <button className="buttonIcon"><FontAwesomeIcon icon={ faThumbsDown } className="iconColor"/>{ posts.dislikes }</button>
+                                <button className="buttonIcon" onClick={() => {
+                                  submitLike();
+                                  localPostId();
+                                } }><FontAwesomeIcon icon={ faThumbsUp } className="iconColor"/>{ posts.likes }</button>
+                                <button className="buttonIcon" onClick={() => {
+                                  submitDislike();
+                                  localPostId();
+                                } }><FontAwesomeIcon icon={ faThumbsDown } className="iconColor"/>{ posts.dislikes }</button>
                               </div>
                             </div>
                           </div>
