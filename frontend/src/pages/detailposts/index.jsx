@@ -20,7 +20,6 @@ function DetailPosts() {
       })
   },[]);
 localStorage.setItem('userId', detail.userId);
-  console.log(detail.userId);
 
   const date1 = moment(detail.createdAt);
   const date2 = moment(Date.now());

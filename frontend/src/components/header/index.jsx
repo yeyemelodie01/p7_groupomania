@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
-import 'react-toastify/dist/ReactToastify.css'
 import Logo from '../../assets/icon-left-font.png'
 import '../../utils/styles/header.css'
 import useModal from '../../utils/hooks/usemodal'

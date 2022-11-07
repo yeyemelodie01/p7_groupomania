@@ -14,7 +14,7 @@ exports.postIdRequest = async(req, res) => {
 }
 
 exports.postAddRequest = async(req, res) => { // export de la fonction postAddRequest qui pour valeur une fonction asynchrone avec la valeur req et res
-  const { userId, postType, post, userName } = req.body //constante userId... qui récupère les données envoyer par le front avec req.body
+  const { userId, postType, post, userName } = req.body//constante userId... qui récupère les données envoyer par le front avec req.body
   let title = "";
   if ('media' === postType) {
       title = req.body.title;
@@ -36,6 +36,7 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
       const result = await cloudinary.uploader.upload(req.file.path, {
         folder: 'postImg',
       });
+      console.log(req.file.path);
       const newPost = new postModel({
         "userId": userId,
         "userName": userName,

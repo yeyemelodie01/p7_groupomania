@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment'
 import LazyLoad from 'react-lazy-load'
-
+import submitLike from '../../utils/hooks/like'
+import submitDislike from '../../utils/hooks/dislike'
 
 function Post() {
   const [ posts, setPosts ] = useState([]);

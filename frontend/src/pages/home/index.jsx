@@ -32,6 +32,7 @@ function Home() {
       formData.append("postType", "media");
       formData.append("title", data.title);
       formData.append("files", data.img[0]);
+      console.log(data.img[0])
       axios
           .post("http://localhost:4000/api/posts/create", formData, {
             headers: {
@@ -139,7 +140,7 @@ function Home() {
                             className="sizeInput"
                             type="text"
                             placeholder="Titre"
-                            maxLength="10"
+                            maxLength="30"
                             {...register("title")}
                           />
                         </label>
@@ -176,7 +177,7 @@ function Home() {
                             className="sizeInput"
                             type="text"
                             placeholder="Titre"
-                            maxLength="10"
+                            maxLength="30"
                             {...register("textTitle")}
                           />
                         </label>
