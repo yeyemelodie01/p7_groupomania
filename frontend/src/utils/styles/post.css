@@ -229,6 +229,18 @@ figcaption{
     }
 }
 /* ECRAN */
-@media screen and (min-width: 1025px) and (max-width: 1440px){
+@media screen and (min-width: 1025px) {
+    .titlePost {
+        margin-bottom: 20px;
+    }
 
+    .imgWidth img {
+        width: 600px;
+        height: 480px;
+    }
+
+    figcaption {
+        width: 100%;
+        margin-top: 20px;
+    }
 }
