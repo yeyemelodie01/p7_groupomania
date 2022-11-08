@@ -191,7 +191,7 @@ function Header() {
               <div className={ showBurger ? "divStyle expand" : "divStyle"}>
                 <ul className="divLink">
                   <li className="modal-toggle linkStyle" onClick={toggleLoginForm}>Se connecter </li>
-                  <span>|</span>
+                  <li><span>|</span></li>
                   <li className="modal-toggle linkStyle" onClick={toggleRegistrationForm}>S'inscrire</li>
                 </ul>
               </div>
@@ -217,7 +217,7 @@ function Header() {
                     <li className="textUser">
                       <p>Bienvenue { userDetails.userName }</p>
                     </li>
-                    <span>|</span>
+                    <li><span>|</span></li>
                     <li className="liUser">
                       <button className="buttonHeader" onClick={ Logout }>Déconnecter</button>
                     </li>
