@@ -103,7 +103,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
               </div>
               <div className="updateDeleteMedia">
                 <form onSubmit={handleSubmit(postUpdate)}>
-                  <label form='img'>
+                  <label htmlFor="img" form='img'>
                     <input
                       id="img"
                       className="sizeInputImg"
