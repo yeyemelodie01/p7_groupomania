@@ -16,8 +16,9 @@ nav{
     width: 50%;
 }
 
-.linkImg div{
-    width: 25%;
+.styleImg{
+    width: 309px;
+    height: 56px;
 }
 
 .divStyle {
@@ -150,8 +151,9 @@ input[type="email"] {
         width: 36%;
     }
 
-    .linkImg div{
-        width: 100%;
+    .styleImg{
+        width: 150px;
+        height: 30px;
     }
 
     .divStyle ul{
@@ -198,5 +200,10 @@ input[type="email"] {
 @media screen and (min-width: 768px) and (max-width: 1023px){
     .linkImg{
         width: 65%;
+    }
+
+    .styleImg{
+        width: 200px;
+        height: 39px;
     }
 }
