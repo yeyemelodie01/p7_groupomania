@@ -14,7 +14,6 @@ function submitDislike() {
       }
     })
     .then(() => {
-      window.location.href='/';
     })
     .catch((err) => {
       console.log(err);

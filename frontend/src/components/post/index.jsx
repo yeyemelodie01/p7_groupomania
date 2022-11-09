@@ -22,12 +22,13 @@ function Post() {
     },
     []);
 
+
+
   const postsSort = posts.sort(function (a, b) {
     return b.createdAt.localeCompare(a.createdAt);
   })
 
   const usePosts = postsSort.map((posts) =>{
-
     function sendPostId(){
       const detail = posts._id;
       localStorage.setItem("postId", detail);
@@ -35,9 +36,28 @@ function Post() {
     }
 
     function localPostId(){
+      const postDetail = {
+        "_id": posts._id,
+        "like" : posts.likes,
+        "dislike" : posts.dislikes
+      }
       const detail = posts._id;
       localStorage.setItem("postId", detail);
+      localStorage.setItem('post', JSON.stringify(postDetail));
     }
+
+    const update = JSON.parse(localStorage.getItem('post'));
+
+    const like = update.like;
+    const dislike = update.dislike;
+
+    const updateLike = like + 1;
+    // const updateDislike = dislike + 1;
+    // const removeLike = like - 1;
+    const removeDislike = dislike - 1;
+
+
+    console.log(updateLike , removeDislike)
 
     const date1 = moment(posts.createdAt);
     const date2 = moment(Date.now());
@@ -85,11 +105,11 @@ function Post() {
                           <div className="divIconLike">
                             <div className="divIconNumber">
                               <div className="likeDislike">
-                                <button className="buttonIcon" onClick={() => {
+                                <button id={ posts.id } aria-label="j'aime" className="buttonIcon" onClick={() => {
                                   submitLike();
                                   localPostId();
-                                }}><FontAwesomeIcon icon={ faThumbsUp } className="iconColor" />{ posts.likes }</button>
-                                <button className="buttonIcon" onClick={() => {
+                                }}><FontAwesomeIcon icon={ faThumbsUp } className="iconColor" />{  } </button>
+                                <button id={ posts.id } aria-label="je n'aime pas" className="buttonIcon" onClick={() => {
                                   submitDislike();
                                   localPostId();
                                 } }><FontAwesomeIcon icon={ faThumbsDown } className="iconColor"/>{ posts.dislikes }</button>
@@ -140,11 +160,11 @@ function Post() {
                           <div className="divIconLike">
                             <div className="divIconNumber">
                               <div className="likeDislike">
-                                <button className="buttonIcon" onClick={() => {
+                                <button className="buttonIcon" aria-label="j'aime" onClick={() => {
                                   submitLike();
                                   localPostId();
                                 } }><FontAwesomeIcon icon={ faThumbsUp } className="iconColor"/>{ posts.likes }</button>
-                                <button className="buttonIcon" onClick={() => {
+                                <button className="buttonIcon" aria-label="je n'aime pas" onClick={() => {
                                   submitDislike();
                                   localPostId();
                                 } }><FontAwesomeIcon icon={ faThumbsDown } className="iconColor"/>{ posts.dislikes }</button>
