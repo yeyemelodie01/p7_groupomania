@@ -14,7 +14,6 @@ function submitLike() {
       }
     })
     .then(() => {
-
     })
     .catch((err) => {
       console.log(err);
