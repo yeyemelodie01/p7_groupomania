@@ -1,4 +1,4 @@
-import LazyLoad from 'react-lazy-load'
+//import LazyLoad from 'react-lazy-load'
 import { useForm } from 'react-hook-form'
 import { useState} from 'react'
 import axios from 'axios'
@@ -211,9 +211,9 @@ function Home() {
                 </div>
               </div>
              <div>
-               <LazyLoad height={100}>
-                 <Post />
-               </LazyLoad>
+               <div className='scrollContainer'>
+                   <Post />
+               </div>
              </div>
       </main>)
     } else {
@@ -223,7 +223,7 @@ function Home() {
             <p>Vous devez vous connecter pour créer et aimer un post</p>
           </div>
           <div className='scrollContainer'>
-            <Post />
+              <Post />
           </div>
       </div>
       )}
