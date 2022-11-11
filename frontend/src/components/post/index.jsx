@@ -35,43 +35,21 @@ function Post() {
       window.location.href='/detail';
     }
 
-    function localPostId(){
-      const detail = posts._id;
-      localStorage.setItem("postId", detail);
+    function postMediaText(){
+        if(posts.text){
+          return(
+            <div className="textFigure">{parse(posts.text)}</div>
+          )
+        }
+
+        if(posts.media){
+          return(
+            <div className="imgWidth">
+              <img src={posts.media} alt=""/>
+            </div>
+          )
+        }
     }
-
-     //const update = JSON.parse(localStorage.getItem('update'));
-
-    // function like(){
-    //   if(update.id === posts._id){
-    //       return(
-    //         <p>{ update.like }</p>
-    //       )
-    //   } else {
-    //     return(
-    //       <p>{ posts.likes }</p>
-    //     )
-    //   }
-    // }
-    //
-    // function dislike(){
-    //   if(update.id === posts._id){
-    //     return(
-    //       <p>{ update.dislike }</p>
-    //     )
-    //   } else {
-    //     return(
-    //       <p>{ posts.dislikes }</p>
-    //     )
-    //   }
-    // }
-    // const like = update.like;
-    // const dislike = update.dislike;
-    //
-    // const updateLike = like + 1;
-    // // const updateDislike = dislike + 1;
-    // // const removeLike = like - 1;
-    // const removeDislike = dislike - 1;
 
     const date1 = moment(posts.createdAt);
     const date2 = moment(Date.now());
@@ -92,7 +70,6 @@ function Post() {
     const userDetails = JSON.parse(localStorage.getItem('user'));
 
     if (userDetails === null){
-      if(posts.text){
         return (
           <div className="postGrid">
             <div className="grid">
@@ -115,187 +92,63 @@ function Post() {
                     <div className="divFigureWidth">
                       <h1 className="titlePost" onClick={ sendPostId }>{posts.title}</h1>
                       <figure>
-                        <div className="textFigure">{parse(posts.text)}</div>
+                        { postMediaText() }
                         <figcaption>
                           <div className="styleIconLike">
                             <div className="divIconLike">
                               <div className="divIconNumber">
-                                <div className="likeDislike">
-                                  <button className="buttonIcon" aria-label="j'aime" onClick={() => {
-                                    submitLike();
-                                    localPostId();}}>
-                                    <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" />{ posts.likes }
-                                  </button>
-                                  <button className="buttonIcon" aria-label="je n'aime pas" onClick={() => {
-                                    submitDislike();
-                                    localPostId();}}>
-                                    <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" />{ posts.dislikes }
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    </div>
-                  </div>
-                </div>
-              </LazyLoad>
-            </div>
-          </div>
-        )
-      }
-      if (posts.media){
-        return (
-          <div className="postGrid">
-            <div className="grid">
-              <LazyLoad className="widthLazy">
-                <div className="postDiv" key={posts._id}>
-                  <div className="profilPost">
-                    <ul className="listPost">
-                      <li>
-                        <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
-                      </li>
-                      <li>
-                        <p className="nameProfil">{posts.userName}</p>
-                      </li>
-                      <li>
-                        <p className="hourPost">{ hour }</p>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="divFigureCenter">
-                    <div className="divFigureWidth">
-                      <h1 className="titlePost" onClick={ sendPostId }>{posts.title}</h1>
-                      <figure>
-                        <div className="imgFigure">
-                          <div className="imgWidth">
-                            <img src={posts.media} alt=""/>
-                          </div>
-                        </div>
-                        <figcaption>
-                          <div className="styleIconLike">
-                            <div className="divIconLike">
-                              <div className="divIconNumber">
-                                <div className="likeDislike">
-                                  <button className="buttonIcon" aria-label="j'aime" onClick={() => {
-                                    submitLike();
-                                    localPostId();}}>
-                                    <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" />{ posts.likes }
-                                  </button>
-                                  <button className="buttonIcon" aria-label="je n'aime pas" onClick={() => {
-                                    submitDislike();
-                                    localPostId();}}>
-                                    <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" />{ posts.dislikes }
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    </div>
-                  </div>
-                </div>
-              </LazyLoad>
-            </div>
-          </div>
-        )
-      }
-    } else {
-      if(posts.text){
-        return (
-          <div className="postGrid">
-            <div className="grid">
-              <LazyLoad className="widthLazy">
-                <div className="postDiv" id="postId" key={posts._id}>
-                  <div className="profilPost">
-                    <ul className="listPost">
-                      <li>
-                        <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
-                      </li>
-                      <li>
-                        <p className="nameProfil">{posts.userName}</p>
-                      </li>
-                      <li>
-                        <p className="hourpost">{ hour }</p>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="divFigureCenter">
-                    <div className="divFigureWidth">
-                      <h1 className="titlePost" onClick={ sendPostId }>{posts.title}</h1>
-                      <figure>
-                        <div className="textFigure">{parse(posts.text)}</div>
-                        <figcaption>
-                          <div className="styleIconLike">
-                            <div className="divIconLike">
-                              <div className="divIconNumber">
-                                <div className="likeDislike">
-                                  <button className="buttonIcon" aria-label="j'aime" onClick={() => {
-                                    submitLike();
-                                    localPostId();}}>
-                                    <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" />{ posts.likes }
-                                  </button>
-                                  <button className="buttonIcon" aria-label="je n'aime pas" onClick={() => {
-                                    submitDislike();
-                                    localPostId();}}>
-                                    <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" />{ posts.dislikes }
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    </div>
-                  </div>
-                </div>
-              </LazyLoad>
-            </div>
-          </div>
-        )
-      }
-      if (posts.media){
-        return (
-          <div className="postGrid">
-            <div className="grid">
-              <LazyLoad className="widthLazy">
-                <div className="postDiv" key={posts._id}>
-                  <div className="profilPost">
-                    <ul className="listPost">
-                      <li>
-                        <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
-                      </li>
-                      <li>
-                        <p className="nameProfil">{posts.userName}</p>
-                      </li>
-                      <li>
-                        <p className="hourPost">{ hour }</p>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="divFigureCenter">
-                    <div className="divFigureWidth">
-                      <h1 className="titlePost" onClick={ sendPostId }>{posts.title}</h1>
-                      <figure>
-                        <div className="imgFigure">
-                          <div className="imgWidth">
-                            <img src={posts.media} alt=""/>
-                          </div>
-                        </div>
-                        <figcaption>
-                          <div className="styleIconLike">
-                            <div className="divIconLike">
-                              <div className="divIconNumber">
-                                <div className="likeDislike">
                                   <button className="buttonIcon" aria-label="j'aime">
-                                    <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" />{ posts.likes }
+                                    <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" /><span id='likeSpan'>{ posts.likes }</span>
                                   </button>
                                   <button className="buttonIcon" aria-label="je n'aime pas">
-                                    <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" />{ posts.dislikes }
+                                    <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" /><span id='likeSpan'>{ posts.likes }</span>
                                   </button>
-                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </div>
+                  </div>
+                </div>
+              </LazyLoad>
+            </div>
+          </div>
+        )
+      } else {
+        return (
+          <div className="postGrid">
+            <div className="grid">
+              <LazyLoad className="widthLazy">
+                <div className="postDiv" id="postId" key={posts._id}>
+                  <div className="profilPost">
+                    <ul className="listPost">
+                      <li>
+                        <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
+                      </li>
+                      <li>
+                        <p className="nameProfil">{posts.userName}</p>
+                      </li>
+                      <li>
+                        <p className="hourpost">{ hour }</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="divFigureCenter">
+                    <div className="divFigureWidth">
+                      <h1 className="titlePost" onClick={ sendPostId }>{posts.title}</h1>
+                      <figure>
+                        { postMediaText() }
+                        <figcaption>
+                          <div className="styleIconLike">
+                            <div className="divIconLike">
+                              <div className="divIconNumber">
+                                  <button className="buttonIcon" aria-label="j'aime" onClick={() => { submitLike(posts._id) }}>
+                                    <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" /><span id={'likeSpan'+posts._id}>{ posts.likes }</span>
+                                  </button>
+                                  <button className="buttonIcon" aria-label="je n'aime pas" onClick={() => { submitDislike(posts._id); }}>
+                                    <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" /><span id={'dislikeSpan'+posts._id}>{ posts.dislikes }</span>
+                                  </button>
                               </div>
                             </div>
                           </div>
@@ -309,8 +162,7 @@ function Post() {
           </div>
         )
       }
-    }
-    return null;
+    //return null;
   });
 
     return (

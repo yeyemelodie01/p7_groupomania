@@ -1,19 +1,20 @@
-import axios from 'axios'
+import axios from 'axios';
 
-function submitLike() {
+function submitLike(postId) {
   const userDetails = JSON.parse(localStorage.getItem('user'));
-  let postsId = localStorage.getItem("postId");
   const like = {
     "userId": userDetails._id,
     "like": 1
   }
   axios
-    .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
+    .post(`http://localhost:4000/api/posts/${postId}/like`, like ,{
       headers: {
         Authorization: `Bearer ${userDetails.jwt}`,
       }
     })
-    .then(() => {
+    .then((res) => {
+      document.getElementById('likeSpan'+postId).innerHTML = res.data.likes;
+      document.getElementById('dislikeSpan'+postId).innerHTML = res.data.dislikes;
     })
     .catch((err) => {
       console.log(err);

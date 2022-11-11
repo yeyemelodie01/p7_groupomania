@@ -109,7 +109,7 @@ figcaption{
 }
 
 .divIconLike{
-    width: 100%;
+    width: 16%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -131,16 +131,40 @@ figcaption{
     cursor: pointer;
 }
 
-.likeDislike{
-    width: 80px;
-    display: flex;
-    justify-content: space-around;
+.buttonIcon span{
+    margin: 0;
 }
 
 .iconColor{
     color: #FFD7D7;
     font-size: 20px;
     margin-right: 5px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }
 
 .number{
@@ -210,6 +234,10 @@ figcaption{
     .titlePost{
         font-size: 23px;
         margin: 8px 0;
+    }
+
+    .divIconLike{
+        width: 35%;
     }
 
     .imgWidth img{
