@@ -102,6 +102,9 @@ button.modal-toggle:not(:first-child) {
 
 .formGroup {
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 input[type="text"],

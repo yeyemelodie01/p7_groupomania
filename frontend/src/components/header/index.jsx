@@ -59,8 +59,7 @@ function Header() {
             window.location.reload();
           })
           .catch((err) => {
-            const status = err.response.data.message;
-            localStorage.setItem('error', status)
+            document.getElementById('LogErr').innerHTML = "Mauvais mot de passe/ email";
             console.log(err)
           });
     }
@@ -70,18 +69,7 @@ function Header() {
       window.location.href='/';
     }
 
-    function ShowError(){
-      let status = localStorage.getItem('error')
-      if(status){
-        document.getElementsByClassName('emailError').border='2px #FD2D01 solid';
-      }
-      if (errors.password?.message){
-        document.getElementsByClassName('passwordError').borderColor='2px #FD2D01 solid'
-      }
-    }
-
   let userDetails = JSON.parse(localStorage.getItem('user'));
-  let status = localStorage.getItem('error')
 
     if(userDetails === null) {
       if(isLoginFormShow){
@@ -99,14 +87,8 @@ function Header() {
                     className="emailError"
                     {...register("email", {
                       required:"Email requis",
-                      pattern:{
-                      value: status,
-                      messages:'Utilisateur non enregistré'
-                    }
                     })}
-                    aria-invalid={errors.email ? "true" : "false"}
                   />
-                  {errors.email && <div className="error">{errors.email.message}</div>}
                 </div>
                 <div className="formGroup">
                   <input
@@ -116,12 +98,11 @@ function Header() {
                     {...register("password", {
                       required:"Mot de Passe requis",
                     })}
-                    aria-invalid={errors.password ? "true" : "false"}
                   />
-                  {errors.password && <div className="error">{errors.password.message}</div>}
+                  <span id="LogErr" className="error"></span>
                 </div>
                 <div className="formGroup">
-                  <input type="submit" placeholder="Envoyer" onClick={ ShowError }/>
+                  <input type="submit" placeholder="Envoyer"/>
                 </div>
               </form>
             </Modal>
@@ -171,7 +152,6 @@ function Header() {
                   <input
                     type="submit"
                     placeholder="Envoyer"
-                    onClick={ ShowError }
                   />
                 </div>
               </form>
