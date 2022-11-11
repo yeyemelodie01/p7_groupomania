@@ -44,7 +44,7 @@ function DetailPosts() {
         <div className="gridDetail">
           <div className="divCard">
             <Card
-              key={detail.id}
+              key={detail._id}
               title={detail.title}
               media={detail.media}
               text={detail.text}

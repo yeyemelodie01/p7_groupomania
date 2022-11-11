@@ -2,12 +2,14 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import parse from 'html-react-parser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsDown as fasThumbsDown, faThumbsUp as fasThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import postDelete from '../../utils/hooks/delete'
+import submitLike from '../../utils/hooks/like'
+import submitDislike from '../../utils/hooks/dislike'
 
 function Card({ title, media, text, username, hour, avatar, like, dislike}){
   const [file, setFile] = useState();
@@ -15,6 +17,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
   const { register, handleSubmit} = useForm();
   const userDetails = JSON.parse(localStorage.getItem('user'));
   const userId = localStorage.getItem('userId');
+  const postsId = localStorage.getItem("postId");
 
   function mediaText(){
     if(userDetails){
@@ -239,48 +242,6 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
     }
   }
 
-  function submitLike() {
-    const userDetails = JSON.parse(localStorage.getItem('user'));
-    let postsId = localStorage.getItem("postId");
-    const like = {
-      "userId": userDetails._id,
-      "like": 1
-    }
-    axios
-      .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
-        headers: {
-          Authorization: `Bearer ${userDetails.jwt}`,
-        }
-      })
-      .then(() => {
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  function submitDislike() {
-    const userDetails = JSON.parse(localStorage.getItem('user'));
-    let postsId = localStorage.getItem("postId");
-    const like = {
-      "userId": userDetails._id,
-      "like": -1
-    }
-    axios
-      .post(`http://localhost:4000/api/posts/${postsId}/like`, like ,{
-        headers: {
-          Authorization: `Bearer ${userDetails.jwt}`,
-        }
-      })
-      .then(() => {
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   if(userDetails) {
     return (
       <>
@@ -307,9 +268,11 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                   <div className="divIconLike">
                     <div className="divIconNumber">
                       <div className="likeDislike">
-                        <button className="buttonLikeDislike" onClick={submitLike}><FontAwesomeIcon icon={faThumbsUp} className="iconColor" />{like}
+                        <button className="buttonIcon" aria-label="j'aime" onClick={() => { submitLike(postsId) }}>
+                          <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" /><span id={'likeSpan'+postsId}>{ like }</span>
                         </button>
-                        <button className="buttonLikeDislike" onClick={submitDislike}><FontAwesomeIcon icon={faThumbsDown} className="iconColor" />{dislike}
+                        <button className="buttonIcon" aria-label="je n'aime pas" onClick={() => { submitDislike(postsId); }}>
+                          <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" /><span id={'dislikeSpan'+postsId}>{ dislike }</span>
                         </button>
                       </div>
                     </div>
@@ -346,8 +309,12 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                   <div className="divIconLike">
                     <div className="divIconNumber">
                       <div className="likeDislike">
-                        <button className="buttonIcon"><FontAwesomeIcon icon={ faThumbsUp } className="iconColor" />{ like }</button>
-                        <button className="buttonIcon"><FontAwesomeIcon icon={ faThumbsDown } className="iconColor"/>{ dislike }</button>
+                        <button className="buttonIcon" aria-label="j'aime">
+                          <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" /><span id='likeSpan'>{ like }</span>
+                        </button>
+                        <button className="buttonIcon" aria-label="je n'aime pas">
+                          <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" /><span id='likeSpan'>{ dislike }</span>
+                        </button>
                       </div>
                     </div>
                   </div>

@@ -68,50 +68,51 @@ function Post() {
       hour = date2.diff(date1, 'days') + "j";
     }
     const userDetails = JSON.parse(localStorage.getItem('user'));
-
     if (userDetails === null){
         return (
-          <div className="postGrid">
-            <div className="grid">
-              <LazyLoad className="widthLazy">
-                <div className="postDiv" id="postId" key={posts._id}>
-                  <div className="profilPost">
-                    <ul className="listPost">
-                      <li>
-                        <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
-                      </li>
-                      <li>
-                        <p className="nameProfil">{posts.userName}</p>
-                      </li>
-                      <li>
-                        <p className="hourpost">{ hour }</p>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="divFigureCenter">
-                    <div className="divFigureWidth">
-                      <h1 className="titlePost" onClick={ sendPostId }>{posts.title}</h1>
-                      <figure>
-                        { postMediaText() }
-                        <figcaption>
-                          <div className="styleIconLike">
-                            <div className="divIconLike">
-                              <div className="divIconNumber">
-                                  <button className="buttonIcon" aria-label="j'aime">
-                                    <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" /><span id='likeSpan'>{ posts.likes }</span>
-                                  </button>
-                                  <button className="buttonIcon" aria-label="je n'aime pas">
-                                    <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" /><span id='likeSpan'>{ posts.likes }</span>
-                                  </button>
+          <div key={posts._id}>
+            <div className="postGrid">
+              <div className="grid">
+                <LazyLoad className="widthLazy">
+                  <div className="postDiv" id="postId" >
+                    <div className="profilPost">
+                      <ul className="listPost">
+                        <li>
+                          <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
+                        </li>
+                        <li>
+                          <p className="nameProfil">{posts.userName}</p>
+                        </li>
+                        <li>
+                          <p className="hourpost">{ hour }</p>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="divFigureCenter">
+                      <div className="divFigureWidth">
+                        <h1 className="titlePost" onClick={ sendPostId }>{posts.title}</h1>
+                        <figure>
+                          { postMediaText() }
+                          <figcaption>
+                            <div className="styleIconLike">
+                              <div className="divIconLike">
+                                <div className="divIconNumber">
+                                    <button className="buttonIcon" aria-label="j'aime">
+                                      <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" /><span id='likeSpan'>{ posts.likes }</span>
+                                    </button>
+                                    <button className="buttonIcon" aria-label="je n'aime pas">
+                                      <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" /><span id='likeSpan'>{ posts.dislikes }</span>
+                                    </button>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </figcaption>
-                      </figure>
+                          </figcaption>
+                        </figure>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </LazyLoad>
+                </LazyLoad>
+              </div>
             </div>
           </div>
         )
