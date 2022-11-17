@@ -1,4 +1,3 @@
-//import LazyLoad from 'react-lazy-load'
 import { useForm } from 'react-hook-form'
 import { useState} from 'react'
 import axios from 'axios'
