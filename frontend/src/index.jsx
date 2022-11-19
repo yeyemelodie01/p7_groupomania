@@ -17,7 +17,7 @@ root.render(
       <Route exact path="/">
         <Home />
       </Route>
-      <Route path="/detail">
+      <Route path="/detail/:id">
         <Detailposts />
       </Route>
     </Router>

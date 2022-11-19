@@ -33,7 +33,7 @@ function Home() {
       formData.append("files", data.img[0]);
       console.log(data.img[0])
       axios
-          .post("http://localhost:4000/api/posts/create", formData, {
+          .post("http://localhost:4000/api/posts", formData, {
             headers: {
               Authorization: `Bearer ${userDetails.jwt}`,
               "Content-Type": "multipart/form-data"
@@ -58,7 +58,7 @@ function Home() {
         }
       }
       axios
-        .post("http://localhost:4000/api/posts/create", dataToSend, {headers: {Authorization: `Bearer ${userDetails.jwt}`}})
+        .post("http://localhost:4000/api/posts", dataToSend, {headers: {Authorization: `Bearer ${userDetails.jwt}`}})
         .then(() => {
           window.location.href='/';
         })
@@ -193,10 +193,12 @@ function Home() {
                                     'ImageUpload', 'ImageToolbar', 'ImageStyle',
                                     'ImageCaption'
                                   ],
+
                                 }}
                                 onChange={(event, editor) => {
                                   const data = editor.getData()
                                   setTextEdit(data)
+                                  console.log( 'Editor is ready to use!', editor );
                                 }}
                               />
                             </div>
