@@ -25,6 +25,7 @@
 .profilPost{
     display: flex;
     align-items: center;
+    align-self: flex-start;
     width: 27%;
 }
 
@@ -70,7 +71,6 @@
 }
 
 .textFigure p{
-    text-align: justify;
     margin-bottom: 8px;
 }
 
@@ -222,6 +222,10 @@ figcaption{
         width: 220px;
     }
 
+    .divFigureWidth{
+        width: initial;
+    }
+
     .profilPost{
         width: 55%;
         margin-left: 10px;
@@ -236,8 +240,16 @@ figcaption{
         margin: 8px 0;
     }
 
+    .postDiv{
+        align-items: center;
+    }
+
     .divIconLike{
         width: 35%;
+    }
+
+    .divFigureCenter{
+        width: 94%;
     }
 
     .imgWidth img{
@@ -247,6 +259,11 @@ figcaption{
 
     .ck.ck-reset {
         width: 268px;
+    }
+
+    .textFigure{
+        text-align: justify;
+        width: initial;
     }
 
     /* LAZYLOAD */

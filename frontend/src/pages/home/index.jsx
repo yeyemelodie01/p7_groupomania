@@ -96,7 +96,7 @@ function Home() {
                   <div className="buttonDiv">
                     <button className="buttonPost" onClick={() => setIsHidden((s) => !s)}>
                       <FontAwesomeIcon icon={ faCirclePlus } />
-                      Créer un post
+                      <h1>Créer un post</h1>
                     </button>
                   </div>
                   <div className="hiddenDiv" style={{display: isHidden ? 'block' : 'none'}}>
@@ -134,25 +134,24 @@ function Home() {
                         <div id="uploadImg">
                           <div className="divUploadImg">
                             <div className="divTitle">
-                              <label form='title'>
+                              <label form='title'>Titre du Post :
                                 <input
                                   id="title"
                                   className="sizeInput"
                                   type="text"
-                                  placeholder="Titre"
+                                  placeholder="Écrivez votre titre"
                                   maxLength="30"
                                   {...register("title")}
                                 />
                               </label>
                             </div>
                             <div className="divImgText">
-                              <div className="iconDiv">
-                                <div className="iconSize">
-                                  <FontAwesomeIcon icon={ faImage } />
-                                </div>
-                              </div>
                               <div className="divUpload">
-                                <label form='img'>
+                                <label form="img" className="labelIcon">
+                                  <div className="iconSize">
+                                    <FontAwesomeIcon icon={ faImage } />
+                                    <h2>Insérer une image</h2>
+                                  </div>
                                   <input
                                     id="img"
                                     className="sizeInputImg"
@@ -164,19 +163,18 @@ function Home() {
                                 </label>
                               </div>
                                 <button className="styleButton" type="submit" onClick={() => {}}>Envoyer</button>
-                                {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                           </div>
                         </div>
                         </div>
                         <div id="textWisywig">
                           <div className="divWisywig">
                             <div className="divTitle">
-                              <label form='title'>
+                              <label form='title'>Titre du Post :
                                 <input
                                   id="textTitle"
                                   className="sizeInput"
                                   type="text"
-                                  placeholder="Titre"
+                                  placeholder="Écrivez votre titre"
                                   maxLength="30"
                                   {...register("textTitle")}
                                 />
@@ -198,19 +196,11 @@ function Home() {
                                 onChange={(event, editor) => {
                                   const data = editor.getData()
                                   setTextEdit(data)
-                                  console.log( 'Editor is ready to use!', editor );
                                 }}
-                                onError={ ( error) => {
-                                  // If the editor is restarted, the toolbar element will be created once again.
-                                  // The `onReady` callback will be called again and the new toolbar will be added.
-                                  // This is why you need to remove the older toolbar.
-                                  console.log(error)
-                                } }
                               />
                               <div>ici</div>
                             </div>
                               <button className="styleButton" type="submit" onClick={() => {}} >Envoyer</button>
-                              {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                           </div>
                         </div>
                       </form>
@@ -227,8 +217,8 @@ function Home() {
     } else {
       return(
         <div>
-          <div className="buttonDiv">
-            <p>Vous devez vous connecter pour créer et aimer un post</p>
+          <div className="titleDiv">
+            <h1>Vous devez vous connecter pour créer et aimer un post</h1>
           </div>
           <div className='scrollContainer'>
               <Post />

@@ -82,3 +82,15 @@
         transform: rotate(360deg);
     }
 }
+
+/* RESPONSIVE */
+
+/* MOBILE */
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    #root{
+    }
+
+    #loader{
+        width: 100%;
+    }
+}

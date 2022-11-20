@@ -76,7 +76,7 @@ function Post() {
                     <div className="profilPost">
                       <ul className="listPost">
                         <li>
-                          <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
+                          <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt={`profil de ${posts.userName}`}/>
                         </li>
                         <li>
                           <p className="nameProfil">{posts.userName}</p>
@@ -88,17 +88,17 @@ function Post() {
                     </div>
                     <div className="divFigureCenter">
                       <div className="divFigureWidth">
-                        <h1 className="titlePost" onClick={ sendPostId }>{posts.title}</h1>
+                        <h2 className="titlePost" onClick={ sendPostId }>{posts.title}</h2>
                         <figure>
                           { postMediaText() }
                           <figcaption>
                             <div className="styleIconLike">
                               <div className="divIconLike">
                                 <div className="divIconNumber">
-                                    <button className="buttonIcon" aria-label="j'aime">
+                                    <button className="buttonIcon">
                                       <FontAwesomeIcon icon={ faThumbsUp } className="iconColor degrade" /><span id='likeSpan'>{ posts.likes }</span>
                                     </button>
-                                    <button className="buttonIcon" aria-label="je n'aime pas">
+                                    <button className="buttonIcon">
                                       <FontAwesomeIcon icon={ faThumbsDown } className="iconColor degrade" /><span id='likeSpan'>{ posts.dislikes }</span>
                                     </button>
                                 </div>
@@ -124,7 +124,7 @@ function Post() {
                     <div className="profilPost">
                       <ul className="listPost">
                         <li>
-                          <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt="profil"/>
+                          <img className="imgProfil" src={ `https://ui-avatars.com/api/?name=${posts.userName}` } alt={`profil de ${posts.userName}`}/>
                         </li>
                         <li>
                           <p className="nameProfil">{posts.userName}</p>
@@ -136,17 +136,17 @@ function Post() {
                     </div>
                     <div className="divFigureCenter">
                       <div className="divFigureWidth">
-                        <h1 className="titlePost" onClick={ sendPostId }>{posts.title}</h1>
+                        <h2 className="titlePost" onClick={ sendPostId }>{posts.title}</h2>
                         <figure>
                           { postMediaText() }
                           <figcaption>
                             <div className="styleIconLike">
                               <div className="divIconLike">
                                 <div className="divIconNumber">
-                                  <button className="buttonIcon" aria-label="j'aime" onClick={() => { submitLike(posts._id) }}>
+                                  <button className="buttonIcon" onClick={() => { submitLike(posts._id) }}>
                                     <FontAwesomeIcon icon={ faThumbsUp } className="iconColor degrade" /><span id={'likeSpan'+posts._id}>{ posts.likes }</span>
                                   </button>
-                                  <button className="buttonIcon" aria-label="je n'aime pas" onClick={() => { submitDislike(posts._id); }}>
+                                  <button className="buttonIcon" onClick={() => { submitDislike(posts._id); }}>
                                     <FontAwesomeIcon icon={ faThumbsDown } className="iconColor degrade" /><span id={'dislikeSpan'+posts._id}>{ posts.dislikes }</span>
                                   </button>
                                 </div>

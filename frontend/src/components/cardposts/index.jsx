@@ -267,10 +267,10 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                   <div className="divIconLike">
                     <div className="divIconNumber">
                       <div className="likeDislike">
-                        <button className="buttonIcon" aria-label="j'aime" onClick={() => { submitLike(postsId) }}>
+                        <button className="buttonIcon" onClick={() => { submitLike(postsId) }}>
                           <FontAwesomeIcon icon={ faThumbsUp } className="iconColor degrade" /><span id={'likeSpan'+postsId}>{ like }</span>
                         </button>
-                        <button className="buttonIcon" aria-label="je n'aime pas" onClick={() => { submitDislike(postsId); }}>
+                        <button className="buttonIcon" onClick={() => { submitDislike(postsId); }}>
                           <FontAwesomeIcon icon={ faThumbsDown } className="iconColor degrade" /><span id={'dislikeSpan'+postsId}>{ dislike }</span>
                         </button>
                       </div>
