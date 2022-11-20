@@ -200,7 +200,14 @@ function Home() {
                                   setTextEdit(data)
                                   console.log( 'Editor is ready to use!', editor );
                                 }}
+                                onError={ ( error) => {
+                                  // If the editor is restarted, the toolbar element will be created once again.
+                                  // The `onReady` callback will be called again and the new toolbar will be added.
+                                  // This is why you need to remove the older toolbar.
+                                  console.log(error)
+                                } }
                               />
+                              <div>ici</div>
                             </div>
                               <button className="styleButton" type="submit" onClick={() => {}} >Envoyer</button>
                               {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}

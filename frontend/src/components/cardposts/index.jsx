@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import parse from 'html-react-parser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbsDown as fasThumbsDown, faThumbsUp as fasThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
@@ -153,7 +153,6 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                         />
                       </div>
                       <button className="styleButton" type="submit" onClick={() => {}} >Envoyer</button>
-                      {/*<button className="stylebutton" type="submit" onClick={ cancelChoice }>Annuler</button>*/}
                     </div>
                   </div>
                 </form>
@@ -269,10 +268,10 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                     <div className="divIconNumber">
                       <div className="likeDislike">
                         <button className="buttonIcon" aria-label="j'aime" onClick={() => { submitLike(postsId) }}>
-                          <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" /><span id={'likeSpan'+postsId}>{ like }</span>
+                          <FontAwesomeIcon icon={ faThumbsUp } className="iconColor degrade" /><span id={'likeSpan'+postsId}>{ like }</span>
                         </button>
                         <button className="buttonIcon" aria-label="je n'aime pas" onClick={() => { submitDislike(postsId); }}>
-                          <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" /><span id={'dislikeSpan'+postsId}>{ dislike }</span>
+                          <FontAwesomeIcon icon={ faThumbsDown } className="iconColor degrade" /><span id={'dislikeSpan'+postsId}>{ dislike }</span>
                         </button>
                       </div>
                     </div>
@@ -310,10 +309,10 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                     <div className="divIconNumber">
                       <div className="likeDislike">
                         <button className="buttonIcon" aria-label="j'aime">
-                          <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" /><span id='likeSpan'>{ like }</span>
+                          <FontAwesomeIcon icon={ faThumbsUp } className="iconColor degrade" /><span id='likeSpan'>{ like }</span>
                         </button>
                         <button className="buttonIcon" aria-label="je n'aime pas">
-                          <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" /><span id='likeSpan'>{ dislike }</span>
+                          <FontAwesomeIcon icon={ faThumbsDown } className="iconColor degrade" /><span id='likeSpan'>{ dislike }</span>
                         </button>
                       </div>
                     </div>

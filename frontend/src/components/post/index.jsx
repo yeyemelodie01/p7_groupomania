@@ -2,8 +2,7 @@ import { useState, useEffect} from 'react'
 import axios from 'axios'
 import '../../utils/styles/post.css'
 import parse from 'html-react-parser'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThumbsUp as fasThumbsUp, faThumbsDown as fasThumbsDown } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment'
 import LazyLoad from 'react-lazy-load'
 import submitLike from '../../utils/hooks/like'
@@ -12,7 +11,6 @@ import submitDislike from '../../utils/hooks/dislike'
 
 function Post() {
   const [ posts, setPosts ] = useState([]);
-  library.add( fasThumbsUp, fasThumbsDown)
   useEffect(() => {
       axios
         .get('http://localhost:4000/api/posts')
@@ -98,10 +96,10 @@ function Post() {
                               <div className="divIconLike">
                                 <div className="divIconNumber">
                                     <button className="buttonIcon" aria-label="j'aime">
-                                      <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" /><span id='likeSpan'>{ posts.likes }</span>
+                                      <FontAwesomeIcon icon={ faThumbsUp } className="iconColor degrade" /><span id='likeSpan'>{ posts.likes }</span>
                                     </button>
                                     <button className="buttonIcon" aria-label="je n'aime pas">
-                                      <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" /><span id='likeSpan'>{ posts.dislikes }</span>
+                                      <FontAwesomeIcon icon={ faThumbsDown } className="iconColor degrade" /><span id='likeSpan'>{ posts.dislikes }</span>
                                     </button>
                                 </div>
                               </div>
@@ -146,10 +144,10 @@ function Post() {
                               <div className="divIconLike">
                                 <div className="divIconNumber">
                                   <button className="buttonIcon" aria-label="j'aime" onClick={() => { submitLike(posts._id) }}>
-                                    <FontAwesomeIcon icon={ fasThumbsUp } className="iconColor degrade" /><span id={'likeSpan'+posts._id}>{ posts.likes }</span>
+                                    <FontAwesomeIcon icon={ faThumbsUp } className="iconColor degrade" /><span id={'likeSpan'+posts._id}>{ posts.likes }</span>
                                   </button>
                                   <button className="buttonIcon" aria-label="je n'aime pas" onClick={() => { submitDislike(posts._id); }}>
-                                    <FontAwesomeIcon icon={ fasThumbsDown } className="iconColor degrade" /><span id={'dislikeSpan'+posts._id}>{ posts.dislikes }</span>
+                                    <FontAwesomeIcon icon={ faThumbsDown } className="iconColor degrade" /><span id={'dislikeSpan'+posts._id}>{ posts.dislikes }</span>
                                   </button>
                                 </div>
                               </div>
