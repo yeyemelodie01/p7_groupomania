@@ -121,7 +121,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                   <button className="styleButton" type="submit" onClick={() => {}}>Modifier</button>
                 </form>
                 <div>
-                  <button className="styleButton" onClick={postDelete}>Supprimer</button>
+                  <button className="styleButton buttDelete" onClick={postDelete}>Supprimer</button>
                 </div>
               </div>
             </>
@@ -159,7 +159,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                   </div>
                 </form>
                 <div>
-                  <button className="styleButton" onClick={postDelete}>Supprimer</button>
+                  <button className="styleButton buttDelete" onClick={postDelete}>Supprimer</button>
                 </div>
               </div>
             </>
