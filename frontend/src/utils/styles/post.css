@@ -262,6 +262,10 @@ figcaption{
         width: initial;
     }
 
+    .divIconNumber{
+        width: 33%;
+    }
+
     /* LAZYLOAD */
     .widthLazy{
         width: 320px;

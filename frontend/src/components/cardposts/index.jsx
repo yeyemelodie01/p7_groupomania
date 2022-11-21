@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import parse from 'html-react-parser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import { faImage, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
@@ -41,7 +41,10 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
               <div className="updateDeleteMedia">
                 <form onSubmit={handleSubmit(postUpdate)}>
                   <label form='img'>
-                    <p>Insérer une image</p>
+                    <div className="iconSize">
+                      <FontAwesomeIcon icon={ faImage } />
+                      <p>Modifier l'image:</p>
+                    </div>
                     <input
                       id="img"
                       className="sizeInputImg"
@@ -76,11 +79,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                           id={'editor'}
                           config={{
                             placeholder: "Ecrivez votre texte",
-                            removePlugins: [
-                              'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
-                              'ImageUpload', 'ImageToolbar', 'ImageStyle',
-                              'ImageCaption'
-                            ],
+                            toolbar: [ 'heading', '|', 'bold', 'italic', 'bulletedList', 'numberedList', '|', 'undo', 'redo', ]
                           }}
                           onChange={(event, editor) => {
                             const data = editor.getData()
@@ -88,7 +87,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                           }}
                         />
                       </div>
-                      <button className="styleButton" type="submit" onClick={() => {}} >Envoyer</button>
+                      <button className="styleButton" type="submit" onClick={() => {}} >Modifier</button>
                     </div>
                   </div>
                 </form>
@@ -108,7 +107,10 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
               <div className="updateDeleteMedia">
                 <form onSubmit={handleSubmit(postUpdate)}>
                   <label form='img'>
-                    <p>Insérer une image</p>
+                    <div className="iconSize">
+                      <FontAwesomeIcon icon={ faImage } />
+                      <p>Modifier l'image:</p>
+                    </div>
                     <input
                       id="img"
                       className="sizeInputImg"
@@ -142,11 +144,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                           id={'editor'}
                           config={{
                             placeholder: "Ecrivez votre texte",
-                            removePlugins: [
-                              'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
-                              'ImageUpload', 'ImageToolbar', 'ImageStyle',
-                              'ImageCaption'
-                            ],
+                            toolbar: [ 'heading', '|', 'bold', 'italic', 'bulletedList', 'numberedList', '|', 'undo', 'redo', ]
                           }}
                           onChange={(event, editor) => {
                             const data = editor.getData()
@@ -154,7 +152,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                           }}
                         />
                       </div>
-                      <button className="styleButton" type="submit" onClick={() => {}} >Envoyer</button>
+                      <button className="styleButton" type="submit" onClick={() => {}} >Modifier</button>
                     </div>
                   </div>
                 </form>
@@ -259,7 +257,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
             </li>
           </ul>
         </div>
-        <div className="divFigureCenter">
+        <div className="divFigureDetail">
           <div className="divFigureWidth">
             <h1 className="titlePost">{title}</h1>
             <figure>
@@ -267,7 +265,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
               <figcaption className="detailFig">
                 <div className="styleIconLike">
                   <div className="divIconLike">
-                    <div className="divIconNumber">
+                    <div className="divIconDetail">
                       <div className="likeDislike">
                         <button className="buttonIcon" onClick={() => { submitLike(postsId) }}>
                           <FontAwesomeIcon icon={ faThumbsUp } className="iconColor degrade" /><span id={'likeSpan'+postsId}>{ like }</span>
@@ -300,7 +298,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
             </li>
           </ul>
         </div>
-        <div className="divFigureCenter">
+        <div className="divFigureDetail">
           <div className="divFigureWidth">
             <h1 className="titlePost">{ title }</h1>
             <figure>
@@ -308,7 +306,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
               <figcaption>
                 <div className="styleIconLike">
                   <div className="divIconLike">
-                    <div className="divIconNumber">
+                    <div className="divIconDetail">
                       <div className="likeDislike">
                         <button className="buttonIcon" aria-label="j'aime">
                           <FontAwesomeIcon icon={ faThumbsUp } className="iconColor degrade" /><span id='likeSpan'>{ like }</span>

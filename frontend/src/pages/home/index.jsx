@@ -18,10 +18,6 @@ function Home() {
   const [file, setFile] = useState();
   let userDetails = JSON.parse(localStorage.getItem('user'));
 
-  // const editorConfiguration = {
-  //   toolbar: [ 'bold', 'italic' ]
-  // };
-
   function handleFileChange(event) {
     setFile(event.target.files)
   }
@@ -194,11 +190,7 @@ function Home() {
                                 id={'editor'}
                                 config={{
                                   placeholder: "Ecrivez votre texte",
-                                  removePlugins: [
-                                    'MediaEmbed', 'Link', 'Image', 'EasyImage', 'CKFinder',
-                                    'ImageUpload', 'ImageToolbar', 'ImageStyle',
-                                    'ImageCaption'
-                                  ],
+                                  toolbar: [ 'heading', '|', 'bold', 'italic', 'bulletedList', 'numberedList', '|', 'undo', 'redo', ]
                                 }}
                                 onChange={(event, editor) => {
                                   const data = editor.getData();
