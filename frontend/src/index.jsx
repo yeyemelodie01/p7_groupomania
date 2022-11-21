@@ -1,4 +1,3 @@
-import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from './pages/home';
@@ -10,7 +9,6 @@ const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
 root.render(
-  <StrictMode>
     <Router>
       <GlobalStyle />
       <Header />
@@ -20,6 +18,5 @@ root.render(
       <Route path="/detail/:id">
         <Detailposts />
       </Route>
-    </Router>
-  </StrictMode>,
+    </Router>,
 );

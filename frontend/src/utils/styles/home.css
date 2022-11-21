@@ -122,6 +122,16 @@
 .divTitle {
     width: 300px;
     margin: 25px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.errTitle{
+    color: #FD2D01;
+    margin-top: 7px;
+    font-size: 17px;
 }
 
 .sizeInput{

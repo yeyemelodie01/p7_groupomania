@@ -14,9 +14,13 @@ function Home() {
   const [ isHidden, setIsHidden ] = useState(false);
   const { register, handleSubmit } = useForm();
   const [ radioValue, setRadioValue ] = useState(false);
-  const [ textEdit, setTextEdit ] = useState("");
+  const [ textEdit, setTextEdit ] = useState('');
   const [file, setFile] = useState();
   let userDetails = JSON.parse(localStorage.getItem('user'));
+
+  // const editorConfiguration = {
+  //   toolbar: [ 'bold', 'italic' ]
+  // };
 
   function handleFileChange(event) {
     setFile(event.target.files)
@@ -31,7 +35,6 @@ function Home() {
       formData.append("postType", "media");
       formData.append("title", data.title);
       formData.append("files", data.img[0]);
-      console.log(data.img[0])
       axios
           .post("http://localhost:4000/api/posts", formData, {
             headers: {
@@ -43,6 +46,7 @@ function Home() {
             window.location.href='/';
           })
           .catch((err) => {
+            document.getElementById('titleErr').innerHTML = "Titre deja ajouter";
             console.log(err);
           });
     }
@@ -57,12 +61,14 @@ function Home() {
           "text": textEdit
         }
       }
+      console.log(textEdit)
       axios
         .post("http://localhost:4000/api/posts", dataToSend, {headers: {Authorization: `Bearer ${userDetails.jwt}`}})
         .then(() => {
           window.location.href='/';
         })
         .catch((err) => {
+          document.getElementById('titleErr').innerHTML = "Titre deja ajouter";
           console.log(err);
         });
     }
@@ -144,6 +150,7 @@ function Home() {
                                   {...register("title")}
                                 />
                               </label>
+                              <span id="titleErr" className="errTitle"></span>
                             </div>
                             <div className="divImgText">
                               <div className="divUpload">
@@ -179,6 +186,7 @@ function Home() {
                                   {...register("textTitle")}
                                 />
                               </label>
+                              <span id="titleErr" className="errTitle"></span>
                             </div>
                             <div className="divTextWis">
                               <CKEditor
@@ -191,14 +199,13 @@ function Home() {
                                     'ImageUpload', 'ImageToolbar', 'ImageStyle',
                                     'ImageCaption'
                                   ],
-
                                 }}
                                 onChange={(event, editor) => {
-                                  const data = editor.getData()
-                                  setTextEdit(data)
+                                  const data = editor.getData();
+                                  setTextEdit(data);
+                                  console.log(data);
                                 }}
                               />
-                              <div>ici</div>
                             </div>
                               <button className="styleButton" type="submit" onClick={() => {}} >Envoyer</button>
                           </div>

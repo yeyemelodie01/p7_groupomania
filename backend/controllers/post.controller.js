@@ -26,7 +26,7 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
 
   const dataPost = await postModel.find({title: title});
   if(dataPost.length > 0) {
-    res.status(200).json({message: "post déja ajouter"});
+    res.status(409).json({message: "post déja ajouter"});
     return;
   }
 
