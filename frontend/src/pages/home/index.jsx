@@ -15,7 +15,7 @@ function Home() {
   const { register, handleSubmit } = useForm();
   const [ radioValue, setRadioValue ] = useState(false);
   const [ textEdit, setTextEdit ] = useState('');
-  const [file, setFile] = useState();
+  const [ file, setFile ] = useState();
   let userDetails = JSON.parse(localStorage.getItem('user'));
 
   function handleFileChange(event) {
@@ -24,7 +24,7 @@ function Home() {
 
   const onSubmit = (data) => {
     const choice = localStorage.getItem("choice");
-    if('img' === choice) {
+    if ('img' === choice) {
       const formData = new FormData();
       formData.append("userId", userDetails._id);
       formData.append("userName", userDetails.userName);
@@ -58,7 +58,11 @@ function Home() {
         }
       }
       axios
-        .post("http://localhost:4000/api/posts", dataToSend, {headers: {Authorization: `Bearer ${userDetails.jwt}`}})
+        .post("http://localhost:4000/api/posts", dataToSend, {
+          headers: {
+            Authorization: `Bearer ${userDetails.jwt}`
+          }
+        })
         .then(() => {
           window.location.href='/';
         })
@@ -69,15 +73,15 @@ function Home() {
     }
   }
 
-  function showChoice(){
+  function showChoice() {
     const userchoice = localStorage.getItem("choice");
 
-    if(userchoice === 'img'){
+    if (userchoice === 'img') {
       document.getElementById('uploadImg').style.display='block';
       document.getElementById('textWisywig').style.display='none';
     }
 
-    if(userchoice === 'text') {
+    if (userchoice === 'text') {
       document.getElementById('textWisywig').style.display='block';
       document.getElementById('uploadImg').style.display='none';
     }
@@ -89,7 +93,7 @@ function Home() {
     showChoice();
   }
 
-    if(userDetails) {
+    if (userDetails) {
      return (
       <main>
         <div className="parentGrid">
@@ -210,9 +214,9 @@ function Home() {
                    <Post />
                </div>
              </div>
-      </main>)
-    } else {
-      return(
+      </main>
+     )} else {
+      return (
         <div>
           <div className="titleDiv">
             <h1>Vous devez vous connecter pour créer et aimer un post</h1>

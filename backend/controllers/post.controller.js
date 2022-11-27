@@ -111,18 +111,28 @@ exports.postUpdateRequest = async(req, res) => {
 
 exports.postDeleteRequest = async(req, res) => {
   const { userId } = req.body;
-  console.log(userId);
-  postModel.findOne({_id: req.params.id})
-    .then((data) => {
-      const media = data.public_id;
-      if(media){
-        cloudinary.uploader.destroy(media);
-      }
-      postModel.deleteOne({_id:req.params.id})
-        .then(() => res.status(200).json({ message: 'Post supprimé'}))
-        .catch(error => res.status(400).json({ error }));
-      })
-    .catch(error => res.status(500).json({ error }));
+  const postId = await postModel.findOne({_id: req.params.id})
+  const foundUser = await userModel.findOne({_id: userId});
+
+  if (foundUser) {
+    if (foundUser._id.toString()  === postId.userId || foundUser.role === 'admin') {
+      postModel.findOne({_id: req.params.id})
+        .then((data) => {
+          const media = data.public_id;
+          if(media){
+            cloudinary.uploader.destroy(media);
+          }
+          postModel.deleteOne({_id:req.params.id})
+            .then(() => res.status(200).json({ message: 'Post supprimé'}))
+            .catch(error => res.status(400).json({ error }));
+        })
+        .catch(error => res.status(500).json({ error }));
+    } else {
+      res.status(409).json({message: "User non reconnue"});
+    }
+  } else {
+    res.status(409).json({message: "User non reconnue"});
+  }
 }
 
 exports.postLikeRequest = async (req, res) => {

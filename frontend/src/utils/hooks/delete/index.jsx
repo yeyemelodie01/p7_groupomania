@@ -14,7 +14,7 @@ function postDelete(postId) {
     })
     .then(() => {
       alert("Votre post a bien été supprimer")
-      //window.location.href='/';
+      window.location.href='/';
     })
     .catch((err) => {
       console.log(err);

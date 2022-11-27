@@ -26,20 +26,20 @@ function Post() {
     return b.createdAt.localeCompare(a.createdAt);
   })
 
-  const usePosts = postsSort.map((posts) =>{
-    function sendPostId(postId){
+  const usePosts = postsSort.map((posts) => {
+    function sendPostId(postId) {
       window.location.href=`/detail/${postId}`;
     }
 
-    function postMediaText(){
-        if(posts.text){
-          return(
+    function postMediaText() {
+        if (posts.text) {
+          return (
             <div className="textFigure">{parse(posts.text)}</div>
           )
         }
 
-        if(posts.media){
-          return(
+        if (posts.media) {
+          return (
             <div className="imgWidth">
               <img src={posts.media} alt=""/>
             </div>
@@ -63,8 +63,9 @@ function Post() {
     if (1440 <= hours) {
       hour = date2.diff(date1, 'days') + "j";
     }
+
     const userDetails = JSON.parse(localStorage.getItem('user'));
-    if (userDetails === null){
+    if (userDetails === null) {
         return (
           <div key={ posts._id }>
             <div className="postGrid">
@@ -161,7 +162,6 @@ function Post() {
           </div>
         )
       }
-    //return null;
   });
 
     return (

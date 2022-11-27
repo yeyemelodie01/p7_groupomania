@@ -11,8 +11,8 @@ import { faBars} from '@fortawesome/free-solid-svg-icons'
 
 function Header() {
     const { isShow: isLoginFormShow, toggle: toggleLoginForm } = useModal();
-    const { isShow: isRegistrationForm, toggle: toggleRegistrationForm} = useModal();
-    const { register, handleSubmit, formState: { errors }} = useForm();
+    const { isShow: isRegistrationForm, toggle: toggleRegistrationForm } = useModal();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [ showBurger, setShowBurger ] = useState(false)
 
   function setUserDetails (data, res) {
@@ -35,10 +35,10 @@ function Header() {
         "role":"",
       }
         axios
-          .post("http://localhost:4000/api/auth/signup", dataUser)
-          .then(() =>{
+          .post("http://localhost:4000/api/auth/signup", dataUser )
+          .then(() => {
               axios
-                .post("http://localhost:4000/api/auth/login", data)
+                .post("http://localhost:4000/api/auth/login", data )
                 .then((res) => {
                   setUserDetails(data, res);
                   window.location.reload();
@@ -54,7 +54,7 @@ function Header() {
 
     const onLogin = async (data) => {
         axios
-          .post("http://localhost:4000/api/auth/login", data)
+          .post("http://localhost:4000/api/auth/login", data )
           .then((res) => {
             setUserDetails(data, res);
             window.location.reload();
@@ -65,15 +65,15 @@ function Header() {
           });
     }
 
-    function Logout(){
+    function Logout() {
       localStorage.clear();
       window.location.href='/';
     }
 
   let userDetails = JSON.parse(localStorage.getItem('user'));
 
-    if(userDetails === null) {
-      if(isLoginFormShow){
+    if (userDetails === null) {
+      if (isLoginFormShow) {
         return (
           <>
             <Modal
@@ -160,7 +160,7 @@ function Header() {
           </>
         )
       }
-      return(
+      return (
         <>
           <header>
             <nav className="navBar">
@@ -186,7 +186,7 @@ function Header() {
         </>
       )
     } else {
-      return <header>
+      return ( <header>
               <nav className="navBar">
                 <a className="linkImg" href="/">
                   <div>
@@ -213,8 +213,7 @@ function Header() {
                   </div>
               </nav>
             </header>
-
-    }
+      )}
 
 }
 
