@@ -42,6 +42,7 @@ exports.loginRequest = async (req, res) => { // export de la fonction loginReque
       const userLoginInformation = { // constante userLoginInformation
         userId: foundUser._id, // userId qui prend la valeur de foundUser._id
         token: token, //token qui prend la valeur de token.compact
+        role: foundUser.role,
       }
 
 

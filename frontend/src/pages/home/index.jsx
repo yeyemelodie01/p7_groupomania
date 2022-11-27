@@ -57,7 +57,6 @@ function Home() {
           "text": textEdit
         }
       }
-      console.log(textEdit)
       axios
         .post("http://localhost:4000/api/posts", dataToSend, {headers: {Authorization: `Bearer ${userDetails.jwt}`}})
         .then(() => {
@@ -195,7 +194,6 @@ function Home() {
                                 onChange={(event, editor) => {
                                   const data = editor.getData();
                                   setTextEdit(data);
-                                  console.log(data);
                                 }}
                               />
                             </div>

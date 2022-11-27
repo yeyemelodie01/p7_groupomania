@@ -11,93 +11,60 @@ import postDelete from '../../utils/hooks/delete'
 import submitLike from '../../utils/hooks/like'
 import submitDislike from '../../utils/hooks/dislike'
 
-function Card({ title, media, text, username, hour, avatar, like, dislike}){
-  const [file, setFile] = useState();
+function Card({ title, media, text, username, hour, avatar, like, dislike, postsId, userId}) {
+  const [ file, setFile ] = useState();
   const [ textEdit, setTextEdit ] = useState("");
-  const { register, handleSubmit} = useForm();
+  const { register, handleSubmit } = useForm();
   const userDetails = JSON.parse(localStorage.getItem('user'));
-  const userId = localStorage.getItem('userId');
-  const postsId = localStorage.getItem("postId");
 
-  function mediaText(){
-    if(userDetails){
-      const roleAdmin = localStorage.getItem('role');
-      const idAdmin = userDetails._id;
+  function handleFileChange(event) {
+    setFile(event.target.files)
+  }
 
+  const postUpdate = (data) => {
+    if (media) {
+      const formData = new FormData();
+      formData.append("files", data.img[0]);
+      formData.append("postType", "media");
+      formData.append("role", userDetails.role);
       axios
-        .get(`http://localhost:4000/users/${idAdmin}`)
-        .then((res) => {
-          const role = res.data.role;
-          localStorage.setItem('role', role);
+        .put(`http://localhost:4000/api/posts/${postsId}`, formData, {
+          headers: {
+            Authorization: `Bearer ${userDetails.jwt}`,
+            "Content-Type": "multipart/form-data"
+          }
         })
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    if (text) {
+      const updateText = {
+        "postType": 'text',
+        "text": textEdit,
+        "userId": userId,
+      }
+      axios
+        .put(`http://localhost:4000/api/posts/${postsId}`, updateText, {
+          headers: {
+            Authorization: `Bearer ${userDetails.jwt}`,
+          }
+        })
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
 
-      if(roleAdmin === "admin"){
-        if(media){
-          return(
-            <>
-              <div id="media">
-                <img src={ media } alt=""/>
-              </div>
-              <div className="updateDeleteMedia">
-                <form onSubmit={handleSubmit(postUpdate)}>
-                  <label form='img'>
-                    <div className="iconSize">
-                      <FontAwesomeIcon icon={ faImage } />
-                      <p>Modifier l'image:</p>
-                    </div>
-                    <input
-                      id="img"
-                      className="sizeInputImg"
-                      type="file"
-                      value={ file }
-                      onChange={handleFileChange}
-                      {...register("img")}
-                    />
-                  </label>
-                  <button className="styleButton" type="submit" onClick={() => {}}>Modifier</button>
-                </form>
-                <div>
-                  <button className="styleButton" onClick={postDelete}>Supprimer</button>
-                </div>
-              </div>
-            </>
-          )
-        }
-        if(text){
-          return (
-            <>
-              <div id="text">
-                <div>{ parse( text ) }</div>
-              </div>
-              <div className="updateDeleteText">
-                <form onSubmit={handleSubmit(postUpdate)}>
-                  <div id="textUpdate">
-                    <div className="divWisywig">
-                      <div className="divText">
-                        <CKEditor
-                          editor={ ClassicEditor }
-                          id={'editor'}
-                          config={{
-                            placeholder: "Ecrivez votre texte",
-                            toolbar: [ 'heading', '|', 'bold', 'italic', 'bulletedList', 'numberedList', '|', 'undo', 'redo', ]
-                          }}
-                          onChange={(event, editor) => {
-                            const data = editor.getData()
-                            setTextEdit(data)
-                          }}
-                        />
-                      </div>
-                      <button className="styleButton" type="submit" onClick={() => {}} >Modifier</button>
-                    </div>
-                  </div>
-                </form>
-                <div>
-                  <button className="styleButton" onClick={postDelete}>Supprimer</button>
-                </div>
-              </div>
-            </>
-          )}
-      } else if(userDetails._id === userId){
+  function mediaText() {
+    if (userDetails) {
+      if (userDetails._id === userId  || userDetails.role === "admin") {
         if (media) {
           return (
             <>
@@ -123,12 +90,14 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                   <button className="styleButton" type="submit" onClick={() => {}}>Modifier</button>
                 </form>
                 <div>
-                  <button className="styleButton buttDelete" onClick={postDelete}>Supprimer</button>
+                  <button className="styleButton buttDelete" onClick={() => {
+                    postDelete(postsId)
+                  }}>Supprimer</button>
                 </div>
               </div>
             </>
           )}
-        if (text){
+        if (text) {
           return (
             <>
               <div id="text">
@@ -157,21 +126,23 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
                   </div>
                 </form>
                 <div>
-                  <button className="styleButton buttDelete" onClick={postDelete}>Supprimer</button>
+                  <button className="styleButton buttDelete" onClick={() => {
+                    postDelete(postsId)
+                  }}>Supprimer</button>
                 </div>
               </div>
             </>
-          )}
+          ) }
       }
-      if(userDetails._id !== userId){
-        if(media){
+      if (userDetails._id !== userId) {
+        if (media) {
           return (
             <div id="media">
               <img src={ media } alt="userImage"/>
             </div>
           )
         }
-        if (text){
+        if (text) {
           return (
             <div id="text">
               <div>{ parse( text ) }</div>
@@ -180,14 +151,14 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
         }
       }
     } else {
-      if(media){
+      if (media) {
         return (
           <div id="media">
             <img src={ media } alt=""/>
           </div>
         )
       }
-      if (text){
+      if (text) {
         return (
           <div id="text">
             <div>{ parse( text ) }</div>
@@ -197,51 +168,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
     }
   }
 
-  function handleFileChange(event) {
-    setFile(event.target.files)
-  }
-
-  const postUpdate = (data) =>{
-    let postsId = localStorage.getItem("postId");
-    if(media){
-      const formData = new FormData();
-      formData.append("files", data.img[0]);
-      formData.append("postType", "media");
-      axios
-        .put(`http://localhost:4000/api/posts/${postsId}`, formData, {
-          headers: {
-            Authorization: `Bearer ${userDetails.jwt}`,
-            "Content-Type": "multipart/form-data"
-          }
-        })
-        .then(() => {
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    if (text){
-      const updateText = {
-        "postType": 'text',
-        "text": textEdit
-      }
-      axios
-        .put(`http://localhost:4000/api/posts/${postsId}`, updateText, {
-          headers: {
-            Authorization: `Bearer ${userDetails.jwt}`,
-          }
-        })
-        .then(() => {
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }
-
-  if(userDetails) {
+  if (userDetails) {
     return (
       <>
         <div className="profilPost">
@@ -282,7 +209,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike}){
           </div>
         </div>
       </>
-    )} else{
+    )} else {
     return (
       <>
         <div className="profilPost">
@@ -336,6 +263,8 @@ Card.propTypes = {
   avatar: PropTypes.string,
   like: PropTypes.string,
   dislike: PropTypes.string,
+  postsId: PropTypes.string,
+  userId: PropTypes.string,
 }
 
 Card.defaultProps = {
@@ -347,6 +276,8 @@ Card.defaultProps = {
   avatar:'',
   like: '',
   dislike: '',
+  postsId: '',
+  userId: '',
 }
 
 export default Card

@@ -1,5 +1,6 @@
 const postModel = require('../models/post.model');
 const cloudinary = require('../middleware/cloud')
+const userModel = require('../models/user.model')
 
 exports.postRequest = async(req, res) => {
     postModel.find()
@@ -36,6 +37,7 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
         folder: 'postImg',
         format:'WebP'
       });
+
       const newPost = new postModel({
         "userId": userId,
         "userName": userName,
@@ -68,36 +70,48 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
 
 exports.postUpdateRequest = async(req, res) => {
   const postId = await postModel.findOne({_id: req.params.id})
-  const { postType, text } = req.body
-  if("media" === postType){
-    const media = postId.public_id;
-    if(media){
-      cloudinary.uploader.destroy(media);
-    }
-    const newImg = await cloudinary.uploader.upload(req.file.path, {
-      folder: 'postImg',
-      format:'WebP'
-    });
-    const dataUpdate = {
-      public_id: newImg.public_id,
-      media: newImg.secure_url
-    }
-    postModel.updateOne({ _id: req.params.id }, { ...dataUpdate, _id: req.params.id })
-      .then(() => res.status(200).json({ message: 'Mise a jour des informations'}))
-      .catch(error => res.status(400).json({ error }));
-  }
+  const { postType, text, userId } = req.body;
+  const foundUser = await userModel.findOne({_id: userId}); //constante foundUser avec pour valeur le résultat de userModel.findOne pour l'email
 
-  if ("text" === postType){
-    const updateText = {
-      text: text
-    };
-    postModel.updateOne({_id:req.params.id},{...updateText, _id: req.params.id})
-      .then(() => res.status(200).json({ message: 'Mise a jour des informations'}))
-      .catch(error => res.status(400).json({ error }));
+  if (foundUser) {
+    if (foundUser._id.toString()  === postId.userId || foundUser.role === 'admin') {
+      if ("media" === postType) {
+        const media = postId.public_id;
+        if (media) {
+          cloudinary.uploader.destroy(media);
+        }
+        const newImg = await cloudinary.uploader.upload(req.file.path, {
+          folder: 'postImg',
+          format: 'WebP'
+        });
+        const dataUpdate = {
+          public_id: newImg.public_id,
+          media: newImg.secure_url
+        }
+        postModel.updateOne({ _id: req.params.id }, { ...dataUpdate, _id: req.params.id })
+          .then(() => res.status(200).json({ message: 'Mise a jour des informations' }))
+          .catch(error => res.status(400).json({ error }));
+      }
+
+      if ("text" === postType) {
+        const updateText = {
+          text: text
+        };
+        postModel.updateOne({ _id: req.params.id }, { ...updateText, _id: req.params.id })
+          .then(() => res.status(200).json({ message: 'Mise a jour des informations' }))
+          .catch(error => res.status(400).json({ error }));
+      }
+    } else {
+      res.status(409).json({message: "User non reconnue"});
+    }
+  } else {
+    res.status(409).json({message: "User non reconnue"});
   }
 }
 
 exports.postDeleteRequest = async(req, res) => {
+  const { userId } = req.body;
+  console.log(userId);
   postModel.findOne({_id: req.params.id})
     .then((data) => {
       const media = data.public_id;

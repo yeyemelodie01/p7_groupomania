@@ -9,9 +9,13 @@ function DetailPosts() {
   const [detail, setDetail] = useState([]);
 
   useEffect(() => {
-    const postsId = localStorage.getItem("postId");
+    const url = document.location.pathname;
+    const splitUrl = url.split('/detail/');
+    const sliceSplit = splitUrl.slice(1);
+    const postId = String(sliceSplit);
+
     axios
-      .get(`http://localhost:4000/api/posts/${postsId}`)
+      .get(`http://localhost:4000/api/posts/${postId}`)
       .then((res) => {
         setDetail(res.data)
       })
@@ -19,7 +23,6 @@ function DetailPosts() {
         console.log(err)
       })
   },[]);
-  localStorage.setItem('userId', detail.userId);
 
   const date1 = moment(detail.createdAt);
   const date2 = moment(Date.now());
@@ -53,6 +56,8 @@ function DetailPosts() {
               avatar={`https://ui-avatars.com/api/?name=${detail.userName}`}
               like={ JSON.stringify(detail.likes) }
               dislike={ JSON.stringify(detail.dislikes) }
+              postsId={ detail._id }
+              userId={ detail.userId }
             />
           </div>
         </div>

@@ -23,7 +23,8 @@ function Header() {
       '_id': res.data.userId,
       'email': data.email,
       'userName': username,
-      'jwt': res.data.token
+      'jwt': res.data.token,
+      'role': res.data.role,
     }));
   }
 

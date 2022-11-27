@@ -27,10 +27,8 @@ function Post() {
   })
 
   const usePosts = postsSort.map((posts) =>{
-    function sendPostId(){
-      const detail = posts._id;
-      localStorage.setItem("postId", detail);
-      window.location.href=`/detail/${detail}`;
+    function sendPostId(postId){
+      window.location.href=`/detail/${postId}`;
     }
 
     function postMediaText(){
@@ -88,7 +86,7 @@ function Post() {
                     </div>
                     <div className="divFigureCenter">
                       <div className="divFigureWidth">
-                        <h2 className="titlePost" onClick={ sendPostId }>{posts.title}</h2>
+                        <h2 className="titlePost" onClick={() => { sendPostId(posts._id) }}>{posts.title}</h2>
                         <figure>
                           { postMediaText() }
                           <figcaption>
@@ -136,7 +134,7 @@ function Post() {
                     </div>
                     <div className="divFigureCenter">
                       <div className="divFigureWidth">
-                        <h2 className="titlePost" onClick={ sendPostId }>{posts.title}</h2>
+                        <h2 className="titlePost" onClick={() => { sendPostId(posts._id) }}>{posts.title}</h2>
                         <figure>
                           { postMediaText() }
                           <figcaption>
