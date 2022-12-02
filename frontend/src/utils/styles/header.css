@@ -209,4 +209,8 @@ input[type="email"] {
         width: 200px;
         height: 39px;
     }
+
+    .divStyle{
+        width: 70%;
+    }
 }

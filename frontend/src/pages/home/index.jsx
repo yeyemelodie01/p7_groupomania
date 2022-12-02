@@ -42,7 +42,7 @@ function Home() {
             window.location.href='/';
           })
           .catch((err) => {
-            document.getElementById('titleErr').innerHTML = "Titre deja ajouter";
+            document.getElementById('titleErrMedia').innerHTML = "Titre deja ajouter";
             console.log(err);
           });
     }
@@ -67,7 +67,7 @@ function Home() {
           window.location.href='/';
         })
         .catch((err) => {
-          document.getElementById('titleErr').innerHTML = "Titre deja ajouter";
+          document.getElementById('titleErrText').innerHTML = "Titre deja ajouter";
           console.log(err);
         });
     }
@@ -149,7 +149,7 @@ function Home() {
                                   {...register("title")}
                                 />
                               </label>
-                              <span id="titleErr" className="errTitle"></span>
+                              <span id="titleErrMedia" className="errTitle"></span>
                             </div>
                             <div className="divImgText">
                               <div className="divUpload">
@@ -185,7 +185,7 @@ function Home() {
                                   {...register("textTitle")}
                                 />
                               </label>
-                              <span id="titleErr" className="errTitle"></span>
+                              <span id="titleErrText" className="errTitle"></span>
                             </div>
                             <div className="divTextWis">
                               <CKEditor
