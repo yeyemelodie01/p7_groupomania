@@ -71,12 +71,12 @@ exports.postAddRequest = async(req, res) => { // export de la fonction postAddRe
 exports.postUpdateRequest = async(req, res) => {
   const postId = await postModel.findOne({_id: req.params.id})
   const { postType, text, userId } = req.body;
-  const foundUser = await userModel.findOne({_id: userId}); //constante foundUser avec pour valeur le résultat de userModel.findOne pour l'email
-
+  const foundUser = await userModel.findOne({_id: userId});
   if (foundUser) {
     if (foundUser._id.toString()  === postId.userId || foundUser.role === 'admin') {
       if ("media" === postType) {
         const media = postId.public_id;
+
         if (media) {
           cloudinary.uploader.destroy(media);
         }

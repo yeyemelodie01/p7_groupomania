@@ -27,6 +27,7 @@ function Card({ title, media, text, username, hour, avatar, like, dislike, posts
       formData.append("files", data.img[0]);
       formData.append("postType", "media");
       formData.append("role", userDetails.role);
+      formData.append("userId", userId);
       axios
         .put(`http://localhost:4000/api/posts/${postsId}`, formData, {
           headers: {
