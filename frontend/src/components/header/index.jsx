@@ -28,11 +28,10 @@ function Header() {
     }));
   }
 
-    const onSignup = async (data) => {
+    const onSignup = (data) => {
       const dataUser = {
         "email": data.email,
         "password": data.password,
-        "role":"",
       }
         axios
           .post("http://localhost:4000/api/auth/signup", dataUser )
@@ -52,7 +51,7 @@ function Header() {
         })
     }
 
-    const onLogin = async (data) => {
+    const onLogin = (data) => {
         axios
           .post("http://localhost:4000/api/auth/login", data )
           .then((res) => {
