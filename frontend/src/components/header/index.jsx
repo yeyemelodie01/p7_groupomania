@@ -59,7 +59,7 @@ function Header() {
             window.location.reload();
           })
           .catch((err) => {
-            document.getElementById('LogErr').innerHTML = "Mauvais mot de passe/ email";
+            document.getElementById('LogErr').innerHTML = "Email et/ou mots de passe incorrecte";
             console.log(err)
           });
     }

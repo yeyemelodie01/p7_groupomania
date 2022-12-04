@@ -76,10 +76,8 @@ exports.postUpdateRequest = async(req, res) => {
     if (foundUser._id.toString()  === postId.userId || foundUser.role === 'admin') {
       if ("media" === postType) {
         const media = postId.public_id;
+        cloudinary.uploader.destroy(media);
 
-        if (media) {
-          cloudinary.uploader.destroy(media);
-        }
         const newImg = await cloudinary.uploader.upload(req.file.path, {
           folder: 'postImg',
           format: 'WebP'
@@ -119,7 +117,7 @@ exports.postDeleteRequest = async(req, res) => {
       postModel.findOne({_id: req.params.id})
         .then((data) => {
           const media = data.public_id;
-          if(media){
+          if(media) {
             cloudinary.uploader.destroy(media);
           }
           postModel.deleteOne({_id:req.params.id})
